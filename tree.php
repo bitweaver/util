@@ -1,17 +1,22 @@
 <?php
-/** \file
- * $Header: /cvsroot/bitweaver/_bit_util/tree.php,v 1.1 2005/06/19 05:21:32 bitweaver Exp $
+/** 
+ * @version $Header: /cvsroot/bitweaver/_bit_util/tree.php,v 1.2 2005/06/28 07:46:24 spiderr Exp $
  *
- * \brief Base tree maker
+ * ase tree maker
  *
- * \author zaufi@sendmail.ru
+ * @author zaufi@sendmail.ru
+ * @package TreeMaker
  *
+ */
+
+/**
+ * required setup
  */
 if ( defined( 'DEBUG_PKG_PATH' ) ) {
 	require_once( DEBUG_PKG_PATH.'debugger.php' );
 }
 /**
- * \brief Base class for all tree makers
+ * Base class for all tree makers
  *
  * Define base interface and provide common algotithm for tree generation
  *
@@ -19,7 +24,8 @@ if ( defined( 'DEBUG_PKG_PATH' ) ) {
  *  id     => number of ID of current node
  *  parent => number of ID of parant node
  *  data   => user provided data to be placed as node text
- *
+ * 
+ * @package TreeMaker
  */
 class TreeMaker {
 	/// Unique prefix for cookies generated for this tree
