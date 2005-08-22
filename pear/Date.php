@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: Date.php,v 1.1 2005/06/19 05:21:34 bitweaver Exp $
+// $Id: Date.php,v 1.1.1.1.2.1 2005/08/22 11:40:43 lsces Exp $
 //
 // Date Class
 //
@@ -137,7 +137,7 @@ class Date
     {
         switch($format) {
             case DATE_FORMAT_ISO:
-                if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})[ ]([0-9]{2}):([0-9]{2}):([0-9]{2})",$date,$regs)) {
+                if (ereg("([0-9]{3,4})-([0-9]{2})-([0-9]{2})[ ]([0-9]{2}):([0-9]{2}):([0-9]{2})",$date,$regs)) {
                     $this->year   = $regs[1];
                     $this->month  = $regs[2];
                     $this->day    = $regs[3];
@@ -154,7 +154,7 @@ class Date
                 }
                 break;
             case DATE_FORMAT_TIMESTAMP:
-                if (ereg("([0-9]{4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})",$date,$regs)) {
+                if (ereg("([0-9]{3,4})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})",$date,$regs)) {
                     $this->year   = $regs[1];
                     $this->month  = $regs[2];
                     $this->day    = $regs[3];
@@ -171,7 +171,7 @@ class Date
                 }
                 break;
             case DATE_FORMAT_UNIXTIME:
-                $this->setDate(date("Y-m-d H:i:s", $date));
+                $this->setDate(adodb_date("Y-m-d H:i:s", $date));
                 break;
         }
     }
@@ -196,7 +196,7 @@ class Date
                 return $this->format("%Y%m%d%H%M%S");
                 break;
             case DATE_FORMAT_UNIXTIME:
-                return mktime($this->hour, $this->minute, $this->second, $this->month, $this->day, $this->year, 0);
+                return adodb_mktime($this->hour, $this->minute, $this->second, $this->month, $this->day, $this->year, 0);
                 break;
         }
     }
