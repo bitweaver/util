@@ -385,10 +385,11 @@ class tar {
 	}
 	// Add a file to the tar archive
 	function addData($filename,$data,$time=0) {
+		global $gBitSystem;
 		// Make sure there are no other files in the archive that have this same filename
 		if($this->containsFile($filename))
 			return false;
-		if(!$time) $time=date("U");
+		if (!$time) $time=$gBitSystem->getUTCTime();
 		// Read in the file's contents
 		$file_contents = $data;
 		// Add file to processed data
