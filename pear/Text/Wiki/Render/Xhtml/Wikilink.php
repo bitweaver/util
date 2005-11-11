@@ -32,7 +32,7 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
         static $linkLevel = 0;
 
         // make nice variable names (page, anchor, text)
-        extract($options);
+        extract($options, EXTR_SKIP);
 
         if ($type == 'start' && $linkLevel) {
             ++$linkLevel;

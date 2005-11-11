@@ -15,7 +15,7 @@ class Text_Wiki_Render_Xhtml_Heading extends Text_Wiki_Render {
     {
         static $jsOutput = false;
         // get nice variable names (id, type, level)
-        extract($options);
+        extract($options, EXTR_SKIP);
         
         switch($type) {
         case 'start':
