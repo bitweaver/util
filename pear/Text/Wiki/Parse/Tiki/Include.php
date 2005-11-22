@@ -13,7 +13,7 @@
 * 
 * @license LGPL
 * 
-* @version $Id: Include.php,v 1.1 2005/06/19 05:21:36 bitweaver Exp $
+* @version $Id: Include.php,v 1.2 2005/11/22 07:29:10 squareing Exp $
 * 
 */
 
@@ -87,7 +87,7 @@ class Text_Wiki_Parse_Include extends Text_Wiki_Parse {
         // extract attribs as variables in the local space
         $this->vars = $this->getAttrs($matches[2]);
         unset($this->vars['this']);
-        extract($this->vars);
+        extract($this->vars, EXTR_SKIP);
 
         // run the script
         ob_start();
