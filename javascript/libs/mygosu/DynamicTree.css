@@ -1,0 +1,37 @@
+/*.DynamicTree				{line-height:18px; white-space:nowrap; cursor:default;}
+.DynamicTree .section		{background:url(/liberty/icons/tree-branch.gif) repeat-y; display:none;}
+.DynamicTree .last			{background:none;}
+.DynamicTree .folder .folder,
+.DynamicTree .doc .doc,
+.DynamicTree .folder .doc	{margin-left:18px;}
+
+.DynamicTree .text			{padding:1px 10px;}
+.DynamicTree .text-active	{background:#fed;  padding:0px 9px; border:1px solid #ccc; font-weight:bold;}
+
+/* hack for IE to fix a bug (background of .section disappearing when mouse is over a link, for example Node 1.1.1.1) * /
+* html .DynamicTree .doc	{position:relative;}
+* html .DynamicTree .doc a	{position:absolute; top:3px;}
+
+.DynamicTree img			{border:0; vertical-align:middle;}
+.DynamicTree .tree-top		{line-height:30px; color:#333; font-weight:bold;}
+.DynamicTree .tree-wrapper1	{background:#f8f8f8; padding:1em; margin:1em; border:2px solid ; border-color:#eee #ccc #bbb #ddd;}
+.DynamicTree .tree-actions	{clear:both;}
+.DynamicTree .tree-actions a	{display:block; float:left; background:#f8f8f8; padding:5px 8px; margin:0.5em; border:2px solid ; border-color:#eee #ccc #bbb #ddd;}
+.DynamicTree .tree-tooltip	{float:left; font-weight:bold;}
+*/
+
+
+.DynamicTree				{line-height:18px; white-space:nowrap; cursor:default;}
+.DynamicTree .section		{background:url(/liberty/icons/tree-branch.gif) repeat-y; display:none;}
+.DynamicTree .last			{background:none;}
+.DynamicTree .folder .folder,
+.DynamicTree .doc .doc,
+.DynamicTree .folder .doc	{margin-left:18px;}
+.DynamicTree .text-active	{font-weight:bold;}
+
+/* hack for IE to fix a bug (background of .section disappearing when mouse is over a link, for example Node 1.1.1.1) */
+* html .DynamicTree .doc	{position:relative;}
+* html .DynamicTree .doc a	{position:absolute; top:3px;}
+
+.DynamicTree img			{border:0; vertical-align:middle;}
+.DynamicTree .tree-tooltip	{float:left;}
