@@ -67,13 +67,7 @@ function DynamicTreeBuilder(id) {
 				if (nodes[i].firstChild) {
 					if (nodes[i].firstChild.tagName == "A") {
 						var a = nodes[i].firstChild;
-						if (!checkIt('msie')) {
-							node.navlinks = " <span class='move'><a href='javascript:treeMoveUp();'><img src='"+this.img.up+"' alt='' /></a> <a href='javascript:treeMoveDown();'><img src='"+this.img.down+"' alt='' /></a> <a href='javascript:treeMoveLeft();'><img src='"+this.img.left+"' alt='' /></a> <a href='javascript:treeMoveRight();'><img src='"+this.img.right+"' alt='' /></a></span>";
-						} else {
-							node.navlinks = "";
-						}
 						if (a.firstChild) {
-							//node.text = a.firstChild.nodeValue.trim()+navlinks;
 							node.text = a.firstChild.nodeValue.trim();
 						}
 						if (a.href) {
@@ -401,6 +395,11 @@ function DynamicTreeBuilder(id) {
 			node.parentNode = this;
 		};
 		this.toHtml = function() {
+			if (!checkIt('msie')) {
+				this.navlinks = " <span class='move'><a href='javascript:treeMoveUp();'><img src='"+self.img.up+"' alt='' /></a> <a href='javascript:treeMoveDown();'><img src='"+self.img.down+"' alt='' /></a> <a href='javascript:treeMoveLeft();'><img src='"+self.img.left+"' alt='' /></a> <a href='javascript:treeMoveRight();'><img src='"+self.img.right+"' alt='' /></a></span>";
+			} else {
+				this.navlinks = "";
+			}
 			var s = '<div class="?" id="?">'.format((this.isFolder ? "folder" : "doc"), this.id);
 			if (this.isFolder) {
 				var nodeIcon;
