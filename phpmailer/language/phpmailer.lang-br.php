@@ -1,5 +1,7 @@
 <?php
 /**
+ * @package PHPMailer
+ * @subpackage language
  * PHPMailer language file.  
  * Portuguese Version
  * By Paulo Henrique Garcia - paulo@controllerweb.com.br
