@@ -1,5 +1,7 @@
 <?php
 /**
+ * @package PHPMailer
+ * @subpackage language
  * PHPMailer dil dosyasý.
  * Türkçe Versiyonu
  * ÝZYAZILIM - Elçin Özel - Can Yýlmaz - Mehmet Benlioðlu

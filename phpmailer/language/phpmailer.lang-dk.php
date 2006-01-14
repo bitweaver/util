@@ -1,5 +1,7 @@
 <?php
 /**
+ * @package PHPMailer
+ * @subpackage language
  * PHPMailer language file.  
  * Danish Version
  * Author: Mikael Stokkebro <info@stokkebro.dk>

@@ -1,4 +1,10 @@
 <?php
+/**
+ * PHPMailer - PHP email transport class
+ * @package PHPMailer
+ * @author Brent R. Matzelle
+ * @copyright 2001 - 2003 Brent R. Matzelle
+ */
 ////////////////////////////////////////////////////
 // PHPMailer - PHP email class
 //
@@ -12,10 +18,7 @@
 ////////////////////////////////////////////////////
 
 /**
- * PHPMailer - PHP email transport class
  * @package PHPMailer
- * @author Brent R. Matzelle
- * @copyright 2001 - 2003 Brent R. Matzelle
  */
 class PHPMailer
 {

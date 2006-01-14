@@ -2,23 +2,33 @@
 // | DO NOT REMOVE THIS											|
 // +---------------------------------------------------------------+
 // | DynamicTree 1.5.0											 |
-// | Author: Cezary Tomczak [www.gosu.pl]						  |
+// | Author: Cezary Tomczak [www.gosu.pl]						|
 // | Free for any use as long as all copyright messages are intact |
 // +---------------------------------------------------------------+
+
+// simple browser checker
+var detect = navigator.userAgent.toLowerCase();
+function checkIt(string) {
+	return (detect.indexOf(string) + 1);
+}
 
 function DynamicTreeBuilder(id) {
 	this.path = bitIconDir;
 	this.img = {
-		"branch":      "tree-branch.gif",
-		"doc":         "tree-doc.gif",
-		"folder":      "tree-folder.gif",
-		"folderOpen":  "tree-folder-open.gif",
-		"leaf":        "tree-leaf.gif",
-		"leafEnd":     "tree-leaf-end.gif",
-		"node":        "tree-node.gif",
-		"nodeEnd":     "tree-node-end.gif",
-		"nodeOpen":    "tree-node-open.gif",
-		"nodeOpenEnd": "tree-node-open-end.gif" };
+		"up":			"move_up.png",
+		"down":			"move_down.png",
+		"left":			"move_left.png",
+		"right":		"move_right.png",
+		"branch":		"tree-branch.gif",
+		"doc":			"tree-doc.gif",
+		"folder":		"tree-folder.gif",
+		"folderOpen":	"tree-folder-open.gif",
+		"leaf":			"tree-leaf.gif",
+		"leafEnd":		"tree-leaf-end.gif",
+		"node":			"tree-node.gif",
+		"nodeEnd":		"tree-node-end.gif",
+		"nodeOpen":		"tree-node-open.gif",
+		"nodeOpenEnd":	"tree-node-open-end.gif" };
 	this.cookiePath = "";
 	this.cookieDomain = "";
 	this.init = function() {
@@ -48,45 +58,45 @@ function DynamicTreeBuilder(id) {
 		this.updateHtml();
 	};
 	this.parse = function(nodes, tree) {
-		  for (var i = 0; i < nodes.length; i++) {
-			  if (nodes[i].nodeType == 1) {
-				  if (!nodes[i].className) { continue; }
-				  nodes[i].id = this.id + "-" + (++this.count);
-				  var node = new Node();
-				  node.id = nodes[i].id;
-				  if (nodes[i].firstChild) {
-					  if (nodes[i].firstChild.tagName == "A") {
-						  var a = nodes[i].firstChild;
-						  if (a.firstChild) {
-							  node.text = a.firstChild.nodeValue.trim();
-						  }
-						  if (a.href) {
-							  // dirty hack for ie (automatic conversion to absolute paths problem), see also DynamicTreePlugins.importFromHtml()
-							  var s = a.parentNode.innerHTML.match(/href=["'](dynamictree:\/\/dynamictree\/)?([^"']*)["']/i);
-							  if (s) { node.href = s[2]; }
-						  }
-						  if (a.title) {
-							  node.title = a.title;
-						  }
-						  if (a.target) {
-							  node.target = a.target;
-						  }
-					  } else {
-						  node.text = nodes[i].firstChild.nodeValue.trim();
-					  }
-				  }
-				  node.parentNode = tree;
-				  node.childNodes = (nodes[i].className == "folder" ? new Array() : null);
-				  node.isDoc	  = (nodes[i].className == "doc");
-				  node.isFolder   = (nodes[i].className == "folder");
-				  tree.childNodes.push(node);
-				  this.allNodes[node.id] = node;
-			  }
-			  if (nodes[i].nodeType == 1 && nodes[i].childNodes) {
-				  this.parse(nodes[i].childNodes, tree.childNodes.getLast());
-			  }
-		  }
-	  };
+		for (var i = 0; i < nodes.length; i++) {
+			if (nodes[i].nodeType == 1) {
+				if (!nodes[i].className) { continue; }
+				nodes[i].id = this.id + "-" + (++this.count);
+				var node = new Node();
+				node.id = nodes[i].id;
+				if (nodes[i].firstChild) {
+					if (nodes[i].firstChild.tagName == "A") {
+						var a = nodes[i].firstChild;
+						if (a.firstChild) {
+							node.text = a.firstChild.nodeValue.trim();
+						}
+						if (a.href) {
+							// dirty hack for ie (automatic conversion to absolute paths problem), see also DynamicTreePlugins.importFromHtml()
+							var s = a.parentNode.innerHTML.match(/href=["'](dynamictree:\/\/dynamictree\/)?([^"']*)["']/i);
+							if (s) { node.href = s[2]; }
+						}
+						if (a.title) {
+							node.title = a.title;
+						}
+						if (a.target) {
+							node.target = a.target;
+						}
+					} else {
+						node.text = nodes[i].firstChild.nodeValue.trim();
+					}
+				}
+				node.parentNode = tree;
+				node.childNodes = (nodes[i].className == "folder" ? new Array() : null);
+				node.isDoc	= (nodes[i].className == "doc");
+				node.isFolder   = (nodes[i].className == "folder");
+				tree.childNodes.push(node);
+				this.allNodes[node.id] = node;
+			}
+			if (nodes[i].nodeType == 1 && nodes[i].childNodes) {
+				this.parse(nodes[i].childNodes, tree.childNodes.getLast());
+			}
+		}
+	};
 	this.nodeClick = function(id) {
 		var el = $(id+"-section");
 		var node = $(id+"-node");
@@ -385,6 +395,11 @@ function DynamicTreeBuilder(id) {
 			node.parentNode = this;
 		};
 		this.toHtml = function() {
+			if (!checkIt('msie')) {
+				this.navlinks = " <span class='move'><a href='javascript:treeMoveUp();'><img src='"+self.img.up+"' alt='' /></a> <a href='javascript:treeMoveDown();'><img src='"+self.img.down+"' alt='' /></a> <a href='javascript:treeMoveLeft();'><img src='"+self.img.left+"' alt='' /></a> <a href='javascript:treeMoveRight();'><img src='"+self.img.right+"' alt='' /></a></span>";
+			} else {
+				this.navlinks = "";
+			}
 			var s = '<div class="?" id="?">'.format((this.isFolder ? "folder" : "doc"), this.id);
 			if (this.isFolder) {
 				var nodeIcon;
@@ -398,7 +413,7 @@ function DynamicTreeBuilder(id) {
 				s += '<img id="?-node" src="?" width="18" height="18" alt="" />'.format(this.id, nodeIcon);
 				if (this.childNodes.length) { s += '</a>'; }
 				s += '<img id="?-icon" src="?" width="18" height="18" alt="" />'.format(this.id, icon);
-				s += '<span id="?-text" class="text?" onclick="?.textClick(\'?\')">?</span>'.format(this.id, (self.active == this.id ? '-active' : ''), self.id, this.id, this.text);
+				s += '<span id="?-text" class="text?" onclick="?.textClick(\'?\')">??</span>'.format(this.id, (self.active == this.id ? '-active' : ''), self.id, this.id, this.text, this.navlinks);
 				if (this.childNodes.length) {
 					s += '<div class="section?" id="?-section"'.format((this.isLast() ? " last" : ""), this.id);
 					if (self.opened.contains(this.id)) {
@@ -412,7 +427,7 @@ function DynamicTreeBuilder(id) {
 			}
 			if (this.isDoc) {
 				s += '<img src="?" width="18" height="18" alt="" /><img src="?" />'.format((this.isLast() ? self.img.leafEnd : self.img.leaf), self.img.doc);
-				s += '<span id="?-text" class="text?" onclick="?.textClick(\'?\')">?</span>'.format(this.id, (self.active == this.id ? '-active' : ''), self.id, this.id, this.text);
+				s += '<span id="?-text" class="text?" onclick="?.textClick(\'?\')">??</span>'.format(this.id, (self.active == this.id ? '-active' : ''), self.id, this.id, this.text, this.navlinks);
 			}
 			s += '</div>';
 			return s;

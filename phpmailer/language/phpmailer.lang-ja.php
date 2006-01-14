@@ -1,5 +1,7 @@
 <?php
 /**
+ * @package PHPMailer
+ * @subpackage language
  * PHPMailer language file.  
  * Japanese Version
  * By Mitsuhiro Yoshida - http://mitstek.com/

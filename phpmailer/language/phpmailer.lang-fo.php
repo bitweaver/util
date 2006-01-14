@@ -1,5 +1,7 @@
 <?php
 /**
+ * @package PHPMailer
+ * @subpackage language
  * PHPMailer language file.  
  * Faroese Version [language of the Faroe Islands, a Danish dominion]
  * This file created: 11-06-2004

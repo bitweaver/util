@@ -1,5 +1,7 @@
 <?php
 /**
+ * @package PHPMailer
+ * @subpackage language
  * PHPMailer language file.  
  * Finnish Version
  * By Jyry Kuukanen

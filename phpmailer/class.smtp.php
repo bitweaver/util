@@ -1,4 +1,12 @@
 <?php
+/**
+ * SMTP is rfc 821 compliant and implements all the rfc 821 SMTP
+ * commands except TURN which will always return a not implemented
+ * error. SMTP also provides some utility methods for sending mail
+ * to an SMTP server.
+ * @package PHPMailer
+ * @author Chris Ryan
+ */
 ////////////////////////////////////////////////////
 // SMTP - PHP SMTP class
 //
@@ -14,12 +22,7 @@
 ////////////////////////////////////////////////////
 
 /**
- * SMTP is rfc 821 compliant and implements all the rfc 821 SMTP
- * commands except TURN which will always return a not implemented
- * error. SMTP also provides some utility methods for sending mail
- * to an SMTP server.
  * @package PHPMailer
- * @author Chris Ryan
  */
 class SMTP
 {

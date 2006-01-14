@@ -1,5 +1,7 @@
 <?php
 /**
+ * @package PHPMailer
+ * @subpackage language
  * PHPMailer language file.  
  * Polish Version, encoding: windows-1250
  * translated from english lang file ver. 1.72
