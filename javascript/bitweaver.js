@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.2 2006/01/10 21:18:17 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.3 2006/01/26 20:16:41 squareing Exp $
 var expires = new Date();
 var offset = -(expires.getTimezoneOffset() * 60);
 expires.setFullYear(expires.getFullYear() + 1);
@@ -315,6 +315,21 @@ function switchCheckboxes(the_form, elements_name, switcher_name) {
 	return true;
 }
 
+// disable form stuff after submission
+// the button you disable with this will not appear in $_REQUEST
+function disableSubmit(id) {
+	if(document.getElementById) {
+		// this is the way the standards work
+		$(id).disabled = true;
+		$(id).value = "Please Wait...";
+	} else if(document.all) {
+		// this is the way old msie versions work
+		document.all[id].disabled = true;
+	} else if(document.layers) {
+		// this is the way nn4 works
+		document.layers[id].disabled = true;
+	}
+}
 
 // function added for use in navigation dropdown
 // example :
