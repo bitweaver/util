@@ -23,7 +23,7 @@ function serialize(a) {
 var DragDrop = {
 	firstContainer : null,
 	lastContainer : null,
-	parent_id : nullSerial,
+	parent_id : null,
 	parent_group : null,
 	makeListContainer : function(list, group) {
 		// each container becomes a linked list node
