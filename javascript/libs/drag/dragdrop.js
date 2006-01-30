@@ -4,11 +4,27 @@
  Modified by Tom Westcott : http://www.cyberdummy.co.uk 
  **********************************************************/
 
+// {{{ BIT_MOD
+// add a basic serializer
+function serialize(a) { 
+	var counter = 0; 
+	var vardef = ""; 
+	for (var key in a) { 
+		counter = counter +1; 
+		var length = a[key].length; 
+		if (length == "undefined") length = 1; 
+		vardef = vardef + "s:" + key.length + ":\"" + key + "\";" + "s:" + length + ":\"" + a[key] + "\";"; 
+	} 
+	var serialized = "a:" + counter + ":{" + vardef + "}"; 
+	return serialized; 
+} 
+// BIT_MOD }}}
+
 var DragDrop = {
 	firstContainer : null,
 	lastContainer : null,
-        parent_id : null,
-        parent_group : null,
+	parent_id : nullSerial,
+	parent_group : null,
 	makeListContainer : function(list, group) {
 		// each container becomes a linked list node
 		if (this.firstContainer == null) {
@@ -42,9 +58,9 @@ var DragDrop = {
 	// modified out string to make it compatible with eval( $_REQUEST['id'] );
 	serData : function ( group, theid ) {
 		var container = DragDrop.firstContainer;
-		var j = 0;
-		var string = '$'+group+' = array( "';
-		while (container != null) {
+		var hash = new Array()
+
+		while(container != null) {
 			if(theid != null && container.id != theid) {
 				container = container.nextContainer;
 				continue;
@@ -55,25 +71,16 @@ var DragDrop = {
 				continue;
 			}
 
-			j ++;
-			if(j > 1) {
-				string += ',"';
-			}
-			string += container.id;
-			string += '" => array( ';
-
+			var tmpHash = new Array()
 			var items = container.getElementsByTagName( "li" );
-			string += '"';
 			for(var i = 0; i < items.length; i++) {
-				if(i > 0) {
-					string += '","';
-				}
-				string += items[i].id;
+				tmpHash[i] = items[i].id;
 			}
-			string += '" )';
+			hash[container.id] = serialize(tmpHash);
 			container = container.nextContainer;
 		}
-		string += ' );';
+		var string = '';
+		string = serialize(hash);
 		return string;
 	},
 	// }}} BIT_MOD end
