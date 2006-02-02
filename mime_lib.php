@@ -1,6 +1,6 @@
 <?php
 // returns mimetypes of files
-function tiki_get_mime($filename) {
+function bit_get_mime($filename) {
 	if (function_exists("mime_content_type")) {
 		//notice: this is the better way.
 		//Compile php with --enable-mime-magic
@@ -20,13 +20,13 @@ function tiki_get_mime($filename) {
 	}
 }
 //returns "image" from image/jpeg
-function tiki_get_mime_main($filename) {
-	$filesplit = preg_split("#/+#", tiki_get_mime($filename));
+function bit_get_mime_main($filename) {
+	$filesplit = preg_split("#/+#", bit_get_mime($filename));
 	return $filesplit["0"];
 }
 //returns "jpeg" from image/jpeg
-function tiki_get_mime_sub($filename) {
-	$filesplit = preg_split("#/+#", tiki_get_mime($filename));
+function bit_get_mime_sub($filename) {
+	$filesplit = preg_split("#/+#", bit_get_mime($filename));
 	return $filesplit["1"];
 }
 ?>
