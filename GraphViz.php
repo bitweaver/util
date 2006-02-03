@@ -13,11 +13,11 @@
 // | license@php.net so we can mail you a copy immediately.                    |
 // +---------------------------------------------------------------------------+
 //
-// $Id: GraphViz.php,v 1.4 2006/02/03 13:48:22 lsces Exp $
+// $Id: GraphViz.php,v 1.5 2006/02/03 13:50:24 lsces Exp $
 //
 
 //require_once 'System.php';
-// Only used to generate temporary file name - changed to tempnam( TEMP_PKG_PATH.GraphViz.'/', 
+// Only used to generate temporary file name - changed to tempnam( TEMP_PKG_PATH.'GraphViz/', 
 
 /**
  * Interface to AT&T's GraphViz tools.
@@ -365,7 +365,7 @@ class Image_GraphViz {
         $serialized_graph = serialize($this->graph);
 
         if (empty($file)) {
-            $file = tempnam( TEMP_PKG_PATH.GraphViz.'/', 'graph_');
+            $file = tempnam( TEMP_PKG_PATH.'GraphViz/', 'graph_');
         }
 
         if ($fp = @fopen($file, 'w')) {
@@ -490,7 +490,7 @@ class Image_GraphViz {
 
         if (!empty($parsedGraph)) {
             if (empty($file)) {
-                $file = tempnam( TEMP_PKG_PATH.GraphViz.'/', 'graph_');
+                $file = tempnam( TEMP_PKG_PATH.'GraphViz/', 'graph_');
             }
 
             if ($fp = @fopen($file, 'w')) {
