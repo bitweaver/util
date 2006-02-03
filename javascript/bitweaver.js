@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.1.2.1 2005/12/29 22:04:40 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.1.2.2 2006/02/03 12:37:53 squareing Exp $
 var expires = new Date();
 var offset = -(expires.getTimezoneOffset() * 60);
 expires.setFullYear(expires.getFullYear() + 1);
@@ -332,21 +332,12 @@ function go(o) {
 /** \brief: modif a textarea dimension
  * \elementId = textarea idea
  * \height = nb pixels to add to the height (the number can be negative)
- * \width = nb pixels to add to the width
- * \formid = form id (needs to have 2 input rows and cols
  **/
-function textareasize(elementId, height, width, formId) {
+function textareasize(elementId, height) {
 	textarea = $(elementId);
-	form = $(formId);
 	if (textarea && height != 0 && textarea.rows + height > 5) {
 		textarea.rows += height;
-		if (form.rows)
-			form.rows.value = textarea.rows;
-	}
-	if (textarea && width != 0 && textarea.cols + width > 10) {
-		 textarea.cols += width;
-		if (form.cols)
-			form.cols.value = textarea.cols;
+		setCookie('rows', textarea.rows);
 	}
 }
 

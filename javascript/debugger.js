@@ -1,5 +1,5 @@
 // this will dump the contents of an object into the page
-function dump( theObj ) {
+function vd( theObj ) {
 	var tx="<table width='600'>";
 	var props = new Array();
 	for( var i in theObj ) { props.push(i); }
