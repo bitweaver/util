@@ -1,3 +1,14 @@
+/***************************************************************************\
+*                                                                           *
+*  please modify this file and leave plenty of comments. when done, please  *
+*  visit http://dean.edwards.name/packer/ to compress this and place the    *
+*  compressed output in the loaded version of this file                     *
+*                                                                           *
+*  comprress and append to the compressed DynamicTreeBuilder.js file        *
+*  line 57 can cause problems                                               *
+*                                                                           *
+\***************************************************************************/
+
 function DynamicTreePlugins() {
 	this.importFromHtml = function(html) {
 		// dirty hack for ie (automatic conversion to absolute paths problem), see also DynamicTreeBuilder.parse()
