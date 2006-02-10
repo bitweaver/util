@@ -6,6 +6,14 @@
 // | Free for any use as long as all copyright messages are intact |
 // +---------------------------------------------------------------+
 
+/***************************************************************************\
+*                                                                           *
+*  please modify this file and leave plenty of comments. when done, please  *
+*  visit http://dean.edwards.name/packer/ to compress this and place the    *
+*  compressed output in the loaded version of this file                     *
+*                                                                           *
+\***************************************************************************/
+
 // simple browser checker
 var detect = navigator.userAgent.toLowerCase();
 function checkIt(string) {
