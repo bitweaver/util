@@ -199,7 +199,7 @@ class dBug {
 				break;
 			default:
 				$var=($var=="") ? "[empty string]" : $var;
-				echo "<table cellspacing=0><tr>\n<td>".$var."</td>\n</tr>\n</table>\n";
+				echo "<table cellspacing=0><tr>\n<td>".htmlentities($var)."</td>\n</tr>\n</table>\n";
 				break;
 		}
 	}
@@ -220,7 +220,7 @@ class dBug {
 					$this->checkType($value);
 				else {
 					$value=(trim($value)=="") ? "[empty string]" : $value;
-					echo $value."</td>\n</tr>\n";
+					echo htmlentities($value)."</td>\n</tr>\n";
 				}
 			}
 		}
