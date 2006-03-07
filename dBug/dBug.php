@@ -212,16 +212,20 @@ class dBug {
 			
 	//if variable is an array type
 	function varIsArray($var) {
-		$this->makeTableHeader("array","array");
 		if(is_array($var)) {
-			foreach($var as $key=>$value) {
-				$this->makeTDHeader("array",$key);
-				if(in_array(gettype($value),$this->arrType))
-					$this->checkType($value);
-				else {
-					$value=(trim($value)=="") ? "[empty string]" : $value;
-					echo htmlentities($value)."</td>\n</tr>\n";
+			if (count($var) > 0) {
+				$this->makeTableHeader("array","array");
+				foreach($var as $key=>$value) {
+					$this->makeTDHeader("array",$key);
+					if(in_array(gettype($value),$this->arrType))
+						$this->checkType($value);
+					else {
+						$value=(trim($value)=="") ? "[empty string]" : $value;
+						echo htmlentities($value)."</td>\n</tr>\n";
+					}
 				}
+			} else {
+				$this->makeTableHeader("array","empty array");
 			}
 		}
 		else echo "<tr><td>".$this->error("array").$this->closeTDRow();
@@ -234,7 +238,8 @@ class dBug {
 		$arrObjVars=get_object_vars($var);
 		if(is_object($var)) {
 			foreach($arrObjVars as $key=>$value) {
-				$value=(trim($value)=="") ? "[empty string]" : $value;
+				if (!is_array($value)) 
+					$value=(trim($value)=="") ? "[empty string]" : $value;
 				$this->makeTDHeader("object",$key);
 				if(in_array(gettype($value),$this->arrType))
 					$this->checkType($value);
