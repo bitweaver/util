@@ -13,7 +13,7 @@
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
 //
-// $Id: GraphViz.php,v 1.1 2005/06/19 05:21:32 bitweaver Exp $
+// $Id: GraphViz.php,v 1.1.1.1.2.1 2006/03/08 11:40:00 wolff_borg Exp $
 //
 /**
 * PEAR::Image_GraphViz
@@ -305,7 +305,7 @@ class Image_GraphViz {
                 $attributeList[] = $key . '="' . $value . '"';
             }
             if (!empty($attributeList)) {
-              $parsedGraph .= implode(',', $attributeList) . ";\n";
+              $parsedGraph .= implode(';', $attributeList) . ";\n";
             }
         }
         if (isset($this->graph['nodes'])) {
