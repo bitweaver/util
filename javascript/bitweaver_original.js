@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.2 2006/03/01 21:29:31 starrrider Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.3 2006/03/09 20:11:02 starrrider Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -79,10 +79,6 @@ function setSomeElement(fooel, foo1) {
 	$(fooel).value = $(fooel).value + foo1;
 }
 
-
-
-
-
 // function:	setSelectionRange - used by insertAt
 // desc:		No Idea
 // added by:
@@ -157,11 +153,8 @@ function insertAt(elementId, replaceString) {
 // added by:
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id / f = any value (not 0) to turn cookies on
-// Note:		Modified to work with most Browser
 function show(foo,f) {
-	if (document.layers) document.layers[foo].display = "block";
-	else if (document.all) document.all[foo].style.display = "block";
-	else if (document.getElementById) document.getElementById(foo).style.display = "block";
+	if (foo && foo.style && foo.style.display == 'none')  $(foo).style.display = "block";
 	if (f) { setCookie(foo, "o"); }
 }
 
@@ -171,11 +164,8 @@ function show(foo,f) {
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id /
 //				f = any value (not 0) to turn cookies on
-// Note:		Modified to work with most Browser
 function hide(foo,f) {
-	if (document.layers) document.layers[foo].display = "none";
-	else if (document.all) document.all[foo].style.display = "none";
-	else if (document.getElementById) document.getElementById(foo).style.display = "none";
+	if (foo && foo.style && foo.style.display == 'block')  $(foo).style.display = "none";
 	if (f) { setCookie(foo, "c"); }
 }
 
@@ -185,7 +175,6 @@ function hide(foo,f) {
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id
 //				bar - a boolean used to set starting visibility - if True foo is displayed
-// Note:		Modified to work with most Browser
 function flip(foo,bar) {
 	if (	(bar) ||
 			((document.layers) && (document.layers[foo].display == "none")) ||
@@ -217,31 +206,42 @@ function toggle(foo,bar) {
 
 // function:	flipMulti
 // desc:		Toggles multiple HTML elements visibility
-//				On the first pass - Shows the window id (foo) & saves it in a global variable
+//				On the first pass - Shows the window id (foo) & saves it in global variables
 //				Other calls - Hides the saved window id and shows the new window id (foo)
 //				If (foo) is zero(0) - Hides the saved window id (zen) and sets the global variable to 0
-//				This function is used with a Selector's onChnage event to display only the needed window(s)
-//				Multiple windows can be turned on providing the id numbers are sequencial.
-//				An array is used for the global variable so that the function will only display the correct window Id's
+//				This function can be used with a Selector's onChnage event to display multiple window(s)
 // added by: 	StarRider
 // date:		1/5/06
-// params:		foo = the primary window Id - should be a HTML Id with style set to style.display == "none"
-//				bar = a number (1-9/def=1) indicates how many windows to hide/display - The window id's must be successive numbers
+// Note			For Cross-Browser compatibility - A window id's must begin with a Letter or String. flipMulti operates by adding
+//				a number to a string. The first argument (hdr) is extended with the number (foo) to show/hide the window id. With
+//				multiple windows the id's need to be sequencial (each id 1 greater than the last with the first being foo).
+// example:		$foo = microtime() * 1000000;	$hdr = 'edithelp';
+//				$Id1 = $hdr.$foo;	$Id2 = $hdr.($foo+1);		$Id3 = $hdr.($foo+2);		etc.
+//				<div id="{$Id1}">This Data</div>	<div id="{$Id2}">That Data</div>	<div id="{$Id3}">Other Data</div>
+//				onClick="flipMulti('$hdr','$foo','3'); or in a tpl - onClick="flipMulti('{$hdr}','{$foo}','3');
+// params:		hdr = A string used in the creation of the Id number of the item being displayed.
+//				foo = the number use in the Id
+//				bar = a number (1-9/def=1) indicates how many windows to hide/display
 //					(1 greater than the last with foo as the first) and set like this:
 //					$Window_Id1 = (microtime() * 1000000); $Window_Id2 = $Window_Id1+1; $Window_Id3 = $Window_Id2+1;
 //					<div id="{$Window_Id1}">Data</div>  <div id="{$Window_Id2}">Data</div>  <div id="{$Window_Id3}">Data</div>
 //					and onchange="javascript:flipper($Window_Id1,3)"
+//				A string used while creating
 //				zen = a number (1-3/def=1) determins where the window id is stored in the array - Allows flipper to be used by
 //					multiple routines without interferring with each other
-var flipArr=[0,0,0];
-function flipMulti(foo,bar,zen){
+var flipArr=[0,0,0];// Only the numberic portion of the id is saved
+function flipMulti(hdr,foo,bar,zen){
+	if(!hdr || !foo) return 0;
 	if(!zen || zen<1 || zen>3) zen=1;
 	if(!bar || bar<1 || bar>9) bar=1;
-	if(foo) foo=((foo*10)/10); // foo has to be a number
+	foo=(foo*10)/10; // foo has to be a number
 	var i=0;
+	var id = 0;
 	do {
-		if(flipArr[zen-1]!=0) hide(flipArr[zen-1]+i);
-		if(foo) show(foo+i);
+		var oldId = hdr+(flipArr[zen-1]+i);
+		var newId = hdr+(foo+i);
+		if(flipArr[zen-1]!=0) hide(oldId);
+		show(newId);
 	} while (++i <= bar-1);
 	if(foo) flipArr[zen-1]=foo;
 	else flipArr[zen-1]=0;
