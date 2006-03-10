@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.3 2006/03/09 20:11:02 starrrider Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.4 2006/03/10 16:24:27 starrrider Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -30,7 +30,6 @@ function $() {
 
 // function:	toggle_dynamic_var
 // desc:		Toggles the visibility of dynamic variable passed to it
-// added by:
 // date:		Pre-bitweaver
 // params:		$name
 function toggle_dynamic_var($name) {
@@ -45,8 +44,6 @@ function toggle_dynamic_var($name) {
 }	}
 
 // function:	genPass
-// desc:
-// added by:
 // date:		Pre-bitweaver
 // params:		w1 / w2 / w3
 function genPass(w1, w2, w3) {
@@ -72,7 +69,6 @@ function genPass(w1, w2, w3) {
 
 // function:	setSomeElement
 // desc:		Adds a String to the value of fooel
-// added by:
 // date:		Pre-bitweaver
 // params:		fooel = a HTML Id / foo1 = the string to be added
 function setSomeElement(fooel, foo1) {
@@ -81,7 +77,6 @@ function setSomeElement(fooel, foo1) {
 
 // function:	setSelectionRange - used by insertAt
 // desc:		No Idea
-// added by:
 // date:		Pre-bitweaver
 // params:		textarea = / selectionStart = / selectionEnd =
 function setSelectionRange(textarea, selectionStart, selectionEnd) {
@@ -98,7 +93,6 @@ function setSelectionRange(textarea, selectionStart, selectionEnd) {
 
 // function:	setCaretToPos - used by insertAt
 // desc:		No Idea
-// added by:
 // date:		Pre-bitweaver
 // params:		textarea = / pos =
 function setCaretToPos (textarea, pos) {
@@ -107,7 +101,6 @@ function setCaretToPos (textarea, pos) {
 
 // function:	insertAt - used by QuickTags & Plugin Help
 // desc:		inserts replaceString in elementId
-// added by:
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id / replaceString = string
 function insertAt(elementId, replaceString) {
@@ -150,58 +143,44 @@ function insertAt(elementId, replaceString) {
 
 // function:	show
 // desc:		Displays a hidden HTML element. Can also set a cookie to make it stay that way.
-// added by:
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id / f = any value (not 0) to turn cookies on
 function show(foo,f) {
-	if (foo && foo.style && foo.style.display == 'none')  $(foo).style.display = "block";
+	if (foo && $(foo).style && $(foo).style.display) $(foo).style.display = "block";
 	if (f) { setCookie(foo, "o"); }
 }
 
 // function:	hide
 // desc:		Hides an HTML element. Can also set a cookie to make it stay that way.
-// added by:
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id /
 //				f = any value (not 0) to turn cookies on
 function hide(foo,f) {
-	if (foo && foo.style && foo.style.display == 'block')  $(foo).style.display = "none";
+	if (foo && $(foo).style && $(foo).style.display) $(foo).style.display = "none";
 	if (f) { setCookie(foo, "c"); }
 }
 
 // function:	flip
-// desc:		Toggles a HTML elements visibility. Does not use Cookies so a refresh will restore to original state.
-// added by:
+// desc:		Flips the visibility of a HTML element. Cookies are not used.
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id
 //				bar - a boolean used to set starting visibility - if True foo is displayed
 function flip(foo,bar) {
-	if (	(bar) ||
-			((document.layers) && (document.layers[foo].display == "none")) ||
-			((document.all) && (document.all[foo].style.display == "none")) ||
-			((document.getElementById) && (document.getElementById(foo).style.display == "none")) ) show(foo);
-	else if	(	((document.layers) && (document.layers[foo].display == "block")) ||
-				((document.all) && (document.all[foo].style.display == "block")) ||
-				((document.getElementById) && (document.getElementById(foo).style.display == "block")) ) hide(foo);
-		else show(foo);
+	if (foo && bar) show(foo);
+	else if ($(foo).style.display == 'none' ) show(foo);
+	else if ($(foo).style.display == 'block') hide(foo);
 }
 
 // function:	toggle
-// desc:		Toggles a HTML elements visibility. Use Cookies to make it stay that way.
-// added by:
+// desc:		Toggles a HTML elements visibility. Cookies are used to make it stay that way.
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id
 //				bar - a boolean used to set starting visibility - if True foo is displayed
 // Note:		Modified to work with most Browser
 function toggle(foo,bar) {
-	if (	(bar) ||
-			((document.layers) && (document.layers[foo].display == "none")) ||
-			((document.all) && (document.all[foo].style.display == "none")) ||
-			((document.getElementById) && (document.getElementById(foo).style.display == "none")) ) show(foo,1);
-	else if	(	((document.layers) && (document.layers[foo].display == "block")) ||
-				((document.all) && (document.all[foo].style.display == "block")) ||
-				((document.getElementById) && (document.getElementById(foo).style.display == "block")) ) hide(foo,1);
-		else show(foo,1);
+	if (foo && bar) show(foo,1);
+	else if ($(foo).style.display == 'none' ) show(foo,1);
+	else if ($(foo).style.display == 'block') hide(foo,1);
 }
 
 // function:	flipMulti
@@ -231,21 +210,21 @@ function toggle(foo,bar) {
 //					multiple routines without interferring with each other
 var flipArr=[0,0,0];// Only the numberic portion of the id is saved
 function flipMulti(hdr,foo,bar,zen){
-	if(!hdr || !foo) return 0;
-	if(!zen || zen<1 || zen>3) zen=1;
-	if(!bar || bar<1 || bar>9) bar=1;
-	foo=(foo*10)/10; // foo has to be a number
-	var i=0;
-	var id = 0;
-	do {
-		var oldId = hdr+(flipArr[zen-1]+i);
-		var newId = hdr+(foo+i);
-		if(flipArr[zen-1]!=0) hide(oldId);
-		show(newId);
-	} while (++i <= bar-1);
-	if(foo) flipArr[zen-1]=foo;
-	else flipArr[zen-1]=0;
-}
+	if(!hdr || !foo) {
+		if(!zen || zen<1 || zen>3) zen=1;
+		if(!bar || bar<1 || bar>9) bar=1;
+		foo=(foo*10)/10; // foo has to be a number
+		var i=0;
+		var id = 0;
+		do {
+			var oldId = hdr+(flipArr[zen-1]+i);
+			var newId = hdr+(foo+i);
+			if(flipArr[zen-1]!=0) hide(oldId);
+			show(newId);
+		} while (++i <= bar-1);
+		if(foo) flipArr[zen-1]=foo;
+		else flipArr[zen-1]=0;
+}	}
 
 // function:	flipIcon
 // desc:		Toggles a HTML elements visibility with an Icon. Use Cookies to make it stay that way.
@@ -255,7 +234,7 @@ function flipMulti(hdr,foo,bar,zen){
 // params:		foo is an HTML Id for the window to be displayed/hidden
 function flipIcon(foo) {
 	var pic = new Image();
-	if (document.getElementById(foo).style.display == "none") {
+	if (foo && $(foo).style && $(foo).style.display && $(foo).style.display == "none") {
 		pic.src = bitIconDir + "/expanded.gif";
 		show(foo,1);
 	} else {
@@ -268,7 +247,6 @@ function flipIcon(foo) {
 // function:	flipWithSign
 // desc:		Used to Expand/Collapse Lists
 // Note:		Reworked to eliminate collapseSign / expandSign
-// added by:
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id
 function flipWithSign(foo) {
@@ -284,7 +262,6 @@ function flipWithSign(foo) {
 // function:	setFlipWithSign
 // desc:		Toggles the state of a flipped List after page reload
 // Note:		Reworked to eliminate collapseSign / expandSign
-// added by:
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id of a List
 function setFlipWithSign(foo) {
@@ -299,7 +276,6 @@ function setFlipWithSign(foo) {
 
 // function:	setCookie
 // desc:		Creates a Cookie
-// added by:
 // date:		Pre-bitweaver
 // params:		name = the name of the cookie
 //				value = the value placed in the cookie
@@ -324,7 +300,6 @@ function setCookie(name, value, expire, path, domain, secure) {
 
 // function:	getCookie
 // desc:		Gets a Cookie and returns it's value
-// added by:
 // date:		Pre-bitweaver
 // params:		name = the name of the desired cookie
 // NOTE:		return string contains value of specified cookie or null if cookie does not exist
@@ -345,7 +320,6 @@ function getCookie(name) {
 
 // function:	deleteCookie
 // desc:		Deletes a Cookie
-// added by:
 // date:		Pre-bitweaver
 // params:		name = the name of the cookie
 //				[path] (optional) = the path of the cookie (must be same path used when created)
@@ -361,7 +335,6 @@ function deleteCookie(name, path, domain) {
 
 // function:	switchCheckboxes
 // desc:		Will Check / Uncheck all Checkboxes
-// added by:
 // date:		Pre-bitweaver
 // params:		the_form = a HTML Id of a form
 //				elements_name = the name of the checkbox / see note
@@ -371,40 +344,29 @@ function deleteCookie(name, path, domain) {
 function switchCheckboxes(the_form, elements_name, switcher_name) {
 	var elements = $(the_form).elements[elements_name];
 	var elements_cnt = ( typeof (elements.length) != 'undefined') ? elements.length : 0;
-
-	if (elements_cnt) {
-		for (var i = 0; i < elements_cnt; i++) {
+	if (elements_cnt)
+		for (var i = 0; i < elements_cnt; i++)
 			elements[i].checked = document.forms[the_form].elements[switcher_name].checked;
-		}
-	} else {
-		elements.checked = document.forms[the_form].elements[switcher_name].checked;
-	}
+	else elements.checked = document.forms[the_form].elements[switcher_name].checked;
 	return true;
 }
 
 // function:	disableSubmit
 // desc:		disable form stuff after submission
-// added by:
-// date:
 // params:		id = a HTML Id
 // note:		a button you disable with this function will not appear in $_REQUEST
 function disableSubmit(id) {
-	if(document.getElementById) {
-		// this is the way the standards work
+	if(document.getElementById) { // this is the way the standards work
 		$(id).disabled = true;
 		$(id).value = "Please Wait...";
-	} else if(document.all) {
-		// this is the way old msie versions work
+	} else if(document.all) {// this is the way old msie versions work
 		document.all[id].disabled = true;
-	} else if(document.layers) {
-		// this is the way nn4 works
+	} else if(document.layers) { // this is the way nn4 works
 		document.layers[id].disabled = true;
-	}
-}
+}	}
 
 // function:	go
 // desc:		added for use in navigation dropdown
-// added by:
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id
 // Example:	<select name="anything" onchange="go(this);">
@@ -420,7 +382,6 @@ function go(o) {
 
 // function:	textareasize
 // desc:		Modifies the dimensions of a textarea
-// added by:
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id to a textarea
 //				height = nb pixels to add to the height (the number can be negative)
@@ -452,7 +413,7 @@ function closeWin(){
 // usage:		<a href="<URL>" title="{tr}Opens link in new window{/tr}" onkeypress="popUpWin(this.href,'standard',600,400);" onclick="popUpWin(this.href,'standard',600,400);return false;">{tr}FooBar{/tr}</a>
 function popUpWin(url, type, strWidth, strHeight) {
 	closeWin();
-	if (type == "fullScreen"){
+	if (type == "fullScreen") {
 		strWidth = screen.availWidth - 10;
 		strHeight = screen.availHeight - 160;
 	}
@@ -465,13 +426,11 @@ function popUpWin(url, type, strWidth, strHeight) {
 
 // function:	setUserModuleFromCombo
 // desc:		No Idea
-// added by:
 // date:		Pre-bitweaver
 // params:		id = a HTML Id
 function setUserModuleFromCombo(id) {
 	$('usermoduledata').value = $('usermoduledata').value
 		+ $(id).options[$(id).selectedIndex].value;
-//$('usermoduledata').value='das';
 }
 
 /* ----------- These Functions are no longer in use
