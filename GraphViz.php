@@ -13,11 +13,14 @@
 // | license@php.net so we can mail you a copy immediately.                    |
 // +---------------------------------------------------------------------------+
 //
-// $Id: GraphViz.php,v 1.5 2006/02/03 13:50:24 lsces Exp $
+// $Id: GraphViz.php,v 1.6 2006/03/20 15:58:37 squareing Exp $
 //
 
 //require_once 'System.php';
 // Only used to generate temporary file name - changed to tempnam( TEMP_PKG_PATH.'GraphViz/', 
+if( !is_dir( TEMP_PKG_PATH.'GraphViz/' ) ) {
+	mkdir_p( TEMP_PKG_PATH.'GraphViz/' );
+}
 
 /**
  * Interface to AT&T's GraphViz tools.
