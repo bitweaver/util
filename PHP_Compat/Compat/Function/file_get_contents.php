@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: file_get_contents.php,v 1.1 2005/06/19 05:21:34 bitweaver Exp $
+// $Id: file_get_contents.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
 //
 
 
@@ -27,7 +27,7 @@
  * @package     PHP_Compat
  * @link        http://php.net/function.file_get_contents
  * @author      Aidan Lister <aidan@php.net>
- * @version     $Revision: 1.1 $
+ * @version     $Revision: 1.2 $
  * @internal    resource_context is not supported
  * @since       PHP 5
  * @require     PHP 4.0.1 (trigger_error)

@@ -22,7 +22,7 @@
 //   The use of this software is at the risk of the user.
 //
 // --------------------------------------------------------------------------------
-// $Id: pclzip_lib.php,v 1.1 2005/06/19 05:21:32 bitweaver Exp $
+// $Id: pclzip_lib.php,v 1.2 2006/03/22 10:24:32 squareing Exp $
 // --------------------------------------------------------------------------------
   // ----- Constants
   define( 'PCLZIP_READ_BLOCK_SIZE', 2048 );

@@ -1,6 +1,6 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_util/javascript/jscompressor.php,v 1.2 2006/01/10 21:18:17 squareing Exp $
+ * $Header: /cvsroot/bitweaver/_bit_util/javascript/jscompressor.php,v 1.3 2006/03/22 10:24:38 squareing Exp $
  * adapted from tinyMCE gzipper
  */
 

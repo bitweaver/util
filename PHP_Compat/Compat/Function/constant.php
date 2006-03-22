@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: constant.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+// $Id: constant.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
 //
 
 
@@ -27,7 +27,7 @@
  * @package     PHP_Compat
  * @link        http://php.net/constant
  * @author      Aidan Lister <aidan@php.net>
- * @version     $Revision: 1.1 $
+ * @version     $Revision: 1.2 $
  * @since       PHP 4.0.4
  * @require     PHP 4.0.1 (trigger_error)
  */

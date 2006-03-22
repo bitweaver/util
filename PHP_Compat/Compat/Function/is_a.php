@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: is_a.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+// $Id: is_a.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
 //
 
 
@@ -27,7 +27,7 @@
  * @package     PHP_Compat
  * @link        http://php.net/function.is_a
  * @author      Aidan Lister <aidan@php.net>
- * @version     $Revision: 1.1 $
+ * @version     $Revision: 1.2 $
  * @since       PHP 4.2.0
  * @require     PHP 4.0.0 (is_subclass_of)
  */

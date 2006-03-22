@@ -17,7 +17,7 @@
 // |          Stephan Schmidt <schst@php.net>                             |
 // +----------------------------------------------------------------------+
 //
-// $Id: strripos.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+// $Id: strripos.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
 //
 
 
@@ -29,7 +29,7 @@
  * @link        http://php.net/function.strripos
  * @author      Aidan Lister <aidan@php.net>
  * @author      Stephan Schmidt <schst@php.net>
- * @version     $Revision: 1.1 $
+ * @version     $Revision: 1.2 $
  * @since       PHP 5
  * @require     PHP 4.0.1 (trigger_error)
  */

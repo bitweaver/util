@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: array_search.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+// $Id: array_search.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
 //
 
 
@@ -28,7 +28,7 @@
  * @link        http://php.net/array_search
  * @author      Aidan Lister <aidan@php.net>
  * @author      Thiemo Mättig (http://maettig.com/)
- * @version     $Revision: 1.1 $
+ * @version     $Revision: 1.2 $
  * @since       PHP 4.0.5
  * @require     PHP 4.0.1 (trigger_error)
  */

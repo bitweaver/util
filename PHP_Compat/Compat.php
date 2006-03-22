@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: Compat.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+// $Id: Compat.php,v 1.2 2006/03/22 10:24:32 squareing Exp $
 //
 
 

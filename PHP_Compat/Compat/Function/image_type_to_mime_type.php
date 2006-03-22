@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: image_type_to_mime_type.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+// $Id: image_type_to_mime_type.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
 //
 
 
@@ -92,7 +92,7 @@ if (!defined('IMAGETYPE_XBM')) {
  * @package     PHP_Compat
  * @link        http://php.net/function.image_type_to_mime_type
  * @author      Aidan Lister <aidan@php.net>
- * @version     $Revision: 1.1 $
+ * @version     $Revision: 1.2 $
  * @since       PHP 4.3.0
  * @require     PHP 3
  */
