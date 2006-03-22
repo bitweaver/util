@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.4 2006/03/10 16:24:27 starrrider Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.5 2006/03/22 14:49:36 squareing Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -146,7 +146,9 @@ function insertAt(elementId, replaceString) {
 // date:		Pre-bitweaver
 // params:		foo = a HTML Id / f = any value (not 0) to turn cookies on
 function show(foo,f) {
-	if (foo && $(foo).style && $(foo).style.display) $(foo).style.display = "block";
+	if (document.layers) document.layers[foo].display = "block";
+	else if (document.all) document.all[foo].style.display = "block";
+	else if (document.getElementById) document.getElementById(foo).style.display = "block";
 	if (f) { setCookie(foo, "o"); }
 }
 
@@ -156,7 +158,9 @@ function show(foo,f) {
 // params:		foo = a HTML Id /
 //				f = any value (not 0) to turn cookies on
 function hide(foo,f) {
-	if (foo && $(foo).style && $(foo).style.display) $(foo).style.display = "none";
+	if (document.layers) document.layers[foo].display = "none";
+	else if (document.all) document.all[foo].style.display = "none";
+	else if (document.getElementById) document.getElementById(foo).style.display = "none";
 	if (f) { setCookie(foo, "c"); }
 }
 
@@ -166,9 +170,14 @@ function hide(foo,f) {
 // params:		foo = a HTML Id
 //				bar - a boolean used to set starting visibility - if True foo is displayed
 function flip(foo,bar) {
-	if (foo && bar) show(foo);
-	else if ($(foo).style.display == 'none' ) show(foo);
-	else if ($(foo).style.display == 'block') hide(foo);
+	if (	(bar) ||
+			((document.layers) && (document.layers[foo].display == "none")) ||
+			((document.all) && (document.all[foo].style.display == "none")) ||
+			((document.getElementById) && (document.getElementById(foo).style.display == "none")) ) show(foo);
+	else if	(	((document.layers) && (document.layers[foo].display == "block")) ||
+				((document.all) && (document.all[foo].style.display == "block")) ||
+				((document.getElementById) && (document.getElementById(foo).style.display == "block")) ) hide(foo);
+		else show(foo);
 }
 
 // function:	toggle
@@ -178,9 +187,14 @@ function flip(foo,bar) {
 //				bar - a boolean used to set starting visibility - if True foo is displayed
 // Note:		Modified to work with most Browser
 function toggle(foo,bar) {
-	if (foo && bar) show(foo,1);
-	else if ($(foo).style.display == 'none' ) show(foo,1);
-	else if ($(foo).style.display == 'block') hide(foo,1);
+	if (	(bar) ||
+			((document.layers) && (document.layers[foo].display == "none")) ||
+			((document.all) && (document.all[foo].style.display == "none")) ||
+			((document.getElementById) && (document.getElementById(foo).style.display == "none")) ) show(foo,1);
+	else if	(	((document.layers) && (document.layers[foo].display == "block")) ||
+				((document.all) && (document.all[foo].style.display == "block")) ||
+				((document.getElementById) && (document.getElementById(foo).style.display == "block")) ) hide(foo,1);
+		else show(foo,1);
 }
 
 // function:	flipMulti
