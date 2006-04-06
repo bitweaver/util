@@ -20,22 +20,23 @@
 // features
 function hasSupport() {
 
-	if (typeof hasSupport.support != "undefined")
+	if (typeof hasSupport.support != "undefined") {
 		return hasSupport.support;
+	}
 
 	var ie55 = /msie 5\.[56789]/i.test( navigator.userAgent );
 
-	hasSupport.support = ( typeof document.implementation != "undefined" &&
-			document.implementation.hasFeature( "html", "1.0" ) || ie55 );
+	hasSupport.support = ( typeof document.implementation != "undefined" && document.implementation.hasFeature( "html", "1.0" ) || ie55 );
 
 	// IE55 has a serious DOM1 bug... Patch it!
 	if ( ie55 ) {
 		document._getElementsByTagName = document.getElementsByTagName;
 		document.getElementsByTagName = function ( sTagName ) {
-			if ( sTagName == "*" )
+			if ( sTagName == "*" ) {
 				return document.all;
-			else
+			} else {
 				return document._getElementsByTagName( sTagName );
+			}
 		};
 	}
 
@@ -49,7 +50,7 @@ function hasSupport() {
 //						persistance using cookies or not
 
 function WebFXTabPane( el, bUseCookie ) {
-	if ( !hasSupport() || el == null ) return;
+	if ( !hasSupport() || el == null ) { return; }
 
 	this.element = el;
 	this.element.tabPane = this;
@@ -77,8 +78,9 @@ function WebFXTabPane( el, bUseCookie ) {
 	var tabIndex = 0;
 	if ( this.useCookie ) {
 		tabIndex = Number( WebFXTabPane.getCookie( "webfxtab_" + this.element.id ) );
-		if ( isNaN( tabIndex ) )
+		if ( isNaN( tabIndex ) ) {
 			tabIndex = 0;
+		}
 	}
 	this.selectedIndex = tabIndex;
 
@@ -96,13 +98,15 @@ WebFXTabPane.prototype.classNameTag = "tabsystem";
 
 WebFXTabPane.prototype.setSelectedIndex = function ( n ) {
 	if (this.selectedIndex != n) {
-		if (this.selectedIndex != null && this.pages[ this.selectedIndex ] != null )
+		if (this.selectedIndex != null && this.pages[ this.selectedIndex ] != null ) {
 			this.pages[ this.selectedIndex ].hide();
+		}
 		this.selectedIndex = n;
 		this.pages[ this.selectedIndex ].show();
 
-		if ( this.useCookie )
-			WebFXTabPane.setCookie( "webfxtab_" + this.element.id, n, 1 );	// session cookie
+		if ( this.useCookie ) {
+			WebFXTabPane.setCookie( "webfxtab_" + this.element.id, n, 1 );
+		}
 	}
 };
 
@@ -111,10 +115,11 @@ WebFXTabPane.prototype.getSelectedIndex = function () {
 };
 
 WebFXTabPane.prototype.addTabPage = function ( oElement ) {
-	if ( !hasSupport() ) return;
+	if ( !hasSupport() ) { return; }
 
-	if ( oElement.tabPage == this )	// already added
+	if ( oElement.tabPage == this )	{
 		return oElement.tabPage;
+	}
 
 	var n = this.pages.length;
 	var tp = this.pages[n] = new WebFXTabPage( oElement, this, n );
@@ -123,10 +128,11 @@ WebFXTabPane.prototype.addTabPage = function ( oElement ) {
 	// move the tab out of the box
 	this.tabRow.appendChild( tp.tab );
 
-	if ( n == this.selectedIndex )
+	if ( n == this.selectedIndex ) {
 		tp.show();
-	else
+	} else {
 		tp.hide();
+	}
 
 	return tp;
 };
@@ -175,7 +181,7 @@ WebFXTabPane.removeCookie = function ( name ) {
 // nindex :	Number			The index of the page in the parent pane page array
 
 function WebFXTabPage( el, tabPane, nIndex ) {
-	if ( !hasSupport() || el == null ) return;
+	if ( !hasSupport() || el == null ) { return; }
 
 	this.element = el;
 	this.element.tabPage = this;
@@ -196,8 +202,9 @@ function WebFXTabPage( el, tabPane, nIndex ) {
 	this.aElement = a;
 	a.href = "#";
 	a.onclick = function () { return false; };
-	while ( this.tab.hasChildNodes() )
+	while ( this.tab.hasChildNodes() ) {
 		a.appendChild( this.tab.firstChild );
+	}
 	this.tab.appendChild( a );
 
 
@@ -259,7 +266,7 @@ WebFXTabPage.tabOut = function ( tabpage ) {
 
 // This function initializes all uninitialized tab panes and tab pages
 function setupAllTabs() {
-	if ( !hasSupport() ) return;
+	if ( !hasSupport() ) { return; }
 
 	var all = document.getElementsByTagName( "*" );
 	var l = all.length;
@@ -273,22 +280,22 @@ function setupAllTabs() {
 		cn = el.className;
 
 		// no className
-		if ( cn == "" ) continue;
+		if ( cn == "" ) { continue; }
 
 		// uninitiated tab pane
-		if ( tabPaneRe.test( cn ) && !el.tabPane )
+		if ( tabPaneRe.test( cn ) && !el.tabPane ) {
 			new WebFXTabPane( el );
+		}
 
 		// unitiated tab page wit a valid tab pane parent
-		else if ( tabPageRe.test( cn ) && !el.tabPage &&
-					tabPaneRe.test( el.parentNode.className ) ) {
+		else if ( tabPageRe.test( cn ) && !el.tabPage && tabPaneRe.test( el.parentNode.className ) ) {
 			el.parentNode.tabPane.addTabPage( el );
 		}
 	}
 }
 
 function disposeAllTabs() {
-	if ( !hasSupport() ) return;
+	if ( !hasSupport() ) { return; }
 
 	var all = document.getElementsByTagName( "*" );
 	var l = all.length;
@@ -301,11 +308,12 @@ function disposeAllTabs() {
 		cn = el.className;
 
 		// no className
-		if ( cn == "" ) continue;
+		if ( cn == "" ) { continue; }
 
 		// tab pane
-		if ( tabPaneRe.test( cn ) && el.tabPane )
+		if ( tabPaneRe.test( cn ) && el.tabPane ) {
 			tabPanes[tabPanes.length] = el.tabPane;
+		}
 	}
 
 	for (var i = tabPanes.length - 1; i >= 0; i--) {
@@ -318,23 +326,19 @@ function disposeAllTabs() {
 // initialization hook up
 
 // DOM2
-if ( typeof window.addEventListener != "undefined" )
+if ( typeof window.addEventListener != "undefined" ) {
 	window.addEventListener( "load", setupAllTabs, false );
-
-// IE 
-else if ( typeof window.attachEvent != "undefined" ) {
+} else if ( typeof window.attachEvent != "undefined" ) {
 	window.attachEvent( "onload", setupAllTabs );
 	window.attachEvent( "onunload", disposeAllTabs );
-}
-
-else {
+} else {
 	if ( window.onload != null ) {
 		var oldOnload = window.onload;
 		window.onload = function ( e ) {
 			oldOnload( e );
 			setupAllTabs();
 		};
-	}
-	else 
+	} else {
 		window.onload = setupAllTabs;
+	}
 }
