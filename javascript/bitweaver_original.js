@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.5 2006/03/22 14:49:36 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.6 2006/04/06 05:19:47 starrrider Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -198,46 +198,45 @@ function toggle(foo,bar) {
 }
 
 // function:	flipMulti
-// desc:		Toggles multiple HTML elements visibility
-//				On the first pass - Shows the window id (foo) & saves it in global variables
-//				Other calls - Hides the saved window id and shows the new window id (foo)
-//				If (foo) is zero(0) - Hides the saved window id (zen) and sets the global variable to 0
-//				This function can be used with a Selector's onChnage event to display multiple window(s)
+// desc:		Toggles visibility for multiple HTML elements - can be used with an HTML Selector
+//				On the first call - Shows the window id's defined by (header) & (numbr) & saves them in a variable
+//				On subsequent calls - Hide the saved windows and shows the new windows
 // added by: 	StarRider
 // date:		1/5/06
-// Note			For Cross-Browser compatibility - A window id's must begin with a Letter or String. flipMulti operates by adding
-//				a number to a string. The first argument (hdr) is extended with the number (foo) to show/hide the window id. With
-//				multiple windows the id's need to be sequencial (each id 1 greater than the last with the first being foo).
-// example:		$foo = microtime() * 1000000;	$hdr = 'edithelp';
-//				$Id1 = $hdr.$foo;	$Id2 = $hdr.($foo+1);		$Id3 = $hdr.($foo+2);		etc.
-//				<div id="{$Id1}">This Data</div>	<div id="{$Id2}">That Data</div>	<div id="{$Id3}">Other Data</div>
-//				onClick="flipMulti('$hdr','$foo','3'); or in a tpl - onClick="flipMulti('{$hdr}','{$foo}','3');
-// params:		hdr = A string used in the creation of the Id number of the item being displayed.
-//				foo = the number use in the Id
-//				bar = a number (1-9/def=1) indicates how many windows to hide/display
-//					(1 greater than the last with foo as the first) and set like this:
-//					$Window_Id1 = (microtime() * 1000000); $Window_Id2 = $Window_Id1+1; $Window_Id3 = $Window_Id2+1;
-//					<div id="{$Window_Id1}">Data</div>  <div id="{$Window_Id2}">Data</div>  <div id="{$Window_Id3}">Data</div>
-//					and onchange="javascript:flipper($Window_Id1,3)"
-//				A string used while creating
-//				zen = a number (1-3/def=1) determins where the window id is stored in the array - Allows flipper to be used by
-//					multiple routines without interferring with each other
-var flipArr=[0,0,0];// Only the numberic portion of the id is saved
-function flipMulti(hdr,foo,bar,zen){
-	if(!hdr || !foo) {
+// Note			For Cross-Browser compatibility - An HTML elements id's must begin with a Letter or String.
+//				Operates by appending a string (header) with the number (numbr) to show/hide the window id.
+//				With multiple windows - the id's need to be sequencial eg. each id is 1 greater than the last
+//				with the first being (numbr).
+// example:		When used in a tpl file with div elements: $header='dog';
+//				<div id="{$header}1" style="display:none;">This Data</div> / the id is "dog1"
+//				<div id="{$header}2" style="display:none;">That Data</div> / the id is "dog2"
+//				The Selector: <select size="15" onchange="javascript:flipMulti(this.options[this.selectedIndex].value,2,2)">
+//				Each Option: <option value="{$header}">Whatever</option> / the value is "dog"
+//				To display the first set of divs - use:
+//				<script type="text/javascript"> flipMulti('{$header}',1,2); </script>
+// params:		header = The string portion of the elements Id.
+//				numbr = any number - that is appended to the header forming the elements Id.
+//					If header="dog" & numbr=1 then the elements Id is "dog1"
+//				bar = a number (1-9/def=1) indicates how many elements to hide/display.
+//				zen = a number (1-3/def=1) allows multiple routines to use the function at the same time. Stores the
+//				text portion of the window Id (header) in an array so that it can be hidden later.
+var flipArr=[0,0,0]; // Only the header portion of the id is saved
+function flipMulti(header,numbr,bar,zen){
+	if(header && numbr) {
+		if(arguments.length<1) numbr=1;
+		numbr=(numbr*10)/10; // numbr has to be a number
+		if(arguments.length<2) bar=1;
+		bar=(bar*10)/10; // bar has to be a number
+		if(bar<1 || bar>9) bar=1;
+		if(arguments.length<3) zen=1;
+		zen=(zen*10)/10; // zen has to be a number
 		if(!zen || zen<1 || zen>3) zen=1;
-		if(!bar || bar<1 || bar>9) bar=1;
-		foo=(foo*10)/10; // foo has to be a number
 		var i=0;
-		var id = 0;
 		do {
-			var oldId = hdr+(flipArr[zen-1]+i);
-			var newId = hdr+(foo+i);
-			if(flipArr[zen-1]!=0) hide(oldId);
-			show(newId);
+			if(flipArr[zen-1]!=0) hide(flipArr[zen-1]+(numbr+i));
+			show(header+(numbr+i));
 		} while (++i <= bar-1);
-		if(foo) flipArr[zen-1]=foo;
-		else flipArr[zen-1]=0;
+		flipArr[zen-1]=header;
 }	}
 
 // function:	flipIcon
