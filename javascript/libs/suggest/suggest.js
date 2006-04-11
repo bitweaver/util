@@ -183,9 +183,10 @@ TextSuggest.prototype = {
    callRicoAjaxEngine: function() {
       var callParms = [];
       callParms.push( this.id + '_request');
+      callParms.push( 'ajax_xml=1' );
       callParms.push( 'id='             + this.id);
       callParms.push( 'count='          + this.options.count);
-      callParms.push( 'query='          + this.lastRequestString);
+      callParms.push( 'find='          + this.lastRequestString);
       callParms.push( 'match_anywhere=' + this.options.matchAnywhere);
       callParms.push( 'ignore_case='    + this.options.ignoreCase);
 
