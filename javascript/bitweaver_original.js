@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.6 2006/04/06 05:19:47 starrrider Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.7 2006/04/12 08:09:41 starrrider Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -68,11 +68,12 @@ function genPass(w1, w2, w3) {
 }
 
 // function:	setSomeElement
-// desc:		Adds a String to the value of fooel
+// desc:		Adds a String to the value of elementId
 // date:		Pre-bitweaver
-// params:		fooel = a HTML Id / foo1 = the string to be added
-function setSomeElement(fooel, foo1) {
-	$(fooel).value = $(fooel).value + foo1;
+// params:		elementId = a HTML Id
+//				strng = the string to be added
+function setSomeElement(elementId, strng) {
+	$(elementId).value = $(elementId).value + strng;
 }
 
 // function:	setSelectionRange - used by insertAt
@@ -144,58 +145,44 @@ function insertAt(elementId, replaceString) {
 // function:	show
 // desc:		Displays a hidden HTML element. Can also set a cookie to make it stay that way.
 // date:		Pre-bitweaver
-// params:		foo = a HTML Id / f = any value (not 0) to turn cookies on
-function show(foo,f) {
-	if (document.layers) document.layers[foo].display = "block";
-	else if (document.all) document.all[foo].style.display = "block";
-	else if (document.getElementById) document.getElementById(foo).style.display = "block";
-	if (f) { setCookie(foo, "o"); }
+// params:		elementId = a HTML Id
+//				setCookie = any value (not 0) to turn cookies on
+function show(elementId,useCookie) {
+	if (document.layers) document.layers[elementId].display = "block";
+	else if (document.all) document.all[elementId].style.display = "block";
+	else if (document.getElementById) document.getElementById(elementId).style.display = "block";
+	if (useCookie) { setCookie(elementId, "o"); }
 }
 
 // function:	hide
 // desc:		Hides an HTML element. Can also set a cookie to make it stay that way.
 // date:		Pre-bitweaver
-// params:		foo = a HTML Id /
-//				f = any value (not 0) to turn cookies on
-function hide(foo,f) {
-	if (document.layers) document.layers[foo].display = "none";
-	else if (document.all) document.all[foo].style.display = "none";
-	else if (document.getElementById) document.getElementById(foo).style.display = "none";
-	if (f) { setCookie(foo, "c"); }
+// params:		elementId = a HTML Id /
+//				setCookie = any value (not 0) to turn cookies on
+function hide(elementId,useCookie) {
+	if (document.layers) document.layers[elementId].display = "none";
+	else if (document.all) document.all[elementId].style.display = "none";
+	else if (document.getElementById) document.getElementById(elementId).style.display = "none";
+	if (useCookie) { setCookie(elementId, "c"); }
 }
 
 // function:	flip
 // desc:		Flips the visibility of a HTML element. Cookies are not used.
 // date:		Pre-bitweaver
-// params:		foo = a HTML Id
-//				bar - a boolean used to set starting visibility - if True foo is displayed
-function flip(foo,bar) {
-	if (	(bar) ||
-			((document.layers) && (document.layers[foo].display == "none")) ||
-			((document.all) && (document.all[foo].style.display == "none")) ||
-			((document.getElementById) && (document.getElementById(foo).style.display == "none")) ) show(foo);
-	else if	(	((document.layers) && (document.layers[foo].display == "block")) ||
-				((document.all) && (document.all[foo].style.display == "block")) ||
-				((document.getElementById) && (document.getElementById(foo).style.display == "block")) ) hide(foo);
-		else show(foo);
-}
+// params:		elementId = a HTML Id
+function flip(elementId) {
+	if ($(elementId).style.display == "none") { show(elementId);
+	} else { hide(elementId);
+}	}
 
 // function:	toggle
 // desc:		Toggles a HTML elements visibility. Cookies are used to make it stay that way.
 // date:		Pre-bitweaver
-// params:		foo = a HTML Id
-//				bar - a boolean used to set starting visibility - if True foo is displayed
-// Note:		Modified to work with most Browser
-function toggle(foo,bar) {
-	if (	(bar) ||
-			((document.layers) && (document.layers[foo].display == "none")) ||
-			((document.all) && (document.all[foo].style.display == "none")) ||
-			((document.getElementById) && (document.getElementById(foo).style.display == "none")) ) show(foo,1);
-	else if	(	((document.layers) && (document.layers[foo].display == "block")) ||
-				((document.all) && (document.all[foo].style.display == "block")) ||
-				((document.getElementById) && (document.getElementById(foo).style.display == "block")) ) hide(foo,1);
-		else show(foo,1);
-}
+// params:		elementId = a HTML Id
+function toggle(elementId) {
+	if ($(elementId).style.display == "none") { show(elementId,1);
+	} else { hide(elementId,1);
+}	}
 
 // function:	flipMulti
 // desc:		Toggles visibility for multiple HTML elements - can be used with an HTML Selector
@@ -214,29 +201,29 @@ function toggle(foo,bar) {
 //				Each Option: <option value="{$header}">Whatever</option> / the value is "dog"
 //				To display the first set of divs - use:
 //				<script type="text/javascript"> flipMulti('{$header}',1,2); </script>
-// params:		header = The string portion of the elements Id.
-//				numbr = any number - that is appended to the header forming the elements Id.
-//					If header="dog" & numbr=1 then the elements Id is "dog1"
-//				bar = a number (1-9/def=1) indicates how many elements to hide/display.
+// params:		elementIdStart = The string portion of the elements Id.
+//				elementIdNum = any number - that is appended to the elementIdStart forming the elements Id.
+//					If elementIdStart="dog" & elementIdNum=1 then the elements Id is "dog1"
+//				elements = a number (1-9/def=1) indicates how many elements to hide/display.
 //				zen = a number (1-3/def=1) allows multiple routines to use the function at the same time. Stores the
-//				text portion of the window Id (header) in an array so that it can be hidden later.
+//				text portion of the window Id (elementIdStart) in an array so that it can be hidden later.
 var flipArr=[0,0,0]; // Only the header portion of the id is saved
-function flipMulti(header,numbr,bar,zen){
-	if(header && numbr) {
-		if(arguments.length<1) numbr=1;
-		numbr=(numbr*10)/10; // numbr has to be a number
-		if(arguments.length<2) bar=1;
-		bar=(bar*10)/10; // bar has to be a number
-		if(bar<1 || bar>9) bar=1;
+function flipMulti(elementIdStart,elementIdNum,elements,zen){
+	if(elementIdStart && elementIdNum) {
+		if(arguments.length<1) elementIdNum=1;
+		elementIdNum=(elementIdNum*10)/10; // elementIdNum has to be a number
+		if(arguments.length<2) elements=1;
+		elements=(elements*10)/10; // elements has to be a number
+		if(elements<1 || elements>9) elements=1;
 		if(arguments.length<3) zen=1;
 		zen=(zen*10)/10; // zen has to be a number
 		if(!zen || zen<1 || zen>3) zen=1;
 		var i=0;
 		do {
-			if(flipArr[zen-1]!=0) hide(flipArr[zen-1]+(numbr+i));
-			show(header+(numbr+i));
-		} while (++i <= bar-1);
-		flipArr[zen-1]=header;
+			if(flipArr[zen-1]!=0) hide(flipArr[zen-1]+(elementIdNum+i));
+			show(elementIdStart+(elementIdNum+i));
+		} while (++i <= elements-1);
+		flipArr[zen-1]=elementIdStart;
 }	}
 
 // function:	flipIcon
@@ -244,47 +231,47 @@ function flipMulti(header,numbr,bar,zen){
 // Note:		This functions replaces icntoggle & setfoldericonstate - No reason to use 2 functions when 1 will do
 // added by: 	StarRider
 // date:		12/15/05
-// params:		foo is an HTML Id for the window to be displayed/hidden
-function flipIcon(foo) {
+// params:		elementId is an HTML Id for the window to be displayed/hidden
+function flipIcon(elementId) {
 	var pic = new Image();
-	if (foo && $(foo).style && $(foo).style.display && $(foo).style.display == "none") {
+	if (elementId && $(elementId).style && $(elementId).style.display && $(elementId).style.display == "none") {
 		pic.src = bitIconDir + "/expanded.gif";
-		show(foo,1);
+		show(elementId,1);
 	} else {
 		pic.src = bitIconDir + "/collapsed.gif";
-		hide(foo,1);
+		hide(elementId,1);
 	}
-	document.getElementById(foo+"img").src = pic.src;
+	$(elementId+"img").src = pic.src;
 }
 
 // function:	flipWithSign
 // desc:		Used to Expand/Collapse Lists
 // Note:		Reworked to eliminate collapseSign / expandSign
 // date:		Pre-bitweaver
-// params:		foo = a HTML Id
-function flipWithSign(foo) {
-	var bar = "flipper" + foo;
-	if ($(foo).style.display == "none") {
-		show(foo,1);
-		$(bar).firstChild.nodeValue = "[-]";
+// params:		elementId = a HTML Id
+function flipWithSign(elementId) {
+	var flipperName = "flipper" + elementId;
+	if ($(elementId).style.display == "none") {
+		show(elementId,1);
+		$(flipperName).firstChild.nodeValue = "[-]";
 	} else {
-		hide(foo,1);
-		$(bar).firstChild.nodeValue = "[+]";
+		hide(elementId,1);
+		$(flipperName).firstChild.nodeValue = "[+]";
 }	}
 
 // function:	setFlipWithSign
 // desc:		Toggles the state of a flipped List after page reload
 // Note:		Reworked to eliminate collapseSign / expandSign
 // date:		Pre-bitweaver
-// params:		foo = a HTML Id of a List
-function setFlipWithSign(foo) {
-	var bar = "flipper" + foo;
-	if (getCookie(foo) == "o") {
-		show(foo);
-		$(bar).firstChild.nodeValue = "[-]";
+// params:		elementId = a HTML Id of a List
+function setFlipWithSign(elementId) {
+	var flipperName = "flipper" + elementId;
+	if (getCookie(elementId) == "o") {
+		show(elementId);
+		$(flipperName).firstChild.nodeValue = "[-]";
 	} else {
-		hide(foo);
-		$(bar).firstChild.nodeValue = "[+]";
+		hide(elementId);
+		$(flipperName).firstChild.nodeValue = "[+]";
 }	}
 
 // function:	setCookie
@@ -381,7 +368,7 @@ function disableSubmit(id) {
 // function:	go
 // desc:		added for use in navigation dropdown
 // date:		Pre-bitweaver
-// params:		foo = a HTML Id
+// params:		elementId = a HTML Id
 // Example:	<select name="anything" onchange="go(this);">
 //			<option value="http://bitweaver.org">bitweaver.org</option>
 // 			</select>
