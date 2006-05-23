@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.1.2.4 2006/03/22 14:58:31 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.1.2.5 2006/05/23 11:39:40 wolff_borg Exp $
 var expires = new Date();
 var offset = -(expires.getTimezoneOffset() * 60);
 expires.setFullYear(expires.getFullYear() + 1);
@@ -245,6 +245,23 @@ function flipIcon(foo) {
 	document.getElementById(foo+"img").src = pic.src;
 }
 
+// function:	setFlipWithSign
+// desc:		Toggles the state of a flipped List after page reload
+// Note:		Reworked to eliminate collapseSign / expandSign
+// date:		Pre-bitweaver
+// params:		foo = a HTML Id of a List
+function setFlipIcon(foo) {
+	var pic = new Image();
+	if (getCookie(foo) == "o") {
+		pic.src = bitIconDir + "/expanded.gif";
+		show(foo,1);
+	} else {
+		pic.src = bitIconDir + "/collapsed.gif";
+		hide(foo,1);
+	}
+	document.getElementById(foo+"img").src = pic.src;
+}
+
 // function:	flipWithSign
 // desc:		Used to Expand/Collapse Lists
 // Note:		Reworked to eliminate collapseSign / expandSign
@@ -423,66 +440,3 @@ function setUserModuleFromCombo(id) {
 	$('usermoduledata').value = $('usermoduledata').value
 		+ $(id).options[$(id).selectedIndex].value;
 }
-
-/* ----------- These Functions are no longer in use
-
-function settogglestate(foo) { // Only used intrenally
-	if (getCookie(foo) == "o") {
-		show(foo);
-	} else {
-		hide(foo);
-}	}
-
-function setfoldericonstate(foo) { // Replaced by flipIcon
-	pic = new Image();
-	cookie_value = getCookie(foo);
-	if (cookie_value == "o") {
-		pic.src = bitIconDir + "expanded.gif";
-	} else if (cookie_value == "c") {
-		pic.src = bitIconDir + "collapsed.gif";
-	} else {
-		return;
-	}
-	$(foo+"img").src = pic.src;
-}
-
-function icntoggle(foo) { // Replaced by flipIcon
-	if ($(foo).style.display == "none") {
-		show(foo,1);
-	} else {
-		hide(foo,1);
-	}
-	setfoldericonstate(foo);
-}
-
-function expandSign(foo) {  // Only used intrenally
-	$(foo).firstChild.nodeValue = "[+]";
-}
-
-function collapseSign(foo) { // Only used intrenally
-	$(foo).firstChild.nodeValue = "[-]";
-}
-
-function toggleBlockDisplay(item) { // Replaced by flip
-	if (document.layers) {
-		current = (document.layers[item].display == 'none') ? 'block' : 'none';
-		document.layers[item].display = current;
-	} else if (document.all) {
-		current = (document.all[item].style.display == 'none') ? 'block' : 'none';
-		document.all[item].style.display = current;
-	} else if (document.getElementById) {
-		vista = ($(item).style.display == 'none') ? 'block' : 'none';
-		$(item).style.display = vista;
-}	}
-
-function setBlockDisplay(item,vizFlag) { // Replaced by flip
-	current = (vizFlag) ? 'block' : 'none';
-	if (document.layers) {
-		document.layers[item].display = current;
-	} else if (document.all) {
-		document.all[item].style.display = current;
-	} else if (document.getElementById) {
-		$(item).style.display = current;
-}	}
-
-*/
