@@ -12,12 +12,16 @@ function daemonize_init( $pPidfile ) {
 	$gDaemonTouchTimer = 0; // Timer so we only touch the pidfile sometimes. 
 }
 
-function daemonize_refresh() {
+function daemonize_refresh( $pPidfile ) {
+	global $gDaemonTouchTimer;
   if ($gDaemonTouchTimer + 15 < time()) { // So the revivifier can tell we've hung.
-    echo "Touching the file $pidfile to ".time()." - ".date("r")."\n";
-    $fp = fopen($pidfile, "w");
-    fwrite($fp, posix_getpid()."\n".time()."\n");
-    fclose($fp);
-    $gDaemonTouchTimer = time();
+    echo "Touching the file $pPidfile to ".time()." - ".date("r")."\n";
+    if( $fp = fopen($pPidfile, "w") ) {
+	    fwrite($fp, posix_getpid()."\n".time()."\n");
+	    fclose($fp);
+	    $gDaemonTouchTimer = time();
+	} else {
+		die( "could not touch pid file: $pPidfile\n\n" );
+	}
   } 
 }
