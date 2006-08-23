@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.7 2006/04/12 08:09:41 starrrider Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.8 2006/08/23 03:59:24 nickpalmer Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -142,24 +142,24 @@ function insertAt(elementId, replaceString) {
 		//alert("don't know yet how to handle insert" + document);
 }	}
 
-// function:	show
+// function:	showById
 // desc:		Displays a hidden HTML element. Can also set a cookie to make it stay that way.
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id
 //				setCookie = any value (not 0) to turn cookies on
-function show(elementId,useCookie) {
+function showById(elementId,useCookie) {
 	if (document.layers) document.layers[elementId].display = "block";
 	else if (document.all) document.all[elementId].style.display = "block";
 	else if (document.getElementById) document.getElementById(elementId).style.display = "block";
 	if (useCookie) { setCookie(elementId, "o"); }
 }
 
-// function:	hide
+// function:	hideById
 // desc:		Hides an HTML element. Can also set a cookie to make it stay that way.
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id /
 //				setCookie = any value (not 0) to turn cookies on
-function hide(elementId,useCookie) {
+function hideById(elementId,useCookie) {
 	if (document.layers) document.layers[elementId].display = "none";
 	else if (document.all) document.all[elementId].style.display = "none";
 	else if (document.getElementById) document.getElementById(elementId).style.display = "none";
@@ -171,8 +171,8 @@ function hide(elementId,useCookie) {
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id
 function flip(elementId) {
-	if ($(elementId).style.display == "none") { show(elementId);
-	} else { hide(elementId);
+	if ($(elementId).style.display == "none") { showById(elementId);
+	} else { hideById(elementId);
 }	}
 
 // function:	toggle
@@ -180,8 +180,8 @@ function flip(elementId) {
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id
 function toggle(elementId) {
-	if ($(elementId).style.display == "none") { show(elementId,1);
-	} else { hide(elementId,1);
+	if ($(elementId).style.display == "none") { showById(elementId,1);
+	} else { hideById(elementId,1);
 }	}
 
 // function:	flipMulti
@@ -220,8 +220,8 @@ function flipMulti(elementIdStart,elementIdNum,elements,zen){
 		if(!zen || zen<1 || zen>3) zen=1;
 		var i=0;
 		do {
-			if(flipArr[zen-1]!=0) hide(flipArr[zen-1]+(elementIdNum+i));
-			show(elementIdStart+(elementIdNum+i));
+			if(flipArr[zen-1]!=0) hideById(flipArr[zen-1]+(elementIdNum+i));
+			showById(elementIdStart+(elementIdNum+i));
 		} while (++i <= elements-1);
 		flipArr[zen-1]=elementIdStart;
 }	}
@@ -236,10 +236,10 @@ function flipIcon(elementId) {
 	var pic = new Image();
 	if (elementId && $(elementId).style && $(elementId).style.display && $(elementId).style.display == "none") {
 		pic.src = bitIconDir + "/expanded.gif";
-		show(elementId,1);
+		showById(elementId,1);
 	} else {
 		pic.src = bitIconDir + "/collapsed.gif";
-		hide(elementId,1);
+		hideById(elementId,1);
 	}
 	$(elementId+"img").src = pic.src;
 }
@@ -252,10 +252,10 @@ function flipIcon(elementId) {
 function flipWithSign(elementId) {
 	var flipperName = "flipper" + elementId;
 	if ($(elementId).style.display == "none") {
-		show(elementId,1);
+		showById(elementId,1);
 		$(flipperName).firstChild.nodeValue = "[-]";
 	} else {
-		hide(elementId,1);
+		hideById(elementId,1);
 		$(flipperName).firstChild.nodeValue = "[+]";
 }	}
 
@@ -267,10 +267,10 @@ function flipWithSign(elementId) {
 function setFlipWithSign(elementId) {
 	var flipperName = "flipper" + elementId;
 	if (getCookie(elementId) == "o") {
-		show(elementId);
+		showById(elementId);
 		$(flipperName).firstChild.nodeValue = "[-]";
 	} else {
-		hide(elementId);
+		hideById(elementId);
 		$(flipperName).firstChild.nodeValue = "[+]";
 }	}
 
@@ -437,9 +437,9 @@ function setUserModuleFromCombo(id) {
 
 function settogglestate(foo) { // Only used intrenally
 	if (getCookie(foo) == "o") {
-		show(foo);
+		showById(foo);
 	} else {
-		hide(foo);
+		hideById(foo);
 }	}
 
 function setfoldericonstate(foo) { // Replaced by flipIcon
@@ -457,9 +457,9 @@ function setfoldericonstate(foo) { // Replaced by flipIcon
 
 function icntoggle(foo) { // Replaced by flipIcon
 	if ($(foo).style.display == "none") {
-		show(foo,1);
+		showById(foo,1);
 	} else {
-		hide(foo,1);
+		hideById(foo,1);
 	}
 	setfoldericonstate(foo);
 }
