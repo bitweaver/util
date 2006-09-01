@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.8 2006/08/23 03:59:24 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.9 2006/09/01 14:34:10 wolff_borg Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -344,10 +344,14 @@ function deleteCookie(name, path, domain) {
 function switchCheckboxes(the_form, elements_name, switcher_name) {
 	var elements = $(the_form).elements[elements_name];
 	var elements_cnt = ( typeof (elements.length) != 'undefined') ? elements.length : 0;
-	if (elements_cnt)
-		for (var i = 0; i < elements_cnt; i++)
+
+	if (elements_cnt) {
+		for (var i = 0; i < elements_cnt; i++) {
 			elements[i].checked = document.forms[the_form].elements[switcher_name].checked;
-	else elements.checked = document.forms[the_form].elements[switcher_name].checked;
+		}
+	} else {
+		elements.checked = document.forms[the_form].elements[switcher_name].checked;
+	}
 	return true;
 }
 
@@ -432,66 +436,3 @@ function setUserModuleFromCombo(id) {
 	$('usermoduledata').value = $('usermoduledata').value
 		+ $(id).options[$(id).selectedIndex].value;
 }
-
-/* ----------- These Functions are no longer in use
-
-function settogglestate(foo) { // Only used intrenally
-	if (getCookie(foo) == "o") {
-		showById(foo);
-	} else {
-		hideById(foo);
-}	}
-
-function setfoldericonstate(foo) { // Replaced by flipIcon
-	pic = new Image();
-	cookie_value = getCookie(foo);
-	if (cookie_value == "o") {
-		pic.src = bitIconDir + "expanded.gif";
-	} else if (cookie_value == "c") {
-		pic.src = bitIconDir + "collapsed.gif";
-	} else {
-		return;
-	}
-	$(foo+"img").src = pic.src;
-}
-
-function icntoggle(foo) { // Replaced by flipIcon
-	if ($(foo).style.display == "none") {
-		showById(foo,1);
-	} else {
-		hideById(foo,1);
-	}
-	setfoldericonstate(foo);
-}
-
-function expandSign(foo) {  // Only used intrenally
-	$(foo).firstChild.nodeValue = "[+]";
-}
-
-function collapseSign(foo) { // Only used intrenally
-	$(foo).firstChild.nodeValue = "[-]";
-}
-
-function toggleBlockDisplay(item) { // Replaced by flip
-	if (document.layers) {
-		current = (document.layers[item].display == 'none') ? 'block' : 'none';
-		document.layers[item].display = current;
-	} else if (document.all) {
-		current = (document.all[item].style.display == 'none') ? 'block' : 'none';
-		document.all[item].style.display = current;
-	} else if (document.getElementById) {
-		vista = ($(item).style.display == 'none') ? 'block' : 'none';
-		$(item).style.display = vista;
-}	}
-
-function setBlockDisplay(item,vizFlag) { // Replaced by flip
-	current = (vizFlag) ? 'block' : 'none';
-	if (document.layers) {
-		document.layers[item].display = current;
-	} else if (document.all) {
-		document.all[item].style.display = current;
-	} else if (document.getElementById) {
-		$(item).style.display = current;
-}	}
-
-*/
