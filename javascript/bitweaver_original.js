@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.9 2006/09/01 14:34:10 wolff_borg Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.10 2006/09/01 15:13:24 wolff_borg Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -242,6 +242,22 @@ function flipIcon(elementId) {
 		hideById(elementId,1);
 	}
 	$(elementId+"img").src = pic.src;
+}
+
+// function:	setFlipWithSign
+// desc:		Toggles the state of a flipped List after page reload
+// Note:		Reworked to eliminate collapseSign / expandSign
+// date:		Pre-bitweaver
+// params:		foo = a HTML Id of a List
+function setFlipIcon(elementId) {
+	var pic = new Image();
+	if (getCookie(elementId) == "o") {
+		pic.src = bitIconDir + "/expanded.gif";
+		showById(elementId);
+	} else {
+		pic.src = bitIconDir + "/collapsed.gif";
+		hideById(elementId);
+	}
 }
 
 // function:	flipWithSign
