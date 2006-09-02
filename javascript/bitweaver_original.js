@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.10 2006/09/01 15:13:24 wolff_borg Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.11 2006/09/02 10:35:38 wolff_borg Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -258,6 +258,7 @@ function setFlipIcon(elementId) {
 		pic.src = bitIconDir + "/collapsed.gif";
 		hideById(elementId);
 	}
+	$(elementId+"img").src = pic.src;
 }
 
 // function:	flipWithSign
