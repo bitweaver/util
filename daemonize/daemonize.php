@@ -28,12 +28,13 @@ $daemonScript = $argv[1];
 $debug = FALSE;
 if( !empty( $argv[2] ) ) {
 	// convert any remaining arguments into local variables
-	for( $i=2; $i <= count( $argv ); $i++ ) {
+	for( $i=2; $i < count( $argv ); $i++ ) {
 		$arg = preg_replace( '/^[-]*/', '', $argv[$i] ); 
 		list( $name, $val ) = @split( '=', $arg );
 		${$name} = (!empty( $val ) ? $val : TRUE);
 	}
 }
+
 
 if( empty( $pidfile ) ) {
 	$pidfile = '/var/lock/php-' . basename( $daemonScript,'.php' ).'.pid';
