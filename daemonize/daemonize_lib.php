@@ -3,7 +3,7 @@
 function daemonize_init( $pPidfile ) {
 	global $gDaemonTouchTimer;
 	// Log our PID as the first thing, so other processes don't try to kill us.
-	echo "writing pidfile $pPidfile\n";
+	echo "DAEMON ".getmypid()." : writing pidfile $pPidfile\n";
 	if( !$fp = fopen($pPidfile, "w") ) {
 		die( "could not open pid file: $pPidfile\n\n" );
 	}
@@ -14,14 +14,19 @@ function daemonize_init( $pPidfile ) {
 
 function daemonize_refresh( $pPidfile ) {
 	global $gDaemonTouchTimer;
-  if ($gDaemonTouchTimer + 15 < time()) { // So the revivifier can tell we've hung.
-    echo "Touching the file $pPidfile to ".time()." - ".date("r")."\n";
-    if( $fp = fopen($pPidfile, "w") ) {
-	    fwrite($fp, posix_getpid()."\n".time()."\n");
-	    fclose($fp);
-	    $gDaemonTouchTimer = time();
-	} else {
-		die( "could not touch pid file: $pPidfile\n\n" );
-	}
-  } 
+	static $ticks = 0;
+	if ($gDaemonTouchTimer + 15 < time()) { // So the revivifier can tell we've hung.
+		if( ($ticks % 4) == 0 ) {
+			// keep the noise down and only log a message once per minute
+			echo "DAEMON ".getmypid()." : Touching the file $pPidfile to ".time()." - ".date("r")."\n";
+		}
+		if( $fp = fopen($pPidfile, "w") ) {
+			fwrite($fp, posix_getpid()."\n".time()."\n");
+			fclose($fp);
+			$gDaemonTouchTimer = time();
+		} else {
+			die( "could not touch pid file: $pPidfile\n\n" );
+		}
+		$ticks++;
+	} 
 }
