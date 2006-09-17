@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-	$Id: phpSniff.class.php,v 1.3 2006/02/07 19:11:12 spiderr Exp $
+	$Id: phpSniff.class.php,v 1.4 2006/09/17 22:53:49 spiderr Exp $
     
     phpSniff: HTTP_USER_AGENT Client Sniffer for PHP
 	Copyright (C) 2001 Roger Raymond ~ epsilon7@users.sourceforge.net
@@ -183,7 +183,7 @@ class phpSniff extends phpSniff_core
         
         // 20020425 :: besfred
         if(empty($UA)) $UA = getenv('HTTP_USER_AGENT');
-        if(empty($UA)) {
+        if(empty($UA) && !empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
             $pv = explode(".", PHP_VERSION);
             $UA = ( $pv[0] > 3 && $pv[1] > 0 ) ? $_SERVER['HTTP_USER_AGENT'] : (!empty( $HTTP_SERVER_VARS['HTTP_USER_AGENT'] ) ?  $HTTP_SERVER_VARS['HTTP_USER_AGENT'] : '');
         }
