@@ -99,7 +99,7 @@ $col_type = 1;
 // on the other hand, those attempting OCR will find the ability to request new images
 // very useful; if they can't crack one, just grab an easier target...
 // for the ultra-paranoid, setting it to <5 will still work for most users
-$max_attempts = 20;
+$max_attempts = 100;
 
 // list of fonts to use
 // font size should be around 35 pixels wide for each character.
@@ -131,7 +131,7 @@ $bg_images = Array("./.ht_freecap_im1.jpg","./.ht_freecap_im2.jpg","./.ht_freeca
 // for non-transparent backgrounds only:
 	// if 0, merges CAPTCHA with bg
 	// if 1, write CAPTCHA over bg
-	$merge_type = 0;
+	$merge_type = 1;
 	// should we morph the bg? (recommend yes, but takes a little longer to compute)
 	$morph_bg = true;
 
@@ -181,8 +181,8 @@ for($i=0 ; $i<sizeof($font_locations) ; $i++)
 
 // modify image width depending on maximum possible length of word
 // you shouldn't need to use words > 6 chars in length really.
-$width = ($max_word_length*(array_sum($font_widths)/sizeof($font_widths))+75);
-$height = 90;
+$width = ($max_word_length*(array_sum($font_widths)/sizeof($font_widths))+20);
+$height = !empty( $_REQUEST['height'] ) ? $_REQUEST['height'] : 75;
 
 $im = ImageCreate($width, $height);
 $im2 = ImageCreate($width, $height);
@@ -622,7 +622,7 @@ for($i=$word_start_x ; $i<$word_pix_size ; $i+=$font_pixelwidth)
 	// deviates at least 4 pixels between each letter
 	$prev_y = $y_pos;
 	do{
-		$y_pos = $rand_func(-5,5);
+		$y_pos = $rand_func(-3,3);
 	} while($y_pos<$prev_y+2 && $y_pos>$prev_y-2);
 	ImageCopy($im, $im2, $i, $y_pos, $i, 0, $font_pixelwidth, $height);
 
@@ -639,7 +639,7 @@ ImageFilledRectangle($im2,0,0,$width,$height,$bg2);
 // this is where the main distortion happens
 // massively improved since v1.2
 $y_chunk = 1;
-$morph_factor = 1;
+$morph_factor = .1;
 $morph_x = 0;
 for($j=0 ; $j<strlen($word) ; $j++)
 {
@@ -791,7 +791,7 @@ if($bg_type!=0)
 // the least you could do is give me credit (or buy me stuff from amazon!)
 // but I understand that in professional environments, your boss might not like this tag
 // so that's cool.
-$tag_str = "Click on image to refresh";
+$tag_str = "";
 // for debug:
 //$tag_str = "[".$word."]";
 
