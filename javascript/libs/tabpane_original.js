@@ -16,6 +16,34 @@
 |				  Copyright (c) 1998 - 2003 Erik Arvidsson					|
 \--------------------------------------------------------------------------*/
 
+// This function is called by FCKEditor when it is loaded.
+function FCKeditor_OnComplete( editorInstance )
+{
+	// We note that it is loaded so switchEditors doesn't throw an error
+	// before the API object is created.
+	document.FCKEditorLoaded = true;
+}
+
+// Called to cause an FCKEditor to show. This fixes an incompatibility with 
+// tab pane and FCKEditor in Gecko browsers where the FCKEditor is created
+// in a hidden tab. The editor fails to get focused without this.
+function switchEditors(oNode) {
+	var i=0;
+	// We use this to avoid the error when this runs BEFORE 
+	// FKCEditor has created the API object.
+	if (document.FCKEditorLoaded) {
+		for (i=0;i<oNode.childNodes.length;i++) {
+			childNode = oNode.childNodes.item(i);
+			editor = FCKeditorAPI.GetInstance(childNode.name);
+			if (editor && editor.EditorDocument && editor.EditMode == FCK_EDITMODE_WYSIWYG) {
+				editor.SwitchEditMode();
+				editor.SwitchEditMode();
+			}
+		    	switchEditors(childNode);
+		}
+	}
+}
+
 // This function is used to define if the browser supports the needed
 // features
 function hasSupport() {
@@ -221,13 +249,16 @@ WebFXTabPage.prototype.show = function () {
 	s = s.replace(/ +/g, " ");
 	el.className = s;
 
+	// Fix for FCKEditor focus bug
+	switchEditors(this.element);
 	this.element.style.display = "block";
 };
 
 WebFXTabPage.prototype.hide = function () {
 	var el = this.tab;
 	var s = el.className;
-	s = s.replace(/ tab\-active/g, "");
+	// Packer doesn't like \- in regexp for some reason
+	s = s.replace(/ tab.active/g, "");
 	el.className = s;
 
 	this.element.style.display = "none";
@@ -259,7 +290,8 @@ WebFXTabPage.tabOver = function ( tabpage ) {
 WebFXTabPage.tabOut = function ( tabpage ) {
 	var el = tabpage.tab;
 	var s = el.className;
-	s = s.replace(/ tab\-hover/g, "");
+	// Packer doesn't like \- in regexp for some reason
+	s = s.replace(/ tab.hover/g, "");
 	el.className = s;
 };
 
