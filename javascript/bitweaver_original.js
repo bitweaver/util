@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.12 2006/12/01 14:16:17 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.13 2006/12/01 20:13:47 nickpalmer Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -129,7 +129,6 @@ function insertAt(elementId, replaceString) {
 		oSel = "" + oSel;
 		if (oSel.length > 0) {
 			replaceString = replaceString.replace(toBeReplaced, oSel);
-			alert("With " + replaceString);
 			// Delete selection 
 			oEditor.Selection.Delete();
 		}
