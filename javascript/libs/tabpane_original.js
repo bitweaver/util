@@ -16,14 +16,6 @@
 |				  Copyright (c) 1998 - 2003 Erik Arvidsson					|
 \--------------------------------------------------------------------------*/
 
-// This function is called by FCKEditor when it is loaded.
-function FCKeditor_OnComplete( editorInstance )
-{
-	// We note that it is loaded so switchEditors doesn't throw an error
-	// before the API object is created.
-	document.FCKEditorLoaded = true;
-}
-
 // Called to cause an FCKEditor to show. This fixes an incompatibility with 
 // tab pane and FCKEditor in Gecko browsers where the FCKEditor is created
 // in a hidden tab. The editor fails to get focused without this.

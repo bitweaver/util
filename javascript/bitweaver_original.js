@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.11 2006/09/02 10:35:38 wolff_borg Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.12 2006/12/01 14:16:17 nickpalmer Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -7,6 +7,14 @@
 *  compressed output in the loaded version of this file                     *
 *                                                                           *
 \***************************************************************************/
+
+// This function is called by FCKEditor when/if it is loaded.
+function FCKeditor_OnComplete( editorInstance )
+{
+	// We note that it is loaded so switchEditors doesn't throw an error
+	// before the API object is created.
+	document.FCKEditorLoaded = true;
+}
 
 var expires = new Date();
 var offset = -(expires.getTimezoneOffset() * 60);
@@ -106,8 +114,30 @@ function setCaretToPos (textarea, pos) {
 // params:		elementId = a HTML Id / replaceString = string
 function insertAt(elementId, replaceString) {
 	//inserts given text at selection or cursor position
-	textarea = $(elementId);
 	var toBeReplaced = /text|page|textarea_id/;//substrings in replaceString to be replaced by the selection if a selection was done
+
+	// FCKEditor is completely different
+	if (document.FCKEditorLoaded) {
+		oEditor = FCKeditorAPI.GetInstance(document.FCKeditors[elementId]);
+		// Fetching selection can't be done through the 'Selection'. Stupid.
+		if (document.all) { 
+			oSel = oEditor.EditorDocument.selection.createRange().text; 
+		} else { 
+			oSel = oEditor.EditorWindow.getSelection(); 
+		}
+		// Convert oSel to a string.
+		oSel = "" + oSel;
+		if (oSel.length > 0) {
+			replaceString = replaceString.replace(toBeReplaced, oSel);
+			alert("With " + replaceString);
+			// Delete selection 
+			oEditor.Selection.Delete();
+		}
+		oEditor.InsertHtml(replaceString);
+		return;
+	}
+
+	textarea = $(elementId);
 	if (textarea.setSelectionRange) {
 		//Mozilla UserAgent Gecko-1.4
 		var selectionStart = textarea.selectionStart;
