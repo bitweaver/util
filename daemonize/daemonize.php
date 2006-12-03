@@ -30,7 +30,7 @@ if( !empty( $argv[2] ) ) {
 	// convert any remaining arguments into local variables
 	for( $i=2; $i < count( $argv ); $i++ ) {
 		$arg = preg_replace( '/^[-]*/', '', $argv[$i] ); 
-		list( $name, $val ) = @split( '=', $arg );
+		@list( $name, $val ) = @split( '=', $arg );
 		${$name} = (!empty( $val ) ? $val : TRUE);
 	}
 }
@@ -51,7 +51,7 @@ $SIGKILL = 9;
 # If we've self-bootstrapped, then load the bot and run with it.
 if ( !empty( $nohup ) ) {
   to_log("arg detected, bootstrapping daemon through require.");
-  require( $daemonFile );
+  require( $daemonScript );
   to_log("killing daemon child.");
   exit(0);
 }
@@ -62,7 +62,7 @@ if (empty($argv[1])) {
   $lines = array(0, 0);
   $pid_data = "unread";
 
-  #to_log("Testing for pre-existing..."); # Can get spammy.
+  #to_log("Testing for pre-existing... $pidfile"); # Can get spammy.
   if (file_exists($pidfile)) {
     $pid_data = file_get_contents($pidfile);
     $lines = explode("\n", $pid_data);
