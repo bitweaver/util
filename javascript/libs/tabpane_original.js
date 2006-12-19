@@ -4,6 +4,9 @@
 *  visit http://dean.edwards.name/packer/ to compress this and place the    *
 *  compressed output in the loaded version of this file                     *
 *                                                                           *
+*  i think you need to remove all comments before compressing to get this   *
+*  compression to work.                                                     *
+*                                                                           *
 \***************************************************************************/
 
 /*--------------------------------------------------------------------------\
