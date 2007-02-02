@@ -208,6 +208,11 @@ var Drag = {
 	},
 
 	onMouseDown : function(event) {
+// BIT_MOD {{ Ignore events on INPUT items so they still work as expected.
+    		if (event.target.tagName == 'INPUT' ) {
+			return;
+		}
+// }}
 		event = Drag.fixEvent(event);
 		Drag.group = this.group;
 
@@ -360,16 +365,29 @@ var Drag = {
 
 // {{{ BIT_MOD
 // add a basic serializer
-function serialize(a) {
+function serialize(a, count) {
 	var counter = 0;
 	var vardef = "";
-	for (var key in a) {
-		counter = counter +1;
-		var length = a[key].length;
-		if (length == "undefined") length = 1;
-		vardef = vardef + "s:" + key.length + ":\"" + key + "\";" + "s:" + length + ":\"" + a[key] + "\";";
+	var serialized;
+	// Prototype adds properties to the array
+	// which the for loop tries to serialize.
+	if (count > 0) {
+	  for (var key in a) {
+	    counter = counter +1;
+	    var length = a[key].length;
+	    if (length == "undefined") length = 1;
+	    vardef = vardef + "s:" + key.length + ":\"" + key + "\";" + "s:" + length + ":\"" + a[key] + "\";";
+	    serialized = "a:" + counter + ":{" + vardef + "}";
+	    // break out early to avoid prototype properties
+	    if (counter == count) {
+	      break;
+	    }
+	  }
+	}	
+	else {
+	  serialized = "a:0:{}";
 	}
-	var serialized = "a:" + counter + ":{" + vardef + "}";
+
 	return serialized;
 }
 // BIT_MOD }}}
@@ -414,6 +432,7 @@ var DragDrop = {
 		var container = DragDrop.firstContainer;
 		var hash = new Array();
 
+		var hashCount = 0;
 		while(container != null) {
 			if(theid != null && container.id != theid) {
 				container = container.nextContainer;
@@ -426,15 +445,18 @@ var DragDrop = {
 			}
 
 			var tmpHash = new Array();
+			var tmpHashCount = 0;
 			var items = container.getElementsByTagName( "li" );
 			for(var i = 0; i < items.length; i++) {
+			  	tmpHashCount++;
 				tmpHash[i] = items[i].id;
 			}
-			hash[container.id] = serialize(tmpHash);
+			hash[container.id] = serialize(tmpHash, tmpHashCount);
+			hashCount++;
 			container = container.nextContainer;
 		}
 		var string = '';
-		string = serialize(hash);
+		string = serialize(hash, hashCount);
 		return string;
 	},
 	// }}} BIT_MOD end
