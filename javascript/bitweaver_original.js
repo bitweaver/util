@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.13 2006/12/01 20:13:47 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.14 2007/02/02 20:26:55 nickpalmer Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -116,26 +116,31 @@ function insertAt(elementId, replaceString) {
 	//inserts given text at selection or cursor position
 	var toBeReplaced = /text|page|textarea_id/;//substrings in replaceString to be replaced by the selection if a selection was done
 
+	textarea = $(elementId);
+
 	// FCKEditor is completely different
 	if (document.FCKEditorLoaded) {
 		oEditor = FCKeditorAPI.GetInstance(document.FCKeditors[elementId]);
-		// Fetching selection can't be done through the 'Selection'. Stupid.
-		if (document.all) { 
-			oSel = oEditor.EditorDocument.selection.createRange().text; 
-		} else { 
-			oSel = oEditor.EditorWindow.getSelection(); 
+		// Check if it is a fckeditor. If not fall back on old code.
+		if (oEditor) {
+			// Fetching selection can't be done through the 'Selection'. Stupid.
+		  	if (document.all) { 
+				oSel = oEditor.EditorDocument.selection.createRange().text; 
+			} else { 
+				oSel = oEditor.EditorWindow.getSelection(); 
+			}
+			// Convert oSel to a string.
+			oSel = "" + oSel;
+			if (oSel.length > 0) {
+				replaceString = replaceString.replace(toBeReplaced, oSel);
+				// Delete selection 
+				oEditor.Selection.Delete();
+			}
+			oEditor.InsertHtml(replaceString);
+			return;
 		}
-		// Convert oSel to a string.
-		oSel = "" + oSel;
-		if (oSel.length > 0) {
-			replaceString = replaceString.replace(toBeReplaced, oSel);
-			// Delete selection 
-			oEditor.Selection.Delete();
-		}
-		oEditor.InsertHtml(replaceString);
-		return;
 	}
-
+	
 	textarea = $(elementId);
 	if (textarea.setSelectionRange) {
 		//Mozilla UserAgent Gecko-1.4
