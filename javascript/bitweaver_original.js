@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.15 2007/03/01 19:02:06 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.16 2007/03/02 00:04:10 nickpalmer Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -46,18 +46,15 @@ function setupShowHide() {
 	if (curval != null) {
 		var ids = unserialize(curval);
 		for (id in ids) {
-		    if (ids[id] != "o") { 
-			showById(id);
-		    }
-		    else {
-			hideById(id);
-		    } 
+			if (ids[id] != "o") { 
+				showById(id);
+			}
+			else {
+				hideById(id);
+			} 
 		}
 	}
 }
-
-// And the magic to do it at page load.
-addLoadHook(setupShowHide);
 
 /** swiped from this page: http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt */
 /* utf.js - UTF-8 <=> UTF-16 convertion
