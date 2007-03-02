@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.16 2007/03/02 00:04:10 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.17 2007/03/02 12:32:38 nickpalmer Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -612,9 +612,21 @@ function insertAt(elementId, replaceString) {
 // params:		elementId = a HTML Id
 //				setCookie = any value (not 0) to turn cookies on
 function showById(elementId,useCookie) {
-	if (document.layers) document.layers[elementId].display = "block";
-	else if (document.all) document.all[elementId].style.display = "block";
-	else if (document.getElementById) document.getElementById(elementId).style.display = "block";
+	if (document.layers) {
+		if (document.layers[elementId]) {
+			document.layers[elementId].display = "block";
+		}
+	}
+	else if (document.all) {
+		if (document.all[elementId]) {
+			document.all[elementId].style.display = "block";
+		}
+	}
+	else if (document.getElementById) {
+		if (document.getElementById(elementId)) {
+			document.getElementById(elementId).style.display = "block";
+		}
+	}
 	if (useCookie) { setCookieArray('showhide', elementId, "o"); }
 }
 
@@ -624,9 +636,21 @@ function showById(elementId,useCookie) {
 // params:		elementId = a HTML Id /
 //				setCookie = any value (not 0) to turn cookies on
 function hideById(elementId,useCookie) {
-	if (document.layers) document.layers[elementId].display = "none";
-	else if (document.all) document.all[elementId].style.display = "none";
-	else if (document.getElementById) document.getElementById(elementId).style.display = "none";
+	if (document.layers) {
+		if (document.layers[elementId]) {
+			document.layers[elementId].display = "none";
+		}
+	}
+	else if (document.all) {
+		if (document.all[elementId]) {
+			document.all[elementId].style.display = "none";
+		}
+	}
+	else if (document.getElementById) {
+		if (document.getElementById(elementId)) {
+			document.getElementById(elementId).style.display = "none";
+		}
+	}
 	if (useCookie) { setCookieArray('showhide', elementId, "c"); }
 }
 

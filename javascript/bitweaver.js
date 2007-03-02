@@ -1,1 +1,978 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('h 5s(56){x.3s=1x}f 1q=1t 59();f 3H=-(1q.4K()*4L);1q.5d(1q.4O()+1);2d("4P",3H);h 4R(1R){g(K 1b.3L!="1r"){1b.3L("4S",1R,1j)}t g(K 1b.48!="1r"){1b.48("1Z",1R)}t{g(1b.1Z!=W){f 3D=1b.1Z;1b.1Z=h(e){3D(e);1R(e)}}t{1b.1Z=1R(e)}}}h 4U(){f 19=1o(\'2v\');g(19!=W){f 2R=1w(19);M(P 1U 2R){g(2R[P]!="o"){1e(P)}t{18(P)}}}}h 2X(T){f J,i,1J,c;J="";1J=T.y;M(i=0;i<1J;i++){c=T.1N(i);g((c>=4V)&&(c<=4W)){J+=T.Q(i)}t g(c>4t){J+=1c.1g(4Y|((c>>12)&3K));J+=1c.1g(2x|((c>>6)&1D));J+=1c.1g(2x|((c>>0)&1D))}t{J+=1c.1g(4Z|((c>>6)&37));J+=1c.1g(2x|((c>>0)&1D))}}q J}h 2t(T){f J,i,1J,c;f 1T,2U;J="";1J=T.y;i=0;3N(i<1J){c=T.1N(i++);1p(c>>4){m 0:m 1:m 2:m 3:m 4:m 5:m 6:m 7:J+=T.Q(i-1);F;m 12:m 13:1T=T.1N(i++);J+=1c.1g(((c&37)<<6)|(1T&1D));F;m 14:1T=T.1N(i++);2U=T.1N(i++);J+=1c.1g(((c&3K)<<12)|((1T&1D)<<6)|((2U&1D)<<0));F}}q J}h 22(o){f p=0,u=[],E=[],B=1;f 3O=h(o){g(K(o)=="1r"||K(o.2h)=="1r")q\'\';f c=o.2h.3M();c=2X(c.5o(0,c.I(\'(\')).2s(/(^\\s*h\\s*)|(\\s*$)/54,\'\'));q((c==\'\')?\'55\':c)};f 31=h(n){f s=n.3M(),l=s.y;g(l>11)q 1j;M(f i=(s.Q(0)==\'-\')?1:0;i<l;i++){1p(s.Q(i)){m\'0\':m\'1\':m\'2\':m\'3\':m\'4\':m\'5\':m\'6\':m\'7\':m\'8\':m\'9\':F;1F:q 1j}}q!(n<-58||n>5a)};f 2Q=h(o){M(k 1U E)g(E[k]===o)q k;q 1j};f 2T=h(){u[p++]=\'N;\'};f 3U=h(b){u[p++]=(b?\'b:1;\':\'b:0;\')};f 2S=h(i){u[p++]=\'i:\'+i+\';\'};f 3R=h(d){g(5b(d))d=\'3z\';t g(d==1S.44)d=\'2r\';t g(d==1S.45)d=\'-2r\';u[p++]=\'d:\'+d+\';\'};f 1Y=h(s){f 2V=2X(s);u[p++]=\'s:\'+2V.y+\':"\';u[p++]=2V;u[p++]=\'";\'};f 3E=h(a){u[p++]=\'a:\';f 1V=p;u[p++]=0;u[p++]=\':{\';M(f k 1U a){g(K(a[k])!=\'h\'){31(k)?2S(k):1Y(k);1O(a[k]);u[1V]++}}u[p++]=\'}\'};f 40=h(o){f L=3O(o);g(L==\'\')2T();t g(K(o.22)!=\'h\'){u[p++]=\'O:\'+L.y+\':"\';u[p++]=L;u[p++]=\'":\';f 1V=p;u[p++]=0;u[p++]=\':{\';g(K(o.3P)==\'h\'){f a=o.3P();M(f 2Z 1U a){1Y(a[2Z]);1O(o[a[2Z]]);u[1V]++}}t{M(f k 1U o){g(K(o[k])!=\'h\'){1Y(k);1O(o[k]);u[1V]++}}}u[p++]=\'}\'}t{f 30=o.22();u[p++]=\'C:\'+L.y+\':"\';u[p++]=L;u[p++]=\'":\'+30.y+\':{\';u[p++]=30;u[p++]="}"}};f 3X=h(R){u[p++]="R:"+R+";"};f 3Z=h(r){u[p++]="r:"+r+";"};f 1O=h(o){g(o==W||o.2h==5e){B++;2T()}t 1p(o.2h){m 5g:{B++;3U(o);F}m 1S:{B++;31(o)?2S(o):3R(o);F}m 1c:{B++;1Y(o);F}m 2E:{f r=2Q(o);g(r){3X(r)}t{E[B++]=o;3E(o)}F}1F:{f r=2Q(o);g(r){B++;3Z(r)}t{E[B++]=o;40(o)}F}}};1O(o);q u.1f(\'\')}h 1w(w){f p=0,E=[],B=1;r=W;f 35=h(){p++;q W};f 36=h(){p++;f b=(w.Q(p++)==\'1\');p++;q b};f 2H=h(){p++;f i=15(w.A(p,p=w.I(\';\',p)));p++;q i};f 38=h(){p++;f d=w.A(p,p=w.I(\';\',p));1p(d){m\'3z\':d=5k;F;m\'2r\':d=1S.44;F;m\'-2r\':d=1S.45;F;1F:d=5l(d)}p++;q d};f 21=h(){p++;f l=15(w.A(p,p=w.I(\':\',p)));p+=2;f s=2t(w.A(p,p+=l));p+=2;q s};f 39=h(){p++;f n=15(w.A(p,p=w.I(\':\',p)));p+=2;f a=[];E[B++]=a;M(f i=0;i<n;i++){f k;1p(w.Q(p++)){m\'i\':k=2H();F;m\'s\':k=21();F;m\'U\':k=2p();F;1F:q 1j}a[k]=24()}p++;q a};f 3a=h(){p++;f l=15(w.A(p,p=w.I(\':\',p)));p+=2;f L=2t(w.A(p,p+=l));p+=2;f n=15(w.A(p,p=w.I(\':\',p)));p+=2;g(1M([\'K(\',L,\') == "1r"\'].1f(\'\'))){1M([\'h \',L,\'(){}\'].1f(\'\'))}f o=1M([\'1t \',L,\'()\'].1f(\'\'));E[B++]=o;M(f i=0;i<n;i++){f k;1p(w.Q(p++)){m\'s\':k=21();F;m\'U\':k=2p();F;1F:q 1j}g(k.Q(0)==\'\\0\'){k=k.A(k.I(\'\\0\',1)+1,k.y)}o[k]=24()}p++;g(K(o.47)==\'h\')o.47();q o};f 3b=h(){p++;f l=15(w.A(p,p=w.I(\':\',p)));p+=2;f L=2t(w.A(p,p+=l));p+=2;f n=15(w.A(p,p=w.I(\':\',p)));p+=2;g(1M([\'K(\',L,\') == "1r"\'].1f(\'\'))){1M([\'h \',L,\'(){}\'].1f(\'\'))}f o=1M([\'1t \',L,\'()\'].1f(\'\'));E[B++]=o;g(K(o.1w)!=\'h\')p+=n;t o.1w(w.A(p,p+=n));p++;q o};f 2p=h(){p++;f l=15(w.A(p,p=w.I(\':\',p)));p+=2;f u=[];M(f i=0;i<l;i++){g((u[i]=w.Q(p++))==\'\\\\\'){u[i]=1c.1g(15(w.A(p,p+=4),16))}}p+=2;q u.1f(\'\')};f 2y=h(){p++;f r=15(w.A(p,p=w.I(\';\',p)));p++;q E[r]};f 24=h(){1p(w.Q(p++)){m\'N\':q E[B++]=35();m\'b\':q E[B++]=36();m\'i\':q E[B++]=2H();m\'d\':q E[B++]=38();m\'s\':q E[B++]=21();m\'U\':q E[B++]=2p();m\'r\':q E[B++]=2y();m\'a\':q 39();m\'O\':q 3a();m\'C\':q 3b();m\'R\':q 2y();1F:q 1j}};q 24()}h $(){f D=1t 2E();M(f i=0;i<1L.y;i++){f 1z=1L[i];g(K 1z==\'4f\')1z=x.1y(1z);g(1L.y==1)q 1z;D.4g(1z)}q D}h 4h($17){26=\'3e\'+$17+\'4i\';32=\'3e\'+$17+\'4j\';g($(26).H.G=="X"){$(32).H.G="X";$(26).H.G="3h"}t{$(26).H.G="X";$(32).H.G="3h"}}h 4k(3k,3I,3l){2D="4l";2I="4m$%#";s=1E.2F(1E.2G());l=8;p=\'\';M(i=0;i<l;i++){g(s){2J=2D.Q(1E.2F(1E.2G()*(2D.y-1)));s=0}t{2J=2I.Q(1E.2F(1E.2G()*(2I.y-1)));s=1}p=p+2J}$(3k).z=p;$(3I).z=p;$(3l).z=p}h 3C(j,3m){$(j).z=$(j).z+3m}h 1C(v,S,1a){g(v.1C){v.2Y();v.1C(S,1a)}t g(v.3o){f Y=v.3o();v.4q(1x);v.4s(\'2W\',1a);v.3F(\'2W\',S);v.3A()}}h 3v(v,2K){1C(v,2K,2K)}h 4u(j,Z){f 2g=/1s|4v|4w/;v=$(j);g(x.3s){1B=4x.4y(x.4z[j]);g(1B){g(x.1m){1A=1B.4A.2O.3w().1s}t{1A=1B.4B.4C()}1A=""+1A;g(1A.y>0){Z=Z.2s(2g,1A);1B.4D.4E()}1B.4F(Z);q}}v=$(j);g(v.1C){f S=v.S;f 1a=v.1a;g(S!=1a){f 2N=Z.2s(2g,v.z.A(S,1a));v.z=v.z.A(0,S)+2N+v.z.A(1a);1C(v,S,S+2N.y)}t{v.z=v.z.A(0,S)+Z+v.z.A(1a);3v(v,S+Z.y)}}t g(x.2O){v.2Y();f Y=x.2O.3w();g(Y.4J()==v){f 3T=Y.1s==\'\';g(!3T){Y.1s=Z.2s(2g,Y.1s);Y.3F(\'2W\',-Y.1s.y);Y.3A()}t{Y.1s=Z}}}t{3C(j,Z)}}h 1e(j,23){g(x.1K)x.1K[j].G="2w";t g(x.1m)x.1m[j].H.G="2w";t g(x.1y)x.1y(j).H.G="2w";g(23){2u(\'2v\',j,"o")}}h 18(j,23){g(x.1K)x.1K[j].G="X";t g(x.1m)x.1m[j].H.G="X";t g(x.1y)x.1y(j).H.G="X";g(23){2u(\'2v\',j,"c")}}h 51(j){g($(j).H.G=="X"){1e(j)}t{18(j)}}h 52(j){g($(j).H.G=="X"){1e(j,1)}t{18(j,1)}}f 2j=[0,0,0];h 53(2i,1n,D,V){g(2i&&1n){g(1L.y<1)1n=1;1n=(1n*10)/10;g(1L.y<2)D=1;D=(D*10)/10;g(D<1||D>9)D=1;g(1L.y<3)V=1;V=(V*10)/10;g(!V||V<1||V>3)V=1;f i=0;57{g(2j[V-1]!=0)18(2j[V-1]+(1n+i));1e(2i+(1n+i))}3N(++i<=D-1);2j[V-1]=2i}}h 5f(j){f 1l=1t 3V();g(j&&$(j).H&&$(j).H.G&&$(j).H.G=="X"){1l.1i=2o+"/3W.2c";1e(j,1)}t{1l.1i=2o+"/3Y.2c";18(j,1)}$(j+"43").1i=1l.1i}h 5h(j){f 1l=1t 3V();g(1o(j)=="o"){1l.1i=2o+"/3W.2c";1e(j)}t{1l.1i=2o+"/3Y.2c";18(j)}$(j+"43").1i=1l.1i}h 5m(j){f 1v="34"+j;g($(j).H.G=="X"){1e(j,1);$(1v).2e.27="[-]"}t{18(j,1);$(1v).2e.27="[+]"}}h 5p(j){f 1v="34"+j;g(1o(j)=="o"){1e(j);$(1v).2e.27="[-]"}t{18(j);$(1v).2e.27="[+]"}}h 2u(1d,1X,z){f 19=1o(1d);f 1I;g(19!=W){1I=1w(19);1I[1X]=z}t{1I=1t 2E();1I[1X]=z}2d(1d,22(1I))}h 4b(1d,1X){f 19=1o(1d);f 2z;g(19!=W){f 3c=1w(19);2z=3c[1X]}q 2z}h 2d(17,z,2A,1k,1h,2B){f 29=(1k)?1k:3q;f 2b=2M((1h)?1h:3r);f 3f=(2A)?2A.42():1q.42();f 3i=17+"="+2M(z)+"; 1k="+29+"; 1h="+2b+"; 1q="+3f+((2B)?"; 2B":"");x.1d=3i}h 1o(17){f 1W=x.1d;f 2m=17+"=";f 1u=1W.I("; "+2m);g(1u==-1){1u=1W.I(2m);g(1u!=0)q W}t 1u+=2;f 2l=x.1d.I(";",1u);g(2l==-1)2l=1W.y;q 4n(1W.A(1u+2m.y,2l))}h 4r(17,1k,1h){f 29=(1k)?1k:3q;f 2b=2M((1h)?1h:3r);g(1o(17)){x.1d=17+"="+"; 1k="+29+"; 1h="+2b+"; 1q=4I, 3B-4M-4Q 3y:3y:3B 4X"}}h 50(2n,3G,2P){f D=$(2n).D[3G];f 33=(K(D.y)!=\'1r\')?D.y:0;g(33){M(f i=0;i<33;i++){D[i].2q=x.3S[2n].D[2P].2q}}t{D.2q=x.3S[2n].D[2P].2q}q 1x}h 5n(P){g(x.1y){$(P).2L=1x;$(P).z="5q 49..."}t g(x.1m){x.1m[P].2L=1x}t g(x.1K){x.1K[P].2L=1x}}h 4d(o){g(o.25[o.2k].z!=""){2C=o.25[o.2k].z;o.25[o.2k]=1}q 1j}h 4o(j,1H){v=$(j);g(v&&1H!=0&&v.28+1H>5){v.28+=1H;2d(\'28\',v.28)}}f 1G=W;h 3x(){g(1G!=W)g(!1G.4G)1G.4H()}h 4N(3j,1P,2f,20){3x();g(1P=="46"){2f=3J.4T-10;20=3J.5j-5c}f 2a="";g(1P=="5i"||1P=="46")2a="3d,3g=1Q,2C=1Q,3n=3t,5r=1Q,3u="+2f+",1H="+20+",41=0,3Q=0";g(1P=="4a")2a="3d,3g=1Q,2C=1Q,3n=3t,3u="+2f+",1H="+20+",3Q=0,41=0";1G=1b.4c(3j,\'4p\',2a);1G.2Y()}h 4e(P){$(\'3p\').z=$(\'3p\').z+$(P).25[$(P).2k].z}',62,339,'|||||||||||||||var|if|function||elementId|||case||||return|||else|sb|textarea|ss|document|length|value|substring|hv||elements|ht|break|display|style|indexOf|out|typeof|cn|for|||id|charAt||selectionStart|str||zen|null|none|range|replaceString||||||parseInt||name|hideById|curval|selectionEnd|window|String|cookie|showById|join|fromCharCode|domain|src|false|path|pic|all|elementIdNum|getCookie|switch|expires|undefined|text|new|begin|flipperName|unserialize|true|getElementById|element|oSel|oEditor|setSelectionRange|0x3F|Math|default|newWindow|height|newval|len|layers|arguments|eval|charCodeAt|__serialize|type|no|func|Number|char2|in|lp|dc|key|ser_string|onload|strHeight|unser_string|serialize|useCookie|__unserialize|options|name1|nodeValue|rows|cookie_path|tools|cookie_domain|gif|setCookie|firstChild|strWidth|toBeReplaced|constructor|elementIdStart|flipArr|selectedIndex|end|prefix|the_form|bitIconDir|unser_unicode_string|checked|INF|replace|utf8to16|setCookieArray|showhide|block|0x80|unser_ref|val|expire|secure|location|vo|Array|round|random|unser_integer|co|letter|pos|disabled|escape|newString|selection|switcher_name|in_ht|ids|ser_integer|ser_null|char3|utf8|character|utf16to8|focus|kk|cs|is_int|name2|elements_cnt|flipper|unser_null|unser_boolean|0x1F|unser_double|unser_array|unser_object|unser_custom_object|arr|resizable|dyn_|cookie_expire|toolbar|inline|curCookie|url|w1|w3|strng|scrollbars|createTextRange|usermoduledata|bitCookiePath|bitCookieDomain|FCKEditorLoaded|yes|width|setCaretToPos|createRange|closeWin|00|NAN|select|01|setSomeElement|oldOnload|ser_array|moveStart|elements_name|offset|w2|screen|0x0F|addEventListener|toString|while|classname|__sleep|left|ser_double|forms|isCollapsed|ser_boolean|Image|expanded|ser_pointref|collapsed|ser_ref|ser_object|top|toGMTString|img|POSITIVE_INFINITY|NEGATIVE_INFINITY|fullScreen|__wakeup|attachEvent|Wait|console|getCookieArray|open|go|setUserModuleFromCombo|string|push|toggle_dynamic_var|_display|_edit|genPass|aeiouAEU|bcdfgjklmnprstvwxzBCDFGHJKMNPQRSTVWXYZ0123456789_|unescape|textareasize|newWin|collapse|deleteCookie|moveEnd|0x07FF|insertAt|page|textarea_id|FCKeditorAPI|GetInstance|FCKeditors|EditorDocument|EditorWindow|getSelection|Selection|Delete|InsertHtml|closed|close|Thu|parentElement|getTimezoneOffset|60|Jan|popUpWin|getFullYear|tz_offset|70|addLoadHook|load|availWidth|setupShowHide|0x0001|0x007F|GMT|0xE0|0xC0|switchCheckboxes|flip|toggle|flipMulti|ig|Object|editorInstance|do|2147483648|Date|2147483647|isNaN|160|setFullYear|Function|flipIcon|Boolean|setFlipIcon|standard|availHeight|NaN|parseFloat|flipWithSign|disableSubmit|substr|setFlipWithSign|Please|menubar|FCKeditor_OnComplete'.split('|'),0,{}))
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.21 2007/03/02 12:32:37 nickpalmer Exp $
+
+/***************************************************************************\
+*                                                                           *
+*  please modify this file and leave plenty of comments. when done, please  *
+*  visit http://dean.edwards.name/packer/ to compress this and place the    *
+*  compressed output in the loaded version of this file                     *
+*                                                                           *
+\***************************************************************************/
+
+// This function is called by FCKEditor when/if it is loaded.
+function FCKeditor_OnComplete( editorInstance )
+{
+	// We note that it is loaded so switchEditors doesn't throw an error
+	// before the API object is created.
+	document.FCKEditorLoaded = true;
+}
+
+var expires = new Date();
+var offset = -(expires.getTimezoneOffset() * 60);
+expires.setFullYear(expires.getFullYear() + 1);
+setCookie("tz_offset", offset);
+
+// Adds a function to be called at page load time
+function addLoadHook(func) {
+	if ( typeof window.addEventListener != "undefined" ) {
+		window.addEventListener( "load", func, false );
+	} else if ( typeof window.attachEvent != "undefined" ) {
+		window.attachEvent( "onload", func );
+	} else {
+		if ( window.onload != null ) {
+			var oldOnload = window.onload;
+			window.onload = function ( e ) {
+				oldOnload( e );
+		       		func(e);
+			};
+		} else {
+			window.onload = func(e);
+		}
+	}
+}
+
+// shows or hides based on the showhide cookie
+function setupShowHide() {
+	var curval = getCookie('showhide');
+	if (curval != null) {
+		var ids = unserialize(curval);
+		for (id in ids) {
+			if (ids[id] != "o") { 
+				showById(id);
+			}
+			else {
+				hideById(id);
+			} 
+		}
+	}
+}
+
+/** swiped from this page: http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt */
+/* utf.js - UTF-8 <=> UTF-16 convertion
+ *
+ * Copyright (C) 1999 Masanao Izumo <iz@onicos.co.jp>
+ * Version: 1.0
+ * LastModified: Dec 25 1999
+ * This library is free.  You can redistribute it and/or modify it.
+ */
+
+/*
+ * Interfaces:
+ * utf8 = utf16to8(utf16);
+ * utf16 = utf16to8(utf8);
+ */
+
+function utf16to8(str) {
+    var out, i, len, c;
+
+    out = "";
+    len = str.length;
+    for(i = 0; i < len; i++) {
+	c = str.charCodeAt(i);
+	if ((c >= 0x0001) && (c <= 0x007F)) {
+	    out += str.charAt(i);
+	} else if (c > 0x07FF) {
+	    out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+	    out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));
+	    out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+	} else {
+	    out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));
+	    out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+	}
+    }
+    return out;
+}
+
+function utf8to16(str) {
+    var out, i, len, c;
+    var char2, char3;
+
+    out = "";
+    len = str.length;
+    i = 0;
+    while(i < len) {
+	c = str.charCodeAt(i++);
+	switch(c >> 4)
+	{ 
+	  case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+	    // 0xxxxxxx
+	    out += str.charAt(i-1);
+	    break;
+	  case 12: case 13:
+	    // 110x xxxx   10xx xxxx
+	    char2 = str.charCodeAt(i++);
+	    out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+	    break;
+	  case 14:
+	    // 1110 xxxx  10xx xxxx  10xx xxxx
+	    char2 = str.charCodeAt(i++);
+	    char3 = str.charCodeAt(i++);
+	    out += String.fromCharCode(((c & 0x0F) << 12) |
+					   ((char2 & 0x3F) << 6) |
+					   ((char3 & 0x3F) << 0));
+	    break;
+	}
+    }
+
+    return out;
+}
+
+/** swiped from this page: http://www.coolcode.cn/?p=171 **/
+
+/* phpserializer.js - JavaScript to PHP serialize / unserialize class.
+* 
+* This class is designed to convert php variables to javascript
+* and javascript variables to php with a php serialize unserialize
+* compatible way.
+*
+* Copyright (C) 2006 Ma Bingyao <andot@ujn.edu.cn>
+* Version: 3.0f
+* LastModified: Nov 30, 2006
+* This library is free.  You can redistribute it and/or modify it.
+* http://www.coolcode.cn/?p=171
+*/
+ 
+function serialize(o) {
+    var p = 0, sb = [], ht = [], hv = 1;
+    var classname = function(o) {
+        if (typeof(o) == "undefined" || typeof(o.constructor) == "undefined") return '';
+        var c = o.constructor.toString();
+        c = utf16to8(c.substr(0, c.indexOf('(')).replace(/(^\s*function\s*)|(\s*$)/ig, ''));
+        return ((c == '') ? 'Object' : c);
+    };
+    var is_int = function(n) {
+        var s = n.toString(), l = s.length;
+        if (l > 11) return false;
+        for (var i = (s.charAt(0) == '-') ? 1 : 0; i < l; i++) {
+            switch (s.charAt(i)) {
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9': break;
+                default : return false;
+            }
+        }
+        return !(n < -2147483648 || n > 2147483647);
+    };
+    var in_ht = function(o) {
+        for (k in ht) if (ht[k] === o) return k;
+        return false;
+    };
+    var ser_null = function() {
+        sb[p++] = 'N;';
+    };
+    var ser_boolean = function(b) {
+        sb[p++] = (b ? 'b:1;' : 'b:0;');
+    };
+    var ser_integer = function(i) {
+        sb[p++] = 'i:' + i + ';';
+    };
+    var ser_double = function(d) {
+        if (isNaN(d)) d = 'NAN';
+        else if (d == Number.POSITIVE_INFINITY) d = 'INF';
+        else if (d == Number.NEGATIVE_INFINITY) d = '-INF';
+        sb[p++] = 'd:' + d + ';';
+    };
+    var ser_string = function(s) {
+        var utf8 = utf16to8(s);
+        sb[p++] = 's:' + utf8.length + ':"';
+        sb[p++] = utf8;
+        sb[p++] = '";';
+    };
+    var ser_array = function(a) {
+        sb[p++] = 'a:';
+        var lp = p;
+        sb[p++] = 0;
+        sb[p++] = ':{';
+        for (var k in a) {
+            if (typeof(a[k]) != 'function') {
+                is_int(k) ? ser_integer(k) : ser_string(k);
+                __serialize(a[k]);
+                sb[lp]++;
+            }
+        }
+        sb[p++] = '}';
+    };
+    var ser_object = function(o) {
+        var cn = classname(o);
+        if (cn == '') ser_null();
+        else if (typeof(o.serialize) != 'function') {
+            sb[p++] = 'O:' + cn.length + ':"';
+            sb[p++] = cn;
+            sb[p++] = '":';
+            var lp = p;
+            sb[p++] = 0;
+            sb[p++] = ':{';
+            if (typeof(o.__sleep) == 'function') {
+                var a = o.__sleep();
+                for (var kk in a) {
+                    ser_string(a[kk]);
+                    __serialize(o[a[kk]]);
+                    sb[lp]++;
+                }
+            }
+            else {
+                for (var k in o) {
+                    if (typeof(o[k]) != 'function') {
+                        ser_string(k);
+                        __serialize(o[k]);
+                        sb[lp]++;
+                    }
+                }
+            }
+            sb[p++] = '}';
+        }
+        else {
+             var cs = o.serialize();
+             sb[p++] = 'C:' + cn.length + ':"';
+             sb[p++] = cn;
+             sb[p++] = '":' + cs.length + ':{';
+             sb[p++] = cs;
+             sb[p++] = "}";
+         }
+     };
+     var ser_pointref = function(R) {
+         sb[p++] = "R:" + R + ";";
+     };
+     var ser_ref = function(r) {
+         sb[p++] = "r:" + r + ";";
+     };
+     var __serialize = function(o) {
+         if (o == null || o.constructor == Function) {
+             hv++;
+             ser_null();
+         }
+         else switch (o.constructor) {
+             case Boolean: {
+                 hv++;
+                 ser_boolean(o);
+                 break;
+             }
+             case Number: {
+                 hv++;
+                 is_int(o) ? ser_integer(o) : ser_double(o);
+                 break;
+             }
+             case String: {
+                 hv++;
+                 ser_string(o);
+                 break;
+             }
+ /*@cc_on @*/
+ /*@if (@_jscript)
+             case VBArray: {
+                 o = o.toArray();
+             }
+ @end @*/
+             case Array: {
+                 var r = in_ht(o);
+                 if (r) {
+                     ser_pointref(r);
+                 }
+                 else {
+                     ht[hv++] = o;
+                     ser_array(o);
+                 }
+                 break;
+             }
+             default: {
+                 var r = in_ht(o);
+                 if (r) {
+                     hv++;
+                     ser_ref(r);
+                 }
+                 else {
+                     ht[hv++] = o;
+                     ser_object(o);
+                 }
+                 break;
+             }
+         }
+     };
+     __serialize(o);
+     return sb.join('');
+ }
+  
+ function unserialize(ss) {
+     var p = 0, ht = [], hv = 1; r = null;
+     var unser_null = function() {
+         p++;
+         return null;
+     };
+     var unser_boolean = function() {
+         p++;
+         var b = (ss.charAt(p++) == '1');
+         p++;
+         return b;
+     };
+     var unser_integer = function() {
+         p++;
+         var i = parseInt(ss.substring(p, p = ss.indexOf(';', p)));
+         p++;
+         return i;
+     };
+     var unser_double = function() {
+         p++;
+         var d = ss.substring(p, p = ss.indexOf(';', p));
+         switch (d) {
+             case 'NAN': d = NaN; break;
+             case 'INF': d = Number.POSITIVE_INFINITY; break;
+             case '-INF': d = Number.NEGATIVE_INFINITY; break;
+             default: d = parseFloat(d);
+         }
+         p++;
+         return d;
+     };
+     var unser_string = function() {
+         p++;
+         var l = parseInt(ss.substring(p, p = ss.indexOf(':', p)));
+         p += 2;
+         var s = utf8to16(ss.substring(p, p += l));
+         p += 2;
+         return s;
+     };
+     var unser_array = function() {
+         p++;
+         var n = parseInt(ss.substring(p, p = ss.indexOf(':', p)));
+         p += 2;
+         var a = [];
+         ht[hv++] = a;
+         for (var i = 0; i < n; i++) {
+             var k;
+             switch (ss.charAt(p++)) {
+                 case 'i': k = unser_integer(); break;
+                 case 's': k = unser_string(); break;
+                 case 'U': k = unser_unicode_string(); break;
+                 default: return false;
+             }
+             a[k] = __unserialize();
+         }
+         p++;
+         return a;
+     };
+     var unser_object = function() {
+         p++;
+         var l = parseInt(ss.substring(p, p = ss.indexOf(':', p)));
+         p += 2;
+         var cn = utf8to16(ss.substring(p, p += l));
+         p += 2;
+         var n = parseInt(ss.substring(p, p = ss.indexOf(':', p)));
+         p += 2;
+         if (eval(['typeof(', cn, ') == "undefined"'].join(''))) {
+             eval(['function ', cn, '(){}'].join(''));
+         }
+         var o = eval(['new ', cn, '()'].join(''));
+         ht[hv++] = o;
+         for (var i = 0; i < n; i++) {
+             var k;
+             switch (ss.charAt(p++)) {
+                 case 's': k = unser_string(); break;
+                 case 'U': k = unser_unicode_string(); break;
+                 default: return false;
+             }
+             if (k.charAt(0) == '\0') {
+                 k = k.substring(k.indexOf('\0', 1) + 1, k.length);
+             }
+             o[k] = __unserialize();
+         }
+         p++;
+         if (typeof(o.__wakeup) == 'function') o.__wakeup();
+         return o;
+     };
+     var unser_custom_object = function() {
+         p++;
+         var l = parseInt(ss.substring(p, p = ss.indexOf(':', p)));
+         p += 2;
+         var cn = utf8to16(ss.substring(p, p += l));
+         p += 2;
+         var n = parseInt(ss.substring(p, p = ss.indexOf(':', p)));
+         p += 2;
+         if (eval(['typeof(', cn, ') == "undefined"'].join(''))) {
+             eval(['function ', cn, '(){}'].join(''));
+         }
+         var o = eval(['new ', cn, '()'].join(''));
+         ht[hv++] = o;
+         if (typeof(o.unserialize) != 'function') p += n;
+         else o.unserialize(ss.substring(p, p += n));
+         p++;
+         return o;
+     };
+     var unser_unicode_string = function() {
+         p++;
+         var l = parseInt(ss.substring(p, p = ss.indexOf(':', p)));
+         p += 2;
+         var sb = [];
+         for (var i = 0; i < l; i++) {
+             if ((sb[i] = ss.charAt(p++)) == '\\') {
+                 sb[i] = String.fromCharCode(parseInt(ss.substring(p, p += 4), 16));
+             }
+         }
+         p += 2;
+         return sb.join('');
+     };
+     var unser_ref = function() {
+         p++;
+         var r = parseInt(ss.substring(p, p = ss.indexOf(';', p)));
+         p++;
+         return ht[r];
+     };
+     var __unserialize = function() {
+         switch (ss.charAt(p++)) {
+             case 'N': return ht[hv++] = unser_null();
+             case 'b': return ht[hv++] = unser_boolean();
+             case 'i': return ht[hv++] = unser_integer();
+             case 'd': return ht[hv++] = unser_double();
+             case 's': return ht[hv++] = unser_string();
+             case 'U': return ht[hv++] = unser_unicode_string();
+             case 'r': return ht[hv++] = unser_ref();
+             case 'a': return unser_array();
+             case 'O': return unser_object();
+             case 'C': return unser_custom_object();
+             case 'R': return unser_ref();
+             default: return false;
+         }
+     };
+     return __unserialize();
+}
+/* end swipe */
+
+/*--- moved here from prototype - start ---*/
+function $() {
+	var elements = new Array();
+	for (var i = 0; i < arguments.length; i++) {
+		var element = arguments[i];
+		if (typeof element == 'string')
+			element = document.getElementById(element);
+		if (arguments.length == 1)
+			return element;
+		elements.push(element);
+	}
+	return elements;
+}
+/*----------- prototype - end -------------*/
+
+// function:	toggle_dynamic_var
+// desc:		Toggles the visibility of dynamic variable passed to it
+// date:		Pre-bitweaver
+// params:		$name
+function toggle_dynamic_var($name) {
+	name1 = 'dyn_'+$name+'_display';
+	name2 = 'dyn_'+$name+'_edit';
+	if($(name1).style.display == "none") {
+		$(name2).style.display = "none";
+		$(name1).style.display = "inline";
+	} else {
+		$(name1).style.display = "none";
+		$(name2).style.display = "inline";
+}	}
+
+// function:	genPass
+// date:		Pre-bitweaver
+// params:		w1 / w2 / w3
+function genPass(w1, w2, w3) {
+	vo = "aeiouAEU";
+	co = "bcdfgjklmnprstvwxzBCDFGHJKMNPQRSTVWXYZ0123456789_$%#";
+	s = Math.round(Math.random());
+	l = 8;
+	p = '';
+	for (i = 0; i < l; i++) {
+		if (s) {
+			letter = vo.charAt(Math.round(Math.random() * (vo.length - 1)));
+			s = 0;
+		} else {
+			letter = co.charAt(Math.round(Math.random() * (co.length - 1)));
+			s = 1;
+		}
+		p = p + letter;
+	}
+	$(w1).value = p;
+	$(w2).value = p;
+	$(w3).value = p;
+}
+
+// function:	setSomeElement
+// desc:		Adds a String to the value of elementId
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id
+//				strng = the string to be added
+function setSomeElement(elementId, strng) {
+	$(elementId).value = $(elementId).value + strng;
+}
+
+// function:	setSelectionRange - used by insertAt
+// desc:		No Idea
+// date:		Pre-bitweaver
+// params:		textarea = / selectionStart = / selectionEnd =
+function setSelectionRange(textarea, selectionStart, selectionEnd) {
+	if (textarea.setSelectionRange) {
+		textarea.focus();
+		textarea.setSelectionRange(selectionStart, selectionEnd);
+	} else if (textarea.createTextRange) {
+		var range = textarea.createTextRange();
+		textarea.collapse(true);
+		textarea.moveEnd('character', selectionEnd);
+		textarea.moveStart('character', selectionStart);
+		textarea.select();
+}	}
+
+// function:	setCaretToPos - used by insertAt
+// desc:		No Idea
+// date:		Pre-bitweaver
+// params:		textarea = / pos =
+function setCaretToPos (textarea, pos) {
+	setSelectionRange(textarea, pos, pos);
+}
+
+// function:	insertAt - used by QuickTags & Plugin Help
+// desc:		inserts replaceString in elementId
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id / replaceString = string
+function insertAt(elementId, replaceString) {
+	//inserts given text at selection or cursor position
+	var toBeReplaced = /text|page|textarea_id/;//substrings in replaceString to be replaced by the selection if a selection was done
+
+	textarea = $(elementId);
+
+	// FCKEditor is completely different
+	if (document.FCKEditorLoaded) {
+		oEditor = FCKeditorAPI.GetInstance(document.FCKeditors[elementId]);
+		// Check if it is a fckeditor. If not fall back on old code.
+		if (oEditor) {
+			// Fetching selection can't be done through the 'Selection'. Stupid.
+		  	if (document.all) { 
+				oSel = oEditor.EditorDocument.selection.createRange().text; 
+			} else { 
+				oSel = oEditor.EditorWindow.getSelection(); 
+			}
+			// Convert oSel to a string.
+			oSel = "" + oSel;
+			if (oSel.length > 0) {
+				replaceString = replaceString.replace(toBeReplaced, oSel);
+				// Delete selection 
+				oEditor.Selection.Delete();
+			}
+			oEditor.InsertHtml(replaceString);
+			return;
+		}
+	}
+	
+	textarea = $(elementId);
+	if (textarea.setSelectionRange) {
+		//Mozilla UserAgent Gecko-1.4
+		var selectionStart = textarea.selectionStart;
+		var selectionEnd = textarea.selectionEnd;
+		if (selectionStart != selectionEnd) { // has there been a selection
+			var newString = replaceString.replace(toBeReplaced, textarea.value.substring(selectionStart, selectionEnd));
+			textarea.value = textarea.value.substring(0, selectionStart)
+				+ newString
+				+ textarea.value.substring(selectionEnd);
+			setSelectionRange(textarea, selectionStart, selectionStart + newString.length);
+		} else {// set caret
+			textarea.value = textarea.value.substring(0, selectionStart)
+				+ replaceString
+				+ textarea.value.substring(selectionEnd);
+			setCaretToPos(textarea, selectionStart + replaceString.length);
+		}
+	} else if (document.selection) {
+		//UserAgent IE-6.0
+		textarea.focus();
+		var range = document.selection.createRange();
+		if (range.parentElement() == textarea) {
+			var isCollapsed = range.text == '';
+			if (! isCollapsed)	{
+				range.text = replaceString.replace(toBeReplaced, range.text);
+				range.moveStart('character', -range.text.length);
+				range.select();
+			} else {
+				range.text = replaceString;
+		}	}
+	} else { //UserAgent Gecko-1.0.1 (NN7.0)
+		setSomeElement(elementId, replaceString)
+		//alert("don't know yet how to handle insert" + document);
+}	}
+
+// function:	showById
+// desc:		Displays a hidden HTML element. Can also set a cookie to make it stay that way.
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id
+//				setCookie = any value (not 0) to turn cookies on
+function showById(elementId,useCookie) {
+	if (document.layers) {
+		if (document.layers[elementId]) {
+			document.layers[elementId].display = "block";
+		}
+	}
+	else if (document.all) {
+		if (document.all[elementId]) {
+			document.all[elementId].style.display = "block";
+		}
+	}
+	else if (document.getElementById) {
+		if (document.getElementById(elementId)) {
+			document.getElementById(elementId).style.display = "block";
+		}
+	}
+	if (useCookie) { setCookieArray('showhide', elementId, "o"); }
+}
+
+// function:	hideById
+// desc:		Hides an HTML element. Can also set a cookie to make it stay that way.
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id /
+//				setCookie = any value (not 0) to turn cookies on
+function hideById(elementId,useCookie) {
+	if (document.layers) {
+		if (document.layers[elementId]) {
+			document.layers[elementId].display = "none";
+		}
+	}
+	else if (document.all) {
+		if (document.all[elementId]) {
+			document.all[elementId].style.display = "none";
+		}
+	}
+	else if (document.getElementById) {
+		if (document.getElementById(elementId)) {
+			document.getElementById(elementId).style.display = "none";
+		}
+	}
+	if (useCookie) { setCookieArray('showhide', elementId, "c"); }
+}
+
+// function:	flip
+// desc:		Flips the visibility of a HTML element. Cookies are not used.
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id
+function flip(elementId) {
+	if ($(elementId).style.display == "none") { showById(elementId);
+	} else { hideById(elementId);
+}	}
+
+// function:	toggle
+// desc:		Toggles a HTML elements visibility. Cookies are used to make it stay that way.
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id
+function toggle(elementId) {
+	if ($(elementId).style.display == "none") { showById(elementId,1);
+	} else { hideById(elementId,1);
+}	}
+
+// function:	flipMulti
+// desc:		Toggles visibility for multiple HTML elements - can be used with an HTML Selector
+//				On the first call - Shows the window id's defined by (header) & (numbr) & saves them in a variable
+//				On subsequent calls - Hide the saved windows and shows the new windows
+// added by: 	StarRider
+// date:		1/5/06
+// Note			For Cross-Browser compatibility - An HTML elements id's must begin with a Letter or String.
+//				Operates by appending a string (header) with the number (numbr) to show/hide the window id.
+//				With multiple windows - the id's need to be sequencial eg. each id is 1 greater than the last
+//				with the first being (numbr).
+// example:		When used in a tpl file with div elements: $header='dog';
+//				<div id="{$header}1" style="display:none;">This Data</div> / the id is "dog1"
+//				<div id="{$header}2" style="display:none;">That Data</div> / the id is "dog2"
+//				The Selector: <select size="15" onchange="javascript:flipMulti(this.options[this.selectedIndex].value,2,2)">
+//				Each Option: <option value="{$header}">Whatever</option> / the value is "dog"
+//				To display the first set of divs - use:
+//				<script type="text/javascript"> flipMulti('{$header}',1,2); </script>
+// params:		elementIdStart = The string portion of the elements Id.
+//				elementIdNum = any number - that is appended to the elementIdStart forming the elements Id.
+//					If elementIdStart="dog" & elementIdNum=1 then the elements Id is "dog1"
+//				elements = a number (1-9/def=1) indicates how many elements to hide/display.
+//				zen = a number (1-3/def=1) allows multiple routines to use the function at the same time. Stores the
+//				text portion of the window Id (elementIdStart) in an array so that it can be hidden later.
+var flipArr=[0,0,0]; // Only the header portion of the id is saved
+function flipMulti(elementIdStart,elementIdNum,elements,zen){
+	if(elementIdStart && elementIdNum) {
+		if(arguments.length<1) elementIdNum=1;
+		elementIdNum=(elementIdNum*10)/10; // elementIdNum has to be a number
+		if(arguments.length<2) elements=1;
+		elements=(elements*10)/10; // elements has to be a number
+		if(elements<1 || elements>9) elements=1;
+		if(arguments.length<3) zen=1;
+		zen=(zen*10)/10; // zen has to be a number
+		if(!zen || zen<1 || zen>3) zen=1;
+		var i=0;
+		do {
+			if(flipArr[zen-1]!=0) hideById(flipArr[zen-1]+(elementIdNum+i));
+			showById(elementIdStart+(elementIdNum+i));
+		} while (++i <= elements-1);
+		flipArr[zen-1]=elementIdStart;
+}	}
+
+// function:	flipIcon
+// desc:		Toggles a HTML elements visibility with an Icon. Use Cookies to make it stay that way.
+// Note:		This functions replaces icntoggle & setfoldericonstate - No reason to use 2 functions when 1 will do
+// added by: 	StarRider
+// date:		12/15/05
+// params:		elementId is an HTML Id for the window to be displayed/hidden
+function flipIcon(elementId) {
+	var pic = new Image();
+	if (elementId && $(elementId).style && $(elementId).style.display && $(elementId).style.display == "none") {
+		pic.src = bitIconDir + "/expanded.gif";
+		showById(elementId,1);
+	} else {
+		pic.src = bitIconDir + "/collapsed.gif";
+		hideById(elementId,1);
+	}
+	$(elementId+"img").src = pic.src;
+}
+
+// function:	setFlipWithSign
+// desc:		Toggles the state of a flipped List after page reload
+// Note:		Reworked to eliminate collapseSign / expandSign
+// date:		Pre-bitweaver
+// params:		foo = a HTML Id of a List
+function setFlipIcon(elementId) {
+	var pic = new Image();
+	if (getCookie(elementId) == "o") {
+		pic.src = bitIconDir + "/expanded.gif";
+		showById(elementId);
+	} else {
+		pic.src = bitIconDir + "/collapsed.gif";
+		hideById(elementId);
+	}
+	$(elementId+"img").src = pic.src;
+}
+
+// function:	flipWithSign
+// desc:		Used to Expand/Collapse Lists
+// Note:		Reworked to eliminate collapseSign / expandSign
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id
+function flipWithSign(elementId) {
+	var flipperName = "flipper" + elementId;
+	if ($(elementId).style.display == "none") {
+		showById(elementId,1);
+		$(flipperName).firstChild.nodeValue = "[-]";
+	} else {
+		hideById(elementId,1);
+		$(flipperName).firstChild.nodeValue = "[+]";
+}	}
+
+// function:	setFlipWithSign
+// desc:		Toggles the state of a flipped List after page reload
+// Note:		Reworked to eliminate collapseSign / expandSign
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id of a List
+function setFlipWithSign(elementId) {
+	var flipperName = "flipper" + elementId;
+	if (getCookie(elementId) == "o") {
+		showById(elementId);
+		$(flipperName).firstChild.nodeValue = "[-]";
+	} else {
+		hideById(elementId);
+		$(flipperName).firstChild.nodeValue = "[+]";
+}	}
+
+// function: setCookieArray
+// desc: Creates a cookie if required and sets the element in the array
+// date: 2007-march-1
+// params: cookie - the name of the cookie
+//         key - the name of the key in the cookie array
+//         value - the value to set it to
+function setCookieArray(cookie, key, value) {
+	var curval = getCookie(cookie);
+	var newval;
+	if (curval != null) {
+		newval = unserialize(curval);
+		newval[key] = value;
+	}
+	else {
+		newval = new Array();
+		newval[key] = value;
+	}
+	setCookie(cookie, serialize(newval));
+}
+
+// function: getCookieArray
+// desc: Returns a value from a key stored in an array in a cookie.
+// date: 2007-march-1
+// params: cookie - the name of the cookie
+//         key - the name of the key in the cookie array
+function getCookieArray(cookie, key) {
+	var curval = getCookie(cookie);
+	var val;
+	if (curval != null) {
+		var arr = unserialize(curval);
+		val = arr[key];
+	}
+	return val;
+}
+
+// function:	setCookie
+// desc:		Creates a Cookie
+// date:		Pre-bitweaver
+// params:		name = the name of the cookie
+//				value = the value placed in the cookie
+//				[expires] (optional) = the expiration date of the cookie (defaults to end of current session)
+//				[path] (optional) = the path for which the cookie is valid (defaults to path of calling document)
+//				[domain] (optional) = the domain for which the cookie is valid (defaults to domain of calling document)
+//				[secure] (optional) = Boolean value indicating if the cookie transmission requires a secure transmission
+// NOTE:	* an argument defaults when it is assigned null as a placeholder
+// 			* a null placeholder is not required for trailing omitted arguments
+function setCookie(name, value, expire, path, domain, secure) {
+	var cookie_path = (path) ? path : bitCookiePath;
+	var cookie_domain = escape((domain) ? domain : bitCookieDomain);
+	var cookie_expire = (expire) ? expire.toGMTString() : expires.toGMTString();
+	var curCookie = name + "=" + escape(value)
+			+ "; path=" +  cookie_path
+			+ "; domain=" + cookie_domain
+			+ "; expires=" + cookie_expire
+			+ ((secure) ? "; secure" : "");
+//alert(curCookie);
+	document.cookie = curCookie;
+}
+
+// function:	getCookie
+// desc:		Gets a Cookie and returns it's value
+// date:		Pre-bitweaver
+// params:		name = the name of the desired cookie
+// NOTE:		return string contains value of specified cookie or null if cookie does not exist
+function getCookie(name) {
+	var dc = document.cookie;
+	var prefix = name + "=";
+	var begin = dc.indexOf("; " + prefix);
+	if (begin == -1) {
+		begin = dc.indexOf(prefix);
+		if (begin != 0)
+			return null;
+	} else begin += 2;
+	var end = document.cookie.indexOf(";", begin);
+	if (end == -1)
+		end = dc.length;
+	return unescape(dc.substring(begin + prefix.length, end));
+}
+
+// function:	deleteCookie
+// desc:		Deletes a Cookie
+// date:		Pre-bitweaver
+// params:		name = the name of the cookie
+//				[path] (optional) = the path of the cookie (must be same path used when created)
+//				[domain] (optional) = the domain of the cookie (must be same domain used when created)
+// NOTE:		path and domain default if assigned null or omitted if no explicit argument proceeds
+function deleteCookie(name, path, domain) {
+	var cookie_path = (path) ? path : bitCookiePath;
+	var cookie_domain = escape((domain) ? domain : bitCookieDomain);
+	if (getCookie(name)) {
+		document.cookie = name + "="
+			+ "; path=" +  cookie_path + "; domain=" + cookie_domain + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
+}	}
+
+// function:	switchCheckboxes
+// desc:		Will Check / Uncheck all Checkboxes
+// date:		Pre-bitweaver
+// params:		the_form = a HTML Id of a form
+//				elements_name = the name of the checkbox / see note
+//				switcher_name = ??????????????
+// NOTE:		checkboxes need to have the same name as elements_name
+// Example:	<input type="checkbox" name="my_ename[]">, will arrive as Array in php.
+function switchCheckboxes(the_form, elements_name, switcher_name) {
+	var elements = $(the_form).elements[elements_name];
+	var elements_cnt = ( typeof (elements.length) != 'undefined') ? elements.length : 0;
+
+	if (elements_cnt) {
+		for (var i = 0; i < elements_cnt; i++) {
+			elements[i].checked = document.forms[the_form].elements[switcher_name].checked;
+		}
+	} else {
+		elements.checked = document.forms[the_form].elements[switcher_name].checked;
+	}
+	return true;
+}
+
+// function:	disableSubmit
+// desc:		disable form stuff after submission
+// params:		id = a HTML Id
+// note:		a button you disable with this function will not appear in $_REQUEST
+function disableSubmit(id) {
+	if(document.getElementById) { // this is the way the standards work
+		$(id).disabled = true;
+		$(id).value = "Please Wait...";
+	} else if(document.all) {// this is the way old msie versions work
+		document.all[id].disabled = true;
+	} else if(document.layers) { // this is the way nn4 works
+		document.layers[id].disabled = true;
+}	}
+
+// function:	go
+// desc:		added for use in navigation dropdown
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id
+// Example:	<select name="anything" onchange="go(this);">
+//			<option value="http://bitweaver.org">bitweaver.org</option>
+// 			</select>
+function go(o) {
+	if (o.options[o.selectedIndex].value != "") {
+		location = o.options[o.selectedIndex].value;
+		o.options[o.selectedIndex] = 1;
+	}
+	return false;
+}
+
+// function:	textareasize
+// desc:		Modifies the dimensions of a textarea
+// date:		Pre-bitweaver
+// params:		elementId = a HTML Id to a textarea
+//				height = nb pixels to add to the height (the number can be negative)
+//				width = nb pixels to add to the width
+//				formid = a HTML Id to form - see Note:
+// Note:		* The form must have 2 input rows and cols
+function textareasize(elementId, height) {
+	textarea = $(elementId);
+	if (textarea && height != 0 && textarea.rows + height > 5) {
+		textarea.rows += height;
+		setCookie('rows', textarea.rows);
+}	}
+
+// function:	closeWin - used by popUpWin
+// desc:		Closes the window stored in newWindow
+// params:		None
+var newWindow = null;
+function closeWin(){
+	if (newWindow != null)
+		if(!newWindow.closed) newWindow.close();
+}
+
+// function:	popUpWin
+// desc:		span a new window which is XHTML 1.0 Strict compliant and in accordance with WCAG
+// params:		url:		the url for the new window
+//				type:		standard or fullscreen
+//				strWidth:	width of the window
+//				strHeight:	height of the spawned window
+// usage:		<a href="<URL>" title="{tr}Opens link in new window{/tr}" onkeypress="popUpWin(this.href,'standard',600,400);" onclick="popUpWin(this.href,'standard',600,400);return false;">{tr}FooBar{/tr}</a>
+function popUpWin(url, type, strWidth, strHeight) {
+	closeWin();
+	if (type == "fullScreen") {
+		strWidth = screen.availWidth - 10;
+		strHeight = screen.availHeight - 160;
+	}
+	var tools="";
+	if (type == "standard" || type == "fullScreen") tools = "resizable,toolbar=no,location=no,scrollbars=yes,menubar=no,width="+strWidth+",height="+strHeight+",top=0,left=0";
+	if (type == "console") tools = "resizable,toolbar=no,location=no,scrollbars=yes,width="+strWidth+",height="+strHeight+",left=0,top=0";
+	newWindow = window.open(url, 'newWin', tools);
+	newWindow.focus();
+}
+
+// function:	setUserModuleFromCombo
+// desc:		No Idea
+// date:		Pre-bitweaver
+// params:		id = a HTML Id
+function setUserModuleFromCombo(id) {
+	$('usermoduledata').value = $('usermoduledata').value
+		+ $(id).options[$(id).selectedIndex].value;
+}
