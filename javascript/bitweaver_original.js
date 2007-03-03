@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.17 2007/03/02 12:32:38 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.18 2007/03/03 00:11:34 nickpalmer Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -46,7 +46,7 @@ function setupShowHide() {
 	if (curval != null) {
 		var ids = unserialize(curval);
 		for (id in ids) {
-			if (ids[id] != "o") { 
+			if (ids[id] == "o") { 
 				showById(id);
 			}
 			else {
