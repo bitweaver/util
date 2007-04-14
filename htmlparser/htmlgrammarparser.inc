@@ -80,7 +80,7 @@ class HtmlGrammarParser {
         $this->errstr.="object <font color=\"red\">$this->name</font>";
       $this->errstr.=" Line <b>$line</b>, Column <b>$column</b>";
     }
-    $this->errors[$this->errpos]["str"]=$this->errstr."<br />\r\n";
+    $this->errors[$this->errpos]["str"]=$this->errstr."<br>\r\n";
   }
 
 /********************************************************************************************
@@ -466,7 +466,7 @@ EOF	    -1 -1 -1 -1 -1
   function SaveGrammar($name) {
     $str=serialize($this->pg);
     if (!$fp=fopen($name,"w"))
-      print "<br />Error: Can't create file $name. Unable to save grammar.<br />";
+      print "<br>Error: Can't create file $name. Unable to save grammar.<br>";
     flock($fp,2);
     fwrite($fp,$str,strlen($str));
     flock($fp,3);
