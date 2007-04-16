@@ -1,3 +1,42 @@
+var liberty_uploader_under_way = 0;
+function liberty_uploader(file, action, waitmsg, frmid, actionid) {
+	if (liberty_uploader_under_way) {
+		alert(waitmsg);
+	}
+	else {
+		liberty_uploader_under_way = 1;
+		showById('spinner');
+		var old_target = file.form.target;
+		file.form.target = frmid;
+		var old_action = file.form.action;
+		var action_item = document.getElementById(actionid);
+		action_item.value = old_action;
+		file.form.action=action;
+		file.form.submit();
+		file.form.target = old_target;
+		file.form.action = old_action;
+		action_item.value = '';
+	}
+}
+function liberty_uploader_complete(frmid, divid, fileid) {
+	hideById('spinner');
+	var ifrm = document.getElementById(frmid);
+	if (ifrm.contentDocument) {
+		var d = ifrm.contentDocument;
+	} else if (ifrm.contentWindow) {
+		var d = ifrm.contentWindow.document;
+	} else {
+		var d = window.frames[frmid].document;
+	}
+	if (d.location.href == "about:blank") {
+		return;
+	}
+	var div = document.getElementById(divid);
+	div.innerHTML = d.body.innerHTML;
+	liberty_uploader_under_way = 0;
+	var file = document.getElementById(fileid);
+	file.value = '';
+}
 function ajax_updater(target, url, data) {
 	var myAjax = new Ajax.Updater(
 		{success: target},
