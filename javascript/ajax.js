@@ -1,5 +1,5 @@
 var liberty_uploader_under_way = 0;
-function liberty_uploader(file, action, waitmsg, frmid, actionid) {
+function liberty_uploader(file, action, waitmsg, frmid) {
 	if (liberty_uploader_under_way) {
 		alert(waitmsg);
 	}
@@ -9,13 +9,10 @@ function liberty_uploader(file, action, waitmsg, frmid, actionid) {
 		var old_target = file.form.target;
 		file.form.target = frmid;
 		var old_action = file.form.action;
-		var action_item = document.getElementById(actionid);
-		action_item.value = old_action;
 		file.form.action=action;
 		file.form.submit();
 		file.form.target = old_target;
 		file.form.action = old_action;
-		action_item.value = '';
 	}
 }
 function liberty_uploader_complete(frmid, divid, fileid) {
