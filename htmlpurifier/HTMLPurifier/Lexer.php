@@ -56,7 +56,6 @@ class HTMLPurifier_Lexer
 {
     
     function HTMLPurifier_Lexer() {
-        $this->_encoder = new HTMLPurifier_Encoder();
         $this->_entity_parser = new HTMLPurifier_EntityParser();
     }
     
@@ -114,8 +113,6 @@ class HTMLPurifier_Lexer
         return $string;
     }
     
-    var $_encoder;
-    
     /**
      * Lexes an HTML string into tokens.
      * 
@@ -138,6 +135,8 @@ class HTMLPurifier_Lexer
      * default with your own implementation.  A copy/reference of the prototype
      * lexer will now be returned when you request a new lexer.
      * 
+     * @static
+     * 
      * @note
      * Though it is possible to call this factory method from subclasses,
      * such usage is not recommended.
@@ -152,7 +151,8 @@ class HTMLPurifier_Lexer
             $lexer = $prototype;
         }
         if (empty($lexer)) {
-            if (version_compare(PHP_VERSION, '5', '>=')) {
+            if (version_compare(PHP_VERSION, "5", ">=") && // check for PHP5
+                class_exists('DOMDocument')) { // check for DOM support
                 require_once 'HTMLPurifier/Lexer/DOMLex.php';
                 $lexer = new HTMLPurifier_Lexer_DOMLex();
             } else {
@@ -166,6 +166,7 @@ class HTMLPurifier_Lexer
     /**
      * Translates CDATA sections into regular sections (through escaping).
      * 
+     * @static
      * @protected
      * @param $string HTML string to process.
      * @returns HTML with CDATA sections escaped.
@@ -181,6 +182,7 @@ class HTMLPurifier_Lexer
     /**
      * Callback function for escapeCDATA() that does the work.
      * 
+     * @static
      * @warning Though this is public in order to let the callback happen,
      *          calling it directly is not recommended.
      * @params $matches PCRE matches array, with index 0 the entire match
@@ -212,7 +214,7 @@ class HTMLPurifier_Lexer
         // clean into wellformed UTF-8 string for an SGML context: this has
         // to be done after entity expansion because the entities sometimes
         // represent non-SGML characters (horror, horror!)
-        $html = $this->_encoder->cleanUTF8($html);
+        $html = HTMLPurifier_Encoder::cleanUTF8($html);
         
         return $html;
     }

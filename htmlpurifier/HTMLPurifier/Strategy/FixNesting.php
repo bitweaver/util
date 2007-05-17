@@ -49,8 +49,8 @@ class HTMLPurifier_Strategy_FixNesting extends HTMLPurifier_Strategy
         $tokens[] = new HTMLPurifier_Token_End($parent_name);
         
         // setup the context variables
-        $parent_type = 'unknown'; // reference var that we alter
-        $context->register('ParentType', $parent_type);
+        $is_inline = false; // reference var that we alter
+        $context->register('IsInline', $is_inline);
         
         //####################################################################//
         // Loop initialization
@@ -115,11 +115,16 @@ class HTMLPurifier_Strategy_FixNesting extends HTMLPurifier_Strategy
             }
             
             // calculate context
-            if (isset($parent_def)) {
-                $parent_type = $parent_def->type;
+            if ($is_inline === false) {
+                // check if conditions make it inline
+                if (!empty($parent_def) && $parent_def->descendants_are_inline) {
+                    $is_inline = $count - 1;
+                }
             } else {
-                // generally found in specialized elements like UL
-                $parent_type = 'unknown';
+                // check if we're out of inline
+                if ($count === $is_inline) {
+                    $is_inline = false;
+                }
             }
             
             //################################################################//
@@ -156,11 +161,14 @@ class HTMLPurifier_Strategy_FixNesting extends HTMLPurifier_Strategy
                     
                 }
                 
-                $child_def = $def->child;
-                
-                // have DTD child def validate children
-                $result = $child_def->validateChildren(
-                    $child_tokens, $config, $context);
+                if (!empty($def->child)) {
+                    // have DTD child def validate children
+                    $result = $def->child->validateChildren(
+                        $child_tokens, $config, $context);
+                } else {
+                    // weird, no child definition, get rid of everything
+                    $result = false;
+                }
                 
                 // determine whether or not this element has any exclusions
                 $excludes = $def->excludes;
@@ -270,7 +278,7 @@ class HTMLPurifier_Strategy_FixNesting extends HTMLPurifier_Strategy
         array_pop($tokens);
         
         // remove context variables
-        $context->destroy('ParentType');
+        $context->destroy('IsInline');
         
         //####################################################################//
         // Return

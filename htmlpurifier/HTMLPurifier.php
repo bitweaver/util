@@ -22,7 +22,7 @@
  */
 
 /*
-    HTML Purifier 1.3.0 - Standards Compliant HTML Filtering
+    HTML Purifier 1.6.1 - Standards Compliant HTML Filtering
     Copyright (C) 2006 Edward Z. Yang
 
     This library is free software; you can redistribute it and/or
@@ -64,25 +64,43 @@ require_once 'HTMLPurifier/Encoder.php';
 class HTMLPurifier
 {
     
+    var $version = '1.6.1';
+    
     var $config;
+    var $filters;
     
     var $lexer, $strategy, $generator;
+    
+    /**
+     * Final HTMLPurifier_Context of last run purification. Might be an array.
+     * @public
+     */
+    var $context;
     
     /**
      * Initializes the purifier.
      * @param $config Optional HTMLPurifier_Config object for all instances of
      *                the purifier, if omitted, a default configuration is
      *                supplied (which can be overridden on a per-use basis).
+     *                The parameter can also be any type that
+     *                HTMLPurifier_Config::create() supports.
      */
     function HTMLPurifier($config = null) {
         
-        $this->config = $config ? $config : HTMLPurifier_Config::createDefault();
+        $this->config = HTMLPurifier_Config::create($config);
         
         $this->lexer        = HTMLPurifier_Lexer::create();
         $this->strategy     = new HTMLPurifier_Strategy_Core();
         $this->generator    = new HTMLPurifier_Generator();
-        $this->encoder      = new HTMLPurifier_Encoder();
         
+    }
+    
+    /**
+     * Adds a filter to process the output. First come first serve
+     * @param $filter HTMLPurifier_Filter object
+     */
+    function addFilter($filter) {
+        $this->filters[] = $filter;
     }
     
     /**
@@ -91,24 +109,61 @@ class HTMLPurifier
      * @param $html String of HTML to purify
      * @param $config HTMLPurifier_Config object for this operation, if omitted,
      *                defaults to the config object specified during this
-     *                object's construction.
+     *                object's construction. The parameter can also be any type
+     *                that HTMLPurifier_Config::create() supports.
      * @return Purified HTML
      */
     function purify($html, $config = null) {
-        $config = $config ? $config : $this->config;
-        $context =& new HTMLPurifier_Context();
-        $html = $this->encoder->convertToUTF8($html, $config, $context);
+        
+        $config = $config ? HTMLPurifier_Config::create($config) : $this->config;
+        
+        $context = new HTMLPurifier_Context();
+        $html = HTMLPurifier_Encoder::convertToUTF8($html, $config, $context);
+        
+        for ($i = 0, $size = count($this->filters); $i < $size; $i++) {
+            $html = $this->filters[$i]->preFilter($html, $config, $context);
+        }
+        
+        // purified HTML
         $html = 
             $this->generator->generateFromTokens(
+                // list of tokens
                 $this->strategy->execute(
-                    $this->lexer->tokenizeHTML($html, $config, $context),
+                    // list of un-purified tokens
+                    $this->lexer->tokenizeHTML(
+                        // un-purified HTML
+                        $html, $config, $context
+                    ),
                     $config, $context
                 ),
                 $config, $context
             );
-        $html = $this->encoder->convertFromUTF8($html, $config, $context);
+        
+        for ($i = $size - 1; $i >= 0; $i--) {
+            $html = $this->filters[$i]->postFilter($html, $config, $context);
+        }
+        
+        $html = HTMLPurifier_Encoder::convertFromUTF8($html, $config, $context);
+        $this->context =& $context;
         return $html;
     }
+    
+    /**
+     * Filters an array of HTML snippets
+     * @param $config Optional HTMLPurifier_Config object for this operation.
+     *                See HTMLPurifier::purify() for more details.
+     * @return Array of purified HTML
+     */
+    function purifyArray($array_of_html, $config = null) {
+        $context_array = array();
+        foreach ($array_of_html as $key => $html) {
+            $array_of_html[$key] = $this->purify($html, $config);
+            $context_array[$key] = $this->context;
+        }
+        $this->context = $context_array;
+        return $array_of_html;
+    }
+    
     
 }
 

@@ -29,6 +29,7 @@ class HTMLPurifier_Strategy_RemoveForeignElements extends HTMLPurifier_Strategy
         $generator = new HTMLPurifier_Generator();
         $result = array();
         $escape_invalid_tags = $config->get('Core', 'EscapeInvalidTags');
+        $remove_invalid_img  = $config->get('Core', 'RemoveInvalidImg');
         foreach($tokens as $token) {
             if (!empty( $token->is_tag )) {
                 // DEFINITION CALL
@@ -37,8 +38,10 @@ class HTMLPurifier_Strategy_RemoveForeignElements extends HTMLPurifier_Strategy
                     
                     // hard-coded image special case, pre-emptively drop
                     // if not available. Probably not abstract-able
-                    if ( $token->name == 'img' ) {
-                        if (!isset($token->attr['src'])) continue;
+                    if ( $token->name == 'img' && $remove_invalid_img ) {
+                        if (!isset($token->attr['src'])) {
+                            continue;
+                        }
                         if (!isset($definition->info['img']->attr['src'])) {
                             continue;
                         }
@@ -46,7 +49,8 @@ class HTMLPurifier_Strategy_RemoveForeignElements extends HTMLPurifier_Strategy
                             $definition->
                                 info['img']->
                                     attr['src']->
-                                        validate($token->attr['src']);
+                                        validate($token->attr['src'],
+                                            $config, $context);
                         if ($token->attr['src'] === false) continue;
                     }
                     
