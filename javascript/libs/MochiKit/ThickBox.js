@@ -214,6 +214,7 @@ function TB_show(caption, url, imageGroup) {
 					showElement("TB_window");			   
 			   });
 			}
+			executeJavascript("TB_window");
 		}
 		connect(window, "onresize", TB_position);
 		connect(currentDocument(), "onkeyup", function(evt) {
@@ -314,3 +315,20 @@ function getElementsByTagNameAndAttributeValue(tagName, attribute, value) {
 	return elements;
 }
 /////////////////////////////////////////////////////////////////////
+
+function executeJavascript (element) {
+    var element = MochiKit.DOM.getElement(element);
+    if (element) {
+      var st = element.getElementsByTagName("SCRIPT");
+      var string_to_execute;
+
+      for (var i=0;i<st.length; i++) {
+        string_to_execute = st[i].innerHTML;
+        try {
+          eval(string_to_execute.split("<!--").join("").split("-->").join(""));
+        } catch(e) {
+          MochiKit.Logging.log(e);
+        } // end try
+      } // end for
+    } // end if
+} 
