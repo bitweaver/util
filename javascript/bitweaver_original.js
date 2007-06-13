@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.18 2007/03/03 00:11:34 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.19 2007/06/13 15:18:56 wjames5 Exp $
 
 /***************************************************************************\
 *                                                                           *
@@ -20,6 +20,8 @@ var expires = new Date();
 var offset = -(expires.getTimezoneOffset() * 60);
 expires.setFullYear(expires.getFullYear() + 1);
 setCookie("tz_offset", offset);
+setCookie("javascript_enabled", "y");
+
 
 // Adds a function to be called at page load time
 function addLoadHook(func) {
@@ -828,7 +830,7 @@ function getCookieArray(cookie, key) {
 function setCookie(name, value, expire, path, domain, secure) {
 	var cookie_path = (path) ? path : bitCookiePath;
 	var cookie_domain = escape((domain) ? domain : bitCookieDomain);
-	var cookie_expire = (expire) ? expire.toGMTString() : expires.toGMTString();
+	var cookie_expire = (expire) ? expire.toGMTString() : "";
 	var curCookie = name + "=" + escape(value)
 			+ "; path=" +  cookie_path
 			+ "; domain=" + cookie_domain
