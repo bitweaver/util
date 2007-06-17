@@ -264,8 +264,14 @@ WebFXTabPage.prototype.select = function () {
 };
 
 WebFXTabPage.prototype.dispose = function () {
-	// Safari only submits inputs which are visible
-	this.element.style.display = "block";
+	// Safari only submits inputs which are note display:none
+	// I suspect this is for "security" but that is stupid since we
+	// can still hide it off screen like this.
+	if (this.element.style.display == "none") {
+		this.element.style.position = "absolute";
+		this.element.style.left = "-10000px";
+		this.element.style.display = "block";
+	}
 	this.aElement.onclick = null;
 	this.aElement = null;
 	this.element.tabPage = null;
