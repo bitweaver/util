@@ -264,6 +264,8 @@ WebFXTabPage.prototype.select = function () {
 };
 
 WebFXTabPage.prototype.dispose = function () {
+	// Safari only submits inputs which are visible
+	this.element.style.display = "block";
 	this.aElement.onclick = null;
 	this.aElement = null;
 	this.element.tabPage = null;
