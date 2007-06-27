@@ -1,12 +1,8 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.19 2007/06/13 15:18:56 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/Attic/bitweaver_original.js,v 1.20 2007/06/27 17:49:17 squareing Exp $
 
-/***************************************************************************\
-*                                                                           *
-*  please modify this file and leave plenty of comments. when done, please  *
-*  visit http://dean.edwards.name/packer/ to compress this and place the    *
-*  compressed output in the loaded version of this file                     *
-*                                                                           *
-\***************************************************************************/
+// please modify this file and leave plenty of comments. This file will be
+// compressed automatically. Please make sure you only use comments beginning
+// with '//' and put comments on separate lines otherwise the packer will choke
 
 // This function is called by FCKEditor when/if it is loaded.
 function FCKeditor_OnComplete( editorInstance )
@@ -58,21 +54,17 @@ function setupShowHide() {
 	}
 }
 
-/** swiped from this page: http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt */
-/* utf.js - UTF-8 <=> UTF-16 convertion
- *
- * Copyright (C) 1999 Masanao Izumo <iz@onicos.co.jp>
- * Version: 1.0
- * LastModified: Dec 25 1999
- * This library is free.  You can redistribute it and/or modify it.
- */
+// swiped from this page: http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt
+// utf.js - UTF-8 <=> UTF-16 convertion
+// 
+// Copyright (C) 1999 Masanao Izumo <iz@onicos.co.jp>
+// Version: 1.0
+// LastModified: Dec 25 1999
+// This library is free.  You can redistribute it and/or modify it.
 
-/*
- * Interfaces:
- * utf8 = utf16to8(utf16);
- * utf16 = utf16to8(utf8);
- */
-
+// Interfaces:
+// utf8 = utf16to8(utf16);
+// utf16 = utf16to8(utf8);
 function utf16to8(str) {
     var out, i, len, c;
 
@@ -128,20 +120,19 @@ function utf8to16(str) {
     return out;
 }
 
-/** swiped from this page: http://www.coolcode.cn/?p=171 **/
-
-/* phpserializer.js - JavaScript to PHP serialize / unserialize class.
-* 
-* This class is designed to convert php variables to javascript
-* and javascript variables to php with a php serialize unserialize
-* compatible way.
-*
-* Copyright (C) 2006 Ma Bingyao <andot@ujn.edu.cn>
-* Version: 3.0f
-* LastModified: Nov 30, 2006
-* This library is free.  You can redistribute it and/or modify it.
-* http://www.coolcode.cn/?p=171
-*/
+// swiped from this page: http://www.coolcode.cn/?p=171
+// 
+// phpserializer.js - JavaScript to PHP serialize / unserialize class.
+// 
+// This class is designed to convert php variables to javascript
+// and javascript variables to php with a php serialize unserialize
+// compatible way.
+// 
+// Copyright (C) 2006 Ma Bingyao <andot@ujn.edu.cn>
+// Version: 3.0f
+// LastModified: Nov 30, 2006
+// This library is free.  You can redistribute it and/or modify it.
+// http://www.coolcode.cn/?p=171
  
 function serialize(o) {
     var p = 0, sb = [], ht = [], hv = 1;
@@ -275,12 +266,12 @@ function serialize(o) {
                  ser_string(o);
                  break;
              }
- /*@cc_on @*/
- /*@if (@_jscript)
-             case VBArray: {
-                 o = o.toArray();
-             }
- @end @*/
+// @cc_on @
+// @if (@_jscript)
+//             case VBArray: {
+//                 o = o.toArray();
+//             }
+// @end @
              case Array: {
                  var r = in_ht(o);
                  if (r) {
@@ -451,9 +442,9 @@ function serialize(o) {
      };
      return __unserialize();
 }
-/* end swipe */
+// end swipe
 
-/*--- moved here from prototype - start ---*/
+//--- moved here from prototype - start ---
 function $() {
 	var elements = new Array();
 	for (var i = 0; i < arguments.length; i++) {
@@ -466,7 +457,7 @@ function $() {
 	}
 	return elements;
 }
-/*----------- prototype - end -------------*/
+//----------- prototype - end -------------
 
 // function:	toggle_dynamic_var
 // desc:		Toggles the visibility of dynamic variable passed to it
@@ -546,7 +537,8 @@ function setCaretToPos (textarea, pos) {
 // params:		elementId = a HTML Id / replaceString = string
 function insertAt(elementId, replaceString) {
 	//inserts given text at selection or cursor position
-	var toBeReplaced = /text|page|textarea_id/;//substrings in replaceString to be replaced by the selection if a selection was done
+	//substrings in replaceString to be replaced by the selection if a selection was done
+	var toBeReplaced = /text|page|textarea_id/;
 
 	textarea = $(elementId);
 
@@ -578,13 +570,15 @@ function insertAt(elementId, replaceString) {
 		//Mozilla UserAgent Gecko-1.4
 		var selectionStart = textarea.selectionStart;
 		var selectionEnd = textarea.selectionEnd;
-		if (selectionStart != selectionEnd) { // has there been a selection
+		 // has there been a selection
+		if (selectionStart != selectionEnd) {
 			var newString = replaceString.replace(toBeReplaced, textarea.value.substring(selectionStart, selectionEnd));
 			textarea.value = textarea.value.substring(0, selectionStart)
 				+ newString
 				+ textarea.value.substring(selectionEnd);
 			setSelectionRange(textarea, selectionStart, selectionStart + newString.length);
-		} else {// set caret
+		// set caret
+		} else {
 			textarea.value = textarea.value.substring(0, selectionStart)
 				+ replaceString
 				+ textarea.value.substring(selectionEnd);
@@ -603,7 +597,8 @@ function insertAt(elementId, replaceString) {
 			} else {
 				range.text = replaceString;
 		}	}
-	} else { //UserAgent Gecko-1.0.1 (NN7.0)
+	} else {
+		//UserAgent Gecko-1.0.1 (NN7.0)
 		setSomeElement(elementId, replaceString)
 		//alert("don't know yet how to handle insert" + document);
 }	}
@@ -697,16 +692,21 @@ function toggle(elementId) {
 //				elements = a number (1-9/def=1) indicates how many elements to hide/display.
 //				zen = a number (1-3/def=1) allows multiple routines to use the function at the same time. Stores the
 //				text portion of the window Id (elementIdStart) in an array so that it can be hidden later.
-var flipArr=[0,0,0]; // Only the header portion of the id is saved
+
+// Only the header portion of the id is saved
+var flipArr=[0,0,0];
 function flipMulti(elementIdStart,elementIdNum,elements,zen){
 	if(elementIdStart && elementIdNum) {
 		if(arguments.length<1) elementIdNum=1;
-		elementIdNum=(elementIdNum*10)/10; // elementIdNum has to be a number
+		// elementIdNum has to be a number
+		elementIdNum=(elementIdNum*10)/10;
 		if(arguments.length<2) elements=1;
-		elements=(elements*10)/10; // elements has to be a number
+		// elements has to be a number
+		elements=(elements*10)/10;
 		if(elements<1 || elements>9) elements=1;
 		if(arguments.length<3) zen=1;
-		zen=(zen*10)/10; // zen has to be a number
+		// zen has to be a number
+		zen=(zen*10)/10;
 		if(!zen || zen<1 || zen>3) zen=1;
 		var i=0;
 		do {
@@ -902,12 +902,15 @@ function switchCheckboxes(the_form, elements_name, switcher_name) {
 // params:		id = a HTML Id
 // note:		a button you disable with this function will not appear in $_REQUEST
 function disableSubmit(id) {
-	if(document.getElementById) { // this is the way the standards work
+	if(document.getElementById) {
+		// this is the way the standards work
 		$(id).disabled = true;
 		$(id).value = "Please Wait...";
-	} else if(document.all) {// this is the way old msie versions work
+	} else if(document.all) {
+		// this is the way old msie versions work
 		document.all[id].disabled = true;
-	} else if(document.layers) { // this is the way nn4 works
+	} else if(document.layers) {
+		// this is the way nn4 works
 		document.layers[id].disabled = true;
 }	}
 

@@ -1,30 +1,25 @@
-/***************************************************************************\
-*                                                                           *
-*  please modify this file and leave plenty of comments. when done, please  *
-*  visit http://dean.edwards.name/packer/ to compress this and place the    *
-*  compressed output in the loaded version of this file                     *
-*                                                                           *
-*  i think you need to remove all comments before compressing to get this   *
-*  compression to work.                                                     *
-*                                                                           *
-\***************************************************************************/
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/Attic/tabpane_original.js,v 1.8 2007/06/27 17:49:17 squareing Exp $
 
-/*--------------------------------------------------------------------------\
-|							   Tab Pane 1.02								|
-|---------------------------------------------------------------------------|
-|						 Created by Erik Arvidsson							|
-|				  (http://webfx.eae.net/contact.html#erik)					|
-|					  For WebFX (http://webfx.eae.net/)						|
-|---------------------------------------------------------------------------|
-|				  Copyright (c) 1998 - 2003 Erik Arvidsson					|
-\--------------------------------------------------------------------------*/
+//-------------------------------------------------------------------------
+//  						   Tab Pane 1.02
+//-------------------------------------------------------------------------
+//  					 Created by Erik Arvidsson
+//  			  (http://webfx.eae.net/contact.html#erik)
+//  				  For WebFX (http://webfx.eae.net/)
+//-------------------------------------------------------------------------
+//  			  Copyright (c) 1998 - 2003 Erik Arvidsson
+//-------------------------------------------------------------------------
 
-// Called to cause an FCKEditor to show. This fixes an incompatibility with 
+// please modify this file and leave plenty of comments. This file will be
+// compressed automatically. Please make sure you only use comments beginning
+// with '//' and put comments on separate lines otherwise the packer will choke
+
+// Called to cause an FCKEditor to show. This fixes an incompatibility with
 // tab pane and FCKEditor in Gecko browsers where the FCKEditor is created
 // in a hidden tab. The editor fails to get focused without this.
 function switchEditors(oNode) {
 	var i=0;
-	// We use this to avoid the error when this runs BEFORE 
+	// We use this to avoid the error when this runs BEFORE
 	// FKCEditor has created the API object.
 	if (document.FCKEditorLoaded) {
 		for (i=0;i<oNode.childNodes.length;i++) {
