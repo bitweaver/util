@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/Attic/tabpane_original.js,v 1.8 2007/06/27 17:49:17 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/Attic/tabpane_original.js,v 1.9 2007/06/28 19:07:08 nickpalmer Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -76,8 +76,8 @@ function WebFXTabPane( el, bUseCookie ) {
 	this.selectedIndex = null;
 
 	// <--- quick hack to set persistence only on pages where referrer == location
-	var ref = document.referrer.split( "?" );
-	var loc = document.location.href.split( "?" );
+	var ref = document.referrer.split( /[#\?]/ );
+	var loc = document.location.href.split( /[#\?]/ );
 	if( loc[0] != ref[0] ) {
 		WebFXTabPane.setCookie( "webfxtab_" + this.element.id, 0 );
 	}
