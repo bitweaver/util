@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/Attic/tabpane_original.js,v 1.9 2007/06/28 19:07:08 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/Attic/tabpane_original.js,v 1.10 2007/07/07 16:18:37 squareing Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -259,10 +259,11 @@ WebFXTabPage.prototype.select = function () {
 };
 
 WebFXTabPage.prototype.dispose = function () {
-	// Safari only submits inputs which are note display:none
+	// Safari only submits inputs which are not display:none
 	// I suspect this is for "security" but that is stupid since we
 	// can still hide it off screen like this.
-	if (this.element.style.display == "none") {
+	var safari = /^Apple/;
+	if (this.element.style.display == "none" && navigator.vendor == safari) {
 		this.element.style.position = "absolute";
 		this.element.style.left = "-10000px";
 		this.element.style.display = "block";
