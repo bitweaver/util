@@ -1,5 +1,3 @@
-
-
 //-------------------- mContentLoader.js
 var net = new Object();
 
