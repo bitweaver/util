@@ -1,1 +1,375 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('8 15(1g){4 i=0;7(f.2b){z(i=0;i<1g.12.v;i++){1j=1g.12.1Y(i);B=1X.2k(1j.16);7(B&&B.2E&&B.2C==2f){B.1u();B.1u()}15(1j)}}}8 m(){7(O m.P!="Q"){j m.P}4 1k=/2F 5\\.[2d]/i.K(1V.2c);m.P=(O f.1q!="Q"&&f.1q.2a("2e","1.0")||1k);7(1k){f.1p=f.Y;f.Y=8(1c){7(1c=="*"){j f.y}D{j f.1p(1c)}}}j m.P}8 k(6,1f){7(!m()||6==9){j}2.c=6;2.c.t=2;2.p=[];2.o=9;4 1x=f.29.1o(/[#\\?]/);4 1l=f.28.1s.1o(/[#\\?]/);7(1l[0]!=1x[0]){k.S("1h"+2.c.1a,0)}2.1e=1f!=9?1f:21;2.c.h=2.1r+" "+2.c.h;2.I=f.1n("22");2.I.h="27";6.26(2.I,6.1U);4 N=0;7(2.1e){N=25(k.1v("1h"+2.c.1a));7(23(N)){N=0}}2.o=N;4 q=6.12;4 n;z(4 i=0;i<q.v;i++){7(q[i].1m==1&&q[i].h=="F"){2.1d(q[i])}}}k.u.1r="2z";k.u.1W=8(n){7(2.o!=n){7(2.o!=9&&2.p[2.o]!=9){2.p[2.o].13()}2.o=n;2.p[2.o].17();7(2.1e){k.S("1h"+2.c.1a,n,1)}}};k.u.2A=8(){j 2.o};k.u.1d=8(V){7(!m()){j}7(V.H==2){j V.H}4 n=2.p.v;4 C=2.p[n]=W r(V,2,n);C.t=2;2.I.19(C.b);7(n==2.o){C.17()}D{C.13()}j C};k.u.Z=8(){2.c.t=9;2.c=9;2.I=9;z(4 i=0;i<2.p.v;i++){2.p[i].Z();2.p[i]=9}2.p=9};k.S=8(10,1t,1i){4 11="";7(1i){4 d=W 2o();d.2n(d.2m()+1i*24*1y*1y*2u);11="; 11="+d.2s()}f.1z=10+"="+1t+11+"; 2q="+2p};k.1v=8(10){4 1w=W 2j("(\\;|^)[^;]*("+10+")\\=([^;]*)(;|$)");4 18=1w.2y(f.1z);j 18!=9?18[3]:9};k.2l=8(16){S(16,"",-1)};8 r(6,t,1A){7(!m()||6==9){j}2.c=6;2.c.H=2;2.1S=1A;4 q=6.12;z(4 i=0;i<q.v;i++){7(q[i].1m==1&&q[i].h=="b"){2.b=q[i];2g}}4 a=f.1n("A");2.14=a;a.1s="#";a.X=8(){j 1M};2v(2.b.2i()){a.19(2.b.1U)}2.b.19(a);4 R=2;2.b.X=8(){R.1B()};2.b.1H=8(){r.1E(R)};2.b.1F=8(){r.1Q(R)}}r.u.17=8(){4 6=2.b;4 s=6.h+" b-1T";s=s.U(/ +/g," ");6.h=s;15(2.c);2.c.E.T="1G"};r.u.13=8(){4 6=2.b;4 s=6.h;s=s.U(/ b.1T/g,"");6.h=s;2.c.E.T="1R"};r.u.1B=8(){2.t.1W(2.1S)};r.u.Z=8(){4 1P=/^2w/;7(2.c.E.T=="1R"&&1V.2t==1P){2.c.E.1Z="2x";2.c.E.2D="-2r";2.c.E.T="1G"}2.14.X=9;2.14=9;2.c.H=9;2.b.X=9;2.b.1H=9;2.b.1F=9;2.b=9;2.t=9;2.c=9};r.1E=8(F){4 6=F.b;4 s=6.h+" b-1C";s=s.U(/ +/g," ");6.h=s};r.1Q=8(F){4 6=F.b;4 s=6.h;s=s.U(/ b.1C/g,"");6.h=s};8 M(){7(!m()){j}4 y=f.Y("*");4 l=y.v;4 J=/1J/;4 1D=/F/;4 x,6;4 2B;z(4 i=0;i<l;i++){6=y[i];x=6.h;7(x==""){1O}7(J.K(x)&&!6.t){W k(6)}D 7(1D.K(x)&&!6.H&&J.K(6.1I.h)){6.1I.t.1d(6)}}}8 1K(){7(!m()){j}4 y=f.Y("*");4 l=y.v;4 J=/1J/;4 x,6;4 G=[];z(4 i=0;i<l;i++){6=y[i];x=6.h;7(x==""){1O}7(J.K(x)&&6.t){G[G.v]=6.t}}z(4 i=G.v-1;i>=0;i--){G[i].Z();G[i]=9}}7(O w.1N!="Q"){w.1N("20",M,1M)}D 7(O w.1b!="Q"){w.1b("L",M);w.1b("2h",1K)}D{7(w.L!=9){4 1L=w.L;w.L=8(e){1L(e);M()}}D{w.L=M}}',62,166,'||this||var||el|if|function|null||tab|element|||document||className||return|WebFXTabPane||hasSupport||selectedIndex|pages|cs|WebFXTabPage||tabPane|prototype|length|window|cn|all|for||editor|tp|else|style|tabpage|tabPanes|tabPage|tabRow|tabPaneRe|test|onload|setupAllTabs|tabIndex|typeof|support|undefined|oThis|setCookie|display|replace|oElement|new|onclick|getElementsByTagName|dispose|sName|expires|childNodes|hide|aElement|switchEditors|name|show|res|appendChild|id|attachEvent|sTagName|addTabPage|useCookie|bUseCookie|oNode|webfxtab_|nDays|childNode|ie55|loc|nodeType|createElement|split|_getElementsByTagName|implementation|classNameTag|href|sValue|SwitchEditMode|getCookie|re|ref|60|cookie|nIndex|select|hover|tabPageRe|tabOver|onmouseout|block|onmouseover|parentNode|tabpane|disposeAllTabs|oldOnload|false|addEventListener|continue|safari|tabOut|none|index|active|firstChild|navigator|setSelectedIndex|FCKeditorAPI|item|position|load|true|div|isNaN||Number|insertBefore|tabcontainer|location|referrer|hasFeature|FCKEditorLoaded|userAgent|56789|html|FCK_EDITMODE_WYSIWYG|break|onunload|hasChildNodes|RegExp|GetInstance|removeCookie|getTime|setTime|Date|bitCookiePath|path|10000px|toGMTString|vendor|1000|while|Apple|absolute|exec|tabsystem|getSelectedIndex|parentTabPane|EditMode|left|EditorDocument|msie'.split('|'),0,{}))
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.13 2007/07/09 18:29:25 squareing Exp $
+
+//-------------------------------------------------------------------------
+//  						   Tab Pane 1.02
+//-------------------------------------------------------------------------
+//  					 Created by Erik Arvidsson
+//  			  (http://webfx.eae.net/contact.html#erik)
+//  				  For WebFX (http://webfx.eae.net/)
+//-------------------------------------------------------------------------
+//  			  Copyright (c) 1998 - 2003 Erik Arvidsson
+//-------------------------------------------------------------------------
+
+// please modify this file and leave plenty of comments. This file will be
+// compressed automatically. Please make sure you only use comments beginning
+// with '//' and put comments on separate lines otherwise the packer will choke
+
+// Called to cause an FCKEditor to show. This fixes an incompatibility with
+// tab pane and FCKEditor in Gecko browsers where the FCKEditor is created
+// in a hidden tab. The editor fails to get focused without this.
+function switchEditors(oNode) {
+	var i=0;
+	// We use this to avoid the error when this runs BEFORE
+	// FKCEditor has created the API object.
+	if (document.FCKEditorLoaded) {
+		for (i=0;i<oNode.childNodes.length;i++) {
+			childNode = oNode.childNodes.item(i);
+			editor = FCKeditorAPI.GetInstance(childNode.name);
+			if (editor && editor.EditorDocument && editor.EditMode == FCK_EDITMODE_WYSIWYG) {
+				editor.SwitchEditMode();
+				editor.SwitchEditMode();
+			}
+		    	switchEditors(childNode);
+		}
+	}
+}
+
+// This function is used to define if the browser supports the needed
+// features
+function hasSupport() {
+
+	if (typeof hasSupport.support != "undefined") {
+		return hasSupport.support;
+	}
+
+	var ie55 = /msie 5\.[56789]/i.test( navigator.userAgent );
+
+	hasSupport.support = ( typeof document.implementation != "undefined" && document.implementation.hasFeature( "html", "1.0" ) || ie55 );
+
+	// IE55 has a serious DOM1 bug... Patch it!
+	if ( ie55 ) {
+		document._getElementsByTagName = document.getElementsByTagName;
+		document.getElementsByTagName = function ( sTagName ) {
+			if ( sTagName == "*" ) {
+				return document.all;
+			} else {
+				return document._getElementsByTagName( sTagName );
+			}
+		};
+	}
+
+	return hasSupport.support;
+}
+
+
+// The constructor for tab panes
+// el : HTMLElement		The html element used to represent the tab pane
+// bUseCookie : Boolean	Optional. Default is true. Used to determine whether to us
+//						persistance using cookies or not
+
+function WebFXTabPane( el, bUseCookie ) {
+	if ( !hasSupport() || el == null ) { return; }
+
+	this.element = el;
+	this.element.tabPane = this;
+	this.pages = [];
+	this.selectedIndex = null;
+
+	// <--- quick hack to set persistence only on pages where referrer == location
+	var ref = document.referrer.split( /[#\?]/ );
+	var loc = document.location.href.split( /[#\?]/ );
+	if( loc[0] != ref[0] ) {
+		WebFXTabPane.setCookie( "webfxtab_" + this.element.id, 0 );
+	}
+	// end quick hack - xing --->
+
+	this.useCookie = bUseCookie != null ? bUseCookie : true;
+
+	// add class name tag to class name
+	this.element.className = this.classNameTag + " " + this.element.className;
+
+	// add tab row
+	this.tabRow = document.createElement( "div" );
+	this.tabRow.className = "tabcontainer";
+	el.insertBefore( this.tabRow, el.firstChild );
+
+	var tabIndex = 0;
+	if ( this.useCookie ) {
+		tabIndex = Number( WebFXTabPane.getCookie( "webfxtab_" + this.element.id ) );
+		if ( isNaN( tabIndex ) ) {
+			tabIndex = 0;
+		}
+	}
+	this.selectedIndex = tabIndex;
+
+	// loop through child nodes and add them
+	var cs = el.childNodes;
+	var n;
+	for (var i = 0; i < cs.length; i++) {
+		if (cs[i].nodeType == 1 && cs[i].className == "tabpage") {
+			this.addTabPage( cs[i] );
+		}
+	}
+}
+
+WebFXTabPane.prototype.classNameTag = "tabsystem";
+
+WebFXTabPane.prototype.setSelectedIndex = function ( n ) {
+	if (this.selectedIndex != n) {
+		if (this.selectedIndex != null && this.pages[ this.selectedIndex ] != null ) {
+			this.pages[ this.selectedIndex ].hide();
+		}
+		this.selectedIndex = n;
+		this.pages[ this.selectedIndex ].show();
+
+		if ( this.useCookie ) {
+			WebFXTabPane.setCookie( "webfxtab_" + this.element.id, n, 1 );
+		}
+	}
+};
+
+WebFXTabPane.prototype.getSelectedIndex = function () {
+	return this.selectedIndex;
+};
+
+WebFXTabPane.prototype.addTabPage = function ( oElement ) {
+	if ( !hasSupport() ) { return; }
+
+	if ( oElement.tabPage == this )	{
+		return oElement.tabPage;
+	}
+
+	var n = this.pages.length;
+	var tp = this.pages[n] = new WebFXTabPage( oElement, this, n );
+	tp.tabPane = this;
+
+	// move the tab out of the box
+	this.tabRow.appendChild( tp.tab );
+
+	if ( n == this.selectedIndex ) {
+		tp.show();
+	} else {
+		tp.hide();
+	}
+
+	return tp;
+};
+
+WebFXTabPane.prototype.dispose = function () {
+	this.element.tabPane = null;
+	this.element = null;
+	this.tabRow = null;
+
+	for (var i = 0; i < this.pages.length; i++) {
+		this.pages[i].dispose();
+		this.pages[i] = null;
+	}
+	this.pages = null;
+};
+
+
+
+// Cookie handling
+WebFXTabPane.setCookie = function ( sName, sValue, nDays ) {
+	var expires = "";
+	if ( nDays ) {
+		var d = new Date();
+		d.setTime( d.getTime() + nDays * 24 * 60 * 60 * 1000 );
+		expires = "; expires=" + d.toGMTString();
+	}
+
+	document.cookie = sName + "=" + sValue + expires + "; path="+bitCookiePath;
+};
+
+WebFXTabPane.getCookie = function (sName) {
+	var re = new RegExp( "(\;|^)[^;]*(" + sName + ")\=([^;]*)(;|$)" );
+	var res = re.exec( document.cookie );
+	return res != null ? res[3] : null;
+};
+
+WebFXTabPane.removeCookie = function ( name ) {
+	setCookie( name, "", -1 );
+};
+
+
+// The constructor for tab pages. This one should not be used.
+// Use WebFXTabPage.addTabPage instead
+// el : HTMLElement			The html element used to represent the tab pane
+// tabPane : WebFXTabPane	The parent tab pane
+// nindex :	Number			The index of the page in the parent pane page array
+
+function WebFXTabPage( el, tabPane, nIndex ) {
+	if ( !hasSupport() || el == null ) { return; }
+
+	this.element = el;
+	this.element.tabPage = this;
+	this.index = nIndex;
+
+	var cs = el.childNodes;
+	for (var i = 0; i < cs.length; i++) {
+		if (cs[i].nodeType == 1 && cs[i].className == "tab") {
+			this.tab = cs[i];
+			break;
+		}
+	}
+
+	// insert a tag around content to support keyboard navigation
+
+
+	var a = document.createElement( "A" );
+	this.aElement = a;
+	a.href = "#";
+	a.onclick = function () { return false; };
+	while ( this.tab.hasChildNodes() ) {
+		a.appendChild( this.tab.firstChild );
+	}
+	this.tab.appendChild( a );
+
+
+	// hook up events, using DOM0
+	var oThis = this;
+	this.tab.onclick = function () { oThis.select(); };
+	this.tab.onmouseover = function () { WebFXTabPage.tabOver( oThis ); };
+	this.tab.onmouseout = function () { WebFXTabPage.tabOut( oThis ); };
+}
+
+WebFXTabPage.prototype.show = function () {
+	var el = this.tab;
+	var s = el.className + " tab-active";
+	s = s.replace(/ +/g, " ");
+	el.className = s;
+
+	// Fix for FCKEditor focus bug
+	switchEditors(this.element);
+	this.element.style.display = "block";
+};
+
+WebFXTabPage.prototype.hide = function () {
+	var el = this.tab;
+	var s = el.className;
+	// Packer doesn't like \- in regexp for some reason
+	s = s.replace(/ tab.active/g, "");
+	el.className = s;
+
+	this.element.style.display = "none";
+};
+
+WebFXTabPage.prototype.select = function () {
+	this.tabPane.setSelectedIndex( this.index );
+};
+
+WebFXTabPage.prototype.dispose = function () {
+	// Safari only submits inputs which are not display:none
+	// I suspect this is for "security" but that is stupid since we
+	// can still hide it off screen like this.
+	var safari = /^Apple/;
+	if (this.element.style.display == "none" && navigator.vendor == safari) {
+		this.element.style.position = "absolute";
+		this.element.style.left = "-10000px";
+		this.element.style.display = "block";
+	}
+	this.aElement.onclick = null;
+	this.aElement = null;
+	this.element.tabPage = null;
+	this.tab.onclick = null;
+	this.tab.onmouseover = null;
+	this.tab.onmouseout = null;
+	this.tab = null;
+	this.tabPane = null;
+	this.element = null;
+};
+
+WebFXTabPage.tabOver = function ( tabpage ) {
+	var el = tabpage.tab;
+	var s = el.className + " tab-hover";
+	s = s.replace(/ +/g, " ");
+	el.className = s;
+};
+
+WebFXTabPage.tabOut = function ( tabpage ) {
+	var el = tabpage.tab;
+	var s = el.className;
+	// Packer doesn't like \- in regexp for some reason
+	s = s.replace(/ tab.hover/g, "");
+	el.className = s;
+};
+
+
+// This function initializes all uninitialized tab panes and tab pages
+function setupAllTabs() {
+	if ( !hasSupport() ) { return; }
+
+	var all = document.getElementsByTagName( "*" );
+	var l = all.length;
+	var tabPaneRe = /tabpane/;
+	var tabPageRe = /tabpage/;
+	var cn, el;
+	var parentTabPane;
+
+	for ( var i = 0; i < l; i++ ) {
+		el = all[i];
+		cn = el.className;
+
+		// no className
+		if ( cn == "" ) { continue; }
+
+		// uninitiated tab pane
+		if ( tabPaneRe.test( cn ) && !el.tabPane ) {
+			new WebFXTabPane( el );
+		}
+
+		// unitiated tab page wit a valid tab pane parent
+		else if ( tabPageRe.test( cn ) && !el.tabPage && tabPaneRe.test( el.parentNode.className ) ) {
+			el.parentNode.tabPane.addTabPage( el );
+		}
+	}
+}
+
+function disposeAllTabs() {
+	if ( !hasSupport() ) { return; }
+
+	var all = document.getElementsByTagName( "*" );
+	var l = all.length;
+	var tabPaneRe = /tabpane/;
+	var cn, el;
+	var tabPanes = [];
+
+	for ( var i = 0; i < l; i++ ) {
+		el = all[i];
+		cn = el.className;
+
+		// no className
+		if ( cn == "" ) { continue; }
+
+		// tab pane
+		if ( tabPaneRe.test( cn ) && el.tabPane ) {
+			tabPanes[tabPanes.length] = el.tabPane;
+		}
+	}
+
+	for (var i = tabPanes.length - 1; i >= 0; i--) {
+		tabPanes[i].dispose();
+		tabPanes[i] = null;
+	}
+}
+
+
+// initialization hook up
+
+// DOM2
+if ( typeof window.addEventListener != "undefined" ) {
+	window.addEventListener( "load", setupAllTabs, false );
+} else if ( typeof window.attachEvent != "undefined" ) {
+	window.attachEvent( "onload", setupAllTabs );
+	window.attachEvent( "onunload", disposeAllTabs );
+} else {
+	if ( window.onload != null ) {
+		var oldOnload = window.onload;
+		window.onload = function ( e ) {
+			oldOnload( e );
+			setupAllTabs();
+		};
+	} else {
+		window.onload = setupAllTabs;
+	}
+}
