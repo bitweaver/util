@@ -111,8 +111,6 @@ if( empty( $nohup ) ) {
   to_log("NOT found running.");
 }
 
-die;
-
 # If pcntl_fork() doesn't exist, we need to load ourselves in the background, then die.
 if (!function_exists("pcntl_fork")) {
   to_log("no pcntl, calling self with nohup and param");
@@ -190,7 +188,7 @@ exit(0);
 # Access functions.
 function is_alive($pid) {
   $result = system( dirname( __FILE__ )."/is_up $pid");
-vd( $result );
+error_log( $result );
 #  to_log("is_alive (${BINDIR}is_up $pid) returned $result");
   return (0 < $result);
 }
@@ -198,7 +196,7 @@ vd( $result );
 function to_log($string) {
   global $DEBUG;
   if ($DEBUG) {
-    echo(date("r")." - $string\n");
+    error_log(date("r")." - $string\n");
   }
 }
 
