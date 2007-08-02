@@ -79,7 +79,7 @@ function get_jpeg_header_data( $filename )
         if ( ! $filehnd  )
         {
                 // Could't open the file - exit
-                echo "<p>Could not open file $filename</p>\n";
+                error_log( "Could not open file $filename" );
                 return FALSE;
         }
 
@@ -91,7 +91,7 @@ function get_jpeg_header_data( $filename )
         if ( $data != "\xFF\xD8" )
         {
                 // No SOI (FF D8) at start of file - This probably isn't a JPEG file - close file and return;
-                echo "<p>This probably is not a JPEG file</p>\n";
+                error_log( "This probably is not a JPEG file" );
                 fclose($filehnd);
                 return FALSE;
         }
@@ -236,7 +236,7 @@ function put_jpeg_header_data( $old_filename, $new_filename, $jpeg_header_data )
                 if ( strlen($segment['SegData']) > 0xfffd )
                 {
                         // Could't open the file - exit
-                        echo "<p>A Header is too large to fit in JPEG segment</p>\n";
+                        error_log( "A Header is too large to fit in JPEG segment" );
                         return FALSE;
                 }
         }
@@ -250,7 +250,7 @@ function put_jpeg_header_data( $old_filename, $new_filename, $jpeg_header_data )
         if ( ! $newfilehnd  )
         {
                 // Could't open the file - exit
-                echo "<p>Could not open file $new_filename</p>\n";
+                error_log( "Could not open file $new_filename" );
                 return FALSE;
         }
 
