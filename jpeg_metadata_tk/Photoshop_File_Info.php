@@ -45,7 +45,7 @@
 // TODO: XMP sections: XAPMM, TIFF, EXIF
 
 
-include 'Toolkit_Version.php';          // Change: added as of version 1.11
+require_once 'Toolkit_Version.php';          // Change: added as of version 1.11
 
 
 /******************************************************************************

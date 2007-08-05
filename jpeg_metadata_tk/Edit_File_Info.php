@@ -65,7 +65,7 @@
 
 
 
-        include 'Toolkit_Version.php';          // Change: added as of version 1.11
+        require_once 'Toolkit_Version.php';          // Change: added as of version 1.11
 
         // Check for operation modes 2 or 3
         // i.e. $filename is defined, and $new_ps_file_info_array is not
@@ -77,11 +77,11 @@
                 $GLOBALS['HIDE_UNKNOWN_TAGS'] = TRUE;
 
                 // Accessing the existing file info for the specified file requires these includes
-                include 'JPEG.php';
-                include 'XMP.php';
-                include 'Photoshop_IRB.php';
-                include 'EXIF.php';
-                include 'Photoshop_File_Info.php';
+                require_once 'JPEG.php';
+                require_once 'XMP.php';
+                require_once 'Photoshop_IRB.php';
+                require_once 'EXIF.php';
+                require_once 'Photoshop_File_Info.php';
 
                 // Retrieve the header information from the JPEG file
                 $jpeg_header_data = get_jpeg_header_data( $filename );

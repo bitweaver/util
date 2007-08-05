@@ -70,7 +70,7 @@
         </head>
 
         <body>
-                <?php include 'Toolkit_Version.php'; ?>
+                <?php require_once 'Toolkit_Version.php'; ?>
                 <p>Powered by: <a href="http://www.ozhiker.com/electronics/pjmt/" >PHP JPEG Metadata Toolkit version <?php echo $GLOBALS['Toolkit_Version'] ?>, Copyright (C) 2004 Evan Hunter</a></p>                   <!-- Change: displayed toolkit version numbers to reference Toolkit_Version.php - as of version 1.11 -->
                 <br>
                 <br>
@@ -79,14 +79,14 @@
                         // Turn off Error Reporting
                         error_reporting ( 0 );          // Change: changed to no reporting -  as of version 1.11
 
-                        include 'Toolkit_Version.php';  // Change: added as of version 1.11
+                        require_once 'Toolkit_Version.php';  // Change: added as of version 1.11
 
                         // Include the required files for reading and writing Photoshop File Info
-                        include 'JPEG.php';
-                        include 'XMP.php';
-                        include 'Photoshop_IRB.php';
-                        include 'EXIF.php';
-                        include 'Photoshop_File_Info.php';
+                        require_once 'JPEG.php';
+                        require_once 'XMP.php';
+                        require_once 'Photoshop_IRB.php';
+                        require_once 'EXIF.php';
+                        require_once 'Photoshop_File_Info.php';
 
 
                         // Copy all of the HTML Posted variables into an array
@@ -139,7 +139,7 @@
                                 // sent, to allow the user to fix it
 
                                 $outputfilename = $filename;
-                                include "Edit_File_info.php";
+                                require_once "Edit_File_info.php";
                                 echo "</body>\n";
                                 echo "</html>\n";
 
@@ -157,7 +157,7 @@
                                 // sent, to allow the user to fix it
 
                                 $outputfilename = $filename;
-                                include "Edit_File_info.php";
+                                require_once "Edit_File_info.php";
                                 echo "</body>\n";
                                 echo "</html>\n";
 

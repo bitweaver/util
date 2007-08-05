@@ -51,8 +51,8 @@
         ob_start( );
 
 
-        include 'JPEG.php';
-        include 'JFIF.php';
+        require_once 'JPEG.php';
+        require_once 'JFIF.php';
 
 
         // retrieve the filename from the URL parameters

@@ -49,8 +49,8 @@
         ob_start( );
         
         
-        include 'JPEG.php';
-        include 'EXIF.php';
+        require_once 'JPEG.php';
+        require_once 'EXIF.php';
 
 
         // retrieve the filename from the URL parameters

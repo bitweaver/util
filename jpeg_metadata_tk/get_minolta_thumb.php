@@ -50,7 +50,7 @@
         ob_start( );
 
 
-        include 'EXIF.php';
+        require_once 'EXIF.php';
 
 
         // retrieve the filename from the URL parameters

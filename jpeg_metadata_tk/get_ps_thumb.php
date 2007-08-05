@@ -66,8 +66,8 @@
         {
                 // JPEG Extension
 
-                include 'JPEG.php';
-                include 'Photoshop_IRB.php';
+                require_once 'JPEG.php';
+                require_once 'Photoshop_IRB.php';
 
                 // Retrieve the JPEG header Data
 
@@ -115,7 +115,7 @@
         {
                 // TIFF Extension
 
-                include 'EXIF.php';
+                require_once 'EXIF.php';
 
                 // Retrieve the EXIF info
                 $exif_array = get_EXIF_TIFF( $filename );
