@@ -29,7 +29,24 @@ function liberty_uploader_complete(frmid, divid, fileid) {
 		return;
 	}
 	var div = document.getElementById(divid);
-	div.innerHTML = d.body.innerHTML;
+	if (div != null) {
+		div.innerHTML = d.body.innerHTML;
+		for (i=0;i<div.childNodes.length;i++) {
+			if (div.childNodes[i].id == 'result_list') {
+				div.removeChild(div.childNodes[i]);
+			}
+		}
+	}
+	divid = divid + '_tab';
+	div = document.getElementById(divid);
+	if (div != null) {
+		div.innerHTML = d.body.innerHTML		
+		for (i=0;i<div.childNodes.length;i++) {
+			if (div.childNodes[i].id == 'result_tab') {
+				div.removeChild(div.childNodes[i]);
+			}
+		}
+	}
 	liberty_uploader_under_way = 0;
 	var file = document.getElementById(fileid);
 	file.value = '';
