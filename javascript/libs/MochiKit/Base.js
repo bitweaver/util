@@ -27,7 +27,7 @@ MochiKit.Base.VERSION = "1.4";
 MochiKit.Base.NAME = "MochiKit.Base";
 /** @id MochiKit.Base.update */
 MochiKit.Base.update = function (self, obj/*, ... */) {
-    if (self === null) {
+    if (self === null || self === undefined) {
         self = {};
     }
     for (var i = 1; i < arguments.length; i++) {
@@ -150,7 +150,7 @@ MochiKit.Base.update(MochiKit.Base, {
 
     /** @id MochiKit.Base.updatetree */
     updatetree: function (self, obj/*, ...*/) {
-        if (self === null) {
+        if (self === null || self === undefined) {
             self = {};
         }
         for (var i = 1; i < arguments.length; i++) {
@@ -171,7 +171,7 @@ MochiKit.Base.update(MochiKit.Base, {
 
     /** @id MochiKit.Base.setdefault */
     setdefault: function (self, obj/*, ...*/) {
-        if (self === null) {
+        if (self === null || self === undefined) {
             self = {};
         }
         for (var i = 1; i < arguments.length; i++) {
@@ -386,7 +386,8 @@ MochiKit.Base.update(MochiKit.Base, {
                 (typ != 'object' && !(typ == 'function' && typeof(o.item) == 'function')) ||
                 o === null ||
                 typeof(o.length) != 'number' ||
-                o.nodeType === 3
+                o.nodeType === 3 ||
+                o.nodeType === 4
             ) {
                 return false;
             }
@@ -1406,6 +1407,8 @@ if (MochiKit.__export__) {
     compare = MochiKit.Base.compare;
     compose = MochiKit.Base.compose;
     serializeJSON = MochiKit.Base.serializeJSON;
+    mean = MochiKit.Base.mean;
+    median = MochiKit.Base.median;
 }
 
 MochiKit.Base._exportSymbols(this, MochiKit.Base);

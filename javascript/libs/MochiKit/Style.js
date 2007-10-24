@@ -244,6 +244,8 @@ MochiKit.Base.update(MochiKit.Style, {
                 (de.scrollTop || b.scrollTop) -
                 (de.clientTop || 0);
 
+            // Don't pass through next steps
+            return c;
         } else if (elem.offsetParent) {
             c.x += elem.offsetLeft;
             c.y += elem.offsetTop;
@@ -296,7 +298,7 @@ MochiKit.Base.update(MochiKit.Style, {
             }
             var disp = self.getStyle(parent, 'display');
             // Handle strange Opera bug for some display
-            if (disp != 'inline' && disp != 'table-row') {
+            if (disp.search(/^inline|table-row.*$/i)) {
                 c.x -= parent.scrollLeft;
                 c.y -= parent.scrollTop;
             }

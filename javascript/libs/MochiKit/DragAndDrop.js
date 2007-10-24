@@ -216,7 +216,7 @@ MochiKit.DragAndDrop.Droppable.prototype = {
             /** @id MochiKit.DragAndDrop.containment */
             containment: [],
             tree: false
-        }, options || {});
+        }, options);
 
         // cache containers
         this.options._containers = [];
@@ -452,7 +452,7 @@ MochiKit.DragAndDrop.Draggable.prototype = {
 
             /** @id MochiKit.DragAndDrop.snap */
             snap: false
-        }, options || {});
+        }, options);
 
         var d = MochiKit.DOM;
         this.element = d.getElement(element);
@@ -605,7 +605,7 @@ MochiKit.DragAndDrop.Draggable.prototype = {
         }
 
         // fix AppleWebKit rendering
-        if (/AppleWebKit'/.test(navigator.appVersion)) {
+        if (/AppleWebKit/.test(navigator.appVersion)) {
             window.scrollBy(0, 0);
         }
         event.stop();
@@ -800,7 +800,7 @@ MochiKit.DragAndDrop.Draggable.prototype = {
             w = win.document.body.offsetWidth;
             h = win.document.body.offsetHeight;
         }
-        return {top: vp.x, left: vp.y, width: w, height: h};
+        return {top: vp.y, left: vp.x, width: w, height: h};
     },
 
     /** @id MochiKit.DragAndDrop.repr */

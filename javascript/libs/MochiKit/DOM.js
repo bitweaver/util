@@ -81,6 +81,9 @@ MochiKit.DOM.EXPORT = [
     "UL",
     "OL",
     "LI",
+	"DL",
+	"DT",
+	"DD",
     "TD",
     "TR",
     "THEAD",
@@ -370,15 +373,20 @@ MochiKit.Base.update(MochiKit.DOM, {
         if (typeof(maybeparent) == "string") {
             maybeparent = self.getElement(maybeparent);
         }
-        if (node === maybeparent) {
-            return true;
+        if (typeof(node) == 'undefined' || node === null || node === self._document) {
+            return false;
         }
-        while (node && node.tagName.toUpperCase() != "BODY") {
-            node = node.parentNode;
+        do {
             if (node === maybeparent) {
                 return true;
             }
-        }
+            var tagName = node.tagName;
+            node = node.parentNode;
+            if (!tagName) {
+                break;
+            }
+            tagName = tagName.toUpperCase();
+        } while (tagName != "BODY" && tagName != "HTML");
         return false;
     },
 
@@ -1186,6 +1194,12 @@ MochiKit.Base.update(MochiKit.DOM, {
         this.OL = createDOMFunc("ol");
         /** @id MochiKit.DOM.LI */
         this.LI = createDOMFunc("li");
+		/** @id MochiKit.DOM.DL */
+        this.DL = createDOMFunc("dl");
+		/** @id MochiKit.DOM.DT */
+        this.DT = createDOMFunc("dt");
+		/** @id MochiKit.DOM.DD */
+        this.DD = createDOMFunc("dd");
         /** @id MochiKit.DOM.TD */
         this.TD = createDOMFunc("td");
         /** @id MochiKit.DOM.TR */
