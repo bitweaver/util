@@ -2,7 +2,6 @@
 BitAjax = {
 	"updater": function(target, url, queryString) {
 		BitAjax.showSpinner();
-		alert("Spinner");
 		if (queryString != "" && queryString !=null){
 			url += "?"+queryString;
 		}
