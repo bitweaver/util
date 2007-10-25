@@ -2,6 +2,7 @@
 BitAjax = {
 	"updater": function(target, url, queryString) {
 		BitAjax.showSpinner();
+		alert("Spinner");
 		if (queryString != "" && queryString !=null){
 			url += "?"+queryString;
 		}
@@ -12,7 +13,8 @@ BitAjax = {
 
 	"updaterCallback": function(target, rslt){
 		BitAjax.hideSpinner();
-		target.innerHTML = rslt.responseText;
+		var e = document.getElementById(target);
+		if (e != null){e.innerHTML = rslt.responseText;}
 	},
 	
 	"error": function( request ) {
