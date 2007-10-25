@@ -28,7 +28,7 @@ if (document.all && !/opera/i.test(navigator.userAgent)) {
 
 // remove node
 $("tree-remove").onclick = treeRemove;
-function treeRemove() { if (tree.mayRemove()) { if (confirm("Delete current node ?")) { tree.remove(); treePluginExportBitweaver(); } } }
+function treeRemove() { if (tree.mayRemove()) { if (confirm("Delete highlighted item?")) { tree.remove(); treePluginExportBitweaver(); } } }
 // export string
 function treePluginExportBitweaver() { $('structure_string').value = tree.exportToPhp(); }
 
