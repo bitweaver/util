@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.26 2007/11/01 11:26:37 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.27 2007/11/01 11:27:31 nickpalmer Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -929,7 +929,6 @@ function disableSubmit(id) {
 function go(o) {
 	if (o.options[o.selectedIndex].value != "") {
 		location = o.options[o.selectedIndex].value;
-		o.options[o.selectedIndex] = 1;
 	}
 	return false;
 }
