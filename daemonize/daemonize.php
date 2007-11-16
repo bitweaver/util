@@ -187,7 +187,7 @@ exit(0);
 
 # Access functions.
 function is_alive($pid) {
-  $result = system( dirname( __FILE__ )."/is_up $pid");
+  $result = system( dirname( __FILE__ )."/is_up.sh $pid");
 error_log( $result );
 #  to_log("is_alive (${BINDIR}is_up $pid) returned $result");
   return (0 < $result);
