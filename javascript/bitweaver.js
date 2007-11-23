@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.27 2007/11/01 11:27:31 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.28 2007/11/23 11:24:52 squareing Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -758,13 +758,13 @@ function setFlipIcon(elementId) {
 // Note:		Reworked to eliminate collapseSign / expandSign
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id
-function flipWithSign(elementId) {
+function flipWithSign(elementId,cookie) {
 	var flipperName = "flipper" + elementId;
 	if ($(elementId).style.display == "none") {
-		showById(elementId,1);
+		showById(elementId,cookie);
 		$(flipperName).firstChild.nodeValue = "[-]";
 	} else {
-		hideById(elementId,1);
+		hideById(elementId,cookie);
 		$(flipperName).firstChild.nodeValue = "[+]";
 }	}
 
