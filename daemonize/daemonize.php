@@ -68,7 +68,7 @@ if( empty( $nohup ) ) {
     if (!empty($lines[0]) && is_numeric($lines[0]) && !empty($lines[1]) && is_numeric($lines[1])) {
       # Kill hung processes.
       if ($lines[1] + 120 < time()) { // If it's an OLD pidfile...
-        to_log("OLD pidfile found from $lines[1] - ".date("r",$lines[1]).": $pid_data");
+        to_log("OLD pidfile found from $lines[1] - ".date('d/M/Y:H:i:s O',$lines[1]).": $pid_data");
         zero_file($pidfile);
 
         # If found, kill. If it won't die, kill it harder. Then give up.
@@ -94,7 +94,7 @@ if( empty( $nohup ) ) {
         #to_log("Young pidfile found.");  # Can get spammy.
       }
       if (is_alive($lines[0])) {
-		to_log( "DAEMON $lines[0] : $daemonScript running. Last seen at ".date("r", $lines[1] ) );
+		to_log( "DAEMON $lines[0] : $daemonScript running. Last seen at ".date('d/M/Y:H:i:s O', $lines[1] ) );
         exit(0);
       } else {
         to_log("pidfile $lines[0] found, but process is dead.");
