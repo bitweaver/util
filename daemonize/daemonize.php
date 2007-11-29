@@ -190,12 +190,12 @@ function is_alive($pid) {
 	$output = array();
 	exec( dirname( __FILE__ )."/is_up.sh $pid", $output );
 	$result = $output[0];
-	to_log("is_alive (".dirname( __FILE__ )."/is_up.sh $pid) returned $result");
+	to_log("DAEMON is_alive (".dirname( __FILE__ )."/is_up.sh $pid) returned $result");
 	return (0 < $result);
 }
 
 function to_log($string) {
-	error_log(date("r")." - $string\n");
+	error_log( date( 'd/M/Y:H:i:s O' )." - $string");
 }
 
 function zero_file($pidfile) {
