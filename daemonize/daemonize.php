@@ -94,10 +94,10 @@ if( empty( $nohup ) ) {
         #to_log("Young pidfile found.");  # Can get spammy.
       }
       if (is_alive($lines[0])) {
-#        to_log("Already running, pid is $lines[0]. Last seen at ".date("r", $lines[1]));
+		to_log( "DAEMON $pid : $daemonScript running. Last seen at ".date("r", $lines[1] ) );
         exit(0);
       } else {
-        to_log("pidfile found, but process is dead.");
+        to_log("pidfile $lines[0] found, but process is dead.");
       }
     }
     else {
@@ -178,7 +178,7 @@ function sig_handler($signo) {
 }
 
 # Meat of the daemon goes here.
-to_log("requiring the bot...");
+to_log("requiring $daemonScript");
 chdir( dirname( $daemonScript ) );
 require_once( $daemonScript );
 
@@ -190,7 +190,6 @@ function is_alive($pid) {
 	$output = array();
 	exec( dirname( __FILE__ )."/is_up.sh $pid", $output );
 	$result = $output[0];
-	to_log("DAEMON $pid : is_alive (".dirname( __FILE__ )."/is_up.sh $pid) returned $result");
 	return (0 < $result);
 }
 
