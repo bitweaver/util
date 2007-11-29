@@ -190,7 +190,7 @@ function is_alive($pid) {
 	$output = array();
 	exec( dirname( __FILE__ )."/is_up.sh $pid", $output );
 	$result = $output[0];
-	to_log("DAEMON is_alive (".dirname( __FILE__ )."/is_up.sh $pid) returned $result");
+	to_log("DAEMON $pid : is_alive (".dirname( __FILE__ )."/is_up.sh $pid) returned $result");
 	return (0 < $result);
 }
 
