@@ -94,7 +94,7 @@ if( empty( $nohup ) ) {
         #to_log("Young pidfile found.");  # Can get spammy.
       }
       if (is_alive($lines[0])) {
-		to_log( "DAEMON $pid : $daemonScript running. Last seen at ".date("r", $lines[1] ) );
+		to_log( "DAEMON $lines[0] : $daemonScript running. Last seen at ".date("r", $lines[1] ) );
         exit(0);
       } else {
         to_log("pidfile $lines[0] found, but process is dead.");
