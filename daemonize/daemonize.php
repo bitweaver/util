@@ -187,17 +187,15 @@ exit(0);
 
 # Access functions.
 function is_alive($pid) {
-  $result = system( dirname( __FILE__ )."/is_up.sh $pid");
-error_log( $result );
-#  to_log("is_alive (${BINDIR}is_up $pid) returned $result");
-  return (0 < $result);
+	$output = array();
+	exec( dirname( __FILE__ )."/is_up.sh $pid", $output );
+	$result = $output[0];
+	to_log("is_alive (".dirname( __FILE__ )."/is_up.sh $pid) returned $result");
+	return (0 < $result);
 }
 
 function to_log($string) {
-  global $DEBUG;
-  if ($DEBUG) {
-    error_log(date("r")." - $string\n");
-  }
+	error_log(date("r")." - $string\n");
 }
 
 function zero_file($pidfile) {
