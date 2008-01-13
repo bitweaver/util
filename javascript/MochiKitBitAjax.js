@@ -26,6 +26,7 @@ BitAjax = {
 			func(elm.loadedResponse);
 		} else {
 			BitAjax.showSpinner();
+			elm.callbackFunction = func;
 			var r = doSimpleXMLHttpRequest(url);
 			r.addCallback( BitAjax.getAndCallCallback, elm ); 
 			r.addErrback( BitAjax.error );
@@ -35,7 +36,7 @@ BitAjax = {
 	"getAndCallCallback": function(elm, rslt){
 		BitAjax.hideSpinner();
 		elm.loadedResponse = rslt.responseText || "No Response.";
-		func(elm.loadedResponse);
+		elm.callbackFunction(elm.loadedResponse);
 	},
 	
 	"showSpinner": function() {
