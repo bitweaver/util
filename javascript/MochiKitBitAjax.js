@@ -26,17 +26,16 @@ BitAjax = {
 			func(elm.loadedResponse);
 		} else {
 			BitAjax.showSpinner();
-			elm.callbackFunction = func;
 			var r = doSimpleXMLHttpRequest(url);
-			r.addCallback( BitAjax.getAndCallCallback, elm ); 
+			r.addCallback( BitAjax.getAndCallCallback, elm, func ); 
 			r.addErrback( BitAjax.error );
 		}
 	},
 	
-	"getAndCallCallback": function(elm, rslt){
+	"getAndCallCallback": function(elm, func, rslt){
 		BitAjax.hideSpinner();
 		elm.loadedResponse = rslt.responseText || "No Response.";
-		elm.callbackFunction(elm.loadedResponse);
+		func(elm.loadedResponse);
 	},
 	
 	"showSpinner": function() {
