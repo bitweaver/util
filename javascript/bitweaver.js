@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.28 2007/11/23 11:24:52 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.29 2008/01/14 07:11:28 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -880,6 +880,74 @@ function deleteCookie(name, path, domain) {
 			+ "; path=" +  cookie_path + "; domain=" + cookie_domain + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
 }	}
 
+// function:	getElementValue
+// desc:		get the value of form elements: <input type=...>, <textarea ...> ... </textarea> and <select ...> ... </select>. 
+// date:		2008-01-06
+// params:		formElementId
+/*
+Script by RoBorg
+RoBorg@geniusbug.com
+http://javascript.geniusbug.com | http://www.roborg.co.uk
+Please do not remove or edit this message
+Please link to this website if you use this script!
+*/
+function getElementValue(formElementId)
+{
+	formElement = document.getElementById(formElementId);
+	if(formElement.length != null) var type = formElement[0].type;
+	if((typeof(type) == 'undefined') || (type == 0)) var type = formElement.type;
+
+	switch(type)
+	{
+		case 'undefined': return;
+
+		case 'radio':
+			for(var x=0; x < formElement.length; x++) 
+				if(formElement[x].checked == true)
+			return formElement[x].value;
+
+		case 'select-multiple':
+			var myArray = new Array();
+			for(var x=0; x < formElement.length; x++) 
+				if(formElement[x].selected == true)
+					myArray[myArray.length] = formElement[x].value;
+			return myArray;
+
+		case 'checkbox': return formElement.checked;
+	
+		default: return formElement.value;
+	}
+}
+
+// function:	setElementValue
+// desc:		set the value of form elements: <input type=...>, <textarea ...> ... </textarea> and <select ...> ... </select>. 
+// date:		2008-01-06
+// params:		formElementId, value to set form to
+/*
+Script by RoBorg
+RoBorg@geniusbug.com
+http://javascript.geniusbug.com | http://www.roborg.co.uk
+Please do not remove or edit this message
+Please link to this website if you use this script!
+*/
+function setElementValue(formElementId, value)
+{
+	formElement = document.getElementById(formElementId);
+	switch(formElement.type)
+	{
+		case 'undefined': return;
+		case 'radio': formElement.checked = value; break;
+		case 'checkbox': formElement.checked = value; break;
+		case 'select-one': formElement.selectedIndex = value; break;
+
+		case 'select-multiple':
+			for(var x=0; x < formElement.length; x++) 
+				formElement[x].selected = value[x];
+			break;
+
+		default: formElement.value = value; break;
+	}
+}
 // function:	switchCheckboxes
 // desc:		Will Check / Uncheck all Checkboxes
 // date:		Pre-bitweaver
