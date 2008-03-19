@@ -2252,13 +2252,13 @@ function get_IFD_Data_Type( $input_data, $data_type, $Byte_Align )
                 {
                         // Motorola MSB first byte aligment
                         // Unpack the Numerator and denominator and return them
-                        return unpack( 'NNumerator/NDenominator', $input_data );
+                        return @unpack( 'NNumerator/NDenominator', $input_data );
                 }
                 else
                 {
                         // Intel LSB first byte aligment
                         // Unpack the Numerator and denominator and return them
-                        return unpack( 'VNumerator/VDenominator', $input_data );
+                        return @unpack( 'VNumerator/VDenominator', $input_data );
                 }
         }
                 // Check if this is a Signed Byte, Signed Short or Signed Long
