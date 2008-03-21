@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.13 2007/07/09 18:29:25 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.14 2008/03/21 04:52:27 nickpalmer Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -207,7 +207,7 @@ function WebFXTabPage( el, tabPane, nIndex ) {
 
 	var cs = el.childNodes;
 	for (var i = 0; i < cs.length; i++) {
-		if (cs[i].nodeType == 1 && cs[i].className == "tab") {
+		if (cs[i].nodeType == 1 && cs[i].className == "tab" || cs[i].className.substr(0,4) == "tab ") {
 			this.tab = cs[i];
 			break;
 		}
