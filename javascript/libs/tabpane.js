@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.14 2008/03/21 04:52:27 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.15 2008/03/25 23:19:51 nickpalmer Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -106,7 +106,7 @@ function WebFXTabPane( el, bUseCookie ) {
 	var cs = el.childNodes;
 	var n;
 	for (var i = 0; i < cs.length; i++) {
-		if (cs[i].nodeType == 1 && cs[i].className == "tabpage") {
+		if (cs[i].nodeType == 1 && cs[i].className == "tabpage" || cs[i].className.substr(0,8) == "tabpage ") {
 			this.addTabPage( cs[i] );
 		}
 	}
