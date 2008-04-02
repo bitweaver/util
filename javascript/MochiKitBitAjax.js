@@ -3,7 +3,7 @@ BitAjax = {
 	"updater": function(target, url, queryString) {
 		BitAjax.showSpinner();
 		if (queryString != "" && queryString !=null){
-			url += "?"+queryString;
+			url += "?"+queryString+"&tk="+bitTk;
 		}
 		var r = doSimpleXMLHttpRequest(url);
 		r.addCallback( BitAjax.updaterCallback, target ); 
