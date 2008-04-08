@@ -1,4 +1,4 @@
-// FancyZoom.js - v1.0 - http://www.fancyzoom.com
+// FancyZoom.js - v1.1 - http://www.fancyzoom.com
 //
 // Copyright (c) 2008 Cabel Sasser / Panic Inc
 // All rights reserved.
@@ -12,7 +12,7 @@
 // are permitted provided that the following conditions are met:
 // 
 // * USE OF SOURCE ON COMMERCIAL (FOR-PROFIT) WEBSITE REQUIRES ONE-TIME LICENSE FEE PER DOMAIN.
-//   Reasonably priced! Contact info@panic.com and we'll help you out. Thanks!
+//   Reasonably priced! Visit www.fancyzoom.com for licensing instructions. Thanks!
 //
 // * Non-commercial (personal) website use is permitted without license/payment!
 //
@@ -47,6 +47,7 @@ var zoomImagesURI   = bitRootUrl+'util/javascript/fancyzoom/images-global/zoom/'
 
 var myWidth = 0, myHeight = 0, myScroll = 0; myScrollWidth = 0; myScrollHeight = 0;
 var zoomOpen = false, preloadFrame = 1, preloadActive = false, preloadTime = 0, imgPreload = new Image();
+var preloadAnimTimer = 0;
 
 var zoomActive = new Array(); var zoomTimer  = new Array(); 
 var zoomOrigW  = new Array(); var zoomOrigH  = new Array();
@@ -83,7 +84,7 @@ function prepZooms() {
 		if (links[i].getAttribute("href")) {
 			if (links[i].getAttribute("href").search(/(.*)\.(jpg|jpeg|gif|png|bmp|tif|tiff)/gi) != -1) {
 				if (links[i].getAttribute("rel") != "nozoom") {
-					links[i].onclick = function (event) { zoomClick(this, event); return false; };
+					links[i].onclick = function (event) { return zoomClick(this, event); };
 					links[i].onmouseover = function () { zoomPreload(this); };
 				}
 			}
@@ -91,13 +92,13 @@ function prepZooms() {
 	}
 }
 
-// Zoom: Preload a zoom image when hovering over the thumbnail, then set the image once the preload is complete.
-// Preloaded image is stored in imgPreload() and swapped out in the zoom function.
+// Zoom: Load an image into an image object. When done loading, function sets preloadActive to false,
+// so other bits know that they can proceed with the zoom.
+// Preloaded image is stored in imgPreload and swapped out in the zoom function.
 
 function zoomPreload(from) {
 
 	var theimage = from.getAttribute("href");
-	// console.log("PRELOAD START: "+theimage);
 
 	// Only preload if we have to, i.e. the image isn't this image already
 
@@ -108,7 +109,6 @@ function zoomPreload(from) {
 		// Set a function to fire when the preload is complete, setting flags along the way.
 
 		imgPreload.onload = function() {
-			// console.log("PRELOAD END");
 			preloadActive = false;
 		}
 
@@ -129,7 +129,7 @@ function preloadAnimStart() {
 	preloadAnimTimer = setInterval("preloadAnim()", 100);
 }
 
-// Zoom: Display and ANIMATE the jibber jabber widget. Once preloadActive is false, bail and zoom it up!
+// Zoom: Display and ANIMATE the jibber-jabber widget. Once preloadActive is false, bail and zoom it up!
 
 function preloadAnim(from) {
 	if (preloadActive != false) {
@@ -139,28 +139,42 @@ function preloadAnim(from) {
 	} else {
 		document.getElementById("ZoomSpin").style.visibility = "hidden";    
 		clearInterval(preloadAnimTimer);
+		preloadAnimTimer = 0;
 		zoomIn(preloadFrom);
 	}
 }
 
-// Zoom: We got a click! Should we do the zoom? Or wait for the preload to complete?
-// TODO: Double check that imgPreload src = clicked src
+// ZOOM CLICK: We got a click! Should we do the zoom? Or wait for the preload to complete?
+// todo?: Double check that imgPreload src = clicked src
 
 function zoomClick(from, evt) {
 
 	var shift = getShift(evt);
 
+	// Check for Command / Alt key. If pressed, pass them through -- don't zoom!
+	if (! evt && window.event && (window.event.metaKey || window.event.altKey)) {
+		return true;
+	} else if (evt && (evt.metaKey|| evt.altKey)) {
+		return true;
+	}
+
 	// Get browser dimensions
 	getSize();
 
+	// If preloading still, wait, and display the spinner.
 	if (preloadActive == true) {
-		// Preloading is otherwise still going on. So wait.
-		preloadFrom = from;
-		preloadAnimStart();
+		// But only display the spinner if it's not already being displayed!
+		if (preloadAnimTimer == 0) {
+			preloadFrom = from;
+			preloadAnimStart();	
+		}
 	} else {
 		// Otherwise, we're loaded: do the zoom!
 		zoomIn(from, shift);
 	}
+	
+	return false;
+	
 }
 
 // Zoom: Move an element in to endH endW, using zoomHost as a starting point.
@@ -193,12 +207,12 @@ function zoomIn(from, shift) {
 		hostX = hostX - document.getElementById('scroller').scrollLeft;
 	}
 
-	// Determine the target zoom settings
+	// Determine the target zoom settings from the preloaded image object
 
 	endW = imgPreload.width;
 	endH = imgPreload.height;
 
-	// Don't act if we're already doing something.
+	// Start! But only if we're not zooming already!
 
 	if (zoomActive[theID] != true) {
 
@@ -220,9 +234,10 @@ function zoomIn(from, shift) {
 		
 		document.getElementById("ZoomClose").style.visibility = "hidden";     
 
-		// Setup the CAPTION, if existing
+		// Setup the CAPTION, if existing. Hide it first, set the text.
 
 		if (includeCaption) {
+			document.getElementById(zoomCaptionDiv).style.visibility = "hidden";
 			if (from.getAttribute('title') && includeCaption) {
 				// Yes, there's a caption, set it up
 				document.getElementById(zoomCaption).innerHTML = from.getAttribute('title');
@@ -269,8 +284,6 @@ function zoomIn(from, shift) {
 		zoomChangeW = (endW - startW);
 		zoomChangeH = (endH - startH);
 		
-		// console.log("X: "+zoomChangeX+" Y: "+zoomChangeY+" W: "+zoomChangeW+" H: "+zoomChangeH);
-
 		// Shift key?
 	
 		if (shift) {
@@ -685,25 +698,32 @@ function bounceOut(t, b, c, d)
 
 
 // Utility: Get the size of the window, and set myWidth and myHeight
+// Credit to quirksmode.org
 
 function getSize() {
-	if (document.all) {
-		// IE4+ or IE6+ in standards compliant 
-		myWidth  = (document.documentElement.clientWidth) ? document.documentElement.clientWidth : document.body.clientWidth;
-		myHeight = (document.documentElement.clientHeight) ? document.documentElement.clientHeight : document.body.clientHeight;
-		myScroll = (document.documentElement.scrollTop) ? document.documentElement.scrollTop : document.body.scrollTop;
-	} else {
-		// Non-IE
+
+	// Window Size
+
+	if (self.innerHeight) { // Everyone but IE
 		myWidth = window.innerWidth;
 		myHeight = window.innerHeight;
 		myScroll = window.pageYOffset;
+	} else if (document.documentElement && document.documentElement.clientHeight) { // IE6 Strict
+		myWidth = document.documentElement.clientWidth;
+		myHeight = document.documentElement.clientHeight;
+		myScroll = document.documentElement.scrollTop;
+	} else if (document.body) { // Other IE, such as IE7
+		myWidth = document.body.clientWidth;
+		myHeight = document.body.clientHeight;
+		myScroll = document.body.scrollTop;
 	}
-	
-	// Core code from - quirksmode.org
+
+	// Page size w/offscreen areas
+
 	if (window.innerHeight && window.scrollMaxY) {	
 		myScrollWidth = document.body.scrollWidth;
 		myScrollHeight = window.innerHeight + window.scrollMaxY;
-	} else if (document.body.scrollHeight > document.body.offsetHeight) { // all but Explorer Mac
+	} else if (document.body.scrollHeight > document.body.offsetHeight) { // All but Explorer Mac
 		myScrollWidth = document.body.scrollWidth;
 		myScrollHeight = document.body.scrollHeight;
 	} else { // Explorer Mac...would also work in Explorer 6 Strict, Mozilla and Safari
@@ -720,8 +740,8 @@ function getShift(evt) {
 	if (! evt && window.event) {
 		shift = window.event.shiftKey;
 	} else if (evt) {
-		evt.stopPropagation(); // Prevents Firefox from doing shifty things
 		shift = evt.shiftKey;
+		if (shift) evt.stopPropagation(); // Prevents Firefox from doing shifty things
 	}
 	return shift;
 }
@@ -736,8 +756,6 @@ function findElementPos(elemFind)
 		elemX += elemFind.offsetLeft;
 		elemY += elemFind.offsetTop;
 	} while ( elemFind = elemFind.offsetParent )
-
-	//console.log("Found element "+elemFind+" at "+elemY+"/"+elemX);
 
 	return Array(elemX, elemY);
 }
