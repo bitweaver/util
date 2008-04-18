@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.29 2008/01/14 07:11:28 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.30 2008/04/18 18:29:12 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -893,29 +893,30 @@ Please link to this website if you use this script!
 */
 function getElementValue(formElementId)
 {
-	formElement = document.getElementById(formElementId);
-	if(formElement.length != null) var type = formElement[0].type;
-	if((typeof(type) == 'undefined') || (type == 0)) var type = formElement.type;
+	if(formElement = document.getElementById(formElementId)) {
+		if(formElement.length != null) var type = formElement[0].type;
+		if((typeof(type) == 'undefined') || (type == 0)) var type = formElement.type;
 
-	switch(type)
-	{
-		case 'undefined': return;
+		switch(type)
+		{
+			case 'undefined': return;
 
-		case 'radio':
-			for(var x=0; x < formElement.length; x++) 
-				if(formElement[x].checked == true)
-			return formElement[x].value;
+			case 'radio':
+				for(var x=0; x < formElement.length; x++) 
+					if(formElement[x].checked == true)
+				return formElement[x].value;
 
-		case 'select-multiple':
-			var myArray = new Array();
-			for(var x=0; x < formElement.length; x++) 
-				if(formElement[x].selected == true)
-					myArray[myArray.length] = formElement[x].value;
-			return myArray;
+			case 'select-multiple':
+				var myArray = new Array();
+				for(var x=0; x < formElement.length; x++) 
+					if(formElement[x].selected == true)
+						myArray[myArray.length] = formElement[x].value;
+				return myArray;
 
-		case 'checkbox': return formElement.checked;
-	
-		default: return formElement.value;
+			case 'checkbox': return formElement.checked;
+		
+			default: return formElement.value;
+		}
 	}
 }
 
@@ -932,20 +933,21 @@ Please link to this website if you use this script!
 */
 function setElementValue(formElementId, value)
 {
-	formElement = document.getElementById(formElementId);
-	switch(formElement.type)
-	{
-		case 'undefined': return;
-		case 'radio': formElement.checked = value; break;
-		case 'checkbox': formElement.checked = value; break;
-		case 'select-one': formElement.selectedIndex = value; break;
+	if(formElement = document.getElementById(formElementId)) {
+		switch(formElement.type)
+		{
+			case 'undefined': return;
+			case 'radio': formElement.checked = value; break;
+			case 'checkbox': formElement.checked = value; break;
+			case 'select-one': formElement.selectedIndex = value; break;
 
-		case 'select-multiple':
-			for(var x=0; x < formElement.length; x++) 
-				formElement[x].selected = value[x];
-			break;
+			case 'select-multiple':
+				for(var x=0; x < formElement.length; x++) 
+					formElement[x].selected = value[x];
+				break;
 
-		default: formElement.value = value; break;
+			default: formElement.value = value; break;
+		}
 	}
 }
 // function:	switchCheckboxes
