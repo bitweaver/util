@@ -834,7 +834,10 @@ class PHPMailer {
       $result .= $this->HeaderLine('Subject', $this->EncodeHeader($this->SecureHeader($this->Subject)));
     }
 
-    $result .= sprintf("Message-ID: <%s@%s>%s", $uniq_id, $this->ServerHostname(), $this->LE);
+// {{{ BIT_MOD
+	$this->MessageID = '<'.$uniq_id.'@'.$this->ServerHostname().'>'; 
+    $result .= sprintf("Message-ID: %s%s", $this->MessageID, $this->LE);
+// }}} BIT_MOD
     $result .= $this->HeaderLine('X-Priority', $this->Priority);
     $result .= $this->HeaderLine('X-Mailer', 'PHPMailer (phpmailer.sourceforge.net) [version ' . $this->Version . ']');
 
