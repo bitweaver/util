@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.1 2008/04/12 06:20:01 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.2 2008/04/30 17:19:02 wjames5 Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -162,6 +162,9 @@ function mailman_command( $pCommand, $pOptions=NULL ) {
 	$ret = NULL;
 	if( $fullCommand = mailman_get_command( $pCommand ) ) {
 		$cmd = $fullCommand.' '.$pOptions;
+		if( !defined( 'IS_LIVE' ) || !IS_LIVE ) {
+			bit_log_error( 'mailman LOG: '.$cmd );
+		}
 		exec( $cmd, $ret );
 	} else {
 		bit_log_error( tra( 'Groups mailman command failed' ).' ('.$pCommand.') '.tra( 'File not found' ).': '.$fullCommand );
