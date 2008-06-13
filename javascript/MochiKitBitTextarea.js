@@ -40,9 +40,11 @@ BitTextarea =  {
 			iMaxHeight = BT.getMaxHeight();
         	iNewH = ( iTextsizeH > iMaxHeight ) ? iMaxHeight : iTextsizeH;
         }else if( iDiff < 0 ){
-			iMinHeight = BT.getMinHeight();
-        	iNewH = ( iTextsizeH < iMinHeight ) ? iMinHeight : iTextsizeH;
+			iNewH = iTextsizeH;
         }
+		//enforce min in all cases
+		iMinHeight = BT.getMinHeight();
+		iNewH = ( iNewH < iMinHeight ) ? iMinHeight : iNewH;
 		e.style.height = iNewH+"px";
     }, 
     
