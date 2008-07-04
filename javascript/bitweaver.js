@@ -1,8 +1,22 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.30 2008/04/18 18:29:12 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.31 2008/07/04 19:39:40 wjames5 Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
 // with '//' and put comments on separate lines otherwise the packer will choke
+
+// the beginning of the clean up of bitweaver core js - use name spaces
+// if you are adding new features to this file add them to the BitBase object.
+BitBase = {
+	"showSpinner": function() {
+		var e = document.getElementById('spinner');
+		if (e != null){ e.style.display='block'; }
+	},
+	
+	"hideSpinner": function() {
+		var e = document.getElementById('spinner');
+		if (e != null){ e.style.display='none'; }
+	}
+};
 
 // This function is called by FCKEditor when/if it is loaded.
 function FCKeditor_OnComplete( editorInstance )
