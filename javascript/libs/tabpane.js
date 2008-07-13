@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.16 2008/05/02 20:47:14 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.17 2008/07/13 18:36:14 wjames5 Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -228,7 +228,9 @@ function WebFXTabPage( el, tabPane, nIndex ) {
 
 	// hook up events, using DOM0
 	var oThis = this;
-	this.tab.onclick = function () { oThis.select(); };
+	// we can bind a custom onclick event to the tab by passing one in - this lets us associate additional events with the click of a tab -wjames5
+	var oldOnclick = this.tab.onclick;
+	this.tab.onclick = function () { oThis.select(); oldOnclick(); };
 	this.tab.onmouseover = function () { WebFXTabPage.tabOver( oThis ); };
 	this.tab.onmouseout = function () { WebFXTabPage.tabOut( oThis ); };
 }
