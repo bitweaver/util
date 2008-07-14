@@ -1,7 +1,7 @@
 /* Dependencies: MochiKit Base Async */
 BitAjax = {
 	"updater": function(target, url, queryString) {
-		BitAjax.showSpinner();
+		BitBase.showSpinner();
 		if (queryString != "" && queryString !=null){
 			url += "?"+queryString+"&tk="+bitTk;
 		}
@@ -11,13 +11,13 @@ BitAjax = {
 	},
 
 	"updaterCallback": function(target, rslt){
-		BitAjax.hideSpinner();
+		BitBase.hideSpinner();
 		var e = document.getElementById(target);
 		if (e != null){e.innerHTML = rslt.responseText;}
 	},
 	
 	"error": function( request ) {
-		BitAjax.hideSpinner();
+		BitBase.hideSpinner();
 		alert( 'Sorry, there was a problem getting the requested data.' );
 	},
 	
@@ -25,7 +25,7 @@ BitAjax = {
 		if (!force && elm.loadedResponse) {
 			func(elm.loadedResponse);
 		} else {
-			BitAjax.showSpinner();
+			BitBase.showSpinner();
 			var r = doSimpleXMLHttpRequest(url);
 			r.addCallback( BitAjax.getAndCallCallback, elm, func ); 
 			r.addErrback( BitAjax.error );
@@ -33,18 +33,8 @@ BitAjax = {
 	},
 	
 	"getAndCallCallback": function(elm, func, rslt){
-		BitAjax.hideSpinner();
+		BitBase.hideSpinner();
 		elm.loadedResponse = rslt.responseText || "No Response.";
 		func(elm.loadedResponse);
-	},
-	
-	"showSpinner": function() {
-		var e = document.getElementById('spinner')
-		if (e != null){ e.style.display='block' };
-	},
-	
-	"hideSpinner": function() {
-		var e = document.getElementById('spinner')
-		if (e != null){ e.style.display='none' };
 	}
 }
