@@ -17,7 +17,8 @@ class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter
     
     function postFilter($html, $config, &$context) {
         $post_regex = '#<span class="youtube-embed w-([0-9]+) h-([0-9]+)">([A-Za-z0-9\-_]+)</span>#';
-        $post_replace = '<object width="\1" height="\2" '.
+		$post_replace = '<div style="width:\1px; height:\2px;">'.
+			'<object width="\1" height="\2" '.
             'data="http://www.youtube.com/v/\3">'.
             '<param name="movie" value="http://www.youtube.com/v/\3"></param>'.
             '<param name="wmode" value="transparent"></param>'.
@@ -26,7 +27,8 @@ class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter
             'type="application/x-shockwave-flash"'.
             'wmode="transparent" width="\1" height="\2" />'.
             '<![endif]-->'.
-            '</object>';
+			'</object>'.
+			'</div>';
 		$ret = preg_replace($post_regex, $post_replace, $html);
 		return $ret;
     }
