@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: phplot.php,v 1.2 2005/12/26 12:27:28 squareing Exp $ */
+/* $Id: phplot.php,v 1.3 2008/07/25 15:14:32 wolff_borg Exp $ */
 
 /*
  * PHPLOT Version 5.0.rc1
@@ -1797,6 +1797,11 @@ class PHPlot {
      */
     function FindDataLimits()
     {
+	if (!isset($this->data)) {
+		return FALSE;
+	}
+
+
         // Set some default min and max values before running through the data
         switch ($this->data_type) {
         case 'text-data':
@@ -3834,7 +3839,7 @@ class PHPlot {
             return FALSE;
         }
 
-        if (! is_array($this->data)) {
+        if (isset($this->data) && !is_array($this->data)) {
             $this->DrawError("DrawGraph(): No array of data in \$data");
             return FALSE;
         }
