@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.31 2008/07/04 19:39:40 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.32 2008/08/30 04:45:44 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -672,18 +672,30 @@ function hideById(elementId,useCookie) {
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id
 function flip(elementId) {
-	if ($(elementId).style.display == "none") { showById(elementId);
-	} else { hideById(elementId);
-}	}
+	var ele = document.getElementById( elementId );
+	if( ele ) {
+		if(ele.style.display == "none") { 
+			showById(elementId);
+		} else { 
+			hideById(elementId);
+		}	
+	}
+}
 
 // function:	toggle
 // desc:		Toggles a HTML elements visibility. Cookies are used to make it stay that way.
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id
 function toggle(elementId) {
-	if ($(elementId).style.display == "none") { showById(elementId,1);
-	} else { hideById(elementId,1);
-}	}
+	var ele = document.getElementById( elementId );
+	if( ele ) {
+		if( ele.style.display == "none" ) { 
+			showById(elementId,1);
+		} else { 
+			hideById(elementId,1);
+		}
+	}	
+}
 
 // function:	flipMulti
 // desc:		Toggles visibility for multiple HTML elements - can be used with an HTML Selector
