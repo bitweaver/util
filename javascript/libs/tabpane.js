@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.18 2008/07/13 19:49:25 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.19 2008/09/03 07:12:18 squareing Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -17,6 +17,9 @@
 // Called to cause an FCKEditor to show. This fixes an incompatibility with
 // tab pane and FCKEditor in Gecko browsers where the FCKEditor is created
 // in a hidden tab. The editor fails to get focused without this.
+
+// see http://webfx.eae.net/dhtml/tabpane/tabpane.html for details
+
 function switchEditors(oNode) {
 	var i=0;
 	// We use this to avoid the error when this runs BEFORE
@@ -29,7 +32,7 @@ function switchEditors(oNode) {
 				editor.SwitchEditMode();
 				editor.SwitchEditMode();
 			}
-		    	switchEditors(childNode);
+			switchEditors(childNode);
 		}
 	}
 }
