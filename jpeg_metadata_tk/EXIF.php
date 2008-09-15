@@ -1216,7 +1216,7 @@ function read_IFD_universal( $filehnd, $Tiff_offset, $Byte_Align, $Tag_Definitio
         if ( $No_Entries> 10000 )
         {
                 // Huge number of entries - abort
-                error_log( "Error: huge number of EXIF entries - EXIF is probably Corrupted" );
+                // error_log( "Error: huge number of EXIF entries - EXIF is probably Corrupted" );
 
                 return array ( FALSE , 0);
         }
@@ -1297,7 +1297,7 @@ function read_IFD_universal( $filehnd, $Tiff_offset, $Byte_Align, $Tag_Definitio
 
                 if ( $Data_Count > 100000 )
                 {
-                        error_log( "Error: huge EXIF data count - EXIF is probably Corrupted" );
+                        // error_log( "Error: huge EXIF data count - EXIF is probably Corrupted" );
 
                         // Some Casio files have no Next IFD pointer, hence cause errors
 
