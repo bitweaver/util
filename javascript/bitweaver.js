@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.32 2008/08/30 04:45:44 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.33 2008/11/17 17:19:25 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -906,6 +906,18 @@ function deleteCookie(name, path, domain) {
 			+ "; path=" +  cookie_path + "; domain=" + cookie_domain + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
 }	}
 
+function getRadioValue(elementName) {
+	var element = document.getElementsByName(elementName);
+	var bt_count = element.length; // can't use element.length in the loop, as it would decrement
+
+	for( var i = 0; i < bt_count; i++ ) {
+		if (element[i].checked == true) {
+			return element[i].value;
+		}
+	}
+}
+
+
 // function:	getElementValue
 // desc:		get the value of form elements: <input type=...>, <textarea ...> ... </textarea> and <select ...> ... </select>. 
 // date:		2008-01-06
@@ -920,17 +932,24 @@ Please link to this website if you use this script!
 function getElementValue(formElementId)
 {
 	if(formElement = document.getElementById(formElementId)) {
-		if(formElement.length != null) var type = formElement[0].type;
-		if((typeof(type) == 'undefined') || (type == 0)) var type = formElement.type;
+		if(formElement.length != null) {
+			var type = formElement[0].type;
+		}
+		if((typeof(type) == 'undefined') || (type == 0)) {
+			var type = formElement.type;
+		}
 
 		switch(type)
 		{
 			case 'undefined': return;
 
 			case 'radio':
-				for(var x=0; x < formElement.length; x++) 
-					if(formElement[x].checked == true)
-				return formElement[x].value;
+				for(var x=0; x < formElement.length; x++) {
+					if(formElement[x].checked == true) {
+						return formElement[x].value;
+					}
+				}
+				break;
 
 			case 'select-multiple':
 				var myArray = new Array();
