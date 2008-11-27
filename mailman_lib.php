@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.3 2008/10/03 17:43:07 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.4 2008/11/27 16:49:17 nickpalmer Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -64,6 +64,12 @@ function mailman_newlist( $pParamHash ) {
 			mailman_fatal(tra('Unable to create list: ').$pParamHash['listname'], $ret);
 		}
 
+		$options = ' -i '.escapeshellarg(UTIL_PKG_PATH.'mailman.cfg');
+		$options .= ' '.escapeshellarg( $pParamHash['listname'] );
+		if( $ret = mailman_command( 'config_list', $output, $options) ) {
+			mailman_fatal(tra('Unable to configure list: ').$pParamHash['listname'], $ret);
+		}
+
 		$newList = $pParamHash['listname'];
 		$mailman = mailman_get_mailman_command();
 		$newAliases = "
@@ -121,6 +127,17 @@ function mailman_remove_member( $pListName, $pEmail ) {
 		exec( $cmd, $ret );
 	} else {
 		bit_log_error( 'Groups mailman command failed (remove_members) File not found: '.$fullCommand );
+	}
+}
+
+function mailman_setmoderator( $pListName, $pEmail ) {
+	$ret = '';
+	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
+	  $cmd = $fullCommand." -q -l -r mailman_lib.setMemberModeratedFlag ".escapeshellarg( $pListName )." ".escapeshellarg( $pEmail );
+	  $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
+	  exec( $cmd, $ret );
+	} else {
+		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
 	}
 }
 
