@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.4 2008/11/27 16:49:17 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.5 2008/11/29 17:55:08 tekimaki_admin Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -139,6 +139,7 @@ function mailman_setmoderator( $pListName, $pEmail ) {
 	} else {
 		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
 	}
+	return $ret;
 }
 
 function mailman_addmember( $pListName, $pEmail ) {
