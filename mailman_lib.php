@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.5 2008/11/29 17:55:08 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.6 2008/12/05 19:51:46 tekimaki_admin Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -56,6 +56,9 @@ function mailman_list_members( $pListName ) {
 function mailman_newlist( $pParamHash ) {
 	$error = NULL;
 	if( !($error = mailman_verify_list( $pParamHash['listname'] )) ) {
+		if( !empty( $pParamHash['listhost'] ) ) {
+		  $options .= ' -e '.escapeshellarg( $pParamHash['listhost'] );
+		}
 		$options = ' -q '.escapeshellarg( $pParamHash['listname'] );
 		$options .= ' '.escapeshellarg( $pParamHash['listadmin-addr'] ).' ';
 		$options .= ' '.escapeshellarg( $pParamHash['admin-password'] ).' ';
@@ -130,12 +133,24 @@ function mailman_remove_member( $pListName, $pEmail ) {
 	}
 }
 
+function mailman_setmoderated( $pListName, $pModerated = TRUE ) {
+	$ret = FALSE;
+	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
+		$cmd = $fullCommand." -q -l -r mailman_lib.setDefaultModerationFlag ".escapeshellarg( $pListName )." ".( $pModerated ? 1 : 0 );
+		$cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\""; 
+		exec( $cmd, $ret );
+	} else {
+		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
+	}
+	return $ret;
+}
+
 function mailman_setmoderator( $pListName, $pEmail ) {
 	$ret = '';
 	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
-	  $cmd = $fullCommand." -q -l -r mailman_lib.setMemberModeratedFlag ".escapeshellarg( $pListName )." ".escapeshellarg( $pEmail );
-	  $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
-	  exec( $cmd, $ret );
+		$cmd = $fullCommand." -q -l -r mailman_lib.setMemberModeratedFlag ".escapeshellarg( $pListName )." ".escapeshellarg( $pEmail );
+		$cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
+		exec( $cmd, $ret );
 	} else {
 		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
 	}
