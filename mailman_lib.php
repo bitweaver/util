@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.6 2008/12/05 19:51:46 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.7 2008/12/08 00:14:46 tekimaki_admin Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -51,6 +51,14 @@ function mailman_list_members( $pListName ) {
 	return( $output );
 }
 
+// pParamHash follows naming convention off config_list --help usage instructions
+function mailman_config_list( $pParamHash ){
+	$options = ' -i '.escapeshellarg(UTIL_PKG_PATH.'mailman.cfg');
+	$options .= ' '.escapeshellarg( $pParamHash['listname'] );
+	if( $ret = mailman_command( 'config_list', $output, $options) ) {
+		return (tra('Unable to configure list: ').$pParamHash['listname'].":".$ret);
+	}
+}
 
 // pParamHash follows naming convention off newlist --help usage instructions
 function mailman_newlist( $pParamHash ) {
