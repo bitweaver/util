@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.7 2008/12/08 00:14:46 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.8 2008/12/10 21:52:06 tekimaki_admin Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -165,11 +165,29 @@ function mailman_setmoderator( $pListName, $pEmail ) {
 	return $ret;
 }
 
-function mailman_addmember( $pListName, $pEmail ) {
+function mailman_addmember( $pListName, $pEmail, $pType ) {
 	$ret = '';
 	if( $fullCommand = mailman_get_command( 'add_members' ) ) {
-		$cmd = "echo ".escapeshellarg( $pEmail )." | $fullCommand  -r - ".escapeshellarg( $pListName );
+		switch( $pType){
+			case "digest":
+				$cmd = "echo ".escapeshellarg( $pEmail )." | $fullCommand  -d - ".escapeshellarg( $pListName );
+				break;
+			case "email":
+			default:
+				$cmd = "echo ".escapeshellarg( $pEmail )." | $fullCommand  -r - ".escapeshellarg( $pListName );
+				break;
+		}
 		exec( $cmd, $ret );
+
+		/**
+		 * its not enough to rely on the add_members call
+		 * add_members is ignored by mailman if the user is already a member 
+		 * bw relies on mailman_addmember to toggle if a user wants to receive a digest or not
+		 * to keep things simple in bw we conveniently handle the toggle here
+		 **/
+		if( !empty( $pType ) ){
+			mailman_setsubscriptiontype( $pListName, $pEmail, $pType );
+		}
 	} else {
 		bit_log_error( 'Groups mailman command failed (add_members) File not found: '.$fullCommand );
 	}
@@ -181,6 +199,29 @@ function mailman_findmember( $pListName, $pEmail ) {
 		mailman_fatal(tra('Unable to find member in list: ').$pListName, $ret);
 	}
 	return $output;
+}
+
+function mailman_setsubscriptiontype( $pListName, $pEmail, $pType ) {
+	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
+        $cmd = $fullCommand." -q -l -r mailman_lib.setSubscriptionType ".escapeshellarg( $pListName )." ".escapeshellarg( $pEmail )." ".( $pType == 'digest' ? 1 : 0 );
+        $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
+        exec( $cmd, $ret );
+	}else{
+		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
+	}
+	return $ret;
+}
+
+function mailman_getsubscriptiontype( $pListName, $pEmail ){
+	// even though setSubscriptionType returns a string or false  we return an array because thats what exec returns
+	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
+        $cmd = $fullCommand." -l -r mailman_lib.getSubscriptionType ".escapeshellarg( $pListName )." ".escapeshellarg( $pEmail );
+        $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
+        exec( $cmd, $ret );
+	}else{
+		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
+	}
+	return $ret;
 }
 
 function mailman_rmlist( $pListName ) {
