@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.19 2008/09/03 07:12:18 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.20 2008/12/11 15:04:52 wjames5 Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -268,7 +268,8 @@ WebFXTabPage.prototype.dispose = function () {
 	// I suspect this is for "security" but that is stupid since we
 	// can still hide it off screen like this.
 	var safari = /^Apple/;
-	if (this.element.style.display == "none" && navigator.vendor == safari) {
+	// note the crazy 'unknown' check here. this is for IE (of course) whoes xmlhtml is not part of the js engine and willy nilly throws in crap outside the spec.
+	if (this.element.style.display == "none" && typeof( navigator.vendor ) != "unknown" && navigator.vendor == safari) {
 		this.element.style.position = "absolute";
 		this.element.style.left = "-10000px";
 		this.element.style.display = "block";
