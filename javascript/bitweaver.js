@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.33 2008/11/17 17:19:25 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.34 2008/12/19 19:41:14 wjames5 Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -7,15 +7,38 @@
 // the beginning of the clean up of bitweaver core js - use name spaces
 // if you are adding new features to this file add them to the BitBase object.
 BitBase = {
+	"getElement": function(id){
+		return ((typeof(id) == "string") ?
+			document.getElementById(id) : id);
+	},
+
+	"setElementDisplay": function( elm, val ){
+		var self = BitBase;
+		var obj = self.getElement( elm );
+		if( obj != null ){ obj.style.display=val; }
+	},
+
+	"toggleElementDisplay": function( elm, val ){
+		var self = BitBase;
+		var obj = self.getElement( elm );
+		var value = obj.style.display == val?'none':val;
+		self.setElementDisplay( obj, value );
+	},
+
 	"showSpinner": function() {
-		var e = document.getElementById('spinner');
-		if (e != null){ e.style.display='block'; }
+		BitBase.setElementDisplay( 'spinner','block' );
 	},
 	
 	"hideSpinner": function() {
-		var e = document.getElementById('spinner');
-		if (e != null){ e.style.display='none'; }
-	}
+		BitBase.setElementDisplay( 'spinner','none' );
+	},
+
+    "upperCaseFirst": function(str){
+        var tmpChar = str.substring(0,1).toUpperCase();
+        var postString = str.substring(1,str.length);
+        var newString = tmpChar + postString;
+        return newString;
+    }
 };
 
 // This function is called by FCKEditor when/if it is loaded.
