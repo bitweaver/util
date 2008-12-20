@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.34 2008/12/19 19:41:14 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.35 2008/12/20 22:03:32 tekimaki_admin Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -583,7 +583,7 @@ function insertAt(elementId, replaceString) {
 
 	// FCKEditor is completely different
 	if (document.FCKEditorLoaded) {
-		oEditor = FCKeditorAPI.GetInstance(document.FCKeditors[elementId]);
+		oEditor = FCKeditorAPI.GetInstance(elementId);
 		// Check if it is a fckeditor. If not fall back on old code.
 		if (oEditor) {
 			// Fetching selection can't be done through the 'Selection'. Stupid.
