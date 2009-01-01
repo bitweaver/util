@@ -1,1 +1,8 @@
 taken from: http://pan0.net/fspp
+
+fspp.swf is the older version, which doesn't display any watermark.
+
+pan0.swf is the current version of the player, which shows a small watermark in
+the lower right corner. this player doesn't mirror the original image anymore,
+which makes it more usable. also there is an indicator that it's loading the
+image and double clicking on the image goes to full screen.
