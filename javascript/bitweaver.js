@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.35 2008/12/20 22:03:32 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.36 2009/01/06 18:07:32 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -808,14 +808,16 @@ function setFlipIcon(elementId) {
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id
 function flipWithSign(elementId,cookie) {
-	var flipperName = "flipper" + elementId;
-	if ($(elementId).style.display == "none") {
-		showById(elementId,cookie);
-		$(flipperName).firstChild.nodeValue = "[-]";
-	} else {
-		hideById(elementId,cookie);
-		$(flipperName).firstChild.nodeValue = "[+]";
-}	}
+	if( flipperEle = document.getElementById( "flipper"+elementId ) ) {
+		if ($(elementId).style.display == "none") {
+			showById(elementId,cookie);
+			flipperEle.firstChild.nodeValue = "[-]";
+		} else {
+			hideById(elementId,cookie);
+			flipperEle.firstChild.nodeValue = "[+]";
+		}
+	}	
+}
 
 // function:	setFlipWithSign
 // desc:		Toggles the state of a flipped List after page reload
@@ -823,14 +825,16 @@ function flipWithSign(elementId,cookie) {
 // date:		Pre-bitweaver
 // params:		elementId = a HTML Id of a List
 function setFlipWithSign(elementId) {
-	var flipperName = "flipper" + elementId;
-	if (getCookie(elementId) == "o") {
-		showById(elementId);
-		$(flipperName).firstChild.nodeValue = "[-]";
-	} else {
-		hideById(elementId);
-		$(flipperName).firstChild.nodeValue = "[+]";
-}	}
+	if( flipperEle = document.getElementById( "flipper"+elementId ) ) {
+		if (getCookie(elementId) == "o") {
+			showById(elementId);
+			flipperEle.firstChild.nodeValue = "[-]";
+		} else {
+			hideById(elementId);
+			flipperEle.firstChild.nodeValue = "[+]";
+		}
+	}	
+}
 
 // function: setCookieArray
 // desc: Creates a cookie if required and sets the element in the array
