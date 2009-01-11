@@ -34,12 +34,19 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
+// {{{ BITMOD
+// Modifications to make it work with bitweaver:
+// rename setOpacity to _setOpacity to avoid conflicts with mochikit.
+// }}} BITMOD
+
+
 var includeCaption = true; // Turn on the "caption" feature, and write out the caption HTML
 var zoomTime       = 3;    // Milliseconds between frames of zoom animation
 var zoomSteps      = 10;   // Number of zoom animation frames
 var includeFade    = 1;    // Set to 1 to fade the image in / out as it zooms
 var minBorder      = 50;   // Amount of padding between large, scaled down images, and the window edges
-var shadowSettings = '0px 5px 25px rgba(0, 0, 0, '; // Blur, radius, color of shadow for compatible browsers
+var shadowSettings = '0px 5px 25px rgba(0, 0, 0)'; // Blur, radius, color of shadow for compatible browsers
 
 var zoomImagesURI   = bitRootUrl+'util/javascript/fancyzoom/images-global/zoom/'; // Location of the zoom and shadow images
 
@@ -110,7 +117,7 @@ function zoomPreload(from) {
 
 		imgPreload.onload = function() {
 			preloadActive = false;
-		}
+		};
 
 		// Load it!
 		imgPreload.src = theimage;
@@ -263,7 +270,7 @@ function zoomIn(from, shift) {
 		// Show the zooming image container, make it invisible
 
 		if (includeFade == 1) {
-			setOpacity(0, zoomID);
+			_setOpacity(0, zoomID);
 		}
 		zoomdiv.style.visibility = "visible";
 
@@ -400,7 +407,7 @@ function zoomDoneIn(zoomdiv, theID) {
 
 	if (document.getElementById("ShadowBox")) {
 
-		setOpacity(0, "ShadowBox");
+		_setOpacity(0, "ShadowBox");
 		shadowdiv = document.getElementById("ShadowBox");
 
 		shadowLeft = parseInt(zoomdiv.style.left) - 13;
@@ -424,7 +431,7 @@ function zoomDoneIn(zoomdiv, theID) {
 	// Position and display the CAPTION, if existing
   
 	if (includeCaption && document.getElementById(zoomCaption).innerHTML != "") {
-		// setOpacity(0, zoomCaptionDiv);
+		// _setOpacity(0, zoomCaptionDiv);
 		zoomcapd = document.getElementById(zoomCaptionDiv);
 		zoomcapd.style.top = parseInt(zoomdiv.style.top) + (zoomdiv.offsetHeight + 15) + 'px';
 		zoomcapd.style.left = (myWidth / 2) - (zoomcapd.offsetWidth / 2) + 'px';
@@ -434,7 +441,7 @@ function zoomDoneIn(zoomdiv, theID) {
 	
 	// Display Close Box (fade it if it's not IE)
 
-	if (!browserIsIE) setOpacity(0, "ZoomClose");
+	if (!browserIsIE) _setOpacity(0, "ZoomClose");
 	document.getElementById("ZoomClose").style.visibility = "visible";
 	if (!browserIsIE) fadeElementSetup("ZoomClose", 0, 100, 5);
 
@@ -485,9 +492,9 @@ function zoomElement(zoomdiv, theID, zoomCurrent, zoomStartW, zoomChangeW, zoomS
 	  
 		if (includeFade == 1) {
 			if (fadeAmount < 0) {
-				setOpacity(Math.abs(zoomCurrent * fadeAmount), zoomdiv);
+				_setOpacity(Math.abs(zoomCurrent * fadeAmount), zoomdiv);
 			} else {
-				setOpacity(100 - (zoomCurrent * fadeAmount), zoomdiv);
+				_setOpacity(100 - (zoomCurrent * fadeAmount), zoomdiv);
 			}
 		}
 	  
@@ -618,9 +625,9 @@ function fadeElement(theID, fadeCurrent, fadeAmount, fadeSteps) {
 			// Set the opacity depending on if we're adding or subtracting (pos or neg)
 			
 			if (fadeAmount < 0) {
-				setOpacity(Math.abs(fadeCurrent * fadeAmount), theID);
+				_setOpacity(Math.abs(fadeCurrent * fadeAmount), theID);
 			} else {
-				setOpacity(100 - (fadeCurrent * fadeAmount), theID);
+				_setOpacity(100 - (fadeCurrent * fadeAmount), theID);
 			}
 		}
 
@@ -637,7 +644,7 @@ function fadeElement(theID, fadeCurrent, fadeAmount, fadeSteps) {
 
 // Utility: Set the opacity, compatible with a number of browsers. Value from 0 to 100.
 
-function setOpacity(opacity, theID) {
+function _setOpacity(opacity, theID) {
 
 	var object = document.getElementById(theID).style;
 
