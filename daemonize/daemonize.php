@@ -106,7 +106,7 @@ if( empty( $nohup ) ) {
     }
   }
   else {
-    to_log("pidfile not found.");
+    to_log("pidfile not found: $pidfile");
   }
   to_log("NOT found running.");
 }
