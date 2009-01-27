@@ -68,7 +68,7 @@ if( empty( $nohup ) ) {
     if (!empty($lines[0]) && is_numeric($lines[0]) && !empty($lines[1]) && is_numeric($lines[1])) {
       # Kill hung processes.
       if ($lines[1] + 300 < time()) { // If it's an OLD pidfile...
-        to_log("$pidefile OLD pidfile found from $lines[1] - ".date('d/M/Y:H:i:s O',$lines[1]).": $pid_data");
+        to_log("$pidfile OLD pidfile found from $lines[1] - ".date('d/M/Y:H:i:s O',$lines[1]).": $pid_data");
         zero_file($pidfile);
 
         # If found, kill. If it won't die, kill it harder. Then give up.
