@@ -19,7 +19,7 @@ def getSubscriptionType(mlist, addr):
         else:
             print "email"
     except NotAMemberError:
-        print false
+        print 0
 
 def setSubscriptionType(mlist, addr, val):
     mlist.setMemberOption(addr, mm_cfg.Digests, int(val))
