@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.9 2009/01/21 20:53:59 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.10 2009/02/19 17:11:51 tekimaki_admin Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -64,7 +64,7 @@ function mailman_config_list( $pParamHash ){
 function mailman_newlist( $pParamHash ) {
 	$error = NULL;
 	if( !($error = mailman_verify_list( $pParamHash['listname'] )) ) {
-		$optiond = "";
+		$options = "";
 		if( !empty( $pParamHash['listhost'] ) ) {
 		  $options .= ' -e '.escapeshellarg( $pParamHash['listhost'] );
 		}
