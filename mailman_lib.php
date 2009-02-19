@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.10 2009/02/19 17:11:51 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.11 2009/02/19 17:41:08 tekimaki_admin Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -166,7 +166,7 @@ function mailman_setmoderator( $pListName, $pEmail ) {
 	return $ret;
 }
 
-function mailman_addmember( $pListName, $pEmail, $pType ) {
+function mailman_addmember( $pListName, $pEmail, $pType = NULL ) {
 	$ret = '';
 	if( $fullCommand = mailman_get_command( 'add_members' ) ) {
 		switch( $pType){
