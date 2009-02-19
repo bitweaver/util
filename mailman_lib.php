@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.11 2009/02/19 17:41:08 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.12 2009/02/19 20:27:32 tekimaki_admin Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -73,13 +73,14 @@ function mailman_newlist( $pParamHash ) {
 		$options .= ' '.escapeshellarg( $pParamHash['admin-password'] ).' ';
 		
 		if( $ret = mailman_command( 'newlist', $output, $options ) ) {
-			mailman_fatal(tra('Unable to create list: ').$pParamHash['listname'], $ret);
+			return (tra('Unable to create list: ').$pParamHash['listname'].":".$ret);
 		}
 
 		$options = ' -i '.escapeshellarg(UTIL_PKG_PATH.'mailman.cfg');
 		$options .= ' '.escapeshellarg( $pParamHash['listname'] );
 		if( $ret = mailman_command( 'config_list', $output, $options) ) {
-			mailman_fatal(tra('Unable to configure list: ').$pParamHash['listname'], $ret);
+			// @TODO if this fails we should roll back the newlist created
+			return (tra('Unable to configure list: ').$pParamHash['listname'].":".$ret);
 		}
 
 		$newList = $pParamHash['listname'];
