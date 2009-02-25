@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.38 2009/01/27 15:07:47 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.39 2009/02/25 14:57:23 tekimaki_admin Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -168,7 +168,7 @@ BitBase = {
 	"toggleElementDisplay": function( elm, val, useCookie ){
 		var self = BitBase;
 		var obj = self.getElement( elm );
-		var value = obj.style.display == val?'none':val;
+		var value = obj.style.display == 'none'?val:'none';
 		self.setElementDisplay( obj, value, useCookie );
 	},
 
