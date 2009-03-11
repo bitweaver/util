@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.39 2009/02/25 14:57:23 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.40 2009/03/11 22:04:25 tekimaki_admin Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -341,9 +341,9 @@ BitBase = {
 	//				zen = a number (1-3/def=1) allows multiple routines to use the function at the same time. Stores the
 	//				text portion of the window Id (elementIdStart) in an array so that it can be hidden later.
 	// Only the header portion of the id is saved
+	"flipArr":[0,0,0],
 	"flipMulti": function(elementIdStart,elementIdNum,elements,zen){
 		var self = BitBase;
-		var flipArr=[0,0,0];
 		if(elementIdStart && elementIdNum) {
 			if(arguments.length<1) elementIdNum=1;
 			// elementIdNum has to be a number
@@ -358,10 +358,10 @@ BitBase = {
 			if(!zen || zen<1 || zen>3) zen=1;
 			var i=0;
 			do {
-				if(flipArr[zen-1]!=0) self.hideById(flipArr[zen-1]+(elementIdNum+i));
+				if(self.flipArr[zen-1]!=0) self.hideById(self.flipArr[zen-1]+(elementIdNum+i));
 				self.showById(elementIdStart+(elementIdNum+i));
 			} while (++i <= elements-1);
-			flipArr[zen-1]=elementIdStart;
+			self.flipArr[zen-1]=elementIdStart;
 		}
 	},
 
