@@ -1,20 +1,28 @@
 <?
-
-// This code was converted to PHP from Visual C++
-// by Steven Brendtro on behalf of imaginerc.com
-
-// The original code and an article can be found
-// on CodeGuru at:
-// http://www.codeguru.com/Cpp/Cpp/algorithms/print.php/c5115/
-
-// Example Usage:
-//   $oGC = new GeoCalc();
-//   print "GCDistance: " . $oGC->GCDistance(38.9333,-94.3253,38.9314,-94.4876) . "<br />\n";
-//   print "GCAzimuth: " . $oGC->GCAzimuth(38.9333,-94.3253,38.9314,-94.4876) . "<br />\n";
-//   print "ApproxDistance: " . $oGC->ApproxDistance(38.9333,-94.3253,38.9314,-94.4876) . "<br />\n";
-//   print "EllipsoidDistance: " . $oGC->EllipsoidDistance(38.80126649,-94.44590241,43.3368,-96.8755) . "<br /><br />\n";
-//   print "EllipsoidDistance In Miles: " . ConvKilometersToMiles($oGC->EllipsoidDistance(38.80126649,-94.44590241,43.3368,-96.8755));
-
+/**
+ * @version $Header: /cvsroot/bitweaver/_bit_util/geocalc/GeoCalc.class.php,v 1.2 2009/03/31 05:53:20 lsces Exp $
+ *	
+ * This code was converted to PHP from Visual C++
+ * by Steven Brendtro on behalf of imaginerc.com
+ *
+ * The original code and an article can be found
+ * on CodeGuru at:
+ * http://www.codeguru.com/Cpp/Cpp/algorithms/print.php/c5115/
+ *
+ * Example Usage:
+ *   $oGC = new GeoCalc();
+ *   print "GCDistance: " . $oGC->GCDistance(38.9333,-94.3253,38.9314,-94.4876) . "<br />\n";
+ *   print "GCAzimuth: " . $oGC->GCAzimuth(38.9333,-94.3253,38.9314,-94.4876) . "<br />\n";
+ *   print "ApproxDistance: " . $oGC->ApproxDistance(38.9333,-94.3253,38.9314,-94.4876) . "<br />\n";
+ *   print "EllipsoidDistance: " . $oGC->EllipsoidDistance(38.80126649,-94.44590241,43.3368,-96.8755) . "<br /><br />\n";
+ *   print "EllipsoidDistance In Miles: " . ConvKilometersToMiles($oGC->EllipsoidDistance(38.80126649,-94.44590241,43.3368,-96.8755));
+ *
+ * @package geocalc
+ */
+ 
+/**
+ * @package geocalc
+ */
 class GeoCalc {
 
   var $PI = 3.14159265359;
