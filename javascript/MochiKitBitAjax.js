@@ -16,9 +16,9 @@ BitAjax = {
 		if (e != null){e.innerHTML = rslt.responseText;}
 	},
 	
-	"error": function( request ) {
+	"error": function( rqst ) {
+		alert( 'Sorry, there was a problem getting the requested data:\n'+rqst.message );
 		BitBase.hideSpinner();
-		alert( 'Sorry, there was a problem getting the requested data.' );
 	},
 	
 	"getAndCall": function(elm, func, url, force) {
