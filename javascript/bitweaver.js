@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.41 2009/03/26 20:43:26 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.42 2009/05/05 02:55:33 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -1038,7 +1038,25 @@ BitBase = {
 			return true;
 		};
 		return this;
+	},
+
+	/**
+	 **	Extremely lightweight fixIEDropMenu function to support css drop menus for all browsers without need for 30K of fixes/ie7.js
+	 **/
+	"fixIEDropMenu": function( pMenuId ) {
+		var menuItems = document.getElementById(pMenuId).getElementsByTagName("LI");
+		for( var i=0; i< menuItems.length; i++ ) {
+			menuItems[i].onmouseover=function() {
+				this.className += " iemenuhover";
+			}
+			menuItems[i].onmouseout=function() {
+				this.className=this.className.replace(new RegExp(" iemenuhover\\b"), "");
+			}
+		}
 	}
+
+
+
 };
 
 //--- moved here from prototype - start ---
