@@ -604,7 +604,7 @@ class PHPMailer {
       $index++;
     }
     if(!$connection) {
-      $this->SetError($this->Lang('connect_host'));
+      $this->SetError($this->Lang('connect_host').$host);
     }
 
     return $connection;
