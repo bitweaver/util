@@ -1057,10 +1057,23 @@ jQuery.extend({
 			return letter.toUpperCase();
 		});
 
-		if ( set )
-			elem[ name ] = value;
-
+		if ( set ){
+			// {{{ BIT_MOD
+			//Workaround for known bug: http://osdir.com/ml/jQuery/2009-05/msg01006.html
+			//							http://groups.google.com/group/jquery-en/msg/43df4c068cd0145b
+			//							http://dev.jqueryui.com/ticket/3901
+			//						    http://www.n8williams.com/devblog/javascript_and_ajax/jquery-dialog-error-in-ie7-runtime-error-invalid-argument		
+			//May be removed in future versions	
+			if(typeof(value)=="string" && value.match(/[^0-9.]/) && parseInt(value) < 0){
+				elem[ name ] = 0;
+			}
+			else{	
+				elem[ name ] = value;
+			}
+			// }}} BIT_MOD
+		}
 		return elem[ name ];
+		
 	},
 
 	trim: function( text ) {
