@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.43 2009/05/28 19:17:46 tylerbello Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.44 2009/06/30 19:05:33 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -276,7 +276,7 @@ BitBase = {
 			}
 		}
 
-		var textarea = $(elementId);
+		var textarea = document.getElementById(elementId);
 		
 		if (textarea.setSelectionRange) {
 			//Mozilla UserAgent Gecko-1.4
@@ -370,14 +370,14 @@ BitBase = {
 	"flipIcon": function(elementId) {
 		var self = BitBase;
 		var pic = new Image();
-		if (elementId && $(elementId).style && $(elementId).style.display && $(elementId).style.display == "none") {
+		if (elementId && document.getElementById(elementId).style && document.getElementById(elementId).style.display && document.getElementById(elementId).style.display == "none") {
 			pic.src = bitIconDir + "/expanded.gif";
 			self.showById(elementId,1);
 		} else {
 			pic.src = bitIconDir + "/collapsed.gif";
 			self.hideById(elementId,1);
 		}
-		$(elementId+"img").src = pic.src;
+		document.getElementById(elementId+"img").src = pic.src;
 	},
 
 	// desc:		Toggles the state of a flipped List after page reload
@@ -392,15 +392,15 @@ BitBase = {
 			pic.src = bitIconDir + "/collapsed.gif";
 			self.hideById(elementId);
 		}
-		$(elementId+"img").src = pic.src;
+		document.getElementById(elementId+"img").src = pic.src;
 	},
 
 	// desc:		Used to Expand/Collapse Lists
 	// params:		elementId = a HTML Id
 	"flipWithSign": function(elementId,cookie) {
 		var self = BitBase;
-		if( flipperEle = $( "flipper"+elementId ) ) {
-			if ($(elementId).style.display == "none") {
+		if( flipperEle = document.getElementById( "flipper"+elementId ) ) {
+			if (document.getElementById(elementId).style.display == "none") {
 				self.showById(elementId,cookie);
 				flipperEle.firstChild.nodeValue = "[-]";
 			} else {
@@ -414,7 +414,7 @@ BitBase = {
 	// params:		elementId = a HTML Id of a List
 	"setFlipWithSign": function(elementId) {
 		var self = BitBase;
-		if( flipperEle = $( "flipper"+elementId ) ) {
+		if( flipperEle = document.getElementById( "flipper"+elementId ) ) {
 			if (self.getCookie(elementId) == "o") {
 				self.showById(elementId);
 				flipperEle.firstChild.nodeValue = "[-]";
@@ -505,7 +505,7 @@ BitBase = {
 	// NOTE:		checkboxes need to have the same name as elements_name
 	// Example:	<input type="checkbox" name="my_ename[]">, will arrive as Array in php.
 	"switchCheckboxes": function(the_form, elements_name, switcher_name) {
-		var elements = $(the_form).elements[elements_name];
+		var elements = document.getElementById(the_form).elements[elements_name];
 		var elements_cnt = ( typeof (elements.length) != 'undefined') ? elements.length : 0;
 
 		if (elements_cnt) {
@@ -524,8 +524,8 @@ BitBase = {
 	"disableSubmit": function(id) {
 		if(document.getElementById) {
 			// this is the way the standards work
-			$(id).disabled = true;
-			$(id).value = "Please Wait...";
+			document.getElementById(id).disabled = true;
+			document.getElementById(id).value = "Please Wait...";
 		} else if(document.all) {
 			// this is the way old msie versions work
 			document.all[id].disabled = true;
@@ -987,9 +987,9 @@ BitBase = {
 			}
 			p = p + letter;
 		}
-		$(w1).value = p;
-		$(w2).value = p;
-		$(w3).value = p;
+		document.getElementById(w1).value = p;
+		document.getElementById(w2).value = p;
+		document.getElementById(w3).value = p;
 	},
 
 	/** XHConn - Simple XMLHTTP Interface - bfults@gmail.com - 2005-04-08        **
@@ -1045,35 +1045,41 @@ BitBase = {
 	 **/
 	"fixIEDropMenu": function( pMenuId ) {
 		if(document.getElementById(pMenuId)){
-		var menuItems = document.getElementById(pMenuId).getElementsByTagName("LI");
-		for( var i=0; i< menuItems.length; i++ ) {
-			menuItems[i].onmouseover=function() {
-				this.className += " iemenuhover";
-			}
-			menuItems[i].onmouseout=function() {
-				this.className=this.className.replace(new RegExp(" iemenuhover\\b"), "");
+			var menuItems = document.getElementById(pMenuId).getElementsByTagName("LI");
+			for( var i=0; i< menuItems.length; i++ ) {
+				menuItems[i].onmouseover=function() {
+					this.className += " iemenuhover";
+				}
+				menuItems[i].onmouseout=function() {
+					this.className=this.className.replace(new RegExp(" iemenuhover\\b"), "");
+				}
 			}
 		}
 	}
-}
+
+
+	/**
+	 ** This common short cut can raise all kinds of hell, since it behaves differently for different Ajax libraries
+	 ** in particularly, jQuery which does things like $('.someclass') to address multiple elements.
+	 **
+	 ** It's use is strongly discouraged, particularly in distro'ed packages
+	 **/
+	function $() {
+		var elements = new Array();
+		for (var i = 0; i < arguments.length; i++) {
+			var element = arguments[i];
+			if (typeof element == 'string')
+				element = document.getElementById(element);
+			if (arguments.length == 1)
+				return element;
+			elements.push(element);
+		}
+		return elements;
+	}
+	//----------- prototype - end -------------
 
 
 };
-
-//--- moved here from prototype - start ---
-function $() {
-	var elements = new Array();
-	for (var i = 0; i < arguments.length; i++) {
-		var element = arguments[i];
-		if (typeof element == 'string')
-			element = document.getElementById(element);
-		if (arguments.length == 1)
-			return element;
-		elements.push(element);
-	}
-	return elements;
-}
-//----------- prototype - end -------------
 
 // init
 BitBase.init();
@@ -1091,7 +1097,7 @@ BitBase.init();
 //				formid = a HTML Id to form - see Note:
 // Note:		* The form must have 2 input rows and cols
 function textareasize(elementId, height) {
-	textarea = $(elementId);
+	textarea = document.getElementById( elementId );
 	if (textarea && height != 0 && textarea.rows + height > 5) {
 		textarea.rows += height;
 		setCookie('rows', textarea.rows);
@@ -1116,8 +1122,8 @@ function getRadioValue(elementName) {
 // date:		Pre-bitweaver
 // params:		id = a HTML Id
 function setUserModuleFromCombo(id) {
-	$('usermoduledata').value = $('usermoduledata').value
-		+ $(id).options[$(id).selectedIndex].value;
+	document.getElementById('usermoduledata').value = document.getElementById('usermoduledata').value
+		+ document.getElementById(id).options[document.getElementById(id).selectedIndex].value;
 }
 
 // NOTICE: Slated for delete - no use in bitweaver known except this file
@@ -1127,7 +1133,7 @@ function setUserModuleFromCombo(id) {
 // params:		elementId = a HTML Id
 //				strng = the string to be added
 function setSomeElement(elementId, strng) {
-	$(elementId).value = $(elementId).value + strng;
+	document.getElementById(elementId).value = document.getElementById(elementId).value + strng;
 }
 
 // NOTICE: ALL the following are deprecated. See pass through call for replacement
