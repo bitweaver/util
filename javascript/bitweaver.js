@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.44 2009/06/30 19:05:33 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.45 2009/07/01 20:07:23 tylerbello Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -1055,7 +1055,7 @@ BitBase = {
 				}
 			}
 		}
-	}
+	},
 
 
 	/**
@@ -1064,7 +1064,7 @@ BitBase = {
 	 **
 	 ** It's use is strongly discouraged, particularly in distro'ed packages
 	 **/
-	function $() {
+	"$": function() {
 		var elements = new Array();
 		for (var i = 0; i < arguments.length; i++) {
 			var element = arguments[i];
