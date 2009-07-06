@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.45 2009/07/01 20:07:23 tylerbello Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.46 2009/07/06 03:44:13 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -1006,14 +1006,17 @@ BitBase = {
 
 	"SimpleAjax": function() {
 		var xmlhttp, bComplete = false;
-		try { xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); }
+		try { 
+			xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); 
+		}
 		catch (e) { try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
 		catch (e) { try { xmlhttp = new XMLHttpRequest(); }
 		catch (e) { xmlhttp = false; }}}
 		if (!xmlhttp) return null;
-		this.connect = function(sURL, sMethod, sVars, fnDone) {
+		this.connect = function(sURL, sVars, fnDone, sMethod) {
 			if (!xmlhttp) return false;
 			bComplete = false;
+			sMethod = sMethod || 'POST';
 			sMethod = sMethod.toUpperCase();
 
 			try {
@@ -1032,10 +1035,15 @@ BitBase = {
 						fnDone(xmlhttp);
 					}
 				};
+					xmlhttp.setRequestHeader('X_REQUESTED_WITH', 'XMLHttpRequest');
 				xmlhttp.send(sVars);
 			}
 			catch(z) { return false; }
 			return true;
+		};
+		this.update = function( pUpdateEleId, sURL, sVars, sMethod ) {
+console.log( sURL + ',' + sMethod + '.' + sVars );
+			this.connect( sURL, sVars, function( pResponse ) { document.getElementById( pUpdateEleId ).innerHTML = pResponse.responseText; }, sMethod );
 		};
 		return this;
 	},
