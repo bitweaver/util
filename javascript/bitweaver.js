@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.46 2009/07/06 03:44:13 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.47 2009/07/12 18:10:16 squareing Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -992,18 +992,6 @@ BitBase = {
 		document.getElementById(w3).value = p;
 	},
 
-	/** XHConn - Simple XMLHTTP Interface - bfults@gmail.com - 2005-04-08        **
-	 ** Code licensed under Creative Commons Attribution-ShareAlike License      **
-	 ** http://creativecommons.org/licenses/by-sa/2.0/                           **
-
-	var fnWhenDone = function ( pResponse ) { 
-		alert( pResponse.responseText ); 
-	};
-	var ajax = new BitBase.SimpleAjax();
-	ajax.connect("mypage.php", "POST", "foo=bar&baz=qux", fnWhenDone);
-
-	**/
-
 	"SimpleAjax": function() {
 		var xmlhttp, bComplete = false;
 		try { 
@@ -1042,36 +1030,26 @@ BitBase = {
 			return true;
 		};
 		this.update = function( pUpdateEleId, sURL, sVars, sMethod ) {
-console.log( sURL + ',' + sMethod + '.' + sVars );
+			console.log( sURL + ',' + sMethod + '.' + sVars );
 			this.connect( sURL, sVars, function( pResponse ) { document.getElementById( pUpdateEleId ).innerHTML = pResponse.responseText; }, sMethod );
 		};
 		return this;
 	},
 
-	/**
-	 **	Extremely lightweight fixIEDropMenu function to support css drop menus for all browsers without need for 30K of fixes/ie7.js
-	 **/
 	"fixIEDropMenu": function( pMenuId ) {
 		if(document.getElementById(pMenuId)){
 			var menuItems = document.getElementById(pMenuId).getElementsByTagName("LI");
 			for( var i=0; i< menuItems.length; i++ ) {
-				menuItems[i].onmouseover=function() {
+				menuItems[i].onmouseover = function() {
 					this.className += " iemenuhover";
-				}
-				menuItems[i].onmouseout=function() {
-					this.className=this.className.replace(new RegExp(" iemenuhover\\b"), "");
-				}
+				};
+				menuItems[i].onmouseout = function() {
+					this.className = this.className.replace(new RegExp(" iemenuhover\\b"), "");
+				};
 			}
 		}
 	},
 
-
-	/**
-	 ** This common short cut can raise all kinds of hell, since it behaves differently for different Ajax libraries
-	 ** in particularly, jQuery which does things like $('.someclass') to address multiple elements.
-	 **
-	 ** It's use is strongly discouraged, particularly in distro'ed packages
-	 **/
 	"$": function() {
 		var elements = new Array();
 		for (var i = 0; i < arguments.length; i++) {
@@ -1084,7 +1062,6 @@ console.log( sURL + ',' + sMethod + '.' + sVars );
 		}
 		return elements;
 	}
-	//----------- prototype - end -------------
 
 
 };
