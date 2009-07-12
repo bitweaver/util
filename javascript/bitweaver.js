@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.47 2009/07/12 18:10:16 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.48 2009/07/12 18:18:20 squareing Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -64,11 +64,11 @@ BitBase = {
 	"setCookie": function(name, value, expire, path, domain, secure) {
 		var self = BitBase;
 		var path = (path) ? path : bitCookiePath;
-		var domain = escape((domain) ? domain : bitCookieDomain);	
+		var domain = escape((domain) ? domain : bitCookieDomain);
 		var cookie_path = ((path) ? "; path=" + path : "");
 		var cookie_domain = ((domain) ? "; domain=" + domain : "");
 		var cookie_expire = ((expire)?expire:((self.DATE) ? "; expires=" + self.DATE.toGMTString() : ""));
-		var cookie_secure =	((secure) ? "; secure" : ""); 
+		var cookie_secure =	((secure) ? "; secure" : "");
 		var curCookie = name + "=" + escape(value)
 				+ cookie_path
 				+ cookie_domain
@@ -135,7 +135,7 @@ BitBase = {
 		if (getCookie(name)) {
 			document.cookie = name + "="
 				+ "; path=" +  cookie_path + "; domain=" + cookie_domain + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
-		}	
+		}
 	},
 
 	//-- DOM coercion --//
@@ -191,12 +191,12 @@ BitBase = {
 		if (curval != null) {
 			var ids = self.unserialize(curval);
 			for (id in ids) {
-				if (ids[id] == "o") { 
+				if (ids[id] == "o") {
 					self.showById(id);
 				}
 				else {
 					self.hideById(id);
-				} 
+				}
 			}
 		}
 	},
@@ -213,14 +213,14 @@ BitBase = {
 		} else {
 			elm1.style.display = "none";
 			elm2.style.display = "inline";
-		}	
+		}
 	},
 
 	// desc:		convenience
 	"showSpinner": function() {
 		BitBase.setElementDisplay( 'spinner','block' );
 	},
-	
+
 	// desc:		convenience
 	"hideSpinner": function() {
 		BitBase.setElementDisplay( 'spinner','none' );
@@ -259,16 +259,16 @@ BitBase = {
 			// Check if it is a fckeditor. If not fall back on old code.
 			if (oEditor) {
 				// Fetching selection can't be done through the 'Selection'. Stupid.
-				if (document.all) { 
-					oSel = oEditor.EditorDocument.selection.createRange().text; 
-				} else { 
-					oSel = oEditor.EditorWindow.getSelection(); 
+				if (document.all) {
+					oSel = oEditor.EditorDocument.selection.createRange().text;
+				} else {
+					oSel = oEditor.EditorWindow.getSelection();
 				}
 				// Convert oSel to a string.
 				oSel = "" + oSel;
 				if (oSel.length > 0) {
 					replaceString = replaceString.replace(toBeReplaced, oSel);
-					// Delete selection 
+					// Delete selection
 					oEditor.Selection.Delete();
 				}
 				oEditor.InsertHtml(replaceString);
@@ -277,7 +277,7 @@ BitBase = {
 		}
 
 		var textarea = document.getElementById(elementId);
-		
+
 		if (textarea.setSelectionRange) {
 			//Mozilla UserAgent Gecko-1.4
 			var selectionStart = textarea.selectionStart;
@@ -407,7 +407,7 @@ BitBase = {
 				self.hideById(elementId,cookie);
 				flipperEle.firstChild.nodeValue = "[+]";
 			}
-		}	
+		}
 	},
 
 	// desc:		Toggles the state of a flipped List after page reload
@@ -422,10 +422,10 @@ BitBase = {
 				self.hideById(elementId);
 				flipperEle.firstChild.nodeValue = "[+]";
 			}
-		}	
+		}
 	},
 
-	// desc:		get the value of form elements: <input type=...>, <textarea ...> ... </textarea> and <select ...> ... </select>. 
+	// desc:		get the value of form elements: <input type=...>, <textarea ...> ... </textarea> and <select ...> ... </select>.
 	// params:		elm - an element or id
 	/*
 	Script by RoBorg
@@ -457,19 +457,19 @@ BitBase = {
 
 				case 'select-multiple':
 					var myArray = new Array();
-					for(var x=0; x < formElement.length; x++) 
+					for(var x=0; x < formElement.length; x++)
 						if(formElement[x].selected == true)
 							myArray[myArray.length] = formElement[x].value;
 					return myArray;
 
 				case 'checkbox': return formElement.checked;
-			
+
 				default: return formElement.value;
 			}
 		}
 	},
 
-	// desc:		set the value of form elements: <input type=...>, <textarea ...> ... </textarea> and <select ...> ... </select>. 
+	// desc:		set the value of form elements: <input type=...>, <textarea ...> ... </textarea> and <select ...> ... </select>.
 	// params:		elm - an element or id, value to set form to
 	/*
 	Script by RoBorg
@@ -488,7 +488,7 @@ BitBase = {
 				case 'select-one': formElement.selectedIndex = value; break;
 
 				case 'select-multiple':
-					for(var x=0; x < formElement.length; x++) 
+					for(var x=0; x < formElement.length; x++)
 						formElement[x].selected = value[x];
 					break;
 
@@ -501,7 +501,7 @@ BitBase = {
 	// desc:		Will Check / Uncheck all Checkboxes
 	// params:		the_form = a HTML Id of a form
 	//				elements_name = the name of the checkbox / see note
-	//				switcher_name = UNKNOWN 
+	//				switcher_name = UNKNOWN
 	// NOTE:		checkboxes need to have the same name as elements_name
 	// Example:	<input type="checkbox" name="my_ename[]">, will arrive as Array in php.
 	"switchCheckboxes": function(the_form, elements_name, switcher_name) {
@@ -532,7 +532,7 @@ BitBase = {
 		} else if(document.layers) {
 			// this is the way nn4 works
 			document.layers[id].disabled = true;
-		}	
+		}
 	},
 
 	// desc:		added for use in navigation dropdown
@@ -578,7 +578,7 @@ BitBase = {
 
 	// swiped from this page: http://www.onicos.com/staff/iz/amuse/javascript/expert/utf.txt
 	// utf.js - UTF-8 <=> UTF-16 convertion
-	// 
+	//
 	// Copyright (C) 1999 Masanao Izumo <iz@onicos.co.jp>
 	// Version: 1.0
 	// LastModified: Dec 25 1999
@@ -618,7 +618,7 @@ BitBase = {
 		while(i < len) {
 			c = str.charCodeAt(i++);
 			switch(c >> 4)
-			{ 
+			{
 			  case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
 				// 0xxxxxxx
 				out += str.charAt(i-1);
@@ -643,19 +643,19 @@ BitBase = {
 	},
 
 	// swiped from this page: http://www.coolcode.cn/?p=171
-	// 
+	//
 	// phpserializer.js - JavaScript to PHP serialize / unserialize class.
-	// 
+	//
 	// This class is designed to convert php variables to javascript
 	// and javascript variables to php with a php serialize unserialize
 	// compatible way.
-	// 
+	//
 	// Copyright (C) 2006 Ma Bingyao <andot@ujn.edu.cn>
 	// Version: 3.0f
 	// LastModified: Nov 30, 2006
 	// This library is free.  You can redistribute it and/or modify it.
 	// http://www.coolcode.cn/?p=171
-	 
+
 	"serialize": function(o) {
 		var self = BitBase;
 		var p = 0, sb = [], ht = [], hv = 1;
@@ -823,7 +823,7 @@ BitBase = {
 		 __serialize(o);
 		 return sb.join('');
 	 },
-	  
+
 	 "unserialize": function(ss) {
 		 var self = BitBase;
 		 var p = 0, ht = [], hv = 1; r = null;
@@ -992,10 +992,23 @@ BitBase = {
 		document.getElementById(w3).value = p;
 	},
 
+	/**
+	 * XHConn - Simple XMLHTTP Interface - bfults@gmail.com - 2005-04-08        **
+	 * Code licensed under Creative Commons Attribution-ShareAlike License      **
+	 * http://creativecommons.org/licenses/by-sa/2.0/                           **
+	 *
+	 * var fnWhenDone = function ( pResponse ) {
+	 *    	 alert( pResponse.responseText );
+	 *     };
+	 *     var ajax = new BitBase.SimpleAjax();
+	 *     ajax.connect("mypage.php", "POST", "foo=bar&baz=qux", fnWhenDone);
+	 * };
+	 *
+	 **/
 	"SimpleAjax": function() {
 		var xmlhttp, bComplete = false;
-		try { 
-			xmlhttp = new ActiveXObject("Msxml2.XMLHTTP"); 
+		try {
+			xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
 		}
 		catch (e) { try { xmlhttp = new ActiveXObject("Microsoft.XMLHTTP"); }
 		catch (e) { try { xmlhttp = new XMLHttpRequest(); }
@@ -1036,6 +1049,9 @@ BitBase = {
 		return this;
 	},
 
+	/**
+	 *     Extremely lightweight fixIEDropMenu function to support css drop menus for all browsers without need for 30K of fixes/ie7.js
+	 **/
 	"fixIEDropMenu": function( pMenuId ) {
 		if(document.getElementById(pMenuId)){
 			var menuItems = document.getElementById(pMenuId).getElementsByTagName("LI");
@@ -1049,6 +1065,13 @@ BitBase = {
 			}
 		}
 	},
+
+	/**
+	 * This common short cut can raise all kinds of hell, since it behaves differently for different Ajax libraries
+	 * in particularly, jQuery which does things like $('.someclass') to address multiple elements.
+	 *
+	 * It's use is strongly discouraged, particularly in distro'ed packages
+	 **/
 
 	"$": function() {
 		var elements = new Array();
