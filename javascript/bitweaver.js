@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.48 2009/07/12 18:18:20 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.49 2009/07/13 01:44:25 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -1043,7 +1043,6 @@ BitBase = {
 			return true;
 		};
 		this.update = function( pUpdateEleId, sURL, sVars, sMethod ) {
-			console.log( sURL + ',' + sMethod + '.' + sVars );
 			this.connect( sURL, sVars, function( pResponse ) { document.getElementById( pUpdateEleId ).innerHTML = pResponse.responseText; }, sMethod );
 		};
 		return this;
