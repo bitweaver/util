@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.20 2008/12/11 15:04:52 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.21 2009/07/22 15:49:24 dansut Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -78,15 +78,15 @@ function WebFXTabPane( el, bUseCookie ) {
 	this.pages = [];
 	this.selectedIndex = null;
 
+	this.useCookie = bUseCookie != null ? bUseCookie : true;
+
 	// <--- quick hack to set persistence only on pages where referrer == location
 	var ref = document.referrer.split( /[#\?]/ );
 	var loc = document.location.href.split( /[#\?]/ );
 	if( loc[0] != ref[0] ) {
-		WebFXTabPane.setCookie( "webfxtab_" + this.element.id, 0 );
+		this.useCookie = false;
 	}
 	// end quick hack - xing --->
-
-	this.useCookie = bUseCookie != null ? bUseCookie : true;
 
 	// add class name tag to class name
 	this.element.className = this.classNameTag + " " + this.element.className;
@@ -96,15 +96,6 @@ function WebFXTabPane( el, bUseCookie ) {
 	this.tabRow.className = "tabcontainer";
 	el.insertBefore( this.tabRow, el.firstChild );
 
-	var tabIndex = 0;
-	if ( this.useCookie ) {
-		tabIndex = Number( WebFXTabPane.getCookie( "webfxtab_" + this.element.id ) );
-		if ( isNaN( tabIndex ) ) {
-			tabIndex = 0;
-		}
-	}
-	this.selectedIndex = tabIndex;
-
 	// loop through child nodes and add them
 	var cs = el.childNodes;
 	var n;
@@ -113,6 +104,15 @@ function WebFXTabPane( el, bUseCookie ) {
 			this.addTabPage( cs[i] );
 		}
 	}
+
+	var tabIndex = 0;
+	if ( this.useCookie ) {
+		tabIndex = Number( WebFXTabPane.getCookie( "webfxtab_" + this.element.id ) );
+		if ( isNaN( tabIndex ) || !this.pages[ tabIndex ] ) {
+			tabIndex = 0;
+		}
+	}
+	this.setSelectedIndex( tabIndex );
 }
 
 WebFXTabPane.prototype.classNameTag = "tabsystem";
