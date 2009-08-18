@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/fat.js,v 1.5 2007/07/09 18:29:25 squareing Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/fat.js,v 1.6 2009/08/18 21:35:26 wjames5 Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -86,4 +86,4 @@ var Fat = {
 
 window.onload = function () {
 	Fat.fade_all();
-}
+};
