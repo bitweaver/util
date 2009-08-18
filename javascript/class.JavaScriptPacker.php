@@ -355,7 +355,7 @@ class JavaScriptPacker {
 		$params = implode(',', $params);
 		
 		// the whole thing
-		return 'eval(' . $unpack . '(' . $params . "))\n";
+		return 'eval(' . $unpack . '(' . $params . "));\n";
 	}
 	
 	var $buffer;
