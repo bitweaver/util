@@ -1,8 +1,8 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.12 2009/02/19 20:27:32 tekimaki_admin Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.13 2009/10/01 13:45:53 wjames5 Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
-// Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
+// Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details.
 
 /**
 * mailman lib 
