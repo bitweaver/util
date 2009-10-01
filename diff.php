@@ -1,16 +1,16 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_util/diff.php,v 1.2 2009/10/01 13:45:53 wjames5 Exp $
+ * $Header: /cvsroot/bitweaver/_bit_util/diff.php,v 1.3 2009/10/01 14:17:07 wjames5 Exp $
  *
  * A PHP diff engine for phpwiki.
  *
  * Copyright (c) 2004 bitweaver.org
  * Copyright (c) 2003 tikwiki.org
  * Copyright (c) 2000 Geoffrey T. Dairiki <dairiki@dairiki.org>
- * All Rights Reserved. See copyright.txt for details and a complete list of authors.
+ * All Rights Reserved. See below for details and a complete list of authors.
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details
  *
- * $Id: diff.php,v 1.2 2009/10/01 13:45:53 wjames5 Exp $
+ * $Id: diff.php,v 1.3 2009/10/01 14:17:07 wjames5 Exp $
  * @package util
  */
 
