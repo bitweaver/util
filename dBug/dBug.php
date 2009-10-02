@@ -1,7 +1,9 @@
 <?php
-error_reporting(E_ALL);
-
 /*********************************************************************************************************************\
+ * LAST UPDATE
+ * ============
+ * March 22, 2007
+ *
  *
  * AUTHOR
  * =============
@@ -43,95 +45,7 @@ error_reporting(E_ALL);
  * new dBug ( $strXml, "xml" );
  * 
 \*********************************************************************************************************************/
-?>
-<script language="JavaScript">
-/* code modified from ColdFusion's cfdump code */
-	function dBug_toggleRow(source) {
-		target=(document.all) ? source.parentElement.cells[1] : source.parentNode.lastChild
-		dBug_toggleTarget(target,dBug_toggleSource(source));
-	}
-	
-	function dBug_toggleSource(source) {
-		if (source.style.fontStyle=='italic') {
-			source.style.fontStyle='normal';
-			source.title='click to collapse';
-			return 'open';
-		} else {
-			source.style.fontStyle='italic';
-			source.title='click to expand';
-			return 'closed';
-		}
-	}
 
-	function dBug_toggleTarget(target,switchToState) {
-		target.style.display=(switchToState=='open') ? '' : 'none';
-	}
-
-	function dBug_toggleTable(source) {
-		var switchToState=dBug_toggleSource(source);
-		if(document.all) {
-			var table=source.parentElement.parentElement;
-			for(var i=1;i<table.rows.length;i++) {
-				target=table.rows[i];
-				dBug_toggleTarget(target,switchToState);
-			}
-		}
-		else {
-			var table=source.parentNode.parentNode;
-			for (var i=1;i<table.childNodes.length;i++) {
-				target=table.childNodes[i];
-				if(target.style) {
-					dBug_toggleTarget(target,switchToState);
-				}
-			}
-		}
-	}
-</script>
-
-<style type="text/css">
-	table.dBug_array,table.dBug_object,table.dBug_resource,table.dBug_resourceC,table.dBug_xml {
-		font-family:Verdana, Arial, Helvetica, sans-serif; color:#000000; font-size:12px;
-	}
-	
-	.dBug_arrayHeader,
-	.dBug_objectHeader,
-	.dBug_resourceHeader,
-	.dBug_resourceCHeader,
-	.dBug_xmlHeader 
-		{ font-weight:bold; color:#FFFFFF; }
-	
-	/* array */
-	table.dBug_array { background-color:#006600; }
-	table.dBug_array td { background-color:#FFFFFF; }
-	table.dBug_array td.dBug_arrayHeader { background-color:#009900; }
-	table.dBug_array td.dBug_arrayKey { background-color:#CCFFCC; }
-	
-	/* object */
-	table.dBug_object { background-color:#0000CC; }
-	table.dBug_object td { background-color:#FFFFFF; }
-	table.dBug_object td.dBug_objectHeader { background-color:#4444CC; }
-	table.dBug_object td.dBug_objectKey { background-color:#CCDDFF; }
-	
-	/* resource */
-	table.dBug_resourceC { background-color:#884488; }
-	table.dBug_resourceC td { background-color:#FFFFFF; }
-	table.dBug_resourceC td.dBug_resourceCHeader { background-color:#AA66AA; }
-	table.dBug_resourceC td.dBug_resourceCKey { background-color:#FFDDFF; }
-	
-	/* resource */
-	table.dBug_resource { background-color:#884488; }
-	table.dBug_resource td { background-color:#FFFFFF; }
-	table.dBug_resource td.dBug_resourceHeader { background-color:#AA66AA; }
-	table.dBug_resource td.dBug_resourceKey { background-color:#FFDDFF; }
-	
-	/* xml */
-	table.dBug_xml { background-color:#888888; }
-	table.dBug_xml td { background-color:#FFFFFF; }
-	table.dBug_xml td.dBug_xmlHeader { background-color:#AAAAAA; }
-	table.dBug_xml td.dBug_xmlKey { background-color:#DDDDDD; }
-</style>
-
-<?php
 class dBug {
 	
 	var $xmlDepth=array();
@@ -141,41 +55,87 @@ class dBug {
 	var $xmlCount=0;
 	var $xmlAttrib;
 	var $xmlName;
-	var $arrType=array("array","object","resource","boolean");
+	var $arrType=array("array","object","resource","boolean","NULL");
+	var $bInitialized = false;
+	var $bCollapsed = false;
+	var $arrHistory = array();
 	
 	//constructor
-	function dBug($var,$forceType="") {
+	function dBug($var,$forceType="",$bCollapsed=false) {
+		//include js and css scripts
+		if(!defined('BDBUGINIT')) {
+			define("BDBUGINIT", TRUE);
+			$this->initJSandCSS();
+		}
 		$arrAccept=array("array","object","xml"); //array of variable types that can be "forced"
+		$this->bCollapsed = $bCollapsed;
 		if(in_array($forceType,$arrAccept))
 			$this->{"varIs".ucfirst($forceType)}($var);
 		else
 			$this->checkType($var);
 	}
+
+	//get variable name
+	function getVariableName() {
+		$arrBacktrace = debug_backtrace();
+
+		//possible 'included' functions
+		$arrInclude = array("include","include_once","require","require_once");
+		
+		//check for any included/required files. if found, get array of the last included file (they contain the right line numbers)
+		for($i=count($arrBacktrace)-1; $i>=0; $i--) {
+			$arrCurrent = $arrBacktrace[$i];
+			if(array_key_exists("function", $arrCurrent) && 
+				(in_array($arrCurrent["function"], $arrInclude) || (0 != strcasecmp($arrCurrent["function"], "dbug"))))
+				continue;
+
+			$arrFile = $arrCurrent;
+			
+			break;
+		}
+		
+		if(isset($arrFile)) {
+			$arrLines = file($arrFile["file"]);
+			$code = $arrLines[($arrFile["line"]-1)];
+	
+			//find call to dBug class
+			preg_match('/\bnew dBug\s*\(\s*(.+)\s*\);/i', $code, $arrMatches);
+			
+			return $arrMatches[1];
+		}
+		return "";
+	}
 	
 	//create the main table header
 	function makeTableHeader($type,$header,$colspan=2) {
+		if(!$this->bInitialized) {
+			$header = $this->getVariableName() . " (" . $header . ")";
+			$this->bInitialized = true;
+		}
+		$str_i = ($this->bCollapsed) ? "style=\"font-style:italic\" " : ""; 
+		
 		echo "<table cellspacing=2 cellpadding=3 class=\"dBug_".$type."\">
 				<tr>
-					<td class=\"dBug_".$type."Header\" colspan=".$colspan." style=\"cursor:hand\" onClick='dBug_toggleTable(this)'>".$header."</td>
+					<td ".$str_i."class=\"dBug_".$type."Header\" colspan=".$colspan." onClick='dBug_toggleTable(this)'>".$header."</td>
 				</tr>";
 	}
 	
 	//create the table row header
 	function makeTDHeader($type,$header) {
-		echo "<tr>
-				<td valign=\"top\" onClick='dBug_toggleRow(this)' style=\"cursor:hand\" class=\"dBug_".$type."Key\">".$header."</td>
+		$str_d = ($this->bCollapsed) ? " style=\"display:none\"" : "";
+		echo "<tr".$str_d.">
+				<td valign=\"top\" onClick='dBug_toggleRow(this)' class=\"dBug_".$type."Key\">".$header."</td>
 				<td>";
 	}
 	
 	//close table row
 	function closeTDRow() {
-		return "</td>\n</tr>\n";
+		return "</td></tr>\n";
 	}
 	
 	//error
 	function  error($type) {
-		$error="Error: Variable is not a";
-		//thought it would be nice to place in some nice grammar techniques :)
+		$error="Error: Variable cannot be a";
 		// this just checks if the type starts with a vowel or "x" and displays either "a" or "an"
 		if(in_array(substr($type,0,1),array("a","e","i","o","u","x")))
 			$error.="n";
@@ -194,6 +154,9 @@ class dBug {
 			case "array":
 				$this->varIsArray($var);
 				break;
+			case "NULL":
+				$this->varIsNULL();
+				break;
 			case "boolean":
 				$this->varIsBoolean($var);
 				break;
@@ -204,6 +167,11 @@ class dBug {
 		}
 	}
 	
+	//if variable is a NULL type
+	function varIsNULL() {
+		echo "NULL";
+	}
+	
 	//if variable is a boolean type
 	function varIsBoolean($var) {
 		$var=($var==1) ? "TRUE" : "FALSE";
@@ -212,38 +180,60 @@ class dBug {
 			
 	//if variable is an array type
 	function varIsArray($var) {
+		$var_ser = serialize($var);
+		array_push($this->arrHistory, $var_ser);
+		
+		$this->makeTableHeader("array", (empty($var)?"empty array":"array"));
 		if(is_array($var)) {
-			if (count($var) > 0) {
-				$this->makeTableHeader("array","array");
-				foreach($var as $key=>$value) {
-					$this->makeTDHeader("array",$key);
-					if(in_array(gettype($value),$this->arrType))
-						$this->checkType($value);
-					else {
-						$value=(trim($value)=="") ? "[empty string]" : $value;
-						echo htmlentities($value)."</td>\n</tr>\n";
-					}
+			foreach($var as $key=>$value) {
+				$this->makeTDHeader("array",$key);
+				
+				//check for recursion
+				if(is_array($value)) {
+					$var_ser = serialize($value);
+					if(in_array($var_ser, $this->arrHistory, TRUE))
+						$value = "*RECURSION*";
 				}
-			} else {
-				$this->makeTableHeader("array","empty array");
+				
+				if(in_array(gettype($value),$this->arrType))
+					$this->checkType($value);
+				else {
+					$value=(trim($value)=="") ? "[empty string]" : $value;
+					echo htmlentities($value);
+				}
+				echo $this->closeTDRow();
 			}
 		}
 		else echo "<tr><td>".$this->error("array").$this->closeTDRow();
+		array_pop($this->arrHistory);
 		echo "</table>";
 	}
 	
 	//if variable is an object type
 	function varIsObject($var) {
+		$var_ser = serialize($var);
+		array_push($this->arrHistory, $var_ser);
 		$this->makeTableHeader("object","object");
-		$arrObjVars=get_object_vars($var);
+		
 		if(is_object($var)) {
+			$arrObjVars=get_object_vars($var);
 			foreach($arrObjVars as $key=>$value) {
-				if (!is_array($value)) 
-					$value=(trim($value)=="") ? "[empty string]" : $value;
+
+				$value=(!is_object($value) && !is_array($value) && trim($value)=="") ? "[empty string]" : $value;
 				$this->makeTDHeader("object",$key);
+				
+				//check for recursion
+				if(is_object($value)||is_array($value)) {
+					$var_ser = serialize($value);
+					if(in_array($var_ser, $this->arrHistory, TRUE)) {
+						$value = (is_object($value)) ? "*RECURSION* -> $".get_class($value) : "*RECURSION*";
+
+					}
+				}
 				if(in_array(gettype($value),$this->arrType))
 					$this->checkType($value);
-				else echo $value.$this->closeTDRow();
+				else echo $value;
+				echo $this->closeTDRow();
 			}
 			$arrObjMethods=get_class_methods(get_class($var));
 			foreach($arrObjMethods as $key=>$value) {
@@ -252,6 +242,7 @@ class dBug {
 			}
 		}
 		else echo "<tr><td>".$this->error("object").$this->closeTDRow();
+		array_pop($this->arrHistory);
 		echo "</table>";
 	}
 
@@ -281,6 +272,62 @@ class dBug {
 				break;
 		}
 		echo $this->closeTDRow()."</table>\n";
+	}
+
+	//if variable is a database resource type
+	function varIsDBResource($var,$db="mysql") {
+		if($db == "pgsql")
+			$db = "pg";
+		if($db == "sybase-db" || $db == "sybase-ct")
+			$db = "sybase";
+		$arrFields = array("name","type","flags");	
+		$numrows=call_user_func($db."_num_rows",$var);
+		$numfields=call_user_func($db."_num_fields",$var);
+		$this->makeTableHeader("resource",$db." result",$numfields+1);
+		echo "<tr><td class=\"dBug_resourceKey\">&nbsp;</td>";
+		for($i=0;$i<$numfields;$i++) {
+			$field_header = "";
+			for($j=0; $j<count($arrFields); $j++) {
+				$db_func = $db."_field_".$arrFields[$j];
+				if(function_exists($db_func)) {
+					$fheader = call_user_func($db_func, $var, $i). " ";
+					if($j==0)
+						$field_name = $fheader;
+					else
+						$field_header .= $fheader;
+				}
+			}
+			$field[$i]=call_user_func($db."_fetch_field",$var,$i);
+			echo "<td class=\"dBug_resourceKey\" title=\"".$field_header."\">".$field_name."</td>";
+		}
+		echo "</tr>";
+		for($i=0;$i<$numrows;$i++) {
+			$row=call_user_func($db."_fetch_array",$var,constant(strtoupper($db)."_ASSOC"));
+			echo "<tr>\n";
+			echo "<td class=\"dBug_resourceKey\">".($i+1)."</td>"; 
+			for($k=0;$k<$numfields;$k++) {
+				$tempField=$field[$k]->name;
+				$fieldrow=$row[($field[$k]->name)];
+				$fieldrow=($fieldrow=="") ? "[empty string]" : $fieldrow;
+				echo "<td>".$fieldrow."</td>\n";
+			}
+			echo "</tr>\n";
+		}
+		echo "</table>";
+		if($numrows>0)
+			call_user_func($db."_data_seek",$var,0);
+	}
+	
+	//if variable is an image/gd resource type
+	function varIsGDResource($var) {
+		$this->makeTableHeader("resource","gd",2);
+		$this->makeTDHeader("resource","Width");
+		echo imagesx($var).$this->closeTDRow();
+		$this->makeTDHeader("resource","Height");
+		echo imagesy($var).$this->closeTDRow();
+		$this->makeTDHeader("resource","Colors");
+		echo imagecolorstotal($var).$this->closeTDRow();
+		echo "</table>";
 	}
 	
 	//if variable is an xml type
@@ -383,45 +430,102 @@ class dBug {
 		else
 			$this->xmlDData[$count]=$data;
 	}
-	
-	//if variable is a database resource type
-	function varIsDBResource($var,$db="mysql") {
-		$numrows=call_user_func($db."_num_rows",$var);
-		$numfields=call_user_func($db."_num_fields",$var);
-		$this->makeTableHeader("resource",$db." result",$numfields+1);
-		echo "<tr><td class=\"dBug_resourceKey\">&nbsp;</td>";
-		for($i=0;$i<$numfields;$i++) {
-			$field[$i]=call_user_func($db."_fetch_field",$var,$i);
-			echo "<td class=\"dBug_resourceKey\">".$field[$i]->name."</td>";
-		}
-		echo "</tr>";
-		for($i=0;$i<$numrows;$i++) {
-			$row=call_user_func($db."_fetch_array",$var,constant(strtoupper($db)."_ASSOC"));
-			echo "<tr>\n";
-			echo "<td class=\"dBug_resourceKey\">".($i+1)."</td>"; 
-			for($k=0;$k<$numfields;$k++) {
-				$tempField=$field[$k]->name;
-				$fieldrow=$row[($field[$k]->name)];
-				$fieldrow=($fieldrow=="") ? "[empty string]" : $fieldrow;
-				echo "<td>".$fieldrow."</td>\n";
-			}
-			echo "</tr>\n";
-		}
-		echo "</table>";
-		if($numrows>0)
-			call_user_func($db."_data_seek",$var,0);
+
+	function initJSandCSS() {
+		echo <<<SCRIPTS
+			<script language="JavaScript">
+			/* code modified from ColdFusion's cfdump code */
+				function dBug_toggleRow(source) {
+					var target = (document.all) ? source.parentElement.cells[1] : source.parentNode.lastChild;
+					dBug_toggleTarget(target,dBug_toggleSource(source));
+				}
+				
+				function dBug_toggleSource(source) {
+					if (source.style.fontStyle=='italic') {
+						source.style.fontStyle='normal';
+						source.title='click to collapse';
+						return 'open';
+					} else {
+						source.style.fontStyle='italic';
+						source.title='click to expand';
+						return 'closed';
+					}
+				}
+			
+				function dBug_toggleTarget(target,switchToState) {
+					target.style.display = (switchToState=='open') ? '' : 'none';
+				}
+			
+				function dBug_toggleTable(source) {
+					var switchToState=dBug_toggleSource(source);
+					if(document.all) {
+						var table=source.parentElement.parentElement;
+						for(var i=1;i<table.rows.length;i++) {
+							target=table.rows[i];
+							dBug_toggleTarget(target,switchToState);
+						}
+					}
+					else {
+						var table=source.parentNode.parentNode;
+						for (var i=1;i<table.childNodes.length;i++) {
+							target=table.childNodes[i];
+							if(target.style) {
+								dBug_toggleTarget(target,switchToState);
+							}
+						}
+					}
+				}
+			</script>
+			
+			<style type="text/css">
+				table.dBug_array,table.dBug_object,table.dBug_resource,table.dBug_resourceC,table.dBug_xml {
+					font-family:Verdana, Arial, Helvetica, sans-serif; color:#000000; font-size:12px;
+				}
+				
+				.dBug_arrayHeader,
+				.dBug_objectHeader,
+				.dBug_resourceHeader,
+				.dBug_resourceCHeader,
+				.dBug_xmlHeader 
+					{ font-weight:bold; color:#FFFFFF; cursor:pointer; }
+				
+				.dBug_arrayKey,
+				.dBug_objectKey,
+				.dBug_xmlKey 
+					{ cursor:pointer; }
+					
+				/* array */
+				table.dBug_array { background-color:#006600; }
+				table.dBug_array td { background-color:#FFFFFF; }
+				table.dBug_array td.dBug_arrayHeader { background-color:#009900; }
+				table.dBug_array td.dBug_arrayKey { background-color:#CCFFCC; }
+				
+				/* object */
+				table.dBug_object { background-color:#0000CC; }
+				table.dBug_object td { background-color:#FFFFFF; }
+				table.dBug_object td.dBug_objectHeader { background-color:#4444CC; }
+				table.dBug_object td.dBug_objectKey { background-color:#CCDDFF; }
+				
+				/* resource */
+				table.dBug_resourceC { background-color:#884488; }
+				table.dBug_resourceC td { background-color:#FFFFFF; }
+				table.dBug_resourceC td.dBug_resourceCHeader { background-color:#AA66AA; }
+				table.dBug_resourceC td.dBug_resourceCKey { background-color:#FFDDFF; }
+				
+				/* resource */
+				table.dBug_resource { background-color:#884488; }
+				table.dBug_resource td { background-color:#FFFFFF; }
+				table.dBug_resource td.dBug_resourceHeader { background-color:#AA66AA; }
+				table.dBug_resource td.dBug_resourceKey { background-color:#FFDDFF; }
+				
+				/* xml */
+				table.dBug_xml { background-color:#888888; }
+				table.dBug_xml td { background-color:#FFFFFF; }
+				table.dBug_xml td.dBug_xmlHeader { background-color:#AAAAAA; }
+				table.dBug_xml td.dBug_xmlKey { background-color:#DDDDDD; }
+			</style>
+SCRIPTS;
 	}
-	
-	//if variable is an image/gd resource type
-	function varIsGDResource($var) {
-		$this->makeTableHeader("resource","gd",2);
-		$this->makeTDHeader("resource","Width");
-		echo imagesx($var).$this->closeTDRow();
-		$this->makeTDHeader("resource","Height");
-		echo imagesy($var).$this->closeTDRow();
-		$this->makeTDHeader("resource","Colors");
-		echo imagecolorstotal($var).$this->closeTDRow();
-		echo "</table>";
-	}
+
 }
 ?>
