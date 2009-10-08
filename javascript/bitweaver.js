@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.49 2009/07/13 01:44:25 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.50 2009/10/08 00:45:03 wjames5 Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -21,15 +21,6 @@ BitBase = {
 		self.DATE.setFullYear(self.DATE.getFullYear() + 1);
 		self.setCookie("tz_offset", tz_offset);
 		self.setCookie("javascript_enabled", "y");
-	},
-
-	// TODO why do we need an instance if we do nothing with it? why is this here anyway instead of in fck
-	// This function is called by FCKEditor when/if it is loaded.
-	"FCKeditorOnComplete":function( editorInstance )
-	{
-		// We note that it is loaded so switchEditors doesn't throw an error
-		// before the API object is created.
-		document.FCKEditorLoaded = true;
 	},
 
 	// Adds a function to be called at page load time
@@ -1144,9 +1135,6 @@ function setSomeElement(elementId, strng) {
 }
 
 // NOTICE: ALL the following are deprecated. See pass through call for replacement
-function FCKeditor_OnComplete( editorInstance ){
-	BitBase.FCKeditorOnComplete(editorInstance);
-}
 function addLoadHook(func) {
 	BitBase.addLoadHook(func);
 }
