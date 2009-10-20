@@ -1,6 +1,6 @@
 <?php
 
-/* $Id: phplot.php,v 1.3 2008/07/25 15:14:32 wolff_borg Exp $ */
+/* $Id: phplot.php,v 1.4 2009/10/20 18:01:49 ukgrad89 Exp $ */
 
 /*
  * PHPLOT Version 5.0.rc1
@@ -937,7 +937,7 @@ class PHPlot {
         // Fixed fonts:
         else {
             // Split the text by its lines, and count them
-            $which_text = ereg_replace("\r", "", $which_text);
+            $which_text = preg_replace("/\r/", "", $which_text);
             $str = split("\n", $which_text);
             $nlines = count($str);
             $spacing = $this->line_spacing * ($nlines - 1);
