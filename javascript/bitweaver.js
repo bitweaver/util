@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.50 2009/10/08 00:45:03 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.51 2009/11/10 02:18:12 wjames5 Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -1052,7 +1052,38 @@ BitBase = {
 				menuItems[i].onmouseout = function() {
 					this.className = this.className.replace(new RegExp(" iemenuhover\\b"), "");
 				};
+				/* In IE6 brute add iframes to anything that might have a z-index - someone else can narrow this better it doesn't need to be on all LIs */
+				BitBase.bgIframe( menuItems[i] );
 			}
+		}
+	},
+
+	/**
+	 * This mess right here ads an iframe behind any element you need to float over selects in that POS IE6
+	 **/
+	"bgIframe": function(e, s) {
+		/* This is only for IE6 */
+		if( document.all && (navigator.userAgent.toLowerCase().indexOf("msie 6.") != -1) ){
+			/* @TODO enable override of params */
+			s = {
+				top : 'auto', /* auto == .currentStyle.borderTopWidth */
+				left : 'auto', /* auto == .currentStyle.borderLeftWidth */
+				width : 'auto', /* auto == offsetWidth */
+				height : 'auto', /* auto == offsetHeight */
+				opacity : true,
+				src : 'javascript:void(0);'
+			};
+
+			var prop = function(n){return n&&n.constructor==Number?n+'px':n;},
+			html = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+s.src+'"'+
+			'style="display:block;position:absolute;z-index:-1;'+
+			(s.opacity !== false?'filter:Alpha(Opacity=\'0\');':'')+
+			'top:'+(s.top=='auto'?((parseInt(e.parentNode.style.borderTopWidth)||0)*-1)+'px':prop(s.top))+';'+
+			'left:'+(s.left=='auto'?((parseInt(e.parentNode.style.borderLeftWidth)||0)*-1)+'px':prop(s.left))+';'+
+			'width:'+(s.width=='auto'?e.parentNode.offsetWidth+'px':prop(s.width))+';'+
+			'height:'+(s.height=='auto'?e.parentNode.offsetHeight+'px':prop(s.height))+';'+
+			'"/></iframe>';
+			e.innerHTML = html+e.innerHTML;
 		}
 	},
 
