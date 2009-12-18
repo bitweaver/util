@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.51 2009/11/10 02:18:12 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.52 2009/12/18 15:09:50 walterwoj Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -968,6 +968,7 @@ BitBase = {
 		var s = Math.round(Math.random());
 		var l = 8;
 		var p = '';
+		var has_num = false;
 		for (i = 0; i < l; i++) {
 			if (s) {
 				letter = vo.charAt(Math.round(Math.random() * (vo.length - 1)));
@@ -976,8 +977,16 @@ BitBase = {
 				letter = co.charAt(Math.round(Math.random() * (co.length - 1)));
 				s = 1;
 			}
+			
+			if( ! isNaN( letter ) ) // Keep track of weather we put a number in the password
+				has_num = true;
+			
 			p = p + letter;
 		}
+		
+		if( ! has_num ) // If we never put a number in the password we'll put one in a random place now
+			p = p.replace( p.charAt( Math.round(Math.random() * p.length - 1 ) ), Math.round(Math.random() * 9 ) );
+		
 		document.getElementById(w1).value = p;
 		document.getElementById(w2).value = p;
 		document.getElementById(w3).value = p;
