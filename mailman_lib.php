@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.13 2009/10/01 13:45:53 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.14 2010/01/06 19:07:53 wjames5 Exp $
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details.
@@ -14,7 +14,7 @@
 
 function mailman_verify_list( $pListName ) {
 	$error = NULL;
-	if( $matches = preg_match( '/[^A-Za-z0-9]/', $pListName ) ) {
+	if( $matches = preg_match( '/[^A-Za-z0-9\-\_]/', $pListName ) ) {
 		$error = tra( 'Invalid mailing list name' ).': '.tra( 'List names can only contain letters and numbers' );
 	} else {
 		$lists = mailman_list_lists();
@@ -323,7 +323,7 @@ function mailman_get_aliases_file() {
 }
 
 function mailman_command( $pCommand, &$output, $pOptions=NULL ) {
-	$ret = NULL;
+	$ret_code = NULL;
 	if( $fullCommand = mailman_get_command( $pCommand ) ) {
 		$cmd = $fullCommand.' '.$pOptions;
 		if( !defined( 'IS_LIVE' ) || !IS_LIVE ) {
