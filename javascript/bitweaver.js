@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.52 2009/12/18 15:09:50 walterwoj Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.53 2010/01/26 18:23:25 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -413,6 +413,68 @@ BitBase = {
 				self.hideById(elementId);
 				flipperEle.firstChild.nodeValue = "[+]";
 			}
+		}
+	},
+
+	// desc:		Simple fade in/out of element based on http://www.switchonthecode.com/tutorials/javascript-tutorial-simple-fade-animation
+	// params:		elementId = a HTML Id, fadeTime = millisecond to fade out
+	"fade": function(elementId,fadeTime,direction) {
+		var element = document.getElementById(elementId);
+		if(element) {
+			if( fadeTime==null ) {
+				fadeTime = 500.0;
+			}
+			if(element.FadeState == null) {
+				if(element.style.opacity == null || element.style.opacity == '' || element.style.opacity == '1') {
+					element.FadeState = 2;
+				} else {
+					element.FadeState = -2;
+				}
+			}
+
+			if(element.FadeState == 1 || element.FadeState == -1) {
+				element.FadeState = element.FadeState == 1 ? -1 : 1;
+				element.FadeTimeLeft = fadeTime - element.FadeTimeLeft;
+			} else {
+				element.FadeState = element.FadeState == 2 ? -1 : 1;
+				element.FadeTimeLeft = fadeTime;
+				setTimeout("BitBase.animateFade(" + new Date().getTime() + ",'" + elementId + "',"+fadeTime+")", 33);
+			}  
+		}
+	},
+
+	"animateFade": function(lastTick, elementId,fadeTime) {  
+		var curTick = new Date().getTime();
+		var elapsedTicks = curTick - lastTick;
+		var element = document.getElementById(elementId);
+
+		if(element) {
+			if(element.FadeTimeLeft <= elapsedTicks) {
+				if( element.FadeState == 1 ) {
+					element.style.opacity = '1';
+					element.style.filter = 'alpha(opacity = 100)';
+					element.FadeState = 2;
+				} else {
+					element.style.opacity = '0';
+					element.style.filter = 'alpha(opacity = 0)';
+					element.FadeState = -2;
+					element.style.display = 'none';
+				}
+				return;
+			}
+
+			element.FadeTimeLeft -= elapsedTicks;
+			var newOpVal = element.FadeTimeLeft/fadeTime;
+			if(element.FadeState == 1) {
+				element.style.display = ''; // revert to default display
+				newOpVal = 1 - newOpVal;
+			}
+
+			element.height = Math.round(newOpVal*element.offsetHeight)+"px";
+			element.style.opacity = newOpVal;
+			element.style.filter = 'alpha(opacity = ' + (newOpVal*100) + ')';
+
+			setTimeout("BitBase.animateFade(" + curTick + ",'" + elementId + "',"+fadeTime+")", 33);
 		}
 	},
 
