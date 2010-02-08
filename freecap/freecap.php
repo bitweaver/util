@@ -26,7 +26,7 @@
 // {{{ BIT_MOD
 // hmm. too many session tweaks in setup_smarty ... we need to call this
 // also allows us to use $gBitSystem config settings
-require_once( '../../bit_setup_inc.php' );
+require_once( '../../kernel/setup_inc.php' );
 //session_start();
 // }}} BIT_MOD
 

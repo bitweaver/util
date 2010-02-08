@@ -1,11 +1,11 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_util/javascript/jscompressor.php,v 1.3 2006/03/22 10:24:38 squareing Exp $
+ * $Header: /cvsroot/bitweaver/_bit_util/javascript/jscompressor.php,v 1.4 2010/02/08 21:27:27 wjames5 Exp $
  * adapted from tinyMCE gzipper
  */
 
 // initial setup
-require_once( "../../bit_setup_inc.php" );
+require_once( "../../kernel/setup_inc.php" );
 
 // General options
 $expiresOffset = 3600 * 24 * 10;		// 10 days util client cache expires
