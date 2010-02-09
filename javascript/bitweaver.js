@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.53 2010/01/26 18:23:25 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.54 2010/02/09 17:36:49 wjames5 Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -21,6 +21,10 @@ BitBase = {
 		self.DATE.setFullYear(self.DATE.getFullYear() + 1);
 		self.setCookie("tz_offset", tz_offset);
 		self.setCookie("javascript_enabled", "y");
+	},
+
+	"deprecatedFunc": function ( funcName ){
+		alert( 'Warning: Use of deprecated global function ' + funcName + ' use name space BitBase: BitBase.' + funcName )
 	},
 
 	// Adds a function to be called at page load time
@@ -1238,98 +1242,130 @@ function setSomeElement(elementId, strng) {
 
 // NOTICE: ALL the following are deprecated. See pass through call for replacement
 function addLoadHook(func) {
+	BitBase.deprecatedFunc( 'addLoadHook' );
 	BitBase.addLoadHook(func);
 }
 function setCookieArray(cookie, key, value) {
+	BitBase.deprecatedFunc( 'setCookieArray' );
 	BitBase.setCookieArray(cookie, key, value);
 }
 function getCookieArray(cookie, key) {
+	BitBase.deprecatedFunc( 'getCookieArray' );
 	BitBase.getCookieArray(cookie, key);
 }
 function setCookie(name, value, expire, path, domain, secure) {
+	BitBase.deprecatedFunc( 'setCookie' );
 	BitBase.setCookie(name, value, expire, path, domain, secure);
 }
 function getCookie(name) {
+	BitBase.deprecatedFunc( 'getCookie' );
 	BitBase.getCookie(name);
 }
 function deleteCookie(name, path, domain) {
+	BitBase.deprecatedFunc( 'deleteCookie' );
 	BitBase.deleteCookie(name, path, domain);
 }
 function flip(elementId) {
+	BitBase.deprecatedFunc( 'flip' );
 	BitBase.toggleElementDisplay( elementId, 'block' );
 }
 function toggle(elementId) {
+	BitBase.deprecatedFunc( 'toggle' );
 	BitBase.toggleElementDisplay( elementId, 'block', 1 );
 }
 function setupShowHide() {
+	BitBase.deprecatedFunc( 'setupShowHide' );
 	BitBase.setupShowHide();
 }
 function utf16to8(str) {
+	BitBase.deprecatedFunc( 'utf16to8' );
 	BitBase.utf16to8(str);
 }
 function utf8to16(str) {
+	BitBase.deprecatedFunc( 'utf8to16' );
 	BitBase.utf8to16(str);
 }
 function serialize(o) {
+	BitBase.deprecatedFunc( 'serialize' );
 	BitBase.serialize(o);
 }
 function unserialize(ss) {
+	BitBase.deprecatedFunc( 'unserialize' );
 	BitBase.serialize(ss);
 }
 function genPass(w1, w2, w3) {
+	BitBase.deprecatedFunc( 'genPass' );
 	BitBase.genPass(w1, w2, w3);
 }
 function toggle_dynamic_var(name) {
+	BitBase.deprecatedFunc( 'toggle_dynamic_var' );
 	BitBase.toggleDynamicVar( name );
 }
 function setSelectionRange(textarea, selectionStart, selectionEnd) {
+	BitBase.deprecatedFunc( 'setSelectionRange' );
 	BitBase.setSelectionRange(textarea, selectionStart, selectionEnd);
 }
 function setCaretToPos (textarea, pos) {
+	BitBase.deprecatedFunc( 'setCaretToPos' );
 	BitBase.setCaretToPos(textarea, pos);
 }
 function insertAt(elementId, replaceString) {
+	BitBase.deprecatedFunc( 'insertAt' );
 	BitBase.insertAt(elementId, replaceString);
 }
 function showById(elementId,useCookie) {
+	BitBase.deprecatedFunc( 'showById' );
 	BitBase.showById(elementId,useCookie);
 }
 function hideById(elementId,useCookie) {
+	BitBase.deprecatedFunc( 'hideById' );
 	BitBase.hideById(elementId,useCookie);
 }
 function flipMulti(elementIdStart,elementIdNum,elements,zen){
+	BitBase.deprecatedFunc( 'flipMulti' );
 	BitBase.flipMulti(elementIdStart,elementIdNum,elements,zen);
 }
 function flipIcon(elementId) {
+	BitBase.deprecatedFunc( 'flipIcon' );
 	BitBase.flipIcon(elementId);
 }
 function setFlipIcon(elementId) {
+	BitBase.deprecatedFunc( 'setFlipIcon' );
 	BitBase.setFlipIcon(elementId);
 }
 function flipWithSign(elementId,cookie) {
+	BitBase.deprecatedFunc( 'flipWithSign' );
 	BitBase.flipWithSign(elementId,cookie);
 }
 function setFlipWithSign(elementId) {
+	BitBase.deprecatedFunc( 'setFlipWithSign' );
 	BitBase.setFlipWithSign(elementId);
 }
 function getElementValue(formElementId){
+	BitBase.deprecatedFunc( 'getElementValue' );
 	BitBase.getElementValue(formElementId);
 }
 function setElementValue(formElementId, value){
+	BitBase.deprecatedFunc( 'setElementValue' );
 	BitBase.setElementValue(formElementId, value);
 }
 function switchCheckboxes(the_form, elements_name, switcher_name) {
+	BitBase.deprecatedFunc( 'switchCheckboxes' );
 	BitBase.switchCheckboxes(the_form, elements_name, switcher_name);
 }
 function disableSubmit(id) {
+	BitBase.deprecatedFunc( 'disableSubmit' );
 	BitBase.disableSubmit(id);
 }
 function go(o) {
+	BitBase.deprecatedFunc( 'go' );
 	BitBase.go(o);
 }
 function popUpWin(url, type, strWidth, strHeight) {
+	BitBase.deprecatedFunc( 'popUpWin' );
 	BitBase.popUpWin(url, type, strWidth, strHeight);
 }
 function closeWin(){
+	BitBase.deprecatedFunc( 'closeWin' );
 	BitBase.closeWin();
 }
