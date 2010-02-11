@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.54 2010/02/09 17:36:49 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.55 2010/02/11 15:16:16 squareing Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -86,7 +86,7 @@ BitBase = {
 			newval = new Array();
 			newval[key] = val;
 		}
-		self.setCookie(name, serialize(newval));
+		self.setCookie(name, BitBase.serialize(newval));
 	},
 
 	// desc:		Gets a Cookie and returns it's value
@@ -1291,7 +1291,7 @@ function serialize(o) {
 }
 function unserialize(ss) {
 	BitBase.deprecatedFunc( 'unserialize' );
-	BitBase.serialize(ss);
+	BitBase.unserialize(ss);
 }
 function genPass(w1, w2, w3) {
 	BitBase.deprecatedFunc( 'genPass' );
