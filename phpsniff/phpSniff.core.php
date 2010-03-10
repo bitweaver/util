@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-	$Id: phpSniff.core.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+	$Id: phpSniff.core.php,v 1.2 2010/03/10 03:35:15 spiderr Exp $
     
     phpSniff: HTTP_USER_AGENT Client Sniffer for PHP
 	Copyright (C) 2001 Roger Raymond ~ epsilon7@users.sourceforge.net
@@ -518,7 +518,7 @@ class phpSniff_core
             }
 			// if this is a mozilla browser, get the rv: information
 			if($this->browser_is($this->_get_short_name('mozilla'))) {
-                if(preg_match('/([0-9]+)([\.0-9]+)([a-z0-9+]?)/i',$mozv[1],$match)) {
+                if( !empty( $mozv[1] ) && preg_match('/([0-9]+)([\.0-9]+)([a-z0-9+]?)/i',$mozv[1],$match)) {
 				    $this->_set_browser('version',$mozv[1]);
 				    $this->_set_browser('maj_ver',$match[1]);
 				    $this->_set_browser('min_ver',$match[2]);
