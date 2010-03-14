@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.56 2010/02/24 18:40:19 spiderr Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.57 2010/03/14 15:02:38 wjames5 Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -1070,7 +1070,7 @@ BitBase = {
 	 *    	 alert( pResponse.responseText );
 	 *     };
 	 *     var ajax = new BitBase.SimpleAjax();
-	 *     ajax.connect("mypage.php", "POST", "foo=bar&baz=qux", fnWhenDone);
+	 *     ajax.connect("mypage.php", "foo=bar&baz=qux", fnWhenDone, "POST");
 	 * };
 	 *
 	 **/
