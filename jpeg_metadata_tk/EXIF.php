@@ -2620,6 +2620,7 @@ function get_IFD_value_as_text( $Exif_Tag )
         // Create a string to receive the output text
         $output_str = "";
 
+if( !empty( $Exif_Tag['Data Type'] ) ) {
         // Select Processing method according to the datatype
         switch  ($Exif_Tag['Data Type'])
         {
@@ -2711,6 +2712,7 @@ function get_IFD_value_as_text( $Exif_Tag )
                         $output_str .= "Error - Exif tag data type (" . $Exif_Tag['Data Type'] .") is invalid";
                         break;
         }
+}
 
         // Return the resulting text string
         return $output_str;
