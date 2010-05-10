@@ -18,6 +18,7 @@ static $mimetypes = array(
 	"smi" => "application/smil",
 	"mif" => "application/vnd.mif",
 	"ppt" => "application/vnd.ms-powerpoint",
+	"xls" => "application/vnd.ms-excel",
 	"bcpio" => "application/x-bcpio",
 	"vcd" => "application/x-cdlink",
 	"pgn" => "application/x-chess-pgn",
