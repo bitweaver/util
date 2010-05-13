@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.21 2009/07/22 15:49:24 dansut Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/libs/tabpane.js,v 1.22 2010/05/13 23:38:40 spiderr Exp $
 
 //-------------------------------------------------------------------------
 //  						   Tab Pane 1.02
@@ -123,7 +123,9 @@ WebFXTabPane.prototype.setSelectedIndex = function ( n ) {
 			this.pages[ this.selectedIndex ].hide();
 		}
 		this.selectedIndex = n;
-		this.pages[ this.selectedIndex ].show();
+		if( this.pages[ this.selectedIndex ] != undefined ) {
+			this.pages[ this.selectedIndex ].show();
+		}
 
 		if ( this.useCookie ) {
 			WebFXTabPane.setCookie( "webfxtab_" + this.element.id, n, 1 );
