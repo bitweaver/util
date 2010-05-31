@@ -1,4 +1,4 @@
-// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.57 2010/03/14 15:02:38 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_util/javascript/bitweaver.js,v 1.58 2010/05/31 14:36:33 spiderr Exp $
 
 // please modify this file and leave plenty of comments. This file will be
 // compressed automatically. Please make sure you only use comments beginning
@@ -1116,6 +1116,10 @@ BitBase = {
 		};
 		return this;
 	},
+
+    "evalJSON": function ( j ) {
+       	return eval("(" + j + ")");
+    },
 
 	/**
 	 *     Extremely lightweight fixIEDropMenu function to support css drop menus for all browsers without need for 30K of fixes/ie7.js
