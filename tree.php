@@ -1,6 +1,6 @@
 <?php
 /** 
- * @version $Header: /cvsroot/bitweaver/_bit_util/tree.php,v 1.2 2005/06/28 07:46:24 spiderr Exp $
+ * @version $Header$
  *
  * ase tree maker
  *

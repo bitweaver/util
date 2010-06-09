@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: str_split.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
+// $Id$
 //
 
 
@@ -27,7 +27,7 @@
  * @package     PHP_Compat
  * @link        http://php.net/function.str_split
  * @author      Aidan Lister <aidan@php.net>
- * @version     $Revision: 1.2 $
+ * @version     $Revision$
  * @since       PHP 5
  * @require     PHP 4.0.1 (trigger_error)
  */

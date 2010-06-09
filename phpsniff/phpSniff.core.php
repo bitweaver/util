@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-	$Id: phpSniff.core.php,v 1.2 2010/03/10 03:35:15 spiderr Exp $
+	$Id$
     
     phpSniff: HTTP_USER_AGENT Client Sniffer for PHP
 	Copyright (C) 2001 Roger Raymond ~ epsilon7@users.sourceforge.net

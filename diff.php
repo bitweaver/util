@@ -1,6 +1,6 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_util/diff.php,v 1.3 2009/10/01 14:17:07 wjames5 Exp $
+ * $Header$
  *
  * A PHP diff engine for phpwiki.
  *
@@ -10,7 +10,7 @@
  * All Rights Reserved. See below for details and a complete list of authors.
  * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details
  *
- * $Id: diff.php,v 1.3 2009/10/01 14:17:07 wjames5 Exp $
+ * $Id$
  * @package util
  */
 

@@ -16,7 +16,7 @@
 // | Author: Allan Kent <allan@lodestone.co.za>                           |
 // +----------------------------------------------------------------------+
 //
-// $Id: Human.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+// $Id$
 //
 /**
  * Class to convert date strings between Gregorian and Human calendar formats.

@@ -1,6 +1,6 @@
 <?php
 /**
- * $Header: /cvsroot/bitweaver/_bit_util/javascript/jscompressor.php,v 1.4 2010/02/08 21:27:27 wjames5 Exp $
+ * $Header$
  * adapted from tinyMCE gzipper
  */
 

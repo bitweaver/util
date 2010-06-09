@@ -17,7 +17,7 @@
 // |                                                                      |
 // +----------------------------------------------------------------------+
 //
-// $Id: TimeZoneWindows.php,v 1.1 2005/06/19 05:21:33 bitweaver Exp $
+// $Id$
 //
 // Date_TimeZone Class Windows Support File
 //

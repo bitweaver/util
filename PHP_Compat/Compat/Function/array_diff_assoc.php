@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: array_diff_assoc.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
+// $Id$
 //
 
 
@@ -27,7 +27,7 @@
  * @package     PHP_Compat
  * @link        http://php.net/function.array_diff_assoc
  * @author      Aidan Lister <aidan@php.net>
- * @version     $Revision: 1.2 $
+ * @version     $Revision$
  * @since       PHP 4.3.0
  * @require     PHP 4.0.1 (trigger_error)
  */

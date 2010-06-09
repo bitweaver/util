@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************
-	$Id: phpSniff.class.php,v 1.6 2007/06/13 13:10:35 squareing Exp $
+	$Id$
     
     phpSniff: HTTP_USER_AGENT Client Sniffer for PHP
 	Copyright (C) 2001 Roger Raymond ~ epsilon7@users.sourceforge.net

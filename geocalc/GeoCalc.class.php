@@ -1,6 +1,6 @@
 <?
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_util/geocalc/GeoCalc.class.php,v 1.2 2009/03/31 05:53:20 lsces Exp $
+ * @version $Header$
  *	
  * This code was converted to PHP from Visual C++
  * by Steven Brendtro on behalf of imaginerc.com

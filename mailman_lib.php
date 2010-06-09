@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_util/mailman_lib.php,v 1.14 2010/01/06 19:07:53 wjames5 Exp $
+// $Header$
 // Copyright (c) bitweaver Group
 // All Rights Reserved.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details.

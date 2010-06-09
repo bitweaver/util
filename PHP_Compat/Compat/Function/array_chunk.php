@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: array_chunk.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
+// $Id$
 //
 
 
@@ -28,7 +28,7 @@
  * @link        http://php.net/function.array_chunk
  * @author      Aidan Lister <aidan@php.net>
  * @author      Thiemo Mättig (http://maettig.com)
- * @version     $Revision: 1.2 $
+ * @version     $Revision$
  * @since       PHP 4.2.0
  * @require     PHP 4.0.1 (trigger_error)
  */

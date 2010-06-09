@@ -17,7 +17,7 @@
 // |          Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: version_compare.php,v 1.2 2006/03/22 10:24:33 squareing Exp $
+// $Id$
 //
 
 
@@ -29,7 +29,7 @@
  * @link        http://php.net/version_compare
  * @author      Philippe Jausions <Philippe.Jausions@11abacus.com>
  * @author      Aidan Lister <aidan@php.net>
- * @version     $Revision: 1.2 $
+ * @version     $Revision$
  * @since       PHP 4.1.0
  * @require     PHP 4.0.1 (trigger_error)
  */

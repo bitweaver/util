@@ -16,7 +16,7 @@
 // | Authors: Aidan Lister <aidan@php.net>                                |
 // +----------------------------------------------------------------------+
 //
-// $Id: stripos.php,v 1.3 2008/09/23 11:49:58 squareing Exp $
+// $Id$
 //
 
 
@@ -27,7 +27,7 @@
  * @package     PHP_Compat
  * @link        http://php.net/function.stripos
  * @author      Aidan Lister <aidan@php.net>
- * @version     $Revision: 1.3 $
+ * @version     $Revision$
  * @since       PHP 5
  * @require     PHP 4.0.1 (trigger_error)
  */
