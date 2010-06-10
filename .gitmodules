@@ -1,0 +1,6 @@
+[submodule "adodb"]
+	path = adodb
+	url = git://bitweaver.org/adodb.git
+[submodule "smarty"]
+	path = smarty
+	url = git://bitweaver.org/smarty.git
