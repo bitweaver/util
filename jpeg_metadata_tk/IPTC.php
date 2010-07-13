@@ -110,8 +110,8 @@ function get_IPTC( $Data_Str )
 
                 // Add the IPTC record to the output array
                 $OutputArray[] = array( "IPTC_Type" => $iptctype ,
-                                        "RecName" => $GLOBALS[ "IPTC_Entry_Names" ][ $iptctype ],
-                                        "RecDesc" => $GLOBALS[ "IPTC_Entry_Descriptions" ][ $iptctype ],
+                                        "RecName" => (isset( $GLOBALS["IPTC_Entry_Names"][$iptctype] ) ? $GLOBALS["IPTC_Entry_Names"][$iptctype] : ''),
+                                        "RecDesc" => (isset( $GLOBALS["IPTC_Entry_Descriptions"][$iptctype] ) ?  $GLOBALS[ "IPTC_Entry_Descriptions" ][ $iptctype ] : ''),
                                         "RecData" => substr( $Data_Str, $pos, $iptc_raw['IPTC_Size'] ) );
 
                 // Skip over the IPTC record data
