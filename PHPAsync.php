@@ -137,7 +137,7 @@ class PHPAsync extends BitBase{
 		header('Connection: close');
 
 		ob_end_flush();
-		ob_flush();
+		// ob_flush(); -- worked fine in preliminary test and was suggested by web sample, but causes warning here
 		flush();
 
 		session_write_close();
@@ -156,9 +156,9 @@ class PHPAsync extends BitBase{
 			$this->mProcessObject->$func( $pPct );
 		}
 		// rewind to the beginning of the log file if append is false
-		if( !$this->getConfig( 'append_log' ) ){
+		if( $this->getConfig( 'append_log' ) == FALSE ){
 			rewind( $this->mFileHandle ); 
-			ftruncate( $this->mFileHandle, filesize($$this->mLogFile));
+			ftruncate( $this->mFileHandle, filesize($this->mLogFile));
 		}
 		// update the log file
 		if( fwrite( $this->mFileHandle, $logText ) == false ){ 
