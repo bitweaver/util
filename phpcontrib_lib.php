@@ -30,7 +30,7 @@ function extract_to( &$arr, &$to, $type=EXTR_OVERWRITE, $prefix=false ){
 	foreach( $arr as $key=>$val ){
 	   
 		$nkey = $key;
-		$isset = $t==1 ? isset( $to[$key] ) : isset( $to->$key );
+		$isset = $t==0 ? isset( $to[$key] ) : isset( $to->$key );
 	   
 		if( ( $type==EXTR_SKIP && $isset )
 			|| ( $type==EXTR_IF_EXISTS && !$isset ) )
