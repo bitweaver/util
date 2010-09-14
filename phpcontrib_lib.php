@@ -60,3 +60,11 @@ function extract_to( &$arr, &$to, $type=EXTR_OVERWRITE, $prefix=false ){
 	return $i;
 }
 
+/**
+ * array_is_indexed
+ * a crud check if an array is an indexed array with the limitation that
+ * it works for arrays where every element is as if it had been assigned doing $array[] = $value
+ */
+function array_is_indexed( $pArray ){
+	return (count(array_diff_key($pArray, array_values($pArray))) == 0);
+}
