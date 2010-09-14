@@ -1,48 +1,50 @@
 /*
- * jQuery UI Effects Highlight 1.7.1
+ * jQuery UI Effects Highlight 1.8.4
  *
- * Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Effects/Highlight
  *
  * Depends:
- *	effects.core.js
+ *	jquery.effects.core.js
  */
-(function($) {
+(function( $, undefined ) {
 
 $.effects.highlight = function(o) {
-
 	return this.queue(function() {
+		var elem = $(this),
+			props = ['backgroundImage', 'backgroundColor', 'opacity'],
+			mode = $.effects.setMode(elem, o.options.mode || 'show'),
+			animation = {
+				backgroundColor: elem.css('backgroundColor')
+			};
 
-		// Create element
-		var el = $(this), props = ['backgroundImage','backgroundColor','opacity'];
+		if (mode == 'hide') {
+			animation.opacity = 0;
+		}
 
-		// Set options
-		var mode = $.effects.setMode(el, o.options.mode || 'show'); // Set Mode
-		var color = o.options.color || "#ffff99"; // Default highlight color
-		var oldColor = el.css("backgroundColor");
-
-		// Adjust
-		$.effects.save(el, props); el.show(); // Save & Show
-		el.css({backgroundImage: 'none', backgroundColor: color}); // Shift
-
-		// Animation
-		var animation = {backgroundColor: oldColor };
-		if (mode == "hide") animation['opacity'] = 0;
-
-		// Animate
-		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(mode == "hide") el.hide();
-			$.effects.restore(el, props);
-		if (mode == "show" && $.browser.msie) this.style.removeAttribute('filter');
-			if(o.callback) o.callback.apply(this, arguments);
-			el.dequeue();
-		}});
-
+		$.effects.save(elem, props);
+		elem
+			.show()
+			.css({
+				backgroundImage: 'none',
+				backgroundColor: o.options.color || '#ffff99'
+			})
+			.animate(animation, {
+				queue: false,
+				duration: o.duration,
+				easing: o.options.easing,
+				complete: function() {
+					(mode == 'hide' && elem.hide());
+					$.effects.restore(elem, props);
+					(mode == 'show' && !$.support.opacity && this.style.removeAttribute('filter'));
+					(o.callback && o.callback.apply(this, arguments));
+					elem.dequeue();
+				}
+			});
 	});
-
 };
 
 })(jQuery);

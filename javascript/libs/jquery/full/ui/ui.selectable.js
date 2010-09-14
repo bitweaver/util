@@ -1,20 +1,28 @@
 /*
- * jQuery UI Selectable 1.7.1
+ * jQuery UI Selectable 1.8.4
  *
- * Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Selectables
  *
  * Depends:
- *	ui.core.js
+ *	jquery.ui.core.js
+ *	jquery.ui.mouse.js
+ *	jquery.ui.widget.js
  */
-(function($) {
+(function( $, undefined ) {
 
-$.widget("ui.selectable", $.extend({}, $.ui.mouse, {
-
-	_init: function() {
+$.widget("ui.selectable", $.ui.mouse, {
+	options: {
+		appendTo: 'body',
+		autoRefresh: true,
+		distance: 0,
+		filter: '*',
+		tolerance: 'touch'
+	},
+	_create: function() {
 		var self = this;
 
 		this.element.addClass("ui-selectable");
@@ -48,17 +56,20 @@ $.widget("ui.selectable", $.extend({}, $.ui.mouse, {
 
 		this._mouseInit();
 
-		this.helper = $(document.createElement('div'))
-			.css({border:'1px dotted black'})
-			.addClass("ui-selectable-helper");
+		this.helper = $("<div class='ui-selectable-helper'></div>");
 	},
 
 	destroy: function() {
+		this.selectees
+			.removeClass("ui-selectee")
+			.removeData("selectable-item");
 		this.element
 			.removeClass("ui-selectable ui-selectable-disabled")
 			.removeData("selectable")
 			.unbind(".selectable");
 		this._mouseDestroy();
+
+		return this;
 	},
 
 	_mouseStart: function(event) {
@@ -78,8 +89,6 @@ $.widget("ui.selectable", $.extend({}, $.ui.mouse, {
 		$(options.appendTo).append(this.helper);
 		// position helper (lasso)
 		this.helper.css({
-			"z-index": 100,
-			"position": "absolute",
 			"left": event.clientX,
 			"top": event.clientY,
 			"width": 0,
@@ -108,14 +117,23 @@ $.widget("ui.selectable", $.extend({}, $.ui.mouse, {
 		$(event.target).parents().andSelf().each(function() {
 			var selectee = $.data(this, "selectable-item");
 			if (selectee) {
-				selectee.$element.removeClass("ui-unselecting").addClass('ui-selecting');
-				selectee.unselecting = false;
-				selectee.selecting = true;
-				selectee.selected = true;
-				// selectable SELECTING callback
-				self._trigger("selecting", event, {
-					selecting: selectee.element
-				});
+				var doSelect = !event.metaKey || !selectee.$element.hasClass('ui-selected');
+				selectee.$element
+					.removeClass(doSelect ? "ui-unselecting" : "ui-selected")
+					.addClass(doSelect ? "ui-selecting" : "ui-unselecting");
+				selectee.unselecting = !doSelect;
+				selectee.selecting = doSelect;
+				selectee.selected = doSelect;
+				// selectable (UN)SELECTING callback
+				if (doSelect) {
+					self._trigger("selecting", event, {
+						selecting: selectee.element
+					});
+				} else {
+					self._trigger("unselecting", event, {
+						unselecting: selectee.element
+					});
+				}
 				return false;
 			}
 		});
@@ -239,19 +257,10 @@ $.widget("ui.selectable", $.extend({}, $.ui.mouse, {
 		return false;
 	}
 
-}));
+});
 
 $.extend($.ui.selectable, {
-	version: "1.7.1",
-	defaults: {
-		appendTo: 'body',
-		autoRefresh: true,
-		cancel: ":input,option",
-		delay: 0,
-		distance: 0,
-		filter: '*',
-		tolerance: 'touch'
-	}
+	version: "1.8.4"
 });
 
 })(jQuery);
