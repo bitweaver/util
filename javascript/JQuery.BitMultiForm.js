@@ -37,12 +37,11 @@ BitMultiForm = {
 		});
 
 		//Check if remove button exists, if exists, set the remove function
-		/*
 		var a = cloneElm.find('.multiform_remove');
+		var rid = cloneElm.attr('id');
 		if( a.length > 0 ){
-			a[0].onclick = function(){BitMultiForm.removeForm(id1);};
+			a[0].onclick = function(){BitMultiForm.removeForm(rid);};
 		}
-		*/
 
 		$jq('#'+target).append(cloneElm);
 
@@ -52,7 +51,7 @@ BitMultiForm = {
 	},
 	'removeForm':function (elmId) {
 		//Remove the form from the master div
-		BitBase.$(elmId).parentNode.removeChild( $(elmId) );
+		BitBase.$(elmId).parentNode.removeChild( BitBase.$(elmId) );
 	},
 	'seqs':{}
 };
