@@ -4,10 +4,10 @@
 // Dependency: Prototype
 var $jq = jQuery.noConflict();
 BitMultiForm = {
-	'addForm':function (template,target) {
+	'addForm':function (template,target,max) {
 		//Set Variables
 		var index,cloneNode,curr_units,inputs;
-		
+		alert(max);
 		//Get all the form units from the master div that holds all the unique instances of the cloned input blocks
 		curr_units = $jq('#'+target).find('.multiform_unit');
 		
@@ -18,7 +18,11 @@ BitMultiForm = {
 		}else{
 			index = BitMultiForm.seqs[target] = curr_units.length;
 		}
-		
+		if (typeof(max) != 'undefined' && index == max - 1) {
+			button = template.replace("_temp",'_add_button');	
+			alert(button);
+			BitBase.setElementDisplay(button, 'none', false);
+		}
 		//Clone the template node and set the attributes
 		cloneElm = $jq( BitBase.$(template).cloneNode(true) );
 		var id1 = cloneElm.attr('id',cloneElm.attr('id').replace('temp',index));
@@ -50,7 +54,10 @@ BitMultiForm = {
 		}
 	},
 	'removeForm':function (elmId) {
-		//Remove the form from the master div
+		//Remove the form from the master div and make sure add shows
+		button = elmId.replace(/_[0-9]+/, '_add_button');
+		alert(button);
+		BitBase.setElementDisplay(button, 'block', false);
 		BitBase.$(elmId).parentNode.removeChild( BitBase.$(elmId) );
 	},
 	'seqs':{}
