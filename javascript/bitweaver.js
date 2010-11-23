@@ -280,18 +280,27 @@ BitBase = {
 
 	// desc:		convenience
 	"showSpinner": function() {
+		// Center the spinner
 		div = document.getElementById( 'spinner' );
 		w = div.style.width.replace(/[a-z]/gi, '');
 		h = div.style.height.replace(/[a-z]/gi,'');
 		center = BitBase.windowCenter({width: w, height: h});
 		div.style.top = center.y + "px";
-		div.style.left = center.x + "px";
-		BitBase.setElementDisplay( 'spinner','block' );
+		div.style.left = center.x + "px"
+                // Now resize the overlay
+		div = document.getElementById( 'spinner_overlay' );
+		dim = BitBase.windowSize();
+		div.style.width = dim.width + "px";
+		div.style.height = dim.height + "px";
+                // And show them both.
+		BitBase.setElementDisplay( 'spinner_overlay', 'block' );
+		BitBase.setElementDisplay( 'spinner', 'block');
 	},
 
 	// desc:		convenience
 	"hideSpinner": function() {
 		BitBase.setElementDisplay( 'spinner','none' );
+		BitBase.setElementDisplay( 'spinner_overlay','none' );
 	},
 
 	// desc:		No Idea - used by insertAt
