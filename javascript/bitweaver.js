@@ -39,7 +39,6 @@ BitBase = {
     
     "windowCenter" : function(hWnd)
     {
-		alert("Center");
 		var _x = 0;
 		var _y = 0;
 		var offsetX = 0;
