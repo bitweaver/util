@@ -7,6 +7,70 @@
 // the beginning of the clean up of bitweaver core js - use name spaces
 // if you are adding new features to this file add them to the BitBase object.
 BitBase = {
+    // windowCenter and windowSize hacked based on http://www.demtron.com/blog/post/2009/01/14/Centering-a-DIV-Window-with-Cross-Browser-JavaScript.aspx
+    "windowSize" : function()
+    {
+		var w = 0;
+		var h = 0;
+		//IE
+		if(!window.innerWidth)
+		{
+			//strict mode
+			if(!(document.documentElement.clientWidth == 0))
+			{
+				w = document.documentElement.clientWidth;
+				h = document.documentElement.clientHeight;
+			}
+			//quirks mode
+			else
+			{
+				w = document.body.clientWidth;
+				h = document.body.clientHeight;
+		    }
+	    }
+		//w3c
+		else
+	    {
+			w = window.innerWidth;
+			h = window.innerHeight;
+	    }
+		return {width:w,height:h};
+    },
+    
+    "windowCenter" : function(hWnd)
+    {
+		var _x = 0;
+		var _y = 0;
+		var offsetX = 0;
+		var offsetY = 0;
+		//IE
+		if(!window.pageYOffset)
+	    {
+			//strict mode
+			if(!(document.documentElement.scrollTop == 0))
+		    {
+				offsetY = document.documentElement.scrollTop;
+				offsetX = document.documentElement.scrollLeft;
+		    }
+			//quirks mode
+			else
+		    {
+				offsetY = document.body.scrollTop;
+				offsetX = document.body.scrollLeft;
+		    }
+	    }
+		//w3c
+		else
+	    {
+			offsetX = window.pageXOffset;
+			offsetY = window.pageYOffset;
+	    }
+		_sz = BitBase.windowSize();
+		_x = ((_sz.width-hWnd.width)/2)+offsetX;
+		_y = ((_sz.height-hWnd.height)/2)+offsetY;
+		return{x:_x,y:_y};
+    },
+
 	// constants
 	// DATE - set in init()
 	// newWindow used in closeWin()
@@ -216,12 +280,27 @@ BitBase = {
 
 	// desc:		convenience
 	"showSpinner": function() {
-		BitBase.setElementDisplay( 'spinner','block' );
+		// Center the spinner
+		div = document.getElementById( 'spinner' );
+		w = div.style.width.replace(/[a-z]/gi, '');
+		h = div.style.height.replace(/[a-z]/gi,'');
+		center = BitBase.windowCenter({width: w, height: h});
+		div.style.top = center.y + "px";
+		div.style.left = center.x + "px"
+                // Now resize the overlay
+		div = document.getElementById( 'spinner_overlay' );
+		dim = BitBase.windowSize();
+		div.style.width = dim.width + "px";
+		div.style.height = dim.height + "px";
+                // And show them both.
+		BitBase.setElementDisplay( 'spinner_overlay', 'block' );
+		BitBase.setElementDisplay( 'spinner', 'block');
 	},
 
 	// desc:		convenience
 	"hideSpinner": function() {
 		BitBase.setElementDisplay( 'spinner','none' );
+		BitBase.setElementDisplay( 'spinner_overlay','none' );
 	},
 
 	// desc:		No Idea - used by insertAt

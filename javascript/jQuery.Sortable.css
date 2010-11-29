@@ -1,0 +1,4 @@
+.sortable li { margin: 5px; padding: 5px; cursor:move; }
+html>body .sortable li { border:1px solid #CCCCCC;}
+.ui-state-highlight { height: 1.5em; line-height: 1.2em; border:1px solid #FED22F; background: #EEC21F}
+.ui-sortable-helper {background:#EEEEEE;}
