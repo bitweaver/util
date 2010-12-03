@@ -189,9 +189,10 @@ BitBase = {
 	//				[domain] (optional) = the domain of the cookie (must be same domain used when created)
 	// NOTE:		path and domain default if assigned null or omitted if no explicit argument proceeds
 	"deleteCookie": function(name, path, domain) {
+		var self = BitBase;
 		var cookie_path = (path) ? path : bitCookiePath;
 		var cookie_domain = escape((domain) ? domain : bitCookieDomain);
-		if (getCookie(name)) {
+		if (self.getCookie(name)) {
 			document.cookie = name + "="
 				+ "; path=" +  cookie_path + "; domain=" + cookie_domain + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
 		}
