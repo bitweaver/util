@@ -1,9 +1,18 @@
-// Author: Al Sierra
-// Version: 3.16.2010
-// Description: Multi Forms
-// Dependency: Prototype
 var $jq = jQuery.noConflict();
 BitMultiForm = {
+	'addList':function (template,value,title,target,max) {
+		// Hide the option div
+		$jq( '#'+template.replace("temp", value) ).css('display','none');
+		// clone the input form
+		var index = BitMultiForm.addForm(template, target, max);
+		var name = template.replace("temp", index);
+		// Set the values
+		$jq( '#'+name+" .multiform_input" ).val(value);
+		$jq( '#'+name+" .multiform_input" ).after(title);
+		$jq( '#ordering_' + index ).val(index);
+		// Refresh sortable
+		$jq( '#'+name+"_sortable" ).sortable( "refresh" );
+	},
 	'addForm':function (template,target,max) {
 		//Set Variables
 		var index,cloneNode,curr_units,inputs;
@@ -21,7 +30,8 @@ BitMultiForm = {
 			BitMultiForm.total[button] = curr_units.length;
 		}
 		if (typeof(max) != 'undefined' && BitMultiForm.total[button] >= max - 1) {
-			BitBase.setElementDisplay(button, 'none', false);
+			$jq( '#' + button ).css('display', 'none');
+			$jq( '.multiform_add' ).css('display', 'none');
 		}
 		//Clone the template node and set the attributes
 		cloneElm = $jq( BitBase.$(template).cloneNode(true) );
@@ -40,7 +50,7 @@ BitMultiForm = {
 			$jq(this).attr('name',$jq(this).attr('name').replace('temp',index));
 		});
 
-		//Check if remove button exists, if exists, set the remove function
+		//Check if remove button exists, if exists, set the remove function and make visible
 		var a = cloneElm.find('.multiform_remove');
 		var rid = cloneElm.attr('id');
 		if( a.length > 0 ){
@@ -52,6 +62,8 @@ BitMultiForm = {
 		if( typeof( BitBase.setPlaceholders ) != 'undefined' ){
 			BitBase.setPlaceholders();
 		}
+
+		return index;
 	},
 	'removeForm':function (elmId) {
 		//Remove the form from the master div and make sure add shows
@@ -60,6 +72,7 @@ BitMultiForm = {
 			BitMultiForm.total[button]--;
 		}
 		BitBase.setElementDisplay(button, 'block', false);
+		$jq( '.multiform_add' ).css('display', 'block');
 		BitBase.$(elmId).parentNode.removeChild( BitBase.$(elmId) );
 	},
 	'seqs':{},
