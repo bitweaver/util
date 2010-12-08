@@ -1,5 +1,25 @@
 var $jq = jQuery.noConflict();
 BitMultiForm = {
+	'deleteContent':function(content_id, message, id) {
+		var answer = confirm(message);
+		if (answer){
+			BitBase.showSpinner();
+			jQuery.ajax({
+			url:BitSystem.urls.liberty + 'ajax_delete.php',
+                        type:'POST',
+                        context:document.body,
+                        data: {content_id: content_id},
+                        success:function(dom){
+				BitBase.hideSpinner();
+				var result = jQuery.parseJSON(dom);
+				alert(result.message);
+				if (result.status == 1) {
+					jQuery( '#'+id ).css('display', 'none');
+				}
+                        }
+                      });
+		}
+	},
 	'addList':function (template,value,title,target,max) {
 		// Hide the option div
 		$jq( '#'+template.replace("temp", value) ).css('display','none');
