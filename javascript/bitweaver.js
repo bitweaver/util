@@ -288,12 +288,7 @@ BitBase = {
 		center = BitBase.windowCenter({width: w, height: h});
 		div.style.top = center.y + "px";
 		div.style.left = center.x + "px"
-                // Now resize the overlay
-		div = document.getElementById( 'spinner_overlay' );
-		dim = BitBase.windowSize();
-		div.style.width = dim.width + "px";
-		div.style.height = dim.height + "px";
-                // And show them both.
+		// show the spinner and overlay.
 		BitBase.setElementDisplay( 'spinner_overlay', 'block' );
 		BitBase.setElementDisplay( 'spinner', 'block');
 	},
