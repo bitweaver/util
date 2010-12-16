@@ -30,6 +30,7 @@ BitMultiForm = {
 		$jq( '#'+name+" .multiform_input" ).val(value);
 		$jq( '#'+name+" .multiform_input" ).after(title);
 		$jq( '#ordering_' + index ).val(index);
+		$jq( '#'+name ).css('display', 'table-row');
 		// Refresh sortable
 		$jq( '#'+name+"_sortable" ).sortable( "refresh" );
 	},
@@ -49,7 +50,8 @@ BitMultiForm = {
 			index = BitMultiForm.seqs[target] = curr_units.length;
 			BitMultiForm.total[button] = curr_units.length;
 		}
-		if (typeof(max) != 'undefined' && BitMultiForm.total[button] >= max - 1) {
+		BitMultiForm.total[button]++;
+		if (typeof(max) != 'undefined' && BitMultiForm.total[button] >= max) {
 			$jq( '#' + button ).css('display', 'none');
 			$jq( '.multiform_add' ).css('display', 'none');
 		}
@@ -78,6 +80,7 @@ BitMultiForm = {
 		}
 
 		$jq('#'+target).append(cloneElm);
+		$jq('#no_multiform_unit').css('display','none');
 
 		if( typeof( BitBase.setPlaceholders ) != 'undefined' ){
 			BitBase.setPlaceholders();
@@ -90,9 +93,12 @@ BitMultiForm = {
 		button = elmId.replace(/_[0-9]+/, '_add_button');
 		if( typeof( BitMultiForm.total[button] ) != 'undefined' ){
 			BitMultiForm.total[button]--;
+			if (BitMultiForm.total[button] == 0) {
+				$jq('#no_multiform_unit').css('display','block');
+			}
 		}
 		BitBase.setElementDisplay(button, 'block', false);
-		$jq( '.multiform_add' ).css('display', 'block');
+		$jq( '.multiform_add' ).css('display', 'inline-block');
 		BitBase.$(elmId).parentNode.removeChild( BitBase.$(elmId) );
 	},
 	'seqs':{},
