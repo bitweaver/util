@@ -26,7 +26,7 @@ if( !defined( 'PHPASYNC_TEMP_DIR' ) ){
 }
 
 class PHPAsync extends BitBase{
-	private $mPidId;
+	private $mPid;
 
 	private $mLogFile;
 
@@ -34,17 +34,19 @@ class PHPAsync extends BitBase{
 
 	private $mFileHandle;
 
+	private $mStatus; // pct complete
+
 	// default config
-	private $mConfig = array();
+	public $mConfig = array();
 
 	// constructor
 	public function __construct( $pPidId = NULL, $pConfig = array() ){
 		if( !empty( $pPidId ) ){
 			// set id
-			$this->mPidId = $pPidId;
+			$this->mPid = $pPidId;
 
 			// log file path
-			$this->mLogFile = PHPASYNC_TEMP_DIR.'/'.$this->mPidId; 
+			$this->mLogFile = PHPASYNC_TEMP_DIR.'/'.$this->mPid; 
 		}
 
 		// set default config values
@@ -74,12 +76,12 @@ class PHPAsync extends BitBase{
 	 * @param $pUpdateLogHandler - The update log handler is invoked when updateStatus is called by the wrapped process. the object can push customize content into the log by defining this callback
 	 */
 	public function runProcess( $pObject, $pProcessHandler, $pProcessHash = NULL, $pOutputHandler, $pUpdateLogHandler = NULL ){
-		global $gBitSystem;
+		global $gBitSystem, $gBitSmarty;
 
 		// create file tracking id
 		$this->mLogFile = $this->genLogFile();
 
-		$this->mPidId = substr( $this->mLogFile, strlen(PHPASYNC_TEMP_DIR.'/') );
+		$this->mPid = substr( $this->mLogFile, strlen(PHPASYNC_TEMP_DIR.'/') );
 
 		$this->mProcessObject = $pObject;
 
@@ -105,6 +107,9 @@ class PHPAsync extends BitBase{
 			$gBitSystem->fatalError( "Error in PHPAsync: could not create log file - process aborted. Please notify your website developer." );
 		}
 
+		// convenience make the pid available to smarty as most output handlers will want access to it
+		$gBitSmarty->assign( 'pid', $this->mPid );
+
 		// output Buffered content
 		$this->outputBuffer( $pObject->$pOutputHandler() );
 
@@ -118,6 +123,9 @@ class PHPAsync extends BitBase{
 
 		// delete the progress file
 		unlink($this->mLogFile);
+		
+		//return true if completed
+		return true;
 	}
 
 	/**
@@ -128,8 +136,6 @@ class PHPAsync extends BitBase{
 	public function outputBuffer( $pContent ){
 		ob_start(); 
 
-		echo( 'inbuffer<br>' );
-		echo( 'pid: '.$this->mPidId.'<br>' );
 		echo( $pContent );
 		
 		$size = ob_get_length();
@@ -139,7 +145,6 @@ class PHPAsync extends BitBase{
 		ob_end_flush();
 		// ob_flush(); -- worked fine in preliminary test and was suggested by web sample, but causes warning here
 		flush();
-
 		session_write_close();
 	}
 
@@ -147,10 +152,18 @@ class PHPAsync extends BitBase{
 	 * notifies our running process 
 	 * of the percentage of a task completed
 	 */
-	public function updateStatus( $pPct ){
+	public function updateStatus( $pPct, $pLogText = NULL ){
 		global $gBitSystem;
 
-		$logText = $pPct;
+		// crap - hack to store pct and msg - no other way to know without storing this info in table or session or something
+		$logText = !empty( $pLogText )?$pPct.":".$pLogText:$pPct;
+
+		if( (int)$pPct >= 100 ){
+			$this->mStatus = 100;
+		}else{
+			$this->mStatus = $pPct;
+		}
+
 		// if a custom log message handler is registered get the log message from it 
 		if( $func = $this->mUpdateLogHandler ){
 			$this->mProcessObject->$func( $pPct );
@@ -158,7 +171,7 @@ class PHPAsync extends BitBase{
 		// rewind to the beginning of the log file if append is false
 		if( $this->getConfig( 'append_log' ) == FALSE ){
 			rewind( $this->mFileHandle ); 
-			ftruncate( $this->mFileHandle, filesize($this->mLogFile));
+			ftruncate( $this->mFileHandle, 0 ); //filesize($this->mLogFile));
 		}
 		// update the log file
 		if( fwrite( $this->mFileHandle, $logText ) == false ){ 
@@ -176,7 +189,11 @@ class PHPAsync extends BitBase{
 				header('HTTP/1.1 500 Internal Server Error');
 				exit;
 			}
-			return $progress;
+			// crap = hack to get pct and msg - see related hack in updateStatus
+			$delimpos = strpos( $progress, ':' );
+			$pct = substr( $progress, 0, $delimpos ); 
+			$log = substr( $progress, $delimpos+1 ); 
+			return array( 'pct_complete' => $pct, 'log' => $log );
 		}else{
 			$this->setError( 'get_status', 'log file not found' );
 			return FALSE;
@@ -184,8 +201,8 @@ class PHPAsync extends BitBase{
 	}
 
 	public function getPidId(){
-		if( !empty( $this->mPidId ) ){
-			return $this->mPidId;
+		if( !empty( $this->mPid ) ){
+			return $this->mPid;
 		}
 		return NULL;
 	}
@@ -198,8 +215,8 @@ class PHPAsync extends BitBase{
 	}
 
 	private function setLogFile(){
-		if( !empty( $this->mPidId ) ){
-			$this->mLogFile = PHPASYNC_TEMP_DIR.'/'.$this->mPidId; 
+		if( !empty( $this->mPid ) ){
+			$this->mLogFile = PHPASYNC_TEMP_DIR.'/'.$this->mPid; 
 		}
 	}
 
