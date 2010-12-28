@@ -1907,36 +1907,37 @@ function get_Special_Tag_Text_Value( $Tag, $Tag_Definitions_Name )
                                         for( $n = 1; $n <= $n_max; $n++ )
                                         {
 
-                                                // Append text from a lookup table according to
-                                                // the value read for this element
-
-                                                switch ( ord($Tag['Data']{($n_max*($m-1)+$n+3)}) )
-                                                {
-                                                        case 0:
-                                                                $output_str .= "RED     ";
-                                                                break;
-                                                        case 1:
-                                                                $output_str .= "GREEN   ";
-                                                                break;
-                                                        case 2:
-                                                                $output_str .= "BLUE    ";
-                                                                break;
-                                                        case 3:
-                                                                $output_str .= "CYAN    ";
-                                                                break;
-                                                        case 4:
-                                                                $output_str .= "MAGENTA ";
-                                                                break;
-                                                        case 5:
-                                                                $output_str .= "YELLOW  ";
-                                                                break;
-                                                        case 6:
-                                                                $output_str .= "WHITE   ";
-                                                                break;
-                                                        default:
-                                                                $output_str .= "Unknown ";
-                                                                break;
-                                                };
+											// Append text from a lookup table according to
+											// the value read for this element
+											if( isset( $Tag['Data']{($n_max*($m-1)+$n+3)} ) ) {
+												switch ( ord($Tag['Data']{($n_max*($m-1)+$n+3)}) )
+												{
+														case 0:
+																$output_str .= "RED     ";
+																break;
+														case 1:
+																$output_str .= "GREEN   ";
+																break;
+														case 2:
+																$output_str .= "BLUE    ";
+																break;
+														case 3:
+																$output_str .= "CYAN    ";
+																break;
+														case 4:
+																$output_str .= "MAGENTA ";
+																break;
+														case 5:
+																$output_str .= "YELLOW  ";
+																break;
+														case 6:
+																$output_str .= "WHITE   ";
+																break;
+														default:
+																$output_str .= "Unknown ";
+																break;
+												};
+											}
                                         };
                                         $output_str .= "\n";
                                 };
