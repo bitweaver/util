@@ -1,9 +1,17 @@
 <?php
 
 /** PHPExcel */
-require_once( EXTERNALS_PKG_PATH.'phpexcel/Classes/PHPExcel.php');
-/** PHPExcel_Writer_Excel2007 */
-require_once( EXTERNALS_PKG_PATH.'phpexcel/Classes/PHPExcel/Writer/Excel2007.php');
+$php_excel_loaded = FALSE;
+if (@include_once("PEAR.php")) {		
+	ini_set('include_path', ini_get('include_path').':/usr/share/pear/PHPExcel/');
+	if( @include_once("PHPExcel.php") )
+		if( @include_once("PHPExcel/Writer/Excel2007.php") )
+			$php_excel_loaded = TRUE;
+}
+if( !$php_excel_loaded ){
+	require_once( EXTERNALS_PKG_PATH.'phpexcel/Classes/PHPExcel.php');
+	require_once( EXTERNALS_PKG_PATH.'phpexcel/Classes/PHPExcel/Writer/Excel2007.php');
+}
 
 require_once( UTIL_PKG_PATH.'phpcontrib_lib.php' );
 
