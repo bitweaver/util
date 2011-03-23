@@ -16,7 +16,7 @@ function daemonize_refresh( $pPidfile ) {
 	global $gDaemonTouchTimer;
 	static $ticks = 0;
 	if ($gDaemonTouchTimer + 15 < time()) { // So the revivifier can tell we've hung.
-		if( ($ticks % 10) == 0 ) {
+		if( ($ticks % 600) == 0 ) {
 			// keep the noise down and only log a message once per minute
 			echo date( 'd/M/Y:H:i:s O' )." - DAEMON ".getmypid()." : Touching the file $pPidfile to ".time()."\n";
 		}
