@@ -233,6 +233,7 @@ BitBase = {
 		}
 		var value = obj.style.display == 'none'?val:'none';
 		self.setElementDisplay( obj, value, useCookie );
+		return value != 'none';
 	},
 
 	// desc:		convenience
