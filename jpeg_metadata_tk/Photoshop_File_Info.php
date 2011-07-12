@@ -177,9 +177,9 @@ function get_photoshop_file_info( $Exif_array, $XMP_array, $IRB_array )
                 if ( $Item != FALSE )
                 {
                         // Ensure that the Creator value exists and save it.
-                        if  ( ( array_key_exists( 'children', $Item ) ) &&
+                        if  ( ( !empty( $Item['children'][0] ) ) &&
                               ( $Item['children'][0]['tag'] =="rdf:Seq" ) &&
-                              ( array_key_exists( 'value', $Item['children'][0]['children'][0] ) ) )
+                              ( !empty( $Item['children'][0]['children'][0]['empty'] ) ) )
                         {
                                 $outputarray = add_to_field( $outputarray, 'author' , HTML_UTF8_Escape( $Item['children'][0]['children'][0]['value'] ), "\n" );
                         }

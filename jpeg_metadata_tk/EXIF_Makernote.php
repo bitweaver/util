@@ -131,7 +131,7 @@ function Read_Makernote_Tag( $Makernote_Tag, $EXIF_Array, $filehnd )
 
         // Check if the Makernote is present but empty - this sometimes happens
         if ( ( strlen( $Makernote_Tag['Data'] ) === 0 ) ||
-             ( $Makernote_Tag['Data'] === str_repeat ( "\x00", strlen( $Makernote_Tag['Data'] )) ) )
+             ( is_string( $Makernote_Tag['Data'] ) && $Makernote_Tag['Data'] === str_repeat ( "\x00", strlen( $Makernote_Tag['Data'] )) ) )
         {
                 // Modify the makernote to display that it is empty
                 $Makernote_Tag['Decoded Data'] = "Empty";
