@@ -2216,6 +2216,8 @@ function interpret_IFD( $IFD_array, $filename )
 
 function get_IFD_Data_Type( $input_data, $data_type, $Byte_Align )
 {
+	$value = NULL;
+	if( !empty( $input_data ) ) {
         // Check if this is a Unsigned Byte, Unsigned Short or Unsigned Long
         if (( $data_type == 1 ) || ( $data_type == 3 ) || ( $data_type == 4 ))
         {
@@ -2321,13 +2323,13 @@ function get_IFD_Data_Type( $input_data, $data_type, $Byte_Align )
                 {
                         // Motorola MSB first byte aligment
                         // Unpack the Numerator and denominator
-                        $value = unpack( 'NNumerator/NDenominator', $input_data );
+                        $value = @unpack( 'NNumerator/NDenominator', $input_data );
                 }
                 else
                 {
                         // Intel LSB first byte aligment
                         // Unpack the Numerator and denominator
-                        $value = unpack( 'VNumerator/VDenominator', $input_data );
+                        $value = @unpack( 'VNumerator/VDenominator', $input_data );
                 }
 
                 // Convert the numerator to a signed number
@@ -2369,6 +2371,9 @@ function get_IFD_Data_Type( $input_data, $data_type, $Byte_Align )
                 return "Invalid Datatype $data_type";
 
         }
+	} else {
+		return "Invalid Datatype $data_type";
+	}
 
 }
 
