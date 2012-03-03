@@ -3,11 +3,11 @@
  * Simple and fancy lightbox alternative
  *
  * Examples and documentation at: http://fancybox.net
- * 
+ *
  * Copyright (c) 2008 - 2010 Janis Skarnelis
  * That said, it is hardly a one-person project. Many people have submitted bugs, code, and offered their advice freely. Their support is greatly appreciated.
- * 
- * Version: 1.3.2 (20/10/2010)
+ *
+ * Version: 1.3.4 (11/11/2010)
  * Requires: jQuery v1.3+
  *
  * Dual licensed under the MIT and GPL licenses:
@@ -141,9 +141,13 @@
 			selectedOpts.href = href;
 			selectedOpts.title = title;
 
-			if (selectedOpts.autoDimensions && selectedOpts.type !== 'iframe' && selectedOpts.type !== 'swf') {
-				selectedOpts.width = 'auto';
-				selectedOpts.height = 'auto';
+			if (selectedOpts.autoDimensions) {
+				if (selectedOpts.type == 'html' || selectedOpts.type == 'inline' || selectedOpts.type == 'ajax') {
+					selectedOpts.width = 'auto';
+					selectedOpts.height = 'auto';
+				} else {
+					selectedOpts.autoDimensions = false;	
+				}
 			}
 
 			if (selectedOpts.modal) {
@@ -212,6 +216,8 @@
 				break;
 
 				case 'swf':
+					selectedOpts.scrolling = 'no';
+
 					str = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="' + selectedOpts.width + '" height="' + selectedOpts.height + '"><param name="movie" value="' + href + '"></param>';
 					emb = '';
 
@@ -243,7 +249,8 @@
 							}
 						},
 						success : function(data, textStatus, XMLHttpRequest) {
-							if ( XMLHttpRequest.status == 200 ) {
+							var o = typeof XMLHttpRequest == 'object' ? XMLHttpRequest : ajaxLoader;
+							if (o.status == 200) {
 								if ( typeof selectedOpts.ajax.win == 'function' ) {
 									ret = selectedOpts.ajax.win(href, data, textStatus, XMLHttpRequest);
 
@@ -263,23 +270,35 @@
 
 				break;
 
-				case 'iframe' :
+				case 'iframe':
 					_show();
 				break;
 			}
 		},
 
 		_process_inline = function() {
-			tmp.width( selectedOpts.width );
-			tmp.height( selectedOpts.height );
+			var
+				w = selectedOpts.width,
+				h = selectedOpts.height;
 
-			if (selectedOpts.width == 'auto') {
-				selectedOpts.width = tmp.width();
+			if (w.toString().indexOf('%') > -1) {
+				w = parseInt( ($(window).width() - (selectedOpts.margin * 2)) * parseFloat(w) / 100, 10) + 'px';
+
+			} else {
+				w = w == 'auto' ? 'auto' : w + 'px';	
 			}
 
-			if (selectedOpts.height == 'auto') {
-				selectedOpts.height = tmp.height();
+			if (h.toString().indexOf('%') > -1) {
+				h = parseInt( ($(window).height() - (selectedOpts.margin * 2)) * parseFloat(h) / 100, 10) + 'px';
+
+			} else {
+				h = h == 'auto' ? 'auto' : h + 'px';	
 			}
+
+			tmp.wrapInner('<div style="width:' + w + ';height:' + h + ';overflow: ' + (selectedOpts.scrolling == 'auto' ? 'auto' : (selectedOpts.scrolling == 'yes' ? 'scroll' : 'hidden')) + ';position:relative;"></div>');
+
+			selectedOpts.width = tmp.width();
+			selectedOpts.height = tmp.height();
 
 			_show();
 		},
@@ -347,9 +366,6 @@
 				overlay.hide();
 			}
 
-			content.get(0).scrollTop = 0;
-			content.get(0).scrollLeft = 0;
-
 			final_pos = _get_zoom_to();
 
 			_process_title();
@@ -381,7 +397,7 @@
 						.css({
 							'border-width' : currentOpts.padding,
 							'width'	: final_pos.width - currentOpts.padding * 2,
-							'height' : currentOpts.type == 'image' || currentOpts.type == 'swf' || currentOpts.type == 'iframe' ? final_pos.height - titleHeight - currentOpts.padding * 2 : 'auto' 
+							'height' : selectedOpts.autoDimensions ? 'auto' : final_pos.height - titleHeight - currentOpts.padding * 2
 						});
 
 					if (equal) {
@@ -436,13 +452,13 @@
 			content
 				.css({
 					'width' : final_pos.width - currentOpts.padding * 2,
-					'height' : currentOpts.type == 'image' || currentOpts.type == 'swf' || currentOpts.type == 'iframe' ? final_pos.height - titleHeight - currentOpts.padding * 2 : 'auto' 
+					'height' : selectedOpts.autoDimensions ? 'auto' : final_pos.height - titleHeight - currentOpts.padding * 2
 				})
 				.html( tmp.contents() );
 
 			wrap
 				.css(final_pos)
-				.fadeIn( currentOpts.transitionIn == 'none' ? 0 : currentOpts.fadeIn, _finish );
+				.fadeIn( currentOpts.transitionIn == 'none' ? 0 : currentOpts.speedIn, _finish );
 		},
 
 		_format_title = function(title) {
@@ -565,11 +581,11 @@
 				wrap.get(0).style.removeAttribute('filter');
 			}
 
-			wrap.css('height', 'auto');
-
-			if (currentOpts.type !== 'image' && currentOpts.type !== 'swf' && currentOpts.type !== 'iframe') {
+			if (selectedOpts.autoDimensions) {
 				content.css('height', 'auto');
 			}
+
+			wrap.css('height', 'auto');
 
 			if (titleStr && titleStr.length) {
 				title.show();
@@ -580,7 +596,7 @@
 			}
 
 			_set_navigation();
-						
+	
 			if (currentOpts.hideOnContentClick)	{
 				content.bind('click', $.fancybox.close);
 			}
@@ -1056,9 +1072,13 @@
 
 		if ($.fn.mousewheel) {
 			wrap.bind('mousewheel.fb', function(e, delta) {
-				e.preventDefault();
+				if (busy) {
+					e.preventDefault();
 
-				$.fancybox[ delta > 0 ? 'prev' : 'next']();
+				} else if ($(e.target).get(0).clientHeight == 0 || $(e.target).get(0).scrollHeight === $(e.target).get(0).clientHeight) {
+					e.preventDefault();
+					$.fancybox[ delta > 0 ? 'prev' : 'next']();
+				}
 			});
 		}
 
