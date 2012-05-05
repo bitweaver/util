@@ -64,7 +64,7 @@ class PHPAsync extends BitBase{
 			extract_to( $pConfig, $this->mConfig, EXTR_IF_EXISTS );
 		}
 
-		parent::BitBase();
+		parent::__construct();
 	}
 
 	// runProcess
