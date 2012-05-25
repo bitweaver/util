@@ -139,7 +139,7 @@ function mailman_remove_member( $pListName, $pEmail ) {
 		$cmd = "echo ".escapeshellarg( $pEmail )." | $fullCommand  -f - ".escapeshellarg( $pListName );
 		exec( $cmd, $ret );
 	} else {
-		bit_log_error( 'Groups mailman command failed (remove_members) File not found: '.$fullCommand );
+		bit_error_log( 'Groups mailman command failed (remove_members) File not found: '.$fullCommand );
 	}
 }
 
@@ -150,7 +150,7 @@ function mailman_setmoderated( $pListName, $pModerated = TRUE ) {
 		$cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\""; 
 		exec( $cmd, $ret );
 	} else {
-		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
+		bit_error_log( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
 	}
 	return $ret;
 }
@@ -162,7 +162,7 @@ function mailman_setmoderator( $pListName, $pEmail ) {
 		$cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
 		exec( $cmd, $ret );
 	} else {
-		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
+		bit_error_log( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
 	}
 	return $ret;
 }
@@ -191,7 +191,7 @@ function mailman_addmember( $pListName, $pEmail, $pType = NULL ) {
 			mailman_setsubscriptiontype( $pListName, $pEmail, $pType );
 		}
 	} else {
-		bit_log_error( 'Groups mailman command failed (add_members) File not found: '.$fullCommand );
+		bit_error_log( 'Groups mailman command failed (add_members) File not found: '.$fullCommand );
 	}
 }
 
@@ -209,7 +209,7 @@ function mailman_setsubscriptiontype( $pListName, $pEmail, $pType ) {
         $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
         exec( $cmd, $ret );
 	}else{
-		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
+		bit_error_log( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
 	}
 	return $ret;
 }
@@ -221,7 +221,7 @@ function mailman_getsubscriptiontype( $pListName, $pEmail ){
         $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
         exec( $cmd, $ret );
 	}else{
-		bit_log_error( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
+		bit_error_log( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
 	}
 	return $ret;
 }
@@ -327,14 +327,14 @@ function mailman_command( $pCommand, &$output, $pOptions=NULL ) {
 	if( $fullCommand = mailman_get_command( $pCommand ) ) {
 		$cmd = $fullCommand.' '.$pOptions;
 		if( !defined( 'IS_LIVE' ) || !IS_LIVE ) {
-			bit_log_error( 'mailman LOG: '.$cmd );
+			bit_error_log( 'mailman LOG: '.$cmd );
 		}
 		exec( $cmd, $output, $ret_code );
 		if( $ret_code ) {
-			bit_log_error('Error running command: '. $cmd . ' Command returned: '.$ret_code);
+			bit_error_log('Error running command: '. $cmd . ' Command returned: '.$ret_code);
 		}
 	} else {
-		bit_log_error( 'Groups mailman command failed ('.$pCommand.'): File not found: '.$fullCommand );
+		bit_error_log( 'Groups mailman command failed ('.$pCommand.'): File not found: '.$fullCommand );
 	}
 	return $ret_code;
 }
