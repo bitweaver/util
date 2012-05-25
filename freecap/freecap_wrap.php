@@ -110,7 +110,7 @@ if($word_ok!==false)
 	}
 }
 ?>
-<form action="<?=$_SERVER['PHP_SELF']?>" method="post">
+<form action="<?=$_SERVER['SCRIPT_NAME']?>" method="post">
 <table cellpadding="0" cellspacing="0">
 <tr><td>Name:</td><td><input type="text" name="name" value="<?=htmlspecialchars($_POST['name'])?>"></td></tr>
 <tr><td>Foo:</td><td><input type="text" name="foo" value="<?=htmlspecialchars($_POST['foo'])?>"></td></tr>

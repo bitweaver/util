@@ -320,7 +320,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 	if (!empty($_REQUEST['rescanerrors'])) {
 
-		echo '<a href="'.$_SERVER['PHP_SELF'].'">abort</a><hr>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'">abort</a><hr>';
 
 		echo 'Re-scanning all media files already in database that had errors and/or warnings in last scan<hr>';
 
@@ -345,7 +345,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 	} elseif (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan'])) {
 
-		echo '<a href="'.$_SERVER['PHP_SELF'].'">abort</a><hr>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'">abort</a><hr>';
 
 		echo 'Scanning all media files in <b>'.str_replace('\\', '/', realpath(!empty($_REQUEST['scan']) ? $_REQUEST['scan'] : $_REQUEST['newscan'])).'</b> (and subdirectories)<hr>';
 
@@ -707,7 +707,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 	} elseif (!empty($_REQUEST['showfiles'])) {
 
-		echo '<a href="'.$_SERVER['PHP_SELF'].'?encodedbydistribution='.urlencode('%').'">show all</a><br>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?encodedbydistribution='.urlencode('%').'">show all</a><br>';
 		echo '<table border="1">';
 
 		$SQLquery  = 'SELECT `filename`, `comments_id3v2`';
@@ -717,7 +717,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 			set_time_limit(30);
 			$CommentArray = unserialize($row['comments_id3v2']);
 			if (($_REQUEST['encodedbydistribution'] == '%') || (!empty($CommentArray['encoded_by'][0]) && ($_REQUEST['encodedbydistribution'] == $CommentArray['encoded_by'][0]))) {
-				echo '<tr><td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
+				echo '<tr><td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
 				echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td></tr>';
 			}
 		}
@@ -739,16 +739,16 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 				$EncodedBy[$row['encoder_options']][@$CommentArray['encoded_by'][0]] = 1;
 			}
 		}
-		echo '<a href="'.$_SERVER['PHP_SELF'].'?encodedbydistribution='.urlencode('%').'&m3u=1">.m3u version</a><br>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?encodedbydistribution='.urlencode('%').'&m3u=1">.m3u version</a><br>';
 		echo '<table border="1"><tr><th>m3u</th><th>Encoder Options</th><th>Encoded By (ID3v2)</th></tr>';
 		foreach ($EncodedBy as $key => $value) {
-			echo '<tr><TD VALIGN="TOP"><a href="'.$_SERVER['PHP_SELF'].'?encodedbydistribution='.urlencode($key).'&showfiles=1&m3u=1">m3u</a></td>';
+			echo '<tr><TD VALIGN="TOP"><a href="'.$_SERVER['SCRIPT_NAME'].'?encodedbydistribution='.urlencode($key).'&showfiles=1&m3u=1">m3u</a></td>';
 			echo '<TD VALIGN="TOP"><b>'.$key.'</b></td>';
 			echo '<td><table border="0" WIDTH="100%">';
 			arsort($value);
 			foreach ($value as $string => $count) {
 				echo '<tr><TD ALIGN="RIGHT" WIDTH="50"><i>'.number_format($count).'</i></td><td>&nbsp;</td>';
-				echo '<td><a href="'.$_SERVER['PHP_SELF'].'?encodedbydistribution='.urlencode($string).'&showfiles=1">'.$string.'</a></td></tr>';
+				echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?encodedbydistribution='.urlencode($string).'&showfiles=1">'.$string.'</a></td></tr>';
 			}
 			echo '</table></td></tr>';
 		}
@@ -803,7 +803,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 	} else {
 
-		echo '<a href="'.$_SERVER['PHP_SELF'].'?emptygenres='.urlencode($_REQUEST['emptygenres']).'&m3u=1">.m3u version</a><br>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?emptygenres='.urlencode($_REQUEST['emptygenres']).'&m3u=1">.m3u version</a><br>';
 		$EmptyGenreCounter = 0;
 		echo '<table border="1" cellspacing="0" cellpadding="3">';
 		echo '<tr><th>m3u</th><th>filename</th></tr>';
@@ -811,7 +811,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 			if (!in_array($row['fileformat'], $IgnoreNoTagFormats)) {
 				$EmptyGenreCounter++;
 				echo '<tr>';
-				echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
+				echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
 				echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td>';
 				echo '</tr>';
 			}
@@ -841,13 +841,13 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 	} else {
 
 		$NonEmptyCommentsCounter = 0;
-		echo '<a href="'.$_SERVER['PHP_SELF'].'?nonemptycomments='.urlencode($_REQUEST['nonemptycomments']).'&m3u=1">.m3u version</a><br>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?nonemptycomments='.urlencode($_REQUEST['nonemptycomments']).'&m3u=1">.m3u version</a><br>';
 		echo '<table border="1" cellspacing="0" cellpadding="3">';
 		echo '<tr><th>m3u</th><th>filename</th><th>comments</th></tr>';
 		while ($row = mysql_fetch_array($result)) {
 			$NonEmptyCommentsCounter++;
 			echo '<tr>';
-			echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
+			echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
 			echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td>';
 			if (strlen(trim($row['comment'])) > 0) {
 				echo '<td>'.FixTextFields($row['comment']).'</td>';
@@ -884,7 +884,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 	} else {
 
-		echo '<a href="'.$_SERVER['PHP_SELF'].'?trackzero='.urlencode($_REQUEST['trackzero']).'&m3u=1">.m3u version</a><br>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?trackzero='.urlencode($_REQUEST['trackzero']).'&m3u=1">.m3u version</a><br>';
 		$TrackZeroCounter = 0;
 		echo '<table border="1" cellspacing="0" cellpadding="3">';
 		echo '<tr><th>m3u</th><th>filename</th><th>track</th></tr>';
@@ -892,7 +892,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 			if ((strlen($row['track']) > 0) && ($row['track'] < 1) || ($row['track'] > 99)) {
 				$TrackZeroCounter++;
 				echo '<tr>';
-				echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
+				echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
 				echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td>';
 				echo '<td>'.FixTextFields($row['track']).'</td>';
 				echo '</tr>';
@@ -924,12 +924,12 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 	} else {
 
 		echo '<b>'.number_format(mysql_num_rows($result)).'</b> files with "feat." in the title (instead of the artist)<br><br>';
-		echo '<a href="'.$_SERVER['PHP_SELF'].'?titlefeat='.urlencode($_REQUEST['titlefeat']).'&m3u=1">.m3u version</a><br>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?titlefeat='.urlencode($_REQUEST['titlefeat']).'&m3u=1">.m3u version</a><br>';
 		echo '<table border="1" cellspacing="0" cellpadding="3">';
 		echo '<tr><th>m3u</th><th>filename</th><th>title</th></tr>';
 		while ($row = mysql_fetch_array($result)) {
 			echo '<tr>';
-			echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
+			echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
 			echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td>';
 			echo '<td>'.eregi_replace('(feat\. .*)', '<b>\\1</b>', FixTextFields($row['title'])).'</td>';
 			echo '</tr>';
@@ -960,12 +960,12 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 	} else {
 
 		echo '<b>'.number_format(mysql_num_rows($result)).'</b> files with a track number, but no album<br><br>';
-		echo '<a href="'.$_SERVER['PHP_SELF'].'?tracknoalbum='.urlencode($_REQUEST['tracknoalbum']).'&m3u=1">.m3u version</a><br>';
+		echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?tracknoalbum='.urlencode($_REQUEST['tracknoalbum']).'&m3u=1">.m3u version</a><br>';
 		echo '<table border="1" cellspacing="0" cellpadding="3">';
 		echo '<tr><th>m3u</th><th>filename</th><th>track</th><th>album</th></tr>';
 		while ($row = mysql_fetch_array($result)) {
 			echo '<tr>';
-			echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
+			echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
 			echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td>';
 			echo '<td>'.FixTextFields($row['track']).'</td>';
 			echo '<td>'.FixTextFields($row['album']).'</td>';
@@ -1008,7 +1008,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 		$TagsToCompare['id3v1'] = true;
 	}
 
-	echo '<a href="'.$_SERVER['PHP_SELF'].'?unsynchronizedtags='.urlencode($_REQUEST['unsynchronizedtags']).'&autofix=1">Auto-fix empty tags</a><br><br>';
+	echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?unsynchronizedtags='.urlencode($_REQUEST['unsynchronizedtags']).'&autofix=1">Auto-fix empty tags</a><br><br>';
 	echo '<div id="Autofixing"></div>';
 	echo '<table border="1" cellspacing="0" cellpadding="3">';
 	echo '<tr>';
@@ -1016,16 +1016,16 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 	echo '<th>Filename</th>';
 	echo '<th>Combined</th>';
 	if ($TagsToCompare['id3v2']) {
-		echo '<th><a href="'.$_SERVER['PHP_SELF'].'?unsynchronizedtags='.urlencode($_REQUEST['unsynchronizedtags']).'&autofix=1&autofixforcesource=id3v2&autofixforcedest=A1" TITLE="Auto-fix all tags to match ID3v2 contents" onClick="return confirm(\'Are you SURE you want to synchronize all tags to match ID3v2?\');">ID3v2</a></th>';
+		echo '<th><a href="'.$_SERVER['SCRIPT_NAME'].'?unsynchronizedtags='.urlencode($_REQUEST['unsynchronizedtags']).'&autofix=1&autofixforcesource=id3v2&autofixforcedest=A1" TITLE="Auto-fix all tags to match ID3v2 contents" onClick="return confirm(\'Are you SURE you want to synchronize all tags to match ID3v2?\');">ID3v2</a></th>';
 	}
 	if ($TagsToCompare['ape']) {
-		echo '<th><a href="'.$_SERVER['PHP_SELF'].'?unsynchronizedtags='.urlencode($_REQUEST['unsynchronizedtags']).'&autofix=1&autofixforcesource=ape&autofixforcedest=21" TITLE="Auto-fix all tags to match APE contents" onClick="return confirm(\'Are you SURE you want to synchronize all tags to match APE?\');">APE</a></th>';
+		echo '<th><a href="'.$_SERVER['SCRIPT_NAME'].'?unsynchronizedtags='.urlencode($_REQUEST['unsynchronizedtags']).'&autofix=1&autofixforcesource=ape&autofixforcedest=21" TITLE="Auto-fix all tags to match APE contents" onClick="return confirm(\'Are you SURE you want to synchronize all tags to match APE?\');">APE</a></th>';
 	}
 	if ($TagsToCompare['lyrics3']) {
 		echo '<th>Lyrics3</th>';
 	}
 	if ($TagsToCompare['id3v1']) {
-		echo '<th><a href="'.$_SERVER['PHP_SELF'].'?unsynchronizedtags='.urlencode($_REQUEST['unsynchronizedtags']).'&autofix=1&autofixforcesource=ape&autofixforcedest=2A" TITLE="Auto-fix all tags to match ID3v1 contents" onClick="return confirm(\'Are you SURE you want to synchronize all tags to match ID3v1?\');">ID3v1</a></th>';
+		echo '<th><a href="'.$_SERVER['SCRIPT_NAME'].'?unsynchronizedtags='.urlencode($_REQUEST['unsynchronizedtags']).'&autofix=1&autofixforcesource=ape&autofixforcedest=2A" TITLE="Auto-fix all tags to match ID3v1 contents" onClick="return confirm(\'Are you SURE you want to synchronize all tags to match ID3v1?\');">ID3v1</a></th>';
 	}
 	echo '</tr>';
 
@@ -1069,12 +1069,12 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 		$ThisLine  = '<tr>';
 		$ThisLine .= '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">view</a></td>';
-		$ThisLine .= '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td>';
+		$ThisLine .= '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td>';
 		$tagvalues = '';
 		foreach ($FieldsToCompare as $fieldname) {
 			$tagvalues .= $fieldname.' = '.@implode(" \n", @$Comments['all'][$fieldname])." \n";
 		}
-		$ThisLine .= '<td><a href="'.$_SERVER['PHP_SELF'].'?synchronizetagsfrom=all&filename='.urlencode($row['filename']).'" TITLE="'.htmlentities(rtrim($tagvalues, "\n"), ENT_QUOTES).'" TARGET="retagwindow">all</a></td>';
+		$ThisLine .= '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?synchronizetagsfrom=all&filename='.urlencode($row['filename']).'" TITLE="'.htmlentities(rtrim($tagvalues, "\n"), ENT_QUOTES).'" TARGET="retagwindow">all</a></td>';
 		foreach ($TagsToCompare as $tagtype => $CompareThisTagType) {
 			if ($CompareThisTagType) {
 				$tagvalues = '';
@@ -1195,7 +1195,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 				} else {
 					$ThisLine .= '<TD BGCOLOR="#00CC00">';
 				}
-				$ThisLine .= '<a href="'.$_SERVER['PHP_SELF'].'?synchronizetagsfrom='.$tagtype.'&filename='.urlencode($row['filename']).'" TITLE="'.htmlentities(rtrim($tagvalues, "\n"), ENT_QUOTES).'" TARGET="retagwindow">'.$tagtype.'</a>';
+				$ThisLine .= '<a href="'.$_SERVER['SCRIPT_NAME'].'?synchronizetagsfrom='.$tagtype.'&filename='.urlencode($row['filename']).'" TITLE="'.htmlentities(rtrim($tagvalues, "\n"), ENT_QUOTES).'" TARGET="retagwindow">'.$tagtype.'</a>';
 				$ThisLine .= '</td>';
 			}
 		}
@@ -1249,7 +1249,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 						echo '<tr bgcolor="#FF0000">';
 					}
 					echo '<td>&nbsp;</th>';
-					echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'" TITLE="'.FixTextFields(implode("\n", $errors)).'">'.FixTextFields($row['filename']).'</a></td>';
+					echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'" TITLE="'.FixTextFields(implode("\n", $errors)).'">'.FixTextFields($row['filename']).'</a></td>';
 					echo '<td><table border="0">';
 					echo '<tr><td><b>'.$TagsToSynch.'</b></td></tr>';
 					echo '</table></td></tr>';
@@ -1378,7 +1378,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 			echo '<tr>';
 			echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">view</a></td>';
 			echo '<td>&nbsp;'.$NotMatchedReasons.'</td>';
-			echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">'.FixTextFields($ActualFilename).'</a></td>';
+			echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">'.FixTextFields($ActualFilename).'</a></td>';
 
 			if (@$_REQUEST['autofix']) {
 
@@ -1393,7 +1393,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 			} else {
 
-				echo '<td><a href="'.$_SERVER['PHP_SELF'].'?filenamepattern='.urlencode($_REQUEST['filenamepattern']).'&renamefilefrom='.urlencode($row['filename']).'&renamefileto='.urlencode(dirname($row['filename']).'/'.$PatternFilename).'" TITLE="'.FixTextFields(basename($row['filename']))."\n".FixTextFields(basename($PatternFilename)).'" TARGET="renamewindow">';
+				echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?filenamepattern='.urlencode($_REQUEST['filenamepattern']).'&renamefilefrom='.urlencode($row['filename']).'&renamefileto='.urlencode(dirname($row['filename']).'/'.$PatternFilename).'" TITLE="'.FixTextFields(basename($row['filename']))."\n".FixTextFields(basename($PatternFilename)).'" TARGET="renamewindow">';
 				echo '<b>'.$DifferenceBoldedName.'</b></a></td>';
 
 			}
@@ -1426,7 +1426,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 		} else {
 
-			echo '<a href="'.$_SERVER['PHP_SELF'].'?encoderoptionsdistribution=1">Show all Encoder Options</a><hr>';
+			echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?encoderoptionsdistribution=1">Show all Encoder Options</a><hr>';
 			echo 'Files with Encoder Options <b>'.$_REQUEST['showtagfiles'].'</b>:<br>';
 			echo '<table border="1" cellspacing="0" cellpadding="3">';
 			while ($row = mysql_fetch_array($result)) {
@@ -1452,8 +1452,8 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 		while ($row = mysql_fetch_array($result)) {
 			echo '<tr>';
 			echo '<td>'.$row['encoder_options'].'</td>';
-			echo '<TD ALIGN="RIGHT"><a href="'.$_SERVER['PHP_SELF'].'?encoderoptionsdistribution=1&showtagfiles='.($row['encoder_options'] ? urlencode($row['encoder_options']) : '').'">'.number_format($row['num']).'</a></td>';
-			echo '<TD ALIGN="RIGHT"><a href="'.$_SERVER['PHP_SELF'].'?encoderoptionsdistribution=1&showtagfiles='.($row['encoder_options'] ? urlencode($row['encoder_options']) : '').'&m3u=.m3u">m3u</a></td>';
+			echo '<TD ALIGN="RIGHT"><a href="'.$_SERVER['SCRIPT_NAME'].'?encoderoptionsdistribution=1&showtagfiles='.($row['encoder_options'] ? urlencode($row['encoder_options']) : '').'">'.number_format($row['num']).'</a></td>';
+			echo '<TD ALIGN="RIGHT"><a href="'.$_SERVER['SCRIPT_NAME'].'?encoderoptionsdistribution=1&showtagfiles='.($row['encoder_options'] ? urlencode($row['encoder_options']) : '').'&m3u=.m3u">m3u</a></td>';
 			echo '</tr>';
 		}
 		echo '</table><hr>';
@@ -1474,8 +1474,8 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 		while ($row = mysql_fetch_array($result)) {
 			echo '<tr>';
 			echo '<td>'.$row['tags'].'</td>';
-			echo '<TD ALIGN="RIGHT"><a href="'.$_SERVER['PHP_SELF'].'?tagtypes=1&showtagfiles='.($row['tags'] ? urlencode($row['tags']) : '').'">'.number_format($row['num']).'</a></td>';
-			echo '<TD ALIGN="RIGHT"><a href="'.$_SERVER['PHP_SELF'].'?tagtypes=1&showtagfiles='.($row['tags'] ? urlencode($row['tags']) : '').'&m3u=.m3u">m3u</a></td>';
+			echo '<TD ALIGN="RIGHT"><a href="'.$_SERVER['SCRIPT_NAME'].'?tagtypes=1&showtagfiles='.($row['tags'] ? urlencode($row['tags']) : '').'">'.number_format($row['num']).'</a></td>';
+			echo '<TD ALIGN="RIGHT"><a href="'.$_SERVER['SCRIPT_NAME'].'?tagtypes=1&showtagfiles='.($row['tags'] ? urlencode($row['tags']) : '').'&m3u=.m3u">m3u</a></td>';
 			echo '</tr>';
 		}
 		echo '</table><hr>';
@@ -1610,8 +1610,8 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 	} else {
 
-		echo 'Duplicated aritst + title: (<a href="'.$_SERVER['PHP_SELF'].'?artisttitledupes=1&samemix=1">Identical Mix/Version only</a>)<br>';
-		echo '(<a href="'.$_SERVER['PHP_SELF'].'?artisttitledupes=1&m3u=.m3u">.m3u version</a>)<br>';
+		echo 'Duplicated aritst + title: (<a href="'.$_SERVER['SCRIPT_NAME'].'?artisttitledupes=1&samemix=1">Identical Mix/Version only</a>)<br>';
+		echo '(<a href="'.$_SERVER['SCRIPT_NAME'].'?artisttitledupes=1&m3u=.m3u">.m3u version</a>)<br>';
 		echo '<table border="1" cellspacing="0" cellpadding="2">';
 		echo '<tr><th colspan="3">&nbsp;</th><th>Artist</th><th>Title</th><th>Version</th><th>&nbsp;</th><th>&nbsp;</th><th>Filename</th></tr>';
 
@@ -1653,10 +1653,10 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 			echo '</td>';
 			echo '<TD NOWRAP VALIGN="TOP">';
 			foreach ($filenames as $file) {
-				echo '<a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($file).'">play</a><br>';
+				echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($file).'">play</a><br>';
 			}
 			echo '</td>';
-			echo '<TD VALIGN="MIDDLE" ALIGN="CENTER" ><a href="'.$_SERVER['PHP_SELF'].'?artisttitledupes=1&m3uartist='.urlencode($artists[0]).'&m3utitle='.urlencode($titles[0]).'">play all</a></td>';
+			echo '<TD VALIGN="MIDDLE" ALIGN="CENTER" ><a href="'.$_SERVER['SCRIPT_NAME'].'?artisttitledupes=1&m3uartist='.urlencode($artists[0]).'&m3utitle='.urlencode($titles[0]).'">play all</a></td>';
 			echo '<TD VALIGN="TOP" NOWRAP>'.implode('<br>', $artists).'</td>';
 			echo '<TD VALIGN="TOP" NOWRAP>'.implode('<br>', $titles).'</td>';
 			echo '<TD VALIGN="TOP" NOWRAP>'.implode('<br>', $remixes).'</td>';
@@ -1751,8 +1751,8 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 
 		echo '<b>'.number_format(mysql_num_rows($result)).'</b> files with <b>[??]</b>-format track numbers in album field:<br>';
 		if (mysql_num_rows($result) > 0) {
-			echo '(<a href="'.$_SERVER['PHP_SELF'].'?trackinalbum=1&m3u=.m3u">.m3u version</a>)<br>';
-			echo '<a href="'.$_SERVER['PHP_SELF'].'?trackinalbum=1&autofix=1">Try to auto-fix</a><br>';
+			echo '(<a href="'.$_SERVER['SCRIPT_NAME'].'?trackinalbum=1&m3u=.m3u">.m3u version</a>)<br>';
+			echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?trackinalbum=1&autofix=1">Try to auto-fix</a><br>';
 			echo '<table border="1" cellspacing="0" cellpadding="4">';
 			while ($row = mysql_fetch_array($result)) {
 				echo '<tr>';
@@ -1835,9 +1835,9 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 				} else {
 					echo '<tr bgcolor="#FF9999;">';
 				}
-				echo '<td><a href="'.$_SERVER['PHP_SELF'].'?genredistribution='.urlencode($row['genre']).'">'.number_format($row['num']).'</a></td>';
+				echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?genredistribution='.urlencode($row['genre']).'">'.number_format($row['num']).'</a></td>';
 				echo '<TD NOWRAP>'.str_replace("\t", '<br>', $row['genre']).'</td>';
-				echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3u=.m3u&genredistribution='.urlencode($row['genre']).'">.m3u</a></td>';
+				echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3u=.m3u&genredistribution='.urlencode($row['genre']).'">.m3u</a></td>';
 				echo '</tr>';
 			}
 			echo '</table><hr>';
@@ -1849,13 +1849,13 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 			$SQLquery .= ' WHERE (`genre` LIKE "'.mysql_escape_string($_REQUEST['genredistribution']).'")';
 			$SQLquery .= ' ORDER BY `filename` ASC';
 			$result = safe_mysql_query($SQLquery);
-			echo '<a href="'.$_SERVER['PHP_SELF'].'?genredistribution='.urlencode('%').'">All Genres</a><br>';
+			echo '<a href="'.$_SERVER['SCRIPT_NAME'].'?genredistribution='.urlencode('%').'">All Genres</a><br>';
 			echo '<table border="1" cellspacing="0" cellpadding="4">';
 			echo '<tr><th>Genre</th><th>m3u</th><th>Filename</th></tr>';
 			while ($row = mysql_fetch_array($result)) {
 				echo '<tr>';
 				echo '<TD NOWRAP>'.str_replace("\t", '<br>', $row['genre']).'</td>';
-				echo '<td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
+				echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
 				echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td>';
 				echo '</tr>';
 			}
@@ -1878,7 +1878,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 	while ($row = mysql_fetch_array($result)) {
 		echo '<tr>';
 		echo '<TD ALIGN="RIGHT">'.number_format($row['num']).'</td>';
-		echo '<td><a href="'.$_SERVER['PHP_SELF'].'?filetypelist='.$row['fileformat'].'|'.$row['audio_dataformat'].'">'.($row['fileformat'] ? $row['fileformat'] : '<i>unknown</i>').(($row['audio_dataformat'] && ($row['audio_dataformat'] != $row['fileformat'])) ? '.'.$row['audio_dataformat'] : '').'</a></td>';
+		echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?filetypelist='.$row['fileformat'].'|'.$row['audio_dataformat'].'">'.($row['fileformat'] ? $row['fileformat'] : '<i>unknown</i>').(($row['audio_dataformat'] && ($row['audio_dataformat'] != $row['fileformat'])) ? '.'.$row['audio_dataformat'] : '').'</a></td>';
 		echo '</tr>';
 	}
 	echo '</table><hr>';
@@ -1904,7 +1904,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 	} else {
 
 		echo number_format(mysql_num_rows($result)).' files with errors or warnings:<br>';
-		echo '(<a href="'.$_SERVER['PHP_SELF'].'?errorswarnings=1&m3u=.m3u">.m3u version</a>)<br>';
+		echo '(<a href="'.$_SERVER['SCRIPT_NAME'].'?errorswarnings=1&m3u=.m3u">.m3u version</a>)<br>';
 		echo '<table border="1" cellspacing="0" cellpadding="4">';
 		echo '<tr><th>Filename</th><th>Error</th><th>Warning</th></tr>';
 		while ($row = mysql_fetch_array($result)) {
@@ -1959,7 +1959,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 			echo '<tr>';
 			echo '<TD ALIGN="RIGHT">'.FixTextFields(number_format($row['num'])).'</td>';
 			if ($row['vbr_method']) {
-				echo '<td><a href="'.$_SERVER['PHP_SELF'].'?vbrmethod='.$row['vbr_method'].'">'.FixTextFields($row['vbr_method']).'</a></td>';
+				echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?vbrmethod='.$row['vbr_method'].'">'.FixTextFields($row['vbr_method']).'</a></td>';
 			} else {
 				echo '<td><i>CBR</i></td>';
 			}
@@ -1975,7 +1975,7 @@ if (!empty($_REQUEST['scan']) || !empty($_REQUEST['newscan']) || !empty($_REQUES
 		$result = safe_mysql_query($SQLquery);
 		echo number_format(mysql_num_rows($result)).' files with VBR_method of "'.$_REQUEST['vbrmethod'].'":<table border="1" cellspacing="0" cellpadding="3">';
 		while ($row = mysql_fetch_array($result)) {
-			echo '<tr><td><a href="'.$_SERVER['PHP_SELF'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
+			echo '<tr><td><a href="'.$_SERVER['SCRIPT_NAME'].'?m3ufilename='.urlencode($row['filename']).'">m3u</a></td>';
 			echo '<td><a href="demo.browse.php?filename='.rawurlencode($row['filename']).'">'.FixTextFields($row['filename']).'</a></td></tr>';
 		}
 		echo '</table>';
@@ -2073,42 +2073,42 @@ function BetterUCwords($string) {
 
 
 
-echo '<hr><form action="'.FixTextFields($_SERVER['PHP_SELF']).'">';
+echo '<hr><form action="'.FixTextFields($_SERVER['SCRIPT_NAME']).'">';
 echo '<b>Warning:</b> Scanning a new directory will erase all previous entries in the database!<br>';
 echo 'Directory: <input type="text" name="scan" size="50" value="'.FixTextFields(!empty($_REQUEST['scan']) ? $_REQUEST['scan'] : '').'"> ';
 echo '<input type="submit" value="Go" onClick="return confirm(\'Are you sure you want to erase all entries in the database and start scanning again?\');">';
 echo '</form>';
-echo '<hr><form action="'.FixTextFields($_SERVER['PHP_SELF']).'">';
+echo '<hr><form action="'.FixTextFields($_SERVER['SCRIPT_NAME']).'">';
 echo 'Re-scanning a new directory will only add new, previously unscanned files into the list (and not erase the database).<br>';
 echo 'Directory: <input type="text" name="newscan" size="50" value="'.FixTextFields(!empty($_REQUEST['newscan']) ? $_REQUEST['newscan'] : '').'"> ';
 echo '<input type="SUBMIT" value="Go">';
 echo '</form><hr>';
 echo '<ul>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?deadfilescheck=1">Remove deleted or changed files from database</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?md5datadupes=1">List files with identical MD5_DATA values</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?artisttitledupes=1">List files with identical artist + title</a> (<a href="'.$_SERVER['PHP_SELF'].'?artisttitledupes=1&samemix=1">same mix only</a>)</li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?fileextensions=1">File with incorrect file extension</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?formatdistribution=1">File Format Distribution</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?audiobitrates=1">Audio Bitrate Distribution</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?vbrmethod=1">VBR_Method Distribution</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?tagtypes=1">Tag Type Distribution</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?genredistribution='.urlencode('%').'">Genre Distribution</a></li>';
-//echo '<li><a href="'.$_SERVER['PHP_SELF'].'?missingtrackvolume=1">Scan for missing track volume information (update database from pre-v1.7.0b5)</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?encoderoptionsdistribution=1">Encoder Options Distribution</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?encodedbydistribution='.urlencode('%').'">Encoded By (ID3v2) Distribution</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?trackinalbum=1">Track number in Album field</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?tracknoalbum=1">Track number, but no Album</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?titlefeat=1">"feat." in Title field</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?emptygenres=1">Blank genres</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?trackzero=1">Track "zero"</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?nonemptycomments=1">non-empty comments</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?unsynchronizedtags=2A1">Tags that are not synchronized</a> (<a href="'.$_SERVER['PHP_SELF'].'?unsynchronizedtags=2A1&autofix=1">autofix</a>)</li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?filenamepattern='.urlencode('[N] A - T {R}').'">Filenames that don\'t match pattern</a> (<a href="?filenamepattern='.urlencode('[N] A - T {R}').'&autofix=1">auto-fix</a>)</li>';
-//echo '<li><a href="'.$_SERVER['PHP_SELF'].'?filenamepattern='.urlencode('A - T').'">Filenames that don\'t match pattern</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?correctcase=1">Correct filename case (Win/DOS)</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?fixid3v1padding=1">Fix ID3v1 invalid padding</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?errorswarnings=1">Files with Errors and/or Warnings</a></li>';
-echo '<li><a href="'.$_SERVER['PHP_SELF'].'?rescanerrors=1">Re-scan only files with Errors and/or Warnings</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?deadfilescheck=1">Remove deleted or changed files from database</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?md5datadupes=1">List files with identical MD5_DATA values</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?artisttitledupes=1">List files with identical artist + title</a> (<a href="'.$_SERVER['SCRIPT_NAME'].'?artisttitledupes=1&samemix=1">same mix only</a>)</li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?fileextensions=1">File with incorrect file extension</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?formatdistribution=1">File Format Distribution</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?audiobitrates=1">Audio Bitrate Distribution</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?vbrmethod=1">VBR_Method Distribution</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?tagtypes=1">Tag Type Distribution</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?genredistribution='.urlencode('%').'">Genre Distribution</a></li>';
+//echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?missingtrackvolume=1">Scan for missing track volume information (update database from pre-v1.7.0b5)</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?encoderoptionsdistribution=1">Encoder Options Distribution</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?encodedbydistribution='.urlencode('%').'">Encoded By (ID3v2) Distribution</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?trackinalbum=1">Track number in Album field</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?tracknoalbum=1">Track number, but no Album</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?titlefeat=1">"feat." in Title field</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?emptygenres=1">Blank genres</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?trackzero=1">Track "zero"</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?nonemptycomments=1">non-empty comments</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?unsynchronizedtags=2A1">Tags that are not synchronized</a> (<a href="'.$_SERVER['SCRIPT_NAME'].'?unsynchronizedtags=2A1&autofix=1">autofix</a>)</li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?filenamepattern='.urlencode('[N] A - T {R}').'">Filenames that don\'t match pattern</a> (<a href="?filenamepattern='.urlencode('[N] A - T {R}').'&autofix=1">auto-fix</a>)</li>';
+//echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?filenamepattern='.urlencode('A - T').'">Filenames that don\'t match pattern</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?correctcase=1">Correct filename case (Win/DOS)</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?fixid3v1padding=1">Fix ID3v1 invalid padding</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?errorswarnings=1">Files with Errors and/or Warnings</a></li>';
+echo '<li><a href="'.$_SERVER['SCRIPT_NAME'].'?rescanerrors=1">Re-scan only files with Errors and/or Warnings</a></li>';
 echo '</ul>';
 
 $SQLquery  = 'SELECT COUNT(*) AS `TotalFiles`, SUM(`playtime_seconds`) AS `TotalPlaytime`, SUM(`filesize`) AS `TotalFilesize`, AVG(`playtime_seconds`) AS `AvgPlaytime`, AVG(`filesize`) AS `AvgFilesize`, AVG(`audio_bitrate` + `video_bitrate`) AS `AvgBitrate`';

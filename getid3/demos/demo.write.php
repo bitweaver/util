@@ -118,8 +118,8 @@ if (isset($_POST['WriteTags'])) {
 echo '<H4>Sample tag editor/writer</H4>';
 echo '<A HREF="'.$browsescriptfilename.'?listdirectory='.rawurlencode(realpath(dirname($Filename))).'">Browse current directory</A><BR>';
 if (!empty($Filename)) {
-	echo '<A HREF="'.$_SERVER['PHP_SELF'].'">Start Over</A><BR><BR>';
-	echo '<TABLE BORDER="3" CELLSPACING="0" CELLPADDING="4"><FORM ACTION="'.$_SERVER['PHP_SELF'].'" METHOD="POST" ENCTYPE="multipart/form-data">';
+	echo '<A HREF="'.$_SERVER['SCRIPT_NAME'].'">Start Over</A><BR><BR>';
+	echo '<TABLE BORDER="3" CELLSPACING="0" CELLPADDING="4"><FORM ACTION="'.$_SERVER['SCRIPT_NAME'].'" METHOD="POST" ENCTYPE="multipart/form-data">';
 	echo '<TR><TD ALIGN="RIGHT"><B>Filename: </B></TD><TD><INPUT TYPE="HIDDEN" NAME="Filename" VALUE="'.FixTextFields($Filename).'"><A HREF="'.$browsescriptfilename.'?filename='.rawurlencode($Filename).'" TARGET="_blank">'.$Filename.'</A></TD></TR>';
 	if (file_exists($Filename)) {
 

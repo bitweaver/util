@@ -20,7 +20,7 @@ if (!empty($_REQUEST['filename'])) {
 
 } else {
 
-	echo 'Usage: <TT>'.$_SERVER['PHP_SELF'].'?filename=<I>filename.ext</I></TT>';
+	echo 'Usage: <TT>'.$_SERVER['SCRIPT_NAME'].'?filename=<I>filename.ext</I></TT>';
 
 }
 

@@ -128,7 +128,7 @@ if (isset($_REQUEST['filename'])) {
 	if (strstr($_REQUEST['filename'], 'http://') || strstr($_REQUEST['filename'], 'ftp://')) {
 		echo '<i>Cannot browse remote filesystems</i><br>';
 	} else {
-		echo 'Browse: <a href="'.$_SERVER['PHP_SELF'].'?listdirectory='.urlencode($listdirectory).'">'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $listdirectory).'</a><br>';
+		echo 'Browse: <a href="'.$_SERVER['SCRIPT_NAME'].'?listdirectory='.urlencode($listdirectory).'">'.getid3_lib::iconv_fallback('ISO-8859-1', 'UTF-8', $listdirectory).'</a><br>';
 	}
 
 	echo table_var_dump($ThisFileInfo);
@@ -243,7 +243,7 @@ if (isset($_REQUEST['filename'])) {
 				foreach ($DirectoryContents[$dirname]['dir'] as $filename => $fileinfo) {
 					echo '<tr bgcolor="#'.(($rowcounter++ % 2) ? $getID3checkColor_DirectoryLight : $getID3checkColor_DirectoryDark).'">';
 					if ($filename == '..') {
-						echo '<form action="'.$_SERVER['PHP_SELF'].'" method="get">';
+						echo '<form action="'.$_SERVER['SCRIPT_NAME'].'" method="get">';
 						echo '<td colspan="'.$columnsintable.'">Parent directory: ';
 						echo '<input type="text" name="listdirectory" size="50" style="background-color: '.$getID3checkColor_DirectoryDark.';" value="';
 						if (GETID3_OS_ISWINDOWS) {
@@ -254,7 +254,7 @@ if (isset($_REQUEST['filename'])) {
 						echo '"> <input type="submit" value="Go">';
 						echo '</td></form>';
 					} else {
-						echo '<td colspan="'.$columnsintable.'"><a href="'.$_SERVER['PHP_SELF'].'?listdirectory='.urlencode($dirname.$filename).'"><b>'.FixTextFields($filename).'</b></a></td>';
+						echo '<td colspan="'.$columnsintable.'"><a href="'.$_SERVER['SCRIPT_NAME'].'?listdirectory='.urlencode($dirname.$filename).'"><b>'.FixTextFields($filename).'</b></a></td>';
 					}
 					echo '</tr>';
 				}
@@ -269,11 +269,11 @@ if (isset($_REQUEST['filename'])) {
 			echo '<th>Artist</th>';
 			echo '<th>Title</th>';
 			if (isset($_REQUEST['ShowMD5'])) {
-				echo '<th>MD5&nbsp;File (File) (<a href="'.$_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'">disable</a>)</th>';
-				echo '<th>MD5&nbsp;Data (File) (<a href="'.$_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'">disable</a>)</th>';
-				echo '<th>MD5&nbsp;Data (Source) (<a href="'.$_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'">disable</a>)</th>';
+				echo '<th>MD5&nbsp;File (File) (<a href="'.$_SERVER['SCRIPT_NAME'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'">disable</a>)</th>';
+				echo '<th>MD5&nbsp;Data (File) (<a href="'.$_SERVER['SCRIPT_NAME'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'">disable</a>)</th>';
+				echo '<th>MD5&nbsp;Data (Source) (<a href="'.$_SERVER['SCRIPT_NAME'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'">disable</a>)</th>';
 			} else {
-				echo '<th colspan="3">MD5&nbsp;Data (<a href="'.$_SERVER['PHP_SELF'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'&ShowMD5=1">enable</a>)</th>';
+				echo '<th colspan="3">MD5&nbsp;Data (<a href="'.$_SERVER['SCRIPT_NAME'].'?listdirectory='.rawurlencode(isset($_REQUEST['listdirectory']) ? $_REQUEST['listdirectory'] : '.').'&ShowMD5=1">enable</a>)</th>';
 			}
 			echo '<th>Tags</th>';
 			echo '<th>Errors & Warnings</th>';
@@ -285,7 +285,7 @@ if (isset($_REQUEST['filename'])) {
 				uksort($DirectoryContents[$dirname]['known'], 'MoreNaturalSort');
 				foreach ($DirectoryContents[$dirname]['known'] as $filename => $fileinfo) {
 					echo '<tr bgcolor="#'.(($rowcounter++ % 2) ? $getID3checkColor_FileDark : $getID3checkColor_FileLight).'">';
-					echo '<td><a href="'.$_SERVER['PHP_SELF'].'?filename='.urlencode($dirname.$filename).'" TITLE="View detailed analysis">'.FixTextFields(getid3_lib::SafeStripSlashes($filename)).'</a></td>';
+					echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?filename='.urlencode($dirname.$filename).'" TITLE="View detailed analysis">'.FixTextFields(getid3_lib::SafeStripSlashes($filename)).'</a></td>';
 					echo '<td align="right">&nbsp;'.number_format($fileinfo['filesize']).'</td>';
 					echo '<td align="right">&nbsp;'.NiceDisplayFiletypeFormat($fileinfo).'</td>';
 					echo '<td align="right">&nbsp;'.(isset($fileinfo['playtime_string']) ? $fileinfo['playtime_string'] : '-').'</td>';
@@ -333,7 +333,7 @@ if (isset($_REQUEST['filename'])) {
 							break;
 					}
 					echo '</td>';
-					echo '<td align="left">&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?listdirectory='.urlencode($listdirectory).'&deletefile='.urlencode($dirname.$filename).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes($dirname.$filename).'? \n(this action cannot be un-done)\');" TITLE="Permanently delete '."\n".FixTextFields($filename)."\n".' from'."\n".' '.FixTextFields($dirname).'">delete</a></td>';
+					echo '<td align="left">&nbsp;<a href="'.$_SERVER['SCRIPT_NAME'].'?listdirectory='.urlencode($listdirectory).'&deletefile='.urlencode($dirname.$filename).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes($dirname.$filename).'? \n(this action cannot be un-done)\');" TITLE="Permanently delete '."\n".FixTextFields($filename)."\n".' from'."\n".' '.FixTextFields($dirname).'">delete</a></td>';
 					echo '</tr>';
 				}
 			}
@@ -342,7 +342,7 @@ if (isset($_REQUEST['filename'])) {
 				uksort($DirectoryContents[$dirname]['other'], 'MoreNaturalSort');
 				foreach ($DirectoryContents[$dirname]['other'] as $filename => $fileinfo) {
 					echo '<tr bgcolor="#'.(($rowcounter++ % 2) ? $getID3checkColor_UnknownDark : $getID3checkColor_UnknownLight).'">';
-					echo '<td><a href="'.$_SERVER['PHP_SELF'].'?filename='.urlencode($dirname.$filename).'"><i>'.$filename.'</i></a></td>';
+					echo '<td><a href="'.$_SERVER['SCRIPT_NAME'].'?filename='.urlencode($dirname.$filename).'"><i>'.$filename.'</i></a></td>';
 					echo '<td align="right">&nbsp;'.(isset($fileinfo['filesize']) ? number_format($fileinfo['filesize']) : '-').'</td>';
 					echo '<td align="right">&nbsp;'.NiceDisplayFiletypeFormat($fileinfo).'</td>';
 					echo '<td align="right">&nbsp;'.(isset($fileinfo['playtime_string']) ? $fileinfo['playtime_string'] : '-').'</td>';
@@ -367,7 +367,7 @@ if (isset($_REQUEST['filename'])) {
 					echo '</td>';
 
 					echo '<td align="left">&nbsp;</td>'; // Edit
-					echo '<td align="left">&nbsp;<a href="'.$_SERVER['PHP_SELF'].'?listdirectory='.urlencode($listdirectory).'&deletefile='.urlencode($dirname.$filename).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes($dirname.$filename).'? \n(this action cannot be un-done)\');" TITLE="Permanently delete '.addslashes($dirname.$filename).'">delete</a></td>';
+					echo '<td align="left">&nbsp;<a href="'.$_SERVER['SCRIPT_NAME'].'?listdirectory='.urlencode($listdirectory).'&deletefile='.urlencode($dirname.$filename).'" onClick="return confirm(\'Are you sure you want to delete '.addslashes($dirname.$filename).'? \n(this action cannot be un-done)\');" TITLE="Permanently delete '.addslashes($dirname.$filename).'">delete</a></td>';
 					echo '</tr>';
 				}
 			}
@@ -485,7 +485,7 @@ function table_var_dump($variable) {
 						fwrite($tempimagefile, $value);
 						fclose($tempimagefile);
 					}
-					$returnstring .= '</td><td><img src="'.$_SERVER['PHP_SELF'].'?showfile='.urlencode($DumpedImageSRC).'&md5='.md5_file($DumpedImageSRC).'" width="'.$imagechunkcheck[0].'" height="'.$imagechunkcheck[1].'"></td></tr>';
+					$returnstring .= '</td><td><img src="'.$_SERVER['SCRIPT_NAME'].'?showfile='.urlencode($DumpedImageSRC).'&md5='.md5_file($DumpedImageSRC).'" width="'.$imagechunkcheck[0].'" height="'.$imagechunkcheck[1].'"></td></tr>';
 				} else {
 					$returnstring .= '</td><td>'.table_var_dump($value).'</td></tr>';
 				}
