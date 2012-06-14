@@ -18,7 +18,9 @@ function daemonize_refresh( $pPidfile ) {
 	if ($gDaemonTouchTimer + 15 < time()) { // So the revivifier can tell we've hung.
 		if( ($ticks % 600) == 0 ) {
 			// keep the noise down and only log a message once per minute
-			echo date( 'd/M/Y:H:i:s O' )." - DAEMON ".getmypid()." : Touching the file $pPidfile to ".time()."\n";
+			if( !defined( 'IS_LIVE' ) ) {
+				echo date( 'd/M/Y:H:i:s O' )." - DAEMON ".getmypid()." : Touching the file $pPidfile to ".time()."\n";
+			}
 		}
 		if( $fp = fopen($pPidfile, "w") ) {
 			fwrite($fp, posix_getpid()."\n".time()."\n");
