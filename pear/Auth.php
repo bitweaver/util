@@ -97,7 +97,7 @@ class Auth {
      * @var  integer
      * @see  setExpire(), checkAuth()
      */
-    var $expire = 0;
+    private $expire = 0;
 
     /**
      * Has the auth session expired?
@@ -105,7 +105,7 @@ class Auth {
      * @var   bool
      * @see   checkAuth()
      */
-    var $expired = false;
+    private $expired = false;
 
     /**
      * Maximum idletime in seconds
@@ -117,7 +117,7 @@ class Auth {
      * @var integer
      * @see setIdle(), checkAuth()
      */
-    var $idle = 0;
+    private $idle = 0;
 
     /**
      * Is the maximum idletime over?
@@ -125,7 +125,7 @@ class Auth {
      * @var boolean
      * @see checkAuth()
      */
-    var $idled = false;
+    private $idled = false;
 
     /**
      * Storage object
@@ -133,14 +133,14 @@ class Auth {
      * @var object
      * @see Auth(), validateLogin()
      */
-    var $storage = '';
+    private $storage = '';
 
     /**
      * User-defined function that creates the login screen
      *
      * @var string
      */
-    var $loginFunction = '';
+    private $loginFunction = '';
 
     /**
      * Should the login form be displayed
@@ -148,7 +148,7 @@ class Auth {
      * @var   bool
      * @see   setShowlogin()
      */
-    var $showLogin = true;
+    private $showLogin = true;
 
     /**
       * Is Login Allowed from this page
@@ -156,28 +156,28 @@ class Auth {
       * @var  bool
       * @see setAllowLogin
       */
-    var $allowLogin = true;
+    private $allowLogin = true;
 
     /**
      * Current authentication status
      *
      * @var string
      */
-    var $status = '';
+    private $status = '';
 
     /**
      * Username
      *
      * @var string
      */
-    var $username = '';
+    private $username = '';
 
     /**
      * Password
      *
      * @var string
      */
-    var $password = '';
+    private $password = '';
 
     /**
      * checkAuth callback function name
@@ -185,7 +185,7 @@ class Auth {
      * @var string
      * @see setCheckAuthCallback()
      */
-    var $checkAuthCallback = '';
+    private $checkAuthCallback = '';
 
     /**
      * Login callback function name
@@ -193,7 +193,7 @@ class Auth {
      * @var string
      * @see setLoginCallback()
      */
-    var $loginCallback = '';
+    private $loginCallback = '';
 
     /**
      * Failed Login callback function name
@@ -201,7 +201,7 @@ class Auth {
      * @var string
      * @see setFailedLoginCallback()
      */
-    var $loginFailedCallback = '';
+    private $loginFailedCallback = '';
 
     /**
      * Logout callback function name
@@ -209,21 +209,21 @@ class Auth {
      * @var string
      * @see setLogoutCallback()
      */
-    var $logoutCallback = '';
+    private $logoutCallback = '';
 
     /**
      * Auth session-array name
      *
      * @var string
      */
-    var $_sessionName = '_authsession';
+    private $_sessionName = '_authsession';
 
     /**
      * Package Version
      *
      * @var string
      */
-    var $version = "@version@";
+    private $version = "@version@";
 
     /**
      * Flag to use advanced security
@@ -240,78 +240,78 @@ class Auth {
      *                  AUTH_ADV_CHALLENGE  => true,
      *              );
      */
-    var $advancedsecurity = false;
+    private $advancedsecurity = false;
 
     /**
      * Username key in POST array
      *
      * @var string
      */
-    var $_postUsername = 'username';
+    private $_postUsername = 'username';
 
     /**
      * Password key in POST array
      *
      * @var string
      */
-    var $_postPassword = 'password';
+    private $_postPassword = 'password';
 
     /**
      * Holds a reference to the session auth variable
      * @var array
      */
-    var $session;
+    private $session;
 
     /**
      * Holds a reference to the global server variable
      * @var array
      */
-    var $server;
+    private $server;
 
     /**
      * Holds a reference to the global post variable
      * @var array
      */
-    var $post;
+    private $post;
 
     /**
      * Holds a reference to the global cookie variable
      * @var array
      */
-    var $cookie;
+    private $cookie;
 
     /**
      * A hash to hold various superglobals as reference
      * @var array
      */
-    var $authdata;
+    private $authdata;
 
     /**
       * How many times has checkAuth been called
       * @var int
       */
-    var $authChecks = 0;
+    private $authChecks = 0;
 
     /**
      * PEAR::Log object
      *
      * @var object Log
      */
-    var $logger = null;
+    private $logger = null;
 
     /**
      * Whether to enable logging of behaviour
      *
      * @var boolean
      */
-    var $enableLogging = false;
+    private $enableLogging = false;
 
     /**
      * Whether to regenerate session id everytime start is called
      *
      * @var boolean
      */
-    var $regenerateSessionId = false;
+    private $regenerateSessionId = false;
 
     // }}}
     // {{{ Auth() [constructor]
@@ -389,9 +389,8 @@ class Auth {
       *
       * @param array    An array of Auth options
       * @return array   The options which were not applied
-      * @access private
       */
-    function &applyAuthOptions(&$options)
+    private function &applyAuthOptions(&$options)
     {
         if(is_array($options)){
             if (!empty($options['sessionName'])) {
@@ -436,9 +435,8 @@ class Auth {
       *
       * @return bool    True if the conainer is loaded, false if the container
       *                 is already loaded
-      * @access private
       */
-    function _loadStorage()
+    private function _loadStorage()
     {
         if(!is_object($this->storage)) {
             $this->storage =& $this->_factory($this->storage_driver,
@@ -460,9 +458,8 @@ class Auth {
      * @param  string $driver  Type of storage class to return
      * @param  string $options Optional parameters for the storage class
      * @return object Object   Storage object
-     * @access private
      */
-    function &_factory($driver, $options = '')
+    private function &_factory($driver, $options = '')
     {
         $storage_class = 'Auth_Container_' . $driver;
         include_once 'Auth/Container/' . $driver . '.php';
@@ -484,9 +481,8 @@ class Auth {
      * @global $HTTP_POST_VARS, $_POST
      * @see    Auth
      * @return void
-     * @access private
      */
-    function assignData()
+    private function assignData()
     {
         $this->log('Auth::assignData() called.', AUTH_LOG_DEBUG);
 
@@ -511,9 +507,8 @@ class Auth {
      * Start new auth session
      *
      * @return void
-     * @access public
      */
-    function start()
+    public function start()
     {
         $this->log('Auth::start() called.', AUTH_LOG_DEBUG);
 
@@ -536,9 +531,8 @@ class Auth {
      * Login function
      *
      * @return void
-     * @access private
      */
-    function login()
+    private function login()
     {
         $this->log('Auth::login() called.', AUTH_LOG_DEBUG);
 
@@ -612,9 +606,8 @@ class Auth {
      * @param  integer time in seconds
      * @param  bool    add time to current expire time or not
      * @return void
-     * @access public
      */
-    function setExpire($time, $add = false)
+    public function setExpire($time, $add = false)
     {
         $add ? $this->expire += $time : $this->expire = $time;
     }
@@ -628,9 +621,8 @@ class Auth {
      * @param  integer time in seconds
      * @param  bool    add time to current maximum idle time or not
      * @return void
-     * @access public
      */
-    function setIdle($time, $add = false)
+    public function setIdle($time, $add = false)
     {
         $add ? $this->idle += $time : $this->idle = $time;
     }
@@ -649,9 +641,8 @@ class Auth {
      *
      * @param  string New name for the session
      * @return void
-     * @access public
      */
-    function setSessionName($name = 'session')
+    public function setSessionName($name = 'session')
     {
         $this->_sessionName = '_auth_'.$name;
         // Make Sure Auth session variable is there
@@ -669,9 +660,8 @@ class Auth {
      *
      * @param  bool    show login form or not
      * @return void
-     * @access public
      */
-    function setShowLogin($showLogin = true)
+    public function setShowLogin($showLogin = true)
     {
         $this->showLogin = $showLogin;
     }
@@ -684,9 +674,8 @@ class Auth {
      *
      * @param  bool    allow login from this page or not
      * @return void
-     * @access public
      */
-    function setAllowLogin($allowLogin = true)
+    public function setAllowLogin($allowLogin = true)
     {
         $this->allowLogin = $allowLogin;
     }
@@ -700,10 +689,9 @@ class Auth {
      *
      * @param  string  callback function name
      * @return void
-     * @access public
      * @since Method available since Release 1.4.3
      */
-    function setCheckAuthCallback($checkAuthCallback)
+    public function setCheckAuthCallback($checkAuthCallback)
     {
         $this->checkAuthCallback = $checkAuthCallback;
     }
@@ -718,9 +706,8 @@ class Auth {
      * @param  string  callback function name
      * @return void
      * @see    setLogoutCallback()
-     * @access public
      */
-    function setLoginCallback($loginCallback)
+    public function setLoginCallback($loginCallback)
     {
         $this->loginCallback = $loginCallback;
     }
@@ -734,9 +721,8 @@ class Auth {
      *
      * @param  string  callback function name
      * @return void
-     * @access public
      */
-    function setFailedLoginCallback($loginFailedCallback)
+    public function setFailedLoginCallback($loginFailedCallback)
     {
         $this->loginFailedCallback = $loginFailedCallback;
     }
@@ -751,9 +737,8 @@ class Auth {
      * @param  string  callback function name
      * @return void
      * @see    setLoginCallback()
-     * @access public
      */
-    function setLogoutCallback($logoutCallback)
+    public function setLogoutCallback($logoutCallback)
     {
         $this->logoutCallback = $logoutCallback;
     }
@@ -770,9 +755,8 @@ class Auth {
      * @param  boolean Should existing data be overwritten? (default
      *                 is true)
      * @return void
-     * @access public
      */
-    function setAuthData($name, $value, $overwrite = true)
+    public function setAuthData($name, $value, $overwrite = true)
     {
         if (!empty($this->session['data'][$name]) && $overwrite == false) {
             return;
@@ -791,9 +775,8 @@ class Auth {
      *
      * @param  string Name of the data field
      * @return mixed  Value of the data field.
-     * @access public
      */
-    function getAuthData($name = null)
+    public function getAuthData($name = null)
     {
         if (!isset($this->session['data'])) {
             return null;
@@ -816,9 +799,8 @@ class Auth {
      *
      * @param  string Username
      * @return void
-     * @access public
      */
-    function setAuth($username)
+    public function setAuth($username)
     {
         $this->log('Auth::setAuth() called.', AUTH_LOG_DEBUG);
 
@@ -876,9 +858,8 @@ class Auth {
       *       a session var cookie might need to be crypted (user pass)
       * @param bool Enable or disable
       * @return void
-      * @access public
       */
-    function setAdvancedSecurity($flag=true)
+    public function setAdvancedSecurity($flag=true)
     {
         $this->advancedsecurity = $flag;
     }
@@ -889,10 +870,9 @@ class Auth {
     /**
      * Checks if there is a session with valid auth information.
      *
-     * @access public
      * @return boolean  Whether or not the user is authenticated.
      */
-    function checkAuth()
+    public function checkAuth()
     {
         $this->log('Auth::checkAuth() called.', AUTH_LOG_DEBUG);
         $this->authChecks++;
@@ -1025,9 +1005,8 @@ class Auth {
      * @access public
      * @see checkAuth
      * @return boolean  Whether or not the user is authenticated.
-     * @static
      */
-    function staticCheckAuth($options = null)
+    public static function staticCheckAuth($options = null)
     {
         static $staticAuth;
         if(!isset($staticAuth)) {
@@ -1046,10 +1025,9 @@ class Auth {
      * Is there a valid login session. Previously this was different from
      * checkAuth() but now it is just an alias.
      *
-     * @access public
      * @return bool  True if the user is logged in, otherwise false.
      */
-    function getAuth()
+    public function getAuth()
     {
         $this->log('Auth::getAuth() called.', AUTH_LOG_DEBUG);
         return $this->checkAuth();
@@ -1065,10 +1043,9 @@ class Auth {
      * active session and executes the logout callback function,
      * if any
      *
-     * @access public
      * @return void
      */
-    function logout()
+    public function logout()
     {
         $this->log('Auth::logout() called.', AUTH_LOG_DEBUG);
 
@@ -1089,10 +1066,9 @@ class Auth {
     /**
      * Update the idletime
      *
-     * @access private
      * @return void
      */
-    function updateIdle()
+    public function updateIdle()
     {
         $this->session['idle'] = time();
     }
@@ -1104,9 +1080,8 @@ class Auth {
      * Get the username
      *
      * @return string
-     * @access public
      */
-    function getUsername()
+    public function getUsername()
     {
         if (isset($this->session['username'])) {
             return($this->session['username']);
@@ -1121,9 +1096,8 @@ class Auth {
      * Get the current status
      *
      * @return string
-     * @access public
      */
-    function getStatus()
+    public function getStatus()
     {
         return $this->status;
     }
@@ -1135,9 +1109,8 @@ class Auth {
      * Gets the post varible used for the username
      *
      * @return string
-     * @access public
      */
-    function getPostUsernameField()
+    public function getPostUsernameField()
     {
         return($this->_postUsername);
     }
@@ -1149,9 +1122,8 @@ class Auth {
      * Gets the post varible used for the username
      *
      * @return string
-     * @access public
      */
-    function getPostPasswordField()
+    public function getPostPasswordField()
     {
         return($this->_postPassword);
     }
@@ -1162,10 +1134,9 @@ class Auth {
     /**
      * Returns the time up to the session is valid
      *
-     * @access public
      * @return integer
      */
-    function sessionValidThru()
+    public function sessionValidThru()
     {
         if (!isset($this->session['idle'])) {
             return 0;
@@ -1183,10 +1154,9 @@ class Auth {
      * List all users that are currently available in the storage
      * container
      *
-     * @access public
      * @return array
      */
-    function listUsers()
+    public function listUsers()
     {
         $this->log('Auth::listUsers() called.', AUTH_LOG_DEBUG);
         $this->_loadStorage();
@@ -1199,14 +1169,13 @@ class Auth {
     /**
      * Add user to the storage container
      *
-     * @access public
      * @param  string Username
      * @param  string Password
      * @param  mixed  Additional parameters
      * @return mixed  True on success, PEAR error object on error
      *                and AUTH_METHOD_NOT_SUPPORTED otherwise.
      */
-    function addUser($username, $password, $additional = '')
+    public function addUser($username, $password, $additional = '')
     {
         $this->log('Auth::addUser() called.', AUTH_LOG_DEBUG);
         $this->_loadStorage();
@@ -1219,12 +1188,11 @@ class Auth {
     /**
      * Remove user from the storage container
      *
-     * @access public
      * @param  string Username
      * @return mixed  True on success, PEAR error object on error
      *                and AUTH_METHOD_NOT_SUPPORTED otherwise.
      */
-    function removeUser($username)
+    public function removeUser($username)
     {
         $this->log('Auth::removeUser() called.', AUTH_LOG_DEBUG);
         $this->_loadStorage();
@@ -1237,13 +1205,12 @@ class Auth {
     /**
      * Change password for user in the storage container
      *
-     * @access public
      * @param string Username
      * @param string The new password
      * @return mixed True on success, PEAR error object on error
      *               and AUTH_METHOD_NOT_SUPPORTED otherwise.
      */
-    function changePassword($username, $password)
+    public function changePassword($username, $password)
     {
         $this->log('Auth::changePassword() called', AUTH_LOG_DEBUG);
         $this->_loadStorage();
@@ -1256,12 +1223,11 @@ class Auth {
     /**
      * Log a message from the Auth system
      *
-     * @access public
      * @param string The message to log
      * @param string The log level to log the message under. See the Log documentation for more info.
      * @return boolean
      */
-    function log($message, $level = AUTH_LOG_DEBUG)
+    public function log($message, $level = AUTH_LOG_DEBUG)
     {
         if (!$this->enableLogging) return false;
 
@@ -1281,9 +1247,8 @@ class Auth {
       *
       * @return bool    True if the logger is loaded, false if the logger
       *                 is already loaded
-      * @access private
       */
-    function _loadLogger()
+    private function _loadLogger()
     {
         if(is_null($this->logger)) {
             if (!class_exists('Log')) {
@@ -1308,7 +1273,7 @@ class Auth {
      * @param object Log_Observer A Log Observer instance
      * @return boolean
      */
-    function attachLogObserver(&$observer) {
+    public function attachLogObserver(&$observer) {
 
         $this->_loadLogger();
 
@@ -1328,7 +1293,7 @@ class Auth {
      * @param integer
      * @return boolean
      */
-    function _isAdvancedSecurityEnabled($feature = null) {
+    private function _isAdvancedSecurityEnabled($feature = null) {
 
         if (is_null($feature)) {
 
