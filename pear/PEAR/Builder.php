@@ -10,7 +10,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: Builder.php 313024 2011-07-06 19:51:24Z dufuz $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  *
@@ -33,7 +33,7 @@ require_once 'PEAR/PackageFile.php';
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: @PEAR-VER@
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since PHP 4.0.2
  * @see        http://pear.php.net/manual/en/core.ppm.pear-builder.php
@@ -240,7 +240,7 @@ class PEAR_Builder extends PEAR_Common
      *
      * @see PEAR_Builder::_runCommand
      */
-    function build($descfile, $callback = null)
+    function build($descfile, $callback = null, $options = array())
     {
         if (preg_match('/(\\/|\\\\|^)([^\\/\\\\]+)?php(.+)?$/',
                        $this->config->get('php_bin'), $matches)) {
@@ -320,11 +320,26 @@ class PEAR_Builder extends PEAR_Common
             return $this->raiseError("`phpize' failed");
         }
 
+        // Figure out what params have been passed in to us already - formatting fixing
+        $opts = array();
+        if (!empty($options)) {
+            foreach ($options as $op) {
+                $op = str_replace('--', '', $op);
+                list($name, $value) = explode('=', $op);
+                $opts[] = $name;
+            }
+        }
+
         // {{{ start of interactive part
         $configure_command = "$dir/configure";
         $configure_options = $pkg->getConfigureOptions();
         if ($configure_options) {
             foreach ($configure_options as $o) {
+                // skip params that have been passed already
+                if (in_array($o['name'], $opts)) {
+                    continue;
+                }
+
                 $default = array_key_exists('default', $o) ? $o['default'] : null;
                 list($r) = $this->ui->userDialog('build',
                                                  array($o['prompt']),
@@ -340,9 +355,16 @@ class PEAR_Builder extends PEAR_Common
         }
         // }}} end of interactive part
 
+        // Set any options that were passed in.
+        if (!empty($options)) {
+            foreach ($options as $op) {
+                $configure_command .= ' ' . $op;
+            }
+        }
+
         // FIXME make configurable
-        if (!$user=getenv('USER')) {
-            $user='defaultuser';
+        if (!$user = getenv('USER')){
+            $user = 'defaultuser';
         }
 
         $tmpdir = $this->config->get('temp_dir');
@@ -375,6 +397,7 @@ class PEAR_Builder extends PEAR_Common
         if (!file_exists($build_dir) || !is_dir($build_dir) || !chdir($build_dir)) {
             return $this->raiseError("could not chdir to $build_dir");
         }
+
         putenv('PHP_PEAR_VERSION=1.9.4');
         foreach ($to_run as $cmd) {
             $err = $this->_runCommand($cmd, $callback);
@@ -391,11 +414,17 @@ class PEAR_Builder extends PEAR_Common
             chdir($old_cwd);
             return $this->raiseError("no `modules' directory found");
         }
+
         $built_files = array();
         $prefix = exec($this->config->get('php_prefix')
                         . "php-config" .
                        $this->config->get('php_suffix') . " --prefix");
-        $this->_harvestInstDir($prefix, $inst_dir . DIRECTORY_SEPARATOR . $prefix, $built_files);
+        $ext_dir = $this->config->get('ext_dir');
+        if (!$ext_dir) {
+            $ext_dir = $prefix;
+        }
+        $this->_harvestInstDir($ext_dir, $inst_dir . DIRECTORY_SEPARATOR . $prefix, $built_files);
+
         chdir($old_cwd);
         return $built_files;
     }

@@ -9,7 +9,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: Package.php 313023 2011-07-06 19:17:11Z dufuz $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.0a1
  */
@@ -50,7 +50,7 @@ define('PEAR_DOWNLOADER_PACKAGE_PHPVERSION', -1004);
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: @PEAR-VER@
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 1.4.0a1
  */
@@ -1672,7 +1672,7 @@ class PEAR_Downloader_Package
                         if (!isset($options['soft'])) {
                             $this->_downloader->log(0, 'Channel "' . $parsed['channel'] .
                                 '" is not initialized, use ' .
-                                '"pear channel-discover ' . $parsed['channel'] . '" to initialize' .
+                                '"pear channel-discover ' . $parsed['channel'] . '" to initialize ' .
                                 'or pear config-set auto_discover 1');
                         }
                     }

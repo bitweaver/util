@@ -9,7 +9,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: Dependency2.php 313023 2011-07-06 19:17:11Z dufuz $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.4.0a1
  */
@@ -31,7 +31,7 @@ require_once 'PEAR/Validate.php';
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: @PEAR-VER@
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 1.4.0a1
  */
@@ -547,6 +547,10 @@ class PEAR_Dependency2
     function validatePearinstallerDependency($dep)
     {
         $pearversion = $this->getPEARVersion();
+        if (array_key_exists('PEAR_RUNTESTS_PEAR_VERSION_RETURN', $GLOBALS)) {
+            // A means for testing pear-core in local repositories.
+            return $GLOBALS['PEAR_RUNTESTS_PEAR_VERSION_RETURN'];
+        }
         $extra = $this->_getExtraString($dep);
         if (isset($dep['exclude'])) {
             if (!is_array($dep['exclude'])) {

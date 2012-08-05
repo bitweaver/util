@@ -10,7 +10,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: Install.php 313023 2011-07-06 19:17:11Z dufuz $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -30,7 +30,7 @@ require_once 'PEAR/Command/Common.php';
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: @package_version@
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 0.1
  */
@@ -380,7 +380,7 @@ Run post-installation scripts in package <package>, if any exist.
             $newini = array();
         }
         foreach ($binaries as $binary) {
-            if ($ini['extension_dir']) {
+            if (!$this->config->get('ext_dir') && $ini['extension_dir']) {
                 $binary = basename($binary);
             }
             $newini[] = $enable . '="' . $binary . '"' . (OS_UNIX ? "\n" : "\r\n");

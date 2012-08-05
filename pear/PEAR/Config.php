@@ -10,7 +10,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: Config.php 313023 2011-07-06 19:17:11Z dufuz $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 0.1
  */
@@ -246,7 +246,7 @@ if (getenv('PHP_PEAR_SIG_KEYDIR')) {
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: @package_version@
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 0.1
  */
@@ -370,7 +370,7 @@ class PEAR_Config extends PEAR
             ),
         'auto_discover' => array(
             'type' => 'integer',
-            'default' => 0,
+            'default' => 1,
             'doc' => 'whether to automatically discover new channels',
             'prompt' => 'Auto-discover new Channels',
             'group' => 'Internet Access',

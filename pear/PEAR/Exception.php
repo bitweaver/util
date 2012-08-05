@@ -6,16 +6,16 @@
  * PHP versions 4 and 5
  *
  * @category   pear
- * @package    PEAR
+ * @package    PEAR_Exception
  * @author     Tomas V. V. Cox <cox@idecnet.com>
  * @author     Hans Lellelid <hans@velum.net>
  * @author     Bertrand Mansion <bmansion@mamasam.com>
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: Exception.php 313023 2011-07-06 19:17:11Z dufuz $
- * @link       http://pear.php.net/package/PEAR
- * @since      File available since Release 1.3.3
+ * @version    CVS: $Id$
+ * @link       http://pear.php.net/package/PEAR_Exception
+ * @since      File available since Release 1.0.0
  */
 
 
@@ -82,16 +82,16 @@
  * </code>
  *
  * @category   pear
- * @package    PEAR
+ * @package    PEAR_Exception
  * @author     Tomas V.V.Cox <cox@idecnet.com>
  * @author     Hans Lellelid <hans@velum.net>
  * @author     Bertrand Mansion <bmansion@mamasam.com>
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
- * @link       http://pear.php.net/package/PEAR
- * @since      Class available since Release 1.3.3
+ * @version    Release: @package_version@
+ * @link       http://pear.php.net/package/PEAR_Exception
+ * @since      Class available since Release 1.0.0
  *
  */
 class PEAR_Exception extends Exception

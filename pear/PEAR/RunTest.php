@@ -10,7 +10,7 @@
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    CVS: $Id: RunTest.php 313024 2011-07-06 19:51:24Z dufuz $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/PEAR
  * @since      File available since Release 1.3.3
  */
@@ -38,7 +38,7 @@ putenv("PHP_PEAR_RUNTESTS=1");
  * @author     Greg Beaver <cellog@php.net>
  * @copyright  1997-2009 The Authors
  * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    Release: 1.9.4
+ * @version    Release: @package_version@
  * @link       http://pear.php.net/package/PEAR
  * @since      Class available since Release 1.3.3
  */
@@ -273,7 +273,7 @@ class PEAR_RunTest
      *                       test came out.
      *                       PEAR Error when the tester it self fails
      */
-    function run($file, $ini_settings = array(), $test_number = 1)
+    function run($file, $ini_settings_cmd_line = array(), $test_number = 1)
     {
         if (isset($this->_savephp)) {
             $this->_php = $this->_savephp;
@@ -310,19 +310,24 @@ class PEAR_RunTest
             $pass_options = $this->_options['ini'];
         }
 
-        if (is_string($ini_settings)) {
-            $ini_settings = $this->iniString2array($ini_settings);
+        if (is_string($ini_settings_cmd_line)) {
+            $ini_settings_cmd_line = $this->iniString2array($ini_settings_cmd_line);
         }
 
-        $ini_settings = $this->settings2array($this->ini_overwrites, $ini_settings);
+        $ini_settings_base = $this->settings2array($this->ini_overwrites, $ini_settings_cmd_line);
         if ($section_text['INI']) {
             if (strpos($section_text['INI'], '{PWD}') !== false) {
                 $section_text['INI'] = str_replace('{PWD}', dirname($file), $section_text['INI']);
             }
             $ini = preg_split( "/[\n\r]+/", $section_text['INI']);
-            $ini_settings = $this->settings2array($ini, $ini_settings);
-        }
-        $ini_settings = $this->settings2params($ini_settings);
+            $ini_settings_phpt_section = $this->settings2array($ini, array());
+        	$ini_settings_phpt_section = $this->settings2params($ini_settings_phpt_section);
+        } else {
+        	$ini_settings_phpt_section = ''; 
+		}
+        $ini_settings_base = $this->settings2params($ini_settings_base);
+		$ini_settings_all = $ini_settings_base . ' ' . $ini_settings_phpt_section;
+
         $shortname = str_replace($cwd . DIRECTORY_SEPARATOR, '', $file);
 
         $tested = trim($section_text['TEST']);
@@ -360,7 +365,7 @@ class PEAR_RunTest
         $this->_cleanupOldFiles($file);
 
         // Check if test should be skipped.
-        $res  = $this->_runSkipIf($section_text, $temp_skipif, $tested, $ini_settings);
+        $res  = $this->_runSkipIf($section_text, $temp_skipif, $tested, $ini_settings_base);
         if (count($res) != 2) {
             return $res;
         }
@@ -418,7 +423,7 @@ class PEAR_RunTest
         }
 
         $args = $section_text['ARGS'] ? ' -- '.$section_text['ARGS'] : '';
-        $cmd = $this->_preparePhpBin($this->_php, $temp_file, $ini_settings);
+        $cmd = $this->_preparePhpBin($this->_php, $temp_file, $ini_settings_all);
         $cmd.= "$args 2>&1";
         if (isset($this->_logger)) {
             $this->_logger->log(2, 'Running command "' . $cmd . '"');
@@ -455,7 +460,7 @@ class PEAR_RunTest
             $env['REQUEST_METHOD'] = 'POST';
 
             $this->save_text($tmp_post, $request);
-            $cmd = "$this->_php$pass_options$ini_settings \"$temp_file\" 2>&1 < $tmp_post";
+            $cmd = "$this->_php $pass_options $ini_settings_all \"$temp_file\" 2>&1 < \"$tmp_post\"";
         } elseif (array_key_exists('POST', $section_text) && !empty($section_text['POST'])) {
             $post = trim($section_text['POST']);
             $this->save_text($tmp_post, $post);
@@ -465,7 +470,7 @@ class PEAR_RunTest
             $env['CONTENT_TYPE']   = 'application/x-www-form-urlencoded';
             $env['CONTENT_LENGTH'] = $content_length;
 
-            $cmd = "$this->_php$pass_options$ini_settings \"$temp_file\" 2>&1 < $tmp_post";
+            $cmd = "$this->_php $pass_options $ini_settings_all \"$temp_file\" 2>&1 < \"$tmp_post\"";
         } else {
             $env['REQUEST_METHOD'] = 'GET';
             $env['CONTENT_TYPE']   = '';
@@ -749,7 +754,7 @@ $text
         $warn = false;
         if (array_key_exists('SKIPIF', $section_text) && trim($section_text['SKIPIF'])) {
             $this->save_text($temp_skipif, $section_text['SKIPIF']);
-            $output = $this->system_with_timeout("$this->_php$ini_settings -f \"$temp_skipif\"");
+            $output = $this->system_with_timeout("$this->_php $ini_settings -f \"$temp_skipif\"");
             $output = $output[1];
             $loutput = ltrim($output);
             unlink($temp_skipif);
@@ -956,7 +961,7 @@ $text
         if ($section_text['CLEAN']) {
             // perform test cleanup
             $this->save_text($temp_clean, $section_text['CLEAN']);
-            $output = $this->system_with_timeout("$this->_php $temp_clean  2>&1");
+            $output = $this->system_with_timeout("$this->_php \"$temp_clean\"  2>&1");
             if (strlen($output[1])) {
                 echo "BORKED --CLEAN-- section! output:\n", $output[1];
             }
