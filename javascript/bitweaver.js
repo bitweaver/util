@@ -1287,7 +1287,7 @@ function textareasize(elementId, height) {
 	textarea = document.getElementById( elementId );
 	if (textarea && height != 0 && textarea.rows + height > 5) {
 		textarea.rows += height;
-		setCookie('rows', textarea.rows);
+		BitBase.setCookie('rows', textarea.rows);
 	}
 }
 
