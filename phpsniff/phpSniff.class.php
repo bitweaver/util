@@ -870,7 +870,7 @@ class phpSniff
             }
 			// if this is a mozilla browser, get the rv: information
 			if($this->browser_is($this->_get_short_name('mozilla'))) {
-                if(preg_match('/([0-9]+)([\.0-9]+)([a-z0-9+]?)/i',$mozv[1],$match)) {
+                if( !empty( $mozv[1] ) && preg_match('/([0-9]+)([\.0-9]+)([a-z0-9+]?)/i',$mozv[1],$match) ) {
 				    $this->_set_browser('version',$mozv[1]);
 				    $this->_set_browser('maj_ver',$match[1]);
 				    $this->_set_browser('min_ver',$match[2]);
