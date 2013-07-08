@@ -18,7 +18,7 @@
  * @author     Adam Ashley <aashley@php.net>
  * @copyright  2001-2006 The PHP Group
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version    CVS: $Id: Auth.php 289651 2009-10-15 04:39:07Z aashley $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Auth
  */
 
@@ -82,7 +82,7 @@ define('AUTH_ADV_CHALLENGE', 3);
  * @author     Adam Ashley <aashley@php.net>
  * @copyright  2001-2006 The PHP Group
  * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
- * @version    Release: @package_version@  File: $Revision: 289651 $
+ * @version    Release: @package_version@  File: $Revision$
  * @link       http://pear.php.net/package/Auth
  */
 class Auth {

@@ -60,7 +60,7 @@ class getID3
 
 		// Check memory
 		$memory_limit = ini_get('memory_limit');
-		if (eregi('([0-9]+)M', $memory_limit, $matches)) {
+		if (preg_match('/([0-9]+)M/i', $memory_limit, $matches)) {
 			// could be stored as "16M" rather than 16777216 for example
 			$memory_limit = $matches[1] * 1048576;
 		}
@@ -131,7 +131,7 @@ class getID3
 				    $subdirsraw = explode("\n", ob_get_contents());
 				    ob_end_clean();
 				    foreach ($subdirsraw as $dummy => $line) {
-				      if (eregi('^[0-9]{4}/[0-9]{2}/[0-9]{2}  [0-9]{2}:[0-9]{2} [AP]M    <DIR>          ([^ ]{8})     '.preg_quote($DirPieces[$i]).'$', trim($line), $matches)) {
+				      if (preg_match('#^[0-9]{4}/[0-9]{2}/[0-9]{2}  [0-9]{2}:[0-9]{2} [AP]M    <DIR>          ([^ ]{8})     '.preg_quote($DirPieces[$i]).'$#i', trim($line), $matches)) {
 				        $CLIdir .= ' && cd '.$matches[1];
 				        break;
 				      }

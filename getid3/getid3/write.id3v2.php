@@ -1783,7 +1783,7 @@ class getid3_write_id3v2
 	}
 
 	function is_hash($var) {
-		// written by dev-nullØchristophe*vg
+		// written by dev-nullï¿½christophe*vg
 		// taken from http://www.php.net/manual/en/function.array-merge-recursive.php
 		if (is_array($var)) {
 			$keys = array_keys($var);
@@ -1798,7 +1798,7 @@ class getid3_write_id3v2
 	}
 
 	function array_join_merge($arr1, $arr2) {
-		// written by dev-nullØchristophe*vg
+		// written by dev-nullï¿½christophe*vg
 		// taken from http://www.php.net/manual/en/function.array-merge-recursive.php
 		if (is_array($arr1) && is_array($arr2)) {
 			// the same -> merge
@@ -1866,15 +1866,15 @@ class getid3_write_id3v2
 		if ($parts = $this->safe_parse_url($url)) {
 			if (($parts['scheme'] != 'http') && ($parts['scheme'] != 'https') && ($parts['scheme'] != 'ftp') && ($parts['scheme'] != 'gopher')) {
 				return false;
-			} elseif (!eregi("^[[:alnum:]]([-.]?[0-9a-z])*\.[a-z]{2,3}$", $parts['host'], $regs) && !IsValidDottedIP($parts['host'])) {
+			} elseif (!preg_match("/^[[:alnum:]]([-.]?[0-9a-z])*\.[a-z]{2,3}$/i", $parts['host'], $regs) && !IsValidDottedIP($parts['host'])) {
 				return false;
-			} elseif (!eregi("^([[:alnum:]-]|[\_])*$", $parts['user'], $regs)) {
+			} elseif (!preg_match("/^([[:alnum:]-]|[\_])*$/i", $parts['user'], $regs)) {
 				return false;
-			} elseif (!eregi("^([[:alnum:]-]|[\_])*$", $parts['pass'], $regs)) {
+			} elseif (!preg_match("/^([[:alnum:]-]|[\_])*$/i", $parts['pass'], $regs)) {
 				return false;
-			} elseif (!eregi("^[[:alnum:]/_\.@~-]*$", $parts['path'], $regs)) {
+			} elseif (!preg_match("/^[[:alnum:]/_\.@~-]*$/i", $parts['path'], $regs)) {
 				return false;
-			} elseif (!eregi("^[[:alnum:]?&=+:;_()%#/,\.-]*$", $parts['query'], $regs)) {
+			} elseif (!preg_match("/^[[:alnum:]?&=+:;_()%#/,\.-]*$/i", $parts['query'], $regs)) {
 				return false;
 			} else {
 				return true;
