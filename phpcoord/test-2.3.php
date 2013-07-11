@@ -1,7 +1,12 @@
 <?php
-
-  //--------------------------------------------------------------------------  // PHPcoord
-  // text.php  //  // (c) 2005 Jonathan Stott  //  // Created on 11-Aug-2005  //
+/**-------------------------------------------------------------------------
+  // PHPcoord
+  // text.php
+  //
+  // (c) 2005 Jonathan Stott
+  //
+  // Created on 11-Aug-2005
+  //
   // 2.3 - 24 Aug 2006
   //  - Changed OSRef->toSixFigureString() so that the eastings and northings
   //    are rounded rather than floored.
@@ -13,11 +18,20 @@
   // 2.0 - 21 Dec 2005
   //  - Completely different object design - conversion functions now through
   //    objects rather than static functions
-  //  - Updated comments and documentation  // 1.1 - 11 Sep 2005
+  //  - Updated comments and documentation
+  // 1.1 - 11 Sep 2005
   //  - Added OSGB36/WGS84 data conversions
-  // 1.0 - 11 Aug 2005  //  - Initial version  //--------------------------------------------------------------------------
+  // 1.0 - 11 Aug 2005
+  //  - Initial version
+  //--------------------------------------------------------------------------
+ *
+ * @package kernel
+ * @subpackage functions
+ */
 
-
+/**
+ * Load library
+ */
   require_once("phpcoord-2.3.php");
 ?>
 
