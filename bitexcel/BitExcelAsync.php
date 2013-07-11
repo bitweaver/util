@@ -1,9 +1,24 @@
 <?php
+/**
+ * @version $Header:$
+ *
+ * Copyright (c) 2006 bitweaver.org
+ * All Rights Reserved. See below for details and a complete list of authors.
+ * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details
+ *
+ * @package bitexcel
+ */
 
+/**
+ * required setup
+ */
 require_once( UTIL_PKG_PATH.'PHPAsync.php' );
 
 require_once( UTIL_PKG_PATH.'bitexcel/BitExcel.php' );
 
+/**
+ * @package bitexcel
+ */
 class BitExcelAsync extends BitExcel{
 
 	private $mAsync;

@@ -1,6 +1,17 @@
 <?php
+/**
+ * @version $Header:$
+ *
+ * Copyright (c) 2006 bitweaver.org
+ * All Rights Reserved. See below for details and a complete list of authors.
+ * Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details
+ *
+ * @package bitexcel
+ */
 
-/** PHPExcel */
+/**
+ * required setup
+ */
 $php_excel_loaded = FALSE;
 if (@include_once("PEAR.php")) {		
 	ini_set('include_path', ini_get('include_path').':/usr/share/pear/PHPExcel/');
@@ -20,6 +31,9 @@ require_once( LIBERTY_PKG_PATH . 'LibertyValidator.php' );
 define( 'EXCEL_TEMP_PATH', TEMP_PKG_PATH.'excel/' );
 define( 'EXCEL_TEMP_URL', TEMP_PKG_URL.'excel/' );
 
+/**
+ * @package bitexcel
+ */
 class BitExcel extends BitBase{
 
 	private $mPHPExcel;
@@ -73,7 +87,9 @@ class BitExcel extends BitBase{
 		// $this->mPHPExcel->getProperties()->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.");
 	}
 
-	// write Excel 2007 file
+	/**
+	 * write Excel 2007 file
+	 */
 	public function writeWorkbook( $pParamHash ){
 		if( $this->verifyWorkbook( $pParamHash ) ){
 			// init the excel object
@@ -169,9 +185,10 @@ class BitExcel extends BitBase{
 	/**
 	 * updateWorkbook
 	 * adds data to an existing workbook
-	 * @pFileName 			- name of the workbook (without the extension)
-	 * @pParamHash['title']	- name of the worksheet to insert data into 
-	 * @pParamHash['rows']	- data to insert
+	 * @param pFileName 			- name of the workbook (without the extension)
+	 * @param pParamHash['title']	- name of the worksheet to insert data into 
+	 * @param pParamHash['rows']	- data to insert
+	 * @return bool
 	 */
 	public function updateWorkbook( $pFileName, $pParamHash ){
 		$xlsxFile = EXCEL_TEMP_PATH.$pFileName.".xlsx";
