@@ -15,9 +15,13 @@
  in YourClass::doSomeWork send notifications to the async log like so
  
  $this->asyncProcess->updateStatus( <percentage_complete> );  a numeric value, do not include "%"
+ *
+ * @package kernel
+ */
 
-*/
-
+/**
+ * Setup
+ */
 require_once( UTIL_PKG_PATH.'phpcontrib_lib.php' );
 
 // written for bitweaver environment, but you can override 
@@ -25,6 +29,9 @@ if( !defined( 'PHPASYNC_TEMP_DIR' ) ){
 	define( 'PHPASYNC_TEMP_DIR', TEMP_PKG_PATH.'phpasync' );
 }
 
+/**
+ * @package kernel
+ */
 class PHPAsync extends BitBase{
 	private $mPid;
 
