@@ -1,7 +1,16 @@
 <?php
 
-  //--------------------------------------------------------------------------  // PHPcoord
-  // phpcoord.php  //  // (c) 2005 Jonathan Stott  //  // Created on 11-Aug-2005  //
+/**--------------------------------------------------------------------------
+ * PHPcoord
+ * phpcoord.php
+ *
+ * @package kernel
+ */
+
+  // (c) 2005 Jonathan Stott
+  //
+  // Created on 11-Aug-2005
+  //
   // 2.3 - 24 Aug 2006
   //  - Changed OSRef->toSixFigureString() so that the eastings and northings
   //    are rounded rather than floored.
@@ -13,13 +22,19 @@
   // 2.0 - 21 Dec 2005
   //  - Completely different object design - conversion functions now through
   //    objects rather than static functions
-  //  - Updated comments and documentation  // 1.1 - 11 Sep 2005
+  //  - Updated comments and documentation
+  // 1.1 - 11 Sep 2005
   //  - Added OSGB36/WGS84 data conversions
-  // 1.0 - 11 Aug 2005  //  - Initial version  //--------------------------------------------------------------------------
+  // 1.0 - 11 Aug 2005
+  //  - Initial version
+  //--------------------------------------------------------------------------
 
 
-  // ================================================================== LatLng
-
+/**
+ * LatLng
+ *
+ * @package kernel
+ */
   class LatLng {
 
     var $lat;
@@ -278,7 +293,8 @@
         $longitudeZone = 32;
       }
 
-      // Special zones for Svalbard      if ($latitude >= 72.0 && $latitude < 84.0) {
+      // Special zones for Svalbard
+      if ($latitude >= 72.0 && $latitude < 84.0) {
         if ($longitude >= 0.0 && $longitude < 9.0) {
           $longitudeZone = 31;
         } else if ($longitude >= 9.0 && $longitude < 21.0) {
@@ -340,7 +356,8 @@
                   * pow($A, 6.0)
                   / 720)));
 
-      // Adjust for the southern hemisphere      if ($latitude < 0) {
+      // Adjust for the southern hemisphere
+      if ($latitude < 0) {
         $UTMNorthing += 10000000.0;
       }
 
@@ -348,10 +365,12 @@
     }    
   }
 
-
-  // =================================================================== OSRef
-
-  // References given with OSRef are accurate to 1m.
+/**
+ * OSRef
+ * References given with OSRef are accurate to 1m.
+ *
+ * @package kernel
+ */
   class OSRef {
 
     var $easting;
@@ -522,9 +541,11 @@
     }
   }
 
-
-  // ================================================================== UTMRef
-
+/**
+ * UTMRef
+ *
+ * @package kernel
+ */
   class UTMRef {
 
     var $easting;
@@ -579,7 +600,8 @@
 
       $longitudeOrigin = ($zoneNumber - 1.0) * 6.0 - 180.0 + 3.0;
 
-      // Correct y for southern hemisphere      if ((ord($zoneLetter) - ord("N")) < 0) {
+      // Correct y for southern hemisphere
+      if ((ord($zoneLetter) - ord("N")) < 0) {
         $y -= 10000000.0;
       }
 
@@ -651,9 +673,11 @@
     }   
   }
 
-
-  // ================================================================== RefEll
-
+/**
+ * RefEll
+ *
+ * @package kernel
+ */
   class RefEll {
 
     var $maj;

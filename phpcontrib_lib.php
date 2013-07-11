@@ -1,9 +1,15 @@
 <?php
-// a collection of functions that are very useful
-// but not commonly needed.
-
-// extract_to
 /**
+ * a collection of functions that are very useful
+ * but not commonly needed.
+ *
+ * @package kernel
+ * @subpackage functions
+ */
+
+/**
+ * extract_to
+ *
  * @see http://www.php.net/manual/en/function.extract.php#63234
  * 
  * This function provides exactly the same functionality as extract except 
