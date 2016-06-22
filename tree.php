@@ -29,7 +29,7 @@ if ( defined( 'DEBUG_PKG_PATH' ) ) {
  */
 class TreeMaker {
 	/// Unique prefix for cookies generated for this tree
-	var $prefix;
+	public $prefix;
 	/// Constructor
 	function TreeMaker($prefix) {
 		$this->prefix = $prefix;

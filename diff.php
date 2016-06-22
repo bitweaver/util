@@ -39,9 +39,9 @@ define('USE_ASSERTS', function_exists('assert'));
  */
 class _WikiDiffEngine
 {
-  var $edits;	// List of editing operation to convert XV to YV.
-  var $xv = array(), $yv = array();
-  var $xchanged, $ychanged;
+  public $edits;	// List of editing operation to convert XV to YV.
+  public $xv = array(), $yv = array();
+  public $xchanged, $ychanged;
   function _WikiDiffEngine ($from_lines, $to_lines)
       {
 	$n_from = sizeof($from_lines);
@@ -440,7 +440,7 @@ class _WikiDiffEngine
  */
 class WikiDiff
 {
-  var $edits;
+  public $edits;
   /**
    * Compute diff between files (or deserialize serialized WikiDiff.)
    */
@@ -762,9 +762,9 @@ class WikiDiff
  */
 class WikiDiffFormatter
 {
-  var $context_lines;
-  var $do_reverse_diff;
-  var $context_prefix, $deletes_prefix, $adds_prefix;
+  public $context_lines;
+  public $do_reverse_diff;
+  public $context_prefix, $deletes_prefix, $adds_prefix;
   function WikiDiffFormatter ($reverse = false)
       {
 	$this->do_reverse_diff = $reverse;

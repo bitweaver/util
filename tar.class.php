@@ -54,14 +54,14 @@ Version History:
 */
 class tar {
 	// Unprocessed Archive Information
-	var $filename;
-	var $isGzipped;
-	var $tar_file;
+	public $filename;
+	public $isGzipped;
+	public $tar_file;
 	// Processed Archive Information
-	var $files;
-	var $directories;
-	var $numFiles = 0;
-	var $numDirectories = 0;
+	public $files;
+	public $directories;
+	public $numFiles = 0;
+	public $numDirectories = 0;
 	// Class Constructor -- Does nothing...
 	function tar() {
 		return true;

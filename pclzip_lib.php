@@ -130,12 +130,12 @@
   class PclZip
   {
     // ----- Filename of the zip file
-    var $zipname = '';
+    public $zipname = '';
     // ----- File descriptor of the zip file
-    var $zip_fd = 0;
+    public $zip_fd = 0;
     // ----- Internal error handling
-    var $error_code = 1;
-    var $error_string = '';
+    public $error_code = 1;
+    public $error_string = '';
   // --------------------------------------------------------------------------------
   // Function : PclZip()
   // Description :
