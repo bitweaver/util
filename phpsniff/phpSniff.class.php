@@ -563,7 +563,7 @@ class phpSniff
     function _get_os_info ()
     {   // regexes to use
         $regex_windows  = '/([^dar]win[dows]*)[\s]?([0-9a-z]*)[\w\s]?([a-z0-9.]*)/i';
-        $regex_mac      = '/(68[k0]{1,3})|(ppc mac os x)|([p\S]{1,5}pc)|(darwin)/i';
+        $regex_mac      = '/(68[k0]{1,3})|(ppc|intel) (mac os x)|([p\S]{1,5}pc)|(darwin)/i';
         $regex_os2      = '/os\/2|ibm-webexplorer/i';
         $regex_sunos    = '/(sun|i86)[os\s]*([0-9]*)/i';
         $regex_irix     = '/(irix)[\s]*([0-9]*)/i';
@@ -598,39 +598,21 @@ class phpSniff
             $this->_set_browser('os',strtolower($v));
             $this->_set_browser('platform','win');
         }
-        //  look for amiga OS
-        elseif(preg_match($regex_amiga,$this->_browser_info['ua'],$match))
-        {   $this->_set_browser('platform','amiga');
-            if(stristr($this->_browser_info['ua'],'morphos')) {
-                // checking for MorphOS
-                $this->_set_browser('os','morphos');
-            } elseif(stristr($this->_browser_info['ua'],'mc680x0')) {
-                // checking for MC680x0
-                $this->_set_browser('os','mc680x0');
-            } elseif(stristr($this->_browser_info['ua'],'ppc')) {
-                // checking for PPC
-                $this->_set_browser('os','ppc');
-            } elseif(preg_match('/(AmigaOS [\.1-9]?)/i',$this->_browser_info['ua'],$match)) {
-                // checking for AmigaOS version string
-                $this->_set_browser('os',$match[1]);
-            }
-        }
-        // look for OS2
-        elseif( preg_match($regex_os2,$this->_browser_info['ua']))
-        {   $this->_set_browser('os','os2');
-            $this->_set_browser('platform','os2');
-        }
         // look for mac
         // sets: platform = mac ; os = 68k or ppc
         elseif( preg_match($regex_mac,$this->_browser_info['ua'],$match) )
         {   $this->_set_browser('platform','mac');
-            $os = !empty($match[1]) ? '68k' : '';
-            $os = !empty($match[2]) ? 'osx' : $os;
-            $os = !empty($match[3]) ? 'ppc' : $os;
-            $os = !empty($match[4]) ? 'osx' : $os;
+			$os = '';
+            if( $match[3] == 'mac os x' ) { $os = 'osx'; }
+            elseif( !empty($match[1]) ) { $os = '68k'; }
             $this->_set_browser('os',$os);
         }
         //  look for *nix boxes
+        //  linux sets: platform = *nix ; os = linux
+        elseif(preg_match($regex_linux,$this->_browser_info['ua'],$match))
+        {   $this->_set_browser('platform','*nix');
+            $this->_set_browser('os','linux');
+        }
         //  sunos sets: platform = *nix ; os = sun|sun4|sun5|suni86
         elseif(preg_match($regex_sunos,$this->_browser_info['ua'],$match))
         {   $this->_set_browser('platform','*nix');
@@ -695,10 +677,27 @@ class phpSniff
             $this->_set_browser('os',$match[1].$match[2]);
         }
         //  last one to look for
-        //  linux sets: platform = *nix ; os = linux
-        elseif(preg_match($regex_linux,$this->_browser_info['ua'],$match))
-        {   $this->_set_browser('platform','*nix');
-            $this->_set_browser('os','linux');
+        //  look for amiga OS
+        elseif(preg_match($regex_amiga,$this->_browser_info['ua'],$match))
+        {   $this->_set_browser('platform','amiga');
+            if(stristr($this->_browser_info['ua'],'morphos')) {
+                // checking for MorphOS
+                $this->_set_browser('os','morphos');
+            } elseif(stristr($this->_browser_info['ua'],'mc680x0')) {
+                // checking for MC680x0
+                $this->_set_browser('os','mc680x0');
+            } elseif(stristr($this->_browser_info['ua'],'ppc')) {
+                // checking for PPC
+                $this->_set_browser('os','ppc');
+            } elseif(preg_match('/(AmigaOS [\.1-9]?)/i',$this->_browser_info['ua'],$match)) {
+                // checking for AmigaOS version string
+                $this->_set_browser('os',$match[1]);
+            }
+        }
+        // look for OS2
+        elseif( preg_match($regex_os2,$this->_browser_info['ua']))
+        {   $this->_set_browser('os','os2');
+            $this->_set_browser('platform','os2');
         }
     }
 
