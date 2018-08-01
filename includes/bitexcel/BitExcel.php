@@ -24,7 +24,7 @@ if( !$php_excel_loaded ){
 	require_once( EXTERNALS_PKG_PATH.'phpexcel/Classes/PHPExcel/Writer/Excel2007.php');
 }
 
-require_once( UTIL_PKG_PATH.'phpcontrib_lib.php' );
+require_once( UTIL_PKG_INC.'phpcontrib_lib.php' );
 
 require_once( LIBERTY_PKG_PATH . 'LibertyValidator.php' );
 

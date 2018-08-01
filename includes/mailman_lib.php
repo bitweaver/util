@@ -53,7 +53,7 @@ function mailman_list_members( $pListName ) {
 
 // pParamHash follows naming convention off config_list --help usage instructions
 function mailman_config_list( $pParamHash ){
-	$options = ' -i '.escapeshellarg(UTIL_PKG_PATH.'mailman.cfg');
+	$options = ' -i '.escapeshellarg(UTIL_PKG_INC.'mailman.cfg');
 	$options .= ' '.escapeshellarg( $pParamHash['listname'] );
 	if( $ret = mailman_command( 'config_list', $output, $options) ) {
 		return (tra('Unable to configure list: ').$pParamHash['listname'].":".$ret);
@@ -76,7 +76,7 @@ function mailman_newlist( $pParamHash ) {
 			return (tra('Unable to create list: ').$pParamHash['listname'].":".$ret);
 		}
 
-		$options = ' -i '.escapeshellarg(UTIL_PKG_PATH.'mailman.cfg');
+		$options = ' -i '.escapeshellarg(UTIL_PKG_INC.'mailman.cfg');
 		$options .= ' '.escapeshellarg( $pParamHash['listname'] );
 		if( $ret = mailman_command( 'config_list', $output, $options) ) {
 			// @TODO if this fails we should roll back the newlist created
@@ -147,7 +147,7 @@ function mailman_setmoderated( $pListName, $pModerated = TRUE ) {
 	$ret = FALSE;
 	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
 		$cmd = $fullCommand." -q -l -r mailman_lib.setDefaultModerationFlag ".escapeshellarg( $pListName )." ".( $pModerated ? 1 : 0 );
-		$cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\""; 
+		$cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_INC." $cmd\""; 
 		exec( $cmd, $ret );
 	} else {
 		bit_error_log( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
@@ -159,7 +159,7 @@ function mailman_setmoderator( $pListName, $pEmail ) {
 	$ret = '';
 	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
 		$cmd = $fullCommand." -q -l -r mailman_lib.setMemberModeratedFlag ".escapeshellarg( $pListName )." ".escapeshellarg( $pEmail );
-		$cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
+		$cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_INC." $cmd\"";
 		exec( $cmd, $ret );
 	} else {
 		bit_error_log( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
@@ -206,7 +206,7 @@ function mailman_findmember( $pListName, $pEmail ) {
 function mailman_setsubscriptiontype( $pListName, $pEmail, $pType ) {
 	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
         $cmd = $fullCommand." -q -l -r mailman_lib.setSubscriptionType ".escapeshellarg( $pListName )." ".escapeshellarg( $pEmail )." ".( $pType == 'digest' ? 1 : 0 );
-        $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
+        $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_INC." $cmd\"";
         exec( $cmd, $ret );
 	}else{
 		bit_error_log( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );
@@ -218,7 +218,7 @@ function mailman_getsubscriptiontype( $pListName, $pEmail ){
 	// even though setSubscriptionType returns a string or false  we return an array because thats what exec returns
 	if( $fullCommand = mailman_get_command( 'withlist' ) ) {
         $cmd = $fullCommand." -l -r mailman_lib.getSubscriptionType ".escapeshellarg( $pListName )." ".escapeshellarg( $pEmail );
-        $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_PATH." $cmd\"";
+        $cmd = "/bin/sh -c \"PYTHONPATH=".UTIL_PKG_INC." $cmd\"";
         exec( $cmd, $ret );
 	}else{
 		bit_error_log( 'Groups mailman command failed (withlist) File not found: '.$fullCommand );

@@ -12,9 +12,9 @@
 /**
  * required setup
  */
-require_once( UTIL_PKG_PATH.'PHPAsync.php' );
+require_once( UTIL_PKG_INC.'PHPAsync.php' );
 
-require_once( UTIL_PKG_PATH.'bitexcel/BitExcel.php' );
+require_once( UTIL_PKG_INC.'bitexcel/BitExcel.php' );
 
 /**
  * @package bitexcel
