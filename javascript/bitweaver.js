@@ -1109,9 +1109,9 @@ BitBase = {
 	// params:		w1 / w2 / w3
 	"genPass": function(w1, w2, w3) {
 		var vo = "aeiouAEU";
-		var co = "bcdfgjklmnprstvwxzBCDFGHJKMNPQRSTVWXYZ0123456789_$%#";
+		var co = "bcdfgjklmnprstvwxzBCDFGHJKMNPQRSTVWXYZ0123456789#";
 		var s = Math.round(Math.random());
-		var l = 8;
+		var l = 12;
 		var p = '';
 		var has_num = false;
 		for (i = 0; i < l; i++) {
