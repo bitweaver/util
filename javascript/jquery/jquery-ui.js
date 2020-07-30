@@ -11113,19 +11113,19 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		this.position = { left: curleft, top: curtop };
 
 		this.size = this._helper ? {
-				width: this.helper.width(),
-				height: this.helper.height()
+				width: this.helper.outerWidth(),
+				height: this.helper.outerHeight()
 			} : {
-				width: el.width(),
-				height: el.height()
+				width: el.outerWidth(),
+				height: el.outerHeight()
 			};
 
 		this.originalSize = this._helper ? {
 				width: el.outerWidth(),
 				height: el.outerHeight()
 			} : {
-				width: el.width(),
-				height: el.height()
+				width: el.outerWidth(),
+				height: el.outerHeight()
 			};
 
 		this.sizeDiff = {
