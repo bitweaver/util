@@ -22,7 +22,7 @@
 /**
  * Setup
  */
-require_once( UTIL_PKG_INC.'phpcontrib_lib.php' );
+require_once( UTIL_PKG_INCLUDE_PATH.'phpcontrib_lib.php' );
 
 // written for bitweaver environment, but you can override 
 if( !defined( 'PHPASYNC_TEMP_DIR' ) ){
