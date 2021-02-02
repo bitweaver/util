@@ -190,8 +190,11 @@ class _WikiDiffEngine
 	    $x1 = $xoff + (int)(($numer + ($xlim-$xoff)*$chunk) / $nchunks);
 	    for ( ; $x < $x1; $x++)
 	      {
-		$matches = $ymatches[$flip ? $this->yv[$x] : $this->xv[$x]];
-		if (!$matches)
+		$index = ($flip ? $this->yv[$x] : $this->xv[$x]);
+		if( !empty( $ymatches[$index] ) ) {
+			$matches = $ymatches[$index];
+		}
+		if (empty($matches))
 		    continue;
 		reset($matches);
 		while (list ($junk, $y) = each($matches))
