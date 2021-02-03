@@ -5,7 +5,7 @@
  */
 
 // initial setup
-require_once( "../../kernel/setup_inc.php" );
+require_once( "../../kernel/includes/setup_inc.php" );
 
 // General options
 $expiresOffset = 3600 * 24 * 10;		// 10 days util client cache expires
