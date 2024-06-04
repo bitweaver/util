@@ -181,7 +181,7 @@ TextSuggest.prototype = {
    callRicoAjaxEngine: function() {
       var callParms = [];
       callParms.push( this.id + '_request');
-      callParms.push( 'ajax_xml=1' );
+      callParms.push( 'ajax_api=1' );
       callParms.push( 'id='             + this.id);
       callParms.push( 'count='          + this.options.count);
       callParms.push( 'find='          + this.lastRequestString);
