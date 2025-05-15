@@ -39,7 +39,7 @@ define('USE_ASSERTS', function_exists('assert'));
  */
 class _WikiDiffEngine
 {
-  public $edits;	// List of editing operation to convert XV to YV.
+  public $edits = array();	// List of editing operation to convert XV to YV.
   public $xv = array(), $yv = array();
   public $xchanged, $ychanged;
   function _WikiDiffEngine ($from_lines, $to_lines)
@@ -443,7 +443,7 @@ class _WikiDiffEngine
  */
 class WikiDiff
 {
-  public $edits;
+  public $edits = array();
   /**
    * Compute diff between files (or deserialize serialized WikiDiff.)
    */
