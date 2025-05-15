@@ -41,8 +41,8 @@ class _WikiDiffEngine
 {
   public $edits = array();	// List of editing operation to convert XV to YV.
   public $xv = array(), $yv = array();
-  public $xchanged, $ychanged;
-  function _WikiDiffEngine ($from_lines, $to_lines)
+  public $xchanged = array(), $ychanged = array();
+  function __construct ($from_lines, $to_lines)
       {
 	$n_from = sizeof($from_lines);
 	$n_to = sizeof($to_lines);
@@ -447,7 +447,7 @@ class WikiDiff
   /**
    * Compute diff between files (or deserialize serialized WikiDiff.)
    */
-  function WikiDiff($from_lines = false, $to_lines = false)
+  function __construct($from_lines = false, $to_lines = false)
       {
 	if ($from_lines && $to_lines)
 	  {
@@ -873,8 +873,7 @@ class WikiDiffFormatter
       {
 	$html = '';
 	reset($lines);
-	while (list ($junk, $line) = each($lines))
-	  {
+	foreach( $lines as $junk => $line ) {
 	    $html .= "<tr style=\"background-color: $color\"><td><tt>$prefix</tt>";
 	    $html .= "<tt>" . htmlspecialchars($line) . "</tt></td></tr>\n";
 	  }
