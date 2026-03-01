@@ -236,6 +236,31 @@ BitBase = {
 		return value != 'none';
 	},
 
+	/**
+	 * Hides all elements that have the specified class name
+	 * @param className The class name of the elements to hide
+	 */
+	"hideByClass": function( className ) {
+		var elements = document.getElementsByClassName(className);
+		for (var i = 0; i < elements.length; i++) {
+			elements[i].style.display = 'none';
+		}
+	},
+
+	/**
+	 * Shows all elements that have the specified class name
+	 * @param className The class name of the elements to show
+	 * @param displayType Optional: The display style to use (e.g., 'block', 'inline'). Defaults to '' (CSS default).
+	 */
+	"showByClass": function(className, displayType) {
+		var elements = document.getElementsByClassName(className);
+		// If displayType is not provided (undefined/null), it defaults to 'block'
+		var display = displayType || 'block'; 
+		for (var i = 0; i < elements.length; i++) {
+			elements[i].style.display = display;
+		}
+	},
+
 	// desc:		convenience
 	// params:		elm - ad DOM element or id / useCookie = any value (not 0 or null) to turn cookies on
 	"showById": function( elm, useCookie ) {
