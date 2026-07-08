@@ -663,7 +663,7 @@ class WikiDiff
 		if (is_array($edit))
 		  {
 		reset($edit);
-		while (list ($junk, $line) = each($edit))
+		foreach ($edit as $junk => $line)
 			$output[] = $line;
 		  }
 		else if ($edit > 0)

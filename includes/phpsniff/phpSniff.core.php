@@ -416,7 +416,7 @@ class phpSniff_core
 
     function _build_regex ()
     {   $browsers = '';
-        while(list($k,) = each($this->_browsers))
+        foreach ($this->_browsers as $k => $_)
         {   if(!empty($browsers)) $browsers .= "|";
             $browsers .= $k;
         }
@@ -469,9 +469,9 @@ class phpSniff_core
     function _get_javascript()
     {   $set=false;
 		// see if we have any matches
-        while(list($version,$browser) = each($this->_javascript_versions))
+        foreach ($this->_javascript_versions as $version => $browser)
         {   $browser = explode(',',$browser);
-            while(list(,$search) = each($browser))
+            foreach ($browser as $search)
             {   if($this->is('b:'.$search))
                 {   $this->_set_browser('javascript',$version);
                     $set = true;
@@ -483,9 +483,9 @@ class phpSniff_core
     }
 	
 	function _get_features ()
-	{	while(list($feature,$browser) = each($this->_browser_features))
+	{	foreach ($this->_browser_features as $feature => $browser)
 		{	$browser = explode(',',$browser);
-			while(list(,$search) = each($browser))
+			foreach ($browser as $search)
 			{	if($this->browser_is($search))
 				{	$this->_set_feature($feature);
 					break;
@@ -495,9 +495,9 @@ class phpSniff_core
 	}
 	
 	function _get_quirks ()
-	{	while(list($quirk,$browser) = each($this->_browser_quirks))
+	{	foreach ($this->_browser_quirks as $quirk => $browser)
 		{	$browser = explode(',',$browser);
-			while(list(,$search) = each($browser))
+			foreach ($browser as $search)
 			{	if($this->browser_is($search))
 				{	$this->_set_quirk($quirk);
 					break;
