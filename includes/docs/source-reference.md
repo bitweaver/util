@@ -1,0 +1,555 @@
+# Util source reference
+
+> Generated from the current checkout and then intended for human review.
+> Paths are relative to the package root.
+
+## Inventory summary
+
+| Artifact | Count |
+|---|---:|
+| PHP files | 567 |
+| Smarty templates | 1 |
+| JavaScript files | 202 |
+| CSS files | 29 |
+
+## Bootstrap and schema artifacts
+
+
+## First-party classes and interfaces
+
+- `includes/BrowserDetection.php:123` — `class BrowserDetection`
+- `includes/Date/Calc.php:30` — `class Date_Calc`
+- `includes/Date/Human.php:34` — `class Date_Human`
+- `includes/Date/TimeZone.php:46` — `class Date_TimeZone`
+- `includes/PHPAsync.php:35` — `class PHPAsync extends BitBase{`
+- `includes/bitexcel/BitExcel.php:37` — `class BitExcel extends BitBase{`
+- `includes/bitexcel/BitExcelAsync.php:22` — `class BitExcelAsync extends BitExcel{`
+- `includes/dBug/dBug.php:49` — `class dBug {`
+- `includes/datasets/regions/us/class.USStates.php:6` — `class USStates {`
+- `includes/diff.php:40` — `class _WikiDiffEngine`
+- `includes/diff.php:443` — `class WikiDiff`
+- `includes/diff.php:765` — `class WikiDiffFormatter`
+- `includes/diff.php:932` — `class WikiUnifiedDiffFormatter extends WikiDiffFormatter`
+- `includes/geocalc/GeoCalc.class.php:26` — `class GeoCalc {`
+- `includes/getid3/demos/demo.audioinfo.class.php:46` — `class AudioInfo {`
+- `includes/getid3/getid3/extension.cache.dbm.php:72` — `class getID3_cached_dbm extends getID3`
+- `includes/getid3/getid3/extension.cache.mysql.php:72` — `class getID3_cached_mysql extends getID3`
+- `includes/getid3/getid3/getid3.lib.php:14` — `class getid3_lib`
+- `includes/getid3/getid3/getid3.php:18` — `class getID3`
+- `includes/getid3/getid3/module.archive.gzip.php:17` — `class getid3_gzip {`
+- `includes/getid3/getid3/module.archive.rar.php:17` — `class getid3_rar`
+- `includes/getid3/getid3/module.archive.szip.php:17` — `class getid3_szip`
+- `includes/getid3/getid3/module.archive.tar.php:17` — `class getid3_tar {`
+- `includes/getid3/getid3/module.archive.zip.php:17` — `class getid3_zip`
+- `includes/getid3/getid3/module.audio-video.asf.php:26` — `class getid3_asf`
+- `includes/getid3/getid3/module.audio-video.bink.php:17` — `class getid3_bink`
+- `includes/getid3/getid3/module.audio-video.flv.php:248` — `class AMFStream {`
+- `includes/getid3/getid3/module.audio-video.flv.php:332` — `class AMFReader {`
+- `includes/getid3/getid3/module.audio-video.flv.php:38` — `class getid3_flv`
+- `includes/getid3/getid3/module.audio-video.matroska.php:17` — `class getid3_matroska`
+- `includes/getid3/getid3/module.audio-video.mpeg.php:28` — `class getid3_mpeg`
+- `includes/getid3/getid3/module.audio-video.nsv.php:17` — `class getid3_nsv`
+- `includes/getid3/getid3/module.audio-video.quicktime.php:18` — `class getid3_quicktime`
+- `includes/getid3/getid3/module.audio-video.real.php:18` — `class getid3_real`
+- `includes/getid3/getid3/module.audio-video.riff.php:21` — `class getid3_riff`
+- `includes/getid3/getid3/module.audio-video.swf.php:17` — `class getid3_swf`
+- `includes/getid3/getid3/module.audio.aac.php:17` — `class getid3_aac`
+- `includes/getid3/getid3/module.audio.ac3.php:17` — `class getid3_ac3`
+- `includes/getid3/getid3/module.audio.au.php:17` — `class getid3_au`
+- `includes/getid3/getid3/module.audio.avr.php:17` — `class getid3_avr`
+- `includes/getid3/getid3/module.audio.bonk.php:17` — `class getid3_bonk`
+- `includes/getid3/getid3/module.audio.flac.php:19` — `class getid3_flac`
+- `includes/getid3/getid3/module.audio.la.php:18` — `class getid3_la`
+- `includes/getid3/getid3/module.audio.lpac.php:18` — `class getid3_lpac`
+- `includes/getid3/getid3/module.audio.midi.php:17` — `class getid3_midi`
+- `includes/getid3/getid3/module.audio.mod.php:17` — `class getid3_mod`
+- `includes/getid3/getid3/module.audio.monkey.php:17` — `class getid3_monkey`
+- `includes/getid3/getid3/module.audio.mp3.php:24` — `class getid3_mp3`
+- `includes/getid3/getid3/module.audio.mpc.php:17` — `class getid3_mpc`
+- `includes/getid3/getid3/module.audio.ogg.php:18` — `class getid3_ogg`
+- `includes/getid3/getid3/module.audio.optimfrog.php:18` — `class getid3_optimfrog`
+- `includes/getid3/getid3/module.audio.rkau.php:17` — `class getid3_rkau`
+- `includes/getid3/getid3/module.audio.shorten.php:17` — `class getid3_shorten`
+- `includes/getid3/getid3/module.audio.tta.php:17` — `class getid3_tta`
+- `includes/getid3/getid3/module.audio.voc.php:17` — `class getid3_voc`
+- `includes/getid3/getid3/module.audio.vqf.php:17` — `class getid3_vqf`
+- `includes/getid3/getid3/module.audio.wavpack.php:17` — `class getid3_wavpack`
+- `includes/getid3/getid3/module.graphic.bmp.php:17` — `class getid3_bmp`
+- `includes/getid3/getid3/module.graphic.gif.php:17` — `class getid3_gif`
+- `includes/getid3/getid3/module.graphic.jpg.php:17` — `class getid3_jpg`
+- `includes/getid3/getid3/module.graphic.pcd.php:17` — `class getid3_pcd`
+- `includes/getid3/getid3/module.graphic.png.php:17` — `class getid3_png`
+- `includes/getid3/getid3/module.graphic.svg.php:18` — `class getid3_svg`
+- `includes/getid3/getid3/module.graphic.tiff.php:17` — `class getid3_tiff`
+- `includes/getid3/getid3/module.misc.exe.php:17` — `class getid3_exe`
+- `includes/getid3/getid3/module.misc.iso.php:17` — `class getid3_iso`
+- `includes/getid3/getid3/module.tag.apetag.php:16` — `class getid3_apetag`
+- `includes/getid3/getid3/module.tag.id3v1.php:17` — `class getid3_id3v1`
+- `includes/getid3/getid3/module.tag.id3v2.php:18` — `class getid3_id3v2`
+- `includes/getid3/getid3/module.tag.lyrics3.php:17` — `class getid3_lyrics3`
+- `includes/getid3/getid3/write.apetag.php:19` — `class getid3_write_apetag`
+- `includes/getid3/getid3/write.id3v1.php:18` — `class getid3_write_id3v1`
+- `includes/getid3/getid3/write.id3v2.php:18` — `class getid3_write_id3v2`
+- `includes/getid3/getid3/write.lyrics3.php:17` — `class getid3_write_lyrics3`
+- `includes/getid3/getid3/write.metaflac.php:17` — `class getid3_write_metaflac`
+- `includes/getid3/getid3/write.php:47` — `class getid3_writetags`
+- `includes/getid3/getid3/write.real.php:16` — `class getid3_write_real`
+- `includes/getid3/getid3/write.vorbiscomment.php:17` — `class getid3_write_vorbiscomment`
+- `includes/htmlparser/html_parser_inc.php:5` — `class HtmlParser {`
+- `includes/htmlpure/Filter/CNBC.php:5` — `class HTMLPurifier_Filter_CNBC extends HTMLPurifier_Filter`
+- `includes/htmlpure/Filter/SafeIframe.php:3` — `class HTMLPurifier_Filter_SafeIframe extends HTMLPurifier_Filter`
+- `includes/htmlpure/Filter/YouTube.php:5` — `class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter`
+- `includes/markdown.php:170` — `	class Textile {`
+- `includes/markdown.php:191` — `class Markdown_Parser {`
+- `includes/pclzip_lib.php:130` — `  class PclZip`
+- `includes/pear/Archive/Tar.php:57` — `class Archive_Tar extends PEAR`
+- `includes/pear/Auth.php:88` — `class Auth {`
+- `includes/pear/Auth/Anonymous.php:47` — `class Auth_Anonymous extends Auth`
+- `includes/pear/Auth/Container.php:37` — `class Auth_Container`
+- `includes/pear/Auth/Container/Array.php:71` — `class Auth_Container_Array extends Auth_Container {`
+- `includes/pear/Auth/Container/DB.php:49` — `class Auth_Container_DB extends Auth_Container`
+- `includes/pear/Auth/Container/DBLite.php:52` — `class Auth_Container_DBLite extends Auth_Container`
+- `includes/pear/Auth/Container/File.php:58` — `class Auth_Container_File extends Auth_Container`
+- `includes/pear/Auth/Container/IMAP.php:84` — `class Auth_Container_IMAP extends Auth_Container`
+- `includes/pear/Auth/Container/KADM5.php:55` — `class Auth_Container_KADM5 extends Auth_Container {`
+- `includes/pear/Auth/Container/LDAP.php:203` — `class Auth_Container_LDAP extends Auth_Container`
+- `includes/pear/Auth/Container/MDB.php:51` — `class Auth_Container_MDB extends Auth_Container`
+- `includes/pear/Auth/Container/MDB2.php:51` — `class Auth_Container_MDB2 extends Auth_Container`
+- `includes/pear/Auth/Container/Multiple.php:80` — `class Auth_Container_Multiple extends Auth_Container {`
+- `includes/pear/Auth/Container/NetVPOPMaild.php:55` — `class Auth_Container_Vpopmaild extends Auth_Container`
+- `includes/pear/Auth/Container/PEAR.php:57` — `class Auth_Container_Pear extends Auth_Container`
+- `includes/pear/Auth/Container/POP3.php:55` — `class Auth_Container_POP3 extends Auth_Container`
+- `includes/pear/Auth/Container/RADIUS.php:48` — `class Auth_Container_RADIUS extends Auth_Container`
+- `includes/pear/Auth/Container/SAP.php:54` — `class Auth_Container_SAP extends Auth_Container {`
+- `includes/pear/Auth/Container/SMBPasswd.php:63` — `class Auth_Container_SMBPasswd extends Auth_Container`
+- `includes/pear/Auth/Container/SOAP.php:90` — `class Auth_Container_SOAP extends Auth_Container`
+- `includes/pear/Auth/Container/SOAP5.php:107` — `class Auth_Container_SOAP5 extends Auth_Container`
+- `includes/pear/Auth/Container/vpopmail.php:48` — `class Auth_Container_vpopmail extends Auth_Container {`
+- `includes/pear/Auth/Controller.php:61` — `class Auth_Controller`
+- `includes/pear/Auth/Frontend/Html.php:39` — `class Auth_Frontend_Html {`
+- `includes/pear/Console/Getopt.php:35` — `class Console_Getopt`
+- `includes/pear/HTTP.php:44` — `class HTTP`
+- `includes/pear/HTTP/Download.php:91` — `class HTTP_Download`
+- `includes/pear/HTTP/Download/Archive.php:36` — `class HTTP_Download_Archive`
+- `includes/pear/HTTP/Download/PgLOB.php:39` — `class HTTP_Download_PgLOB`
+- `includes/pear/HTTP/Header.php:110` — `class HTTP_Header extends HTTP`
+- `includes/pear/HTTP/Header/Cache.php:49` — `class HTTP_Header_Cache extends HTTP_Header`
+- `includes/pear/Image/GraphViz.php:112` — `class Image_GraphViz`
+- `includes/pear/MIME/Type.php:30` — `class MIME_Type`
+- `includes/pear/MIME/Type/Extension.php:27` — `class MIME_Type_Extension`
+- `includes/pear/MIME/Type/Parameter.php:25` — `class MIME_Type_Parameter`
+- `includes/pear/OS/Guess.php:94` — `class OS_Guess`
+- `includes/pear/PEAR.php:784` — `class PEAR_Error`
+- `includes/pear/PEAR.php:87` — `class PEAR`
+- `includes/pear/PEAR/Autoloader.php:53` — `class PEAR_Autoloader extends PEAR`
+- `includes/pear/PEAR/Builder.php:41` — `class PEAR_Builder extends PEAR_Common`
+- `includes/pear/PEAR/ChannelFile.php:153` — `class PEAR_ChannelFile`
+- `includes/pear/PEAR/ChannelFile/Parser.php:33` — `class PEAR_ChannelFile_Parser extends PEAR_XMLParser`
+- `includes/pear/PEAR/Command.php:101` — `class PEAR_Command`
+- `includes/pear/PEAR/Command/Auth.php:38` — `class PEAR_Command_Auth extends PEAR_Command_Channels`
+- `includes/pear/PEAR/Command/Build.php:38` — `class PEAR_Command_Build extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Channels.php:39` — `class PEAR_Command_Channels extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Common.php:36` — `class PEAR_Command_Common extends PEAR`
+- `includes/pear/PEAR/Command/Config.php:36` — `class PEAR_Command_Config extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Install.php:37` — `class PEAR_Command_Install extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Mirror.php:34` — `class PEAR_Command_Mirror extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Package.php:40` — `class PEAR_Command_Package extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Pickle.php:35` — `class PEAR_Command_Pickle extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Registry.php:36` — `class PEAR_Command_Registry extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Remote.php:38` — `class PEAR_Command_Remote extends PEAR_Command_Common`
+- `includes/pear/PEAR/Command/Test.php:39` — `class PEAR_Command_Test extends PEAR_Command_Common`
+- `includes/pear/PEAR/Common.php:127` — `class PEAR_Common extends PEAR`
+- `includes/pear/PEAR/Config.php:253` — `class PEAR_Config extends PEAR`
+- `includes/pear/PEAR/Dependency2.php:38` — `class PEAR_Dependency2`
+- `includes/pear/PEAR/DependencyDB.php:37` — `class PEAR_DependencyDB`
+- `includes/pear/PEAR/Downloader.php:46` — `class PEAR_Downloader extends PEAR_Common`
+- `includes/pear/PEAR/Downloader/Package.php:57` — `class PEAR_Downloader_Package`
+- `includes/pear/PEAR/ErrorStack.php:143` — `class PEAR_ErrorStack {`
+- `includes/pear/PEAR/ErrorStack5.php:24` — `class PEAR_ErrorStack_Exception extends PEAR_Exception{}`
+- `includes/pear/PEAR/ErrorStack5.php:76` — `class PEAR_ErrorStack {`
+- `includes/pear/PEAR/Exception.php:97` — `class PEAR_Exception extends Exception`
+- `includes/pear/PEAR/Frontend.php:46` — `class PEAR_Frontend extends PEAR`
+- `includes/pear/PEAR/Frontend/CLI.php:34` — `class PEAR_Frontend_CLI extends PEAR_Frontend`
+- `includes/pear/PEAR/Installer.php:43` — `class PEAR_Installer extends PEAR_Downloader`
+- `includes/pear/PEAR/Installer/Role.php:32` — `class PEAR_Installer_Role`
+- `includes/pear/PEAR/Installer/Role/Cfg.php:27` — `class PEAR_Installer_Role_Cfg extends PEAR_Installer_Role_Common`
+- `includes/pear/PEAR/Installer/Role/Common.php:31` — `class PEAR_Installer_Role_Common`
+- `includes/pear/PEAR/Installer/Role/Data.php:27` — `class PEAR_Installer_Role_Data extends PEAR_Installer_Role_Common {}`
+- `includes/pear/PEAR/Installer/Role/Doc.php:27` — `class PEAR_Installer_Role_Doc extends PEAR_Installer_Role_Common {}`
+- `includes/pear/PEAR/Installer/Role/Ext.php:27` — `class PEAR_Installer_Role_Ext extends PEAR_Installer_Role_Common {}`
+- `includes/pear/PEAR/Installer/Role/Php.php:27` — `class PEAR_Installer_Role_Php extends PEAR_Installer_Role_Common {}`
+- `includes/pear/PEAR/Installer/Role/Script.php:27` — `class PEAR_Installer_Role_Script extends PEAR_Installer_Role_Common {}`
+- `includes/pear/PEAR/Installer/Role/Src.php:27` — `class PEAR_Installer_Role_Src extends PEAR_Installer_Role_Common`
+- `includes/pear/PEAR/Installer/Role/Test.php:27` — `class PEAR_Installer_Role_Test extends PEAR_Installer_Role_Common {}`
+- `includes/pear/PEAR/Installer/Role/Www.php:27` — `class PEAR_Installer_Role_Www extends PEAR_Installer_Role_Common {}`
+- `includes/pear/PEAR/PackageFile.php:42` — `class PEAR_PackageFile`
+- `includes/pear/PEAR/PackageFile/Generator/v1.php:36` — `class PEAR_PackageFile_Generator_v1`
+- `includes/pear/PEAR/PackageFile/Generator/v2.php:38` — `class PEAR_PackageFile_Generator_v2`
+- `includes/pear/PEAR/PackageFile/Parser/v1.php:31` — `class PEAR_PackageFile_Parser_v1`
+- `includes/pear/PEAR/PackageFile/Parser/v2.php:32` — `class PEAR_PackageFile_Parser_v2 extends PEAR_XMLParser`
+- `includes/pear/PEAR/PackageFile/v1.php:282` — `class PEAR_PackageFile_v1`
+- `includes/pear/PEAR/PackageFile/v2.php:30` — `class PEAR_PackageFile_v2`
+- `includes/pear/PEAR/PackageFile/v2/Validator.php:29` — `class PEAR_PackageFile_v2_Validator`
+- `includes/pear/PEAR/PackageFile/v2/rw.php:30` — `class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2`
+- `includes/pear/PEAR/Packager.php:38` — `class PEAR_Packager extends PEAR_Common`
+- `includes/pear/PEAR/REST.php:35` — `class PEAR_REST`
+- `includes/pear/PEAR/REST/10.php:34` — `class PEAR_REST_10`
+- `includes/pear/PEAR/REST/11.php:34` — `class PEAR_REST_11`
+- `includes/pear/PEAR/REST/13.php:35` — `class PEAR_REST_13 extends PEAR_REST_10`
+- `includes/pear/PEAR/REST/14.php:35` — `class PEAR_REST_14  extends PEAR_REST_13`
+- `includes/pear/PEAR/Registry.php:44` — `class PEAR_Registry extends PEAR`
+- `includes/pear/PEAR/RunTest.php:45` — `class PEAR_RunTest`
+- `includes/pear/PEAR/Start.php:7` — `class PEAR_Start extends PEAR`
+- `includes/pear/PEAR/Start/CLI.php:3` — `class PEAR_Start_CLI extends PEAR_Start`
+- `includes/pear/PEAR/Task/Common.php:55` — `class PEAR_Task_Common`
+- `includes/pear/PEAR/Task/Postinstallscript.php:34` — `class PEAR_Task_Postinstallscript extends PEAR_Task_Common`
+- `includes/pear/PEAR/Task/Postinstallscript/rw.php:31` — `class PEAR_Task_Postinstallscript_rw extends PEAR_Task_Postinstallscript`
+- `includes/pear/PEAR/Task/Replace.php:31` — `class PEAR_Task_Replace extends PEAR_Task_Common`
+- `includes/pear/PEAR/Task/Replace/rw.php:31` — `class PEAR_Task_Replace_rw extends PEAR_Task_Replace`
+- `includes/pear/PEAR/Task/Unixeol.php:31` — `class PEAR_Task_Unixeol extends PEAR_Task_Common`
+- `includes/pear/PEAR/Task/Unixeol/rw.php:31` — `class PEAR_Task_Unixeol_rw extends PEAR_Task_Unixeol`
+- `includes/pear/PEAR/Task/Windowseol.php:31` — `class PEAR_Task_Windowseol extends PEAR_Task_Common`
+- `includes/pear/PEAR/Task/Windowseol/rw.php:31` — `class PEAR_Task_Windowseol_rw extends PEAR_Task_Windowseol`
+- `includes/pear/PEAR/Validate.php:39` — `class PEAR_Validate`
+- `includes/pear/PEAR/Validator/PECL.php:31` — `class PEAR_Validator_PECL extends PEAR_Validate`
+- `includes/pear/PEAR/Warning.php:121` — `class PEAR_Warning`
+- `includes/pear/PEAR/Warning.php:25` — `class PEAR_WarningException extends PEAR_Exception {}`
+- `includes/pear/PEAR/Warning.php:27` — `interface PEAR_WarningInterface`
+- `includes/pear/PEAR/XMLParser.php:30` — `class PEAR_XMLParser`
+- `includes/pear/PEAR5.php:6` — `class PEAR5`
+- `includes/pear/Structures/Graph.php:56` — `class Structures_Graph {`
+- `includes/pear/Structures/Graph/Manipulator/AcyclicTest.php:55` — `class Structures_Graph_Manipulator_AcyclicTest {`
+- `includes/pear/Structures/Graph/Manipulator/TopologicalSorter.php:58` — `class Structures_Graph_Manipulator_TopologicalSorter {`
+- `includes/pear/Structures/Graph/Node.php:57` — `class Structures_Graph_Node {`
+- `includes/pear/System.php:59` — `class System`
+- `includes/pear/System/Command.php:573` — `class System_Command_Error extends PEAR_Error`
+- `includes/pear/System/Command.php:62` — `class System_Command {`
+- `includes/pear/Text/Diff.php:20` — `class Text_Diff {`
+- `includes/pear/Text/Diff.php:292` — `class Text_MappedDiff extends Text_Diff {`
+- `includes/pear/Text/Diff.php:342` — `class Text_Diff_Op {`
+- `includes/pear/Text/Diff.php:370` — `class Text_Diff_Op_copy extends Text_Diff_Op {`
+- `includes/pear/Text/Diff.php:395` — `class Text_Diff_Op_delete extends Text_Diff_Op {`
+- `includes/pear/Text/Diff.php:417` — `class Text_Diff_Op_add extends Text_Diff_Op {`
+- `includes/pear/Text/Diff.php:439` — `class Text_Diff_Op_change extends Text_Diff_Op {`
+- `includes/pear/Text/Diff/Engine/native.php:31` — `class Text_Diff_Engine_native {`
+- `includes/pear/Text/Diff/Engine/shell.php:19` — `class Text_Diff_Engine_shell {`
+- `includes/pear/Text/Diff/Engine/string.php:25` — `class Text_Diff_Engine_string {`
+- `includes/pear/Text/Diff/Engine/xdiff.php:18` — `class Text_Diff_Engine_xdiff {`
+- `includes/pear/Text/Diff/Mapped.php:13` — `class Text_Diff_Mapped extends Text_Diff {`
+- `includes/pear/Text/Diff/Renderer.php:17` — `class Text_Diff_Renderer {`
+- `includes/pear/Text/Diff/Renderer/context.php:23` — `class Text_Diff_Renderer_context extends Text_Diff_Renderer {`
+- `includes/pear/Text/Diff/Renderer/inline.php:27` — `class Text_Diff_Renderer_inline extends Text_Diff_Renderer {`
+- `includes/pear/Text/Diff/Renderer/unified.php:24` — `class Text_Diff_Renderer_unified extends Text_Diff_Renderer {`
+- `includes/pear/Text/Diff/ThreeWay.php:156` — `class Text_Diff_ThreeWay_Op {`
+- `includes/pear/Text/Diff/ThreeWay.php:195` — `class Text_Diff_ThreeWay_Op_copy extends Text_Diff_ThreeWay_Op {`
+- `includes/pear/Text/Diff/ThreeWay.php:222` — `class Text_Diff_ThreeWay_BlockBuilder {`
+- `includes/pear/Text/Diff/ThreeWay.php:25` — `class Text_Diff_ThreeWay extends Text_Diff {`
+- `includes/pear/Text/Diff3.php:156` — `class Text_Diff3_Op {`
+- `includes/pear/Text/Diff3.php:195` — `class Text_Diff3_Op_copy extends Text_Diff3_Op {`
+- `includes/pear/Text/Diff3.php:222` — `class Text_Diff3_BlockBuilder {`
+- `includes/pear/Text/Diff3.php:25` — `class Text_Diff3 extends Text_Diff {`
+- `includes/pear/Text/Wiki.php:39` — `class Text_Wiki {`
+- `includes/pear/Text/Wiki/Creole.php:50` — `class Text_Wiki_Creole extends Text_Wiki {`
+- `includes/pear/Text/Wiki/Default.php:26` — `class Text_Wiki_Default extends Text_Wiki {`
+- `includes/pear/Text/Wiki/Parse.php:40` — `class Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Address.php:22` — `class Text_Wiki_Parse_Address extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Blockquote.php:25` — `class Text_Wiki_Parse_Blockquote extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Box.php:39` — `class Text_Wiki_Parse_Box extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Break.php:34` — `class Text_Wiki_Parse_Break extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Center.php:25` — `class Text_Wiki_Parse_Center extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Delimiter.php:24` — `class Text_Wiki_Parse_Delimiter extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Emphasis.php:25` — `class Text_Wiki_Parse_Emphasis extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Footnote.php:26` — `class Text_Wiki_Parse_Footnote extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Heading.php:27` — `class Text_Wiki_Parse_Heading extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Horiz.php:22` — `class Text_Wiki_Parse_Horiz extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Image.php:20` — `class Text_Wiki_Parse_Image extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/List.php:29` — `class Text_Wiki_Parse_List extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Newline.php:21` — `class Text_Wiki_Parse_Newline extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Paragraph.php:23` — `class Text_Wiki_Parse_Paragraph extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Prefilter.php:23` — `class Text_Wiki_Parse_Prefilter extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Preformatted.php:19` — `class Text_Wiki_Parse_Preformatted extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Raw.php:19` — `class Text_Wiki_Parse_Raw extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Strong.php:26` — `class Text_Wiki_Parse_Strong extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Subscript.php:21` — `class Text_Wiki_Parse_Subscript extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Superscript.php:21` — `class Text_Wiki_Parse_Superscript extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Table.php:27` — `class Text_Wiki_Parse_Table extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Tighten.php:20` — `class Text_Wiki_Parse_Tighten extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Trim.php:17` — `class Text_Wiki_Parse_Trim extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Tt.php:19` — `class Text_Wiki_Parse_Tt extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Underline.php:25` — `class Text_Wiki_Parse_Underline extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Url.php:27` — `class Text_Wiki_Parse_Url extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Creole/Wikilink.php:42` — `class Text_Wiki_Parse_Wikilink extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Anchor.php:36` — `class Text_Wiki_Parse_Anchor extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Blockquote.php:36` — `class Text_Wiki_Parse_Blockquote extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Bold.php:37` — `class Text_Wiki_Parse_Bold extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Break.php:34` — `class Text_Wiki_Parse_Break extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Center.php:34` — `class Text_Wiki_Parse_Center extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Code.php:38` — `class Text_Wiki_Parse_Code extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Colortext.php:31` — `class Text_Wiki_Parse_Colortext extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Deflist.php:38` — `class Text_Wiki_Parse_Deflist extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Delimiter.php:36` — `class Text_Wiki_Parse_Delimiter extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Embed.php:41` — `class Text_Wiki_Parse_Embed extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Emphasis.php:36` — `class Text_Wiki_Parse_emphasis extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Freelink.php:42` — `class Text_Wiki_Parse_Freelink extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Function.php:31` — `class Text_Wiki_Parse_Function extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Heading.php:37` — `class Text_Wiki_Parse_Heading extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Horiz.php:34` — `class Text_Wiki_Parse_Horiz extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Html.php:35` — `class Text_Wiki_Parse_Html extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Image.php:31` — `class Text_Wiki_Parse_Image extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Include.php:41` — `class Text_Wiki_Parse_Include extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Interwiki.php:35` — `class Text_Wiki_Parse_Interwiki extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Italic.php:36` — `class Text_Wiki_Parse_Italic extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/List.php:39` — `class Text_Wiki_Parse_List extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Newline.php:35` — `class Text_Wiki_Parse_Newline extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Paragraph.php:35` — `class Text_Wiki_Parse_Paragraph extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Phplookup.php:31` — `class Text_Wiki_Parse_Phplookup extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Prefilter.php:36` — `class Text_Wiki_Parse_Prefilter extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Raw.php:35` — `class Text_Wiki_Parse_Raw extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Revise.php:31` — `class Text_Wiki_Parse_Revise extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Smiley.php:33` — `class Text_Wiki_Parse_Smiley extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Strong.php:38` — `class Text_Wiki_Parse_Strong extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Subscript.php:31` — `class Text_Wiki_Parse_Subscript extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Superscript.php:31` — `class Text_Wiki_Parse_Superscript extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Table.php:37` — `class Text_Wiki_Parse_Table extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Tighten.php:32` — `class Text_Wiki_Parse_Tighten extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Toc.php:36` — `class Text_Wiki_Parse_Toc extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Tt.php:40` — `class Text_Wiki_Parse_Tt extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Underline.php:37` — `class Text_Wiki_Parse_Underline extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Url.php:52` — `class Text_Wiki_Parse_Url extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Parse/Default/Wikilink.php:45` — `class Text_Wiki_Parse_Wikilink extends Text_Wiki_Parse {`
+- `includes/pear/Text/Wiki/Render.php:26` — `class Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole.php:3` — `class Text_Wiki_Render_Creole extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Address.php:3` — `class Text_Wiki_Render_Creole_Address extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Anchor.php:15` — `class Text_Wiki_Render_Creole_Anchor extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Blockquote.php:3` — `class Text_Wiki_Render_Creole_Blockquote extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Bold.php:3` — `class Text_Wiki_Render_Creole_Bold extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Box.php:4` — `class Text_Wiki_Render_Creole_Box extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Break.php:3` — `class Text_Wiki_Render_Creole_Break extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Center.php:4` — `class Text_Wiki_Render_Creole_Center extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Code.php:3` — `class Text_Wiki_Render_Creole_Code extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Colortext.php:3` — `class Text_Wiki_Render_Creole_Colortext extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Deflist.php:3` — `class Text_Wiki_Render_Creole_Deflist extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Delimiter.php:3` — `class Text_Wiki_Render_Creole_Delimiter extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Embed.php:3` — `class Text_Wiki_Render_Creole_Embed extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Emphasis.php:3` — `class Text_Wiki_Render_Creole_Emphasis extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Freelink.php:5` — `class Text_Wiki_Render_Creole_Freelink extends Text_Wiki_Render_Creole_Wikilink {`
+- `includes/pear/Text/Wiki/Render/Creole/Function.php:3` — `class Text_Wiki_Render_Creole_Function extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Heading.php:3` — `class Text_Wiki_Render_Creole_Heading extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Horiz.php:3` — `class Text_Wiki_Render_Creole_Horiz extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Html.php:3` — `class Text_Wiki_Render_Creole_Html extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Image.php:2` — `class Text_Wiki_Render_Creole_Image extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Include.php:3` — `class Text_Wiki_Render_Creole_Include extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Interwiki.php:3` — `class Text_Wiki_Render_Creole_Interwiki extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Italic.php:3` — `class Text_Wiki_Render_Creole_Italic extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/List.php:3` — `class Text_Wiki_Render_Creole_List extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Newline.php:3` — `class Text_Wiki_Render_Creole_Newline extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Paragraph.php:3` — `class Text_Wiki_Render_Creole_Paragraph extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Phplookup.php:5` — `class Text_Wiki_Render_Creole_Phplookup extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Prefilter.php:3` — `class Text_Wiki_Render_Creole_Prefilter extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Preformatted.php:3` — `class Text_Wiki_Render_Creole_Preformatted extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Raw.php:3` — `class Text_Wiki_Render_Creole_Raw extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Revise.php:3` — `class Text_Wiki_Render_Creole_Revise extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Strong.php:3` — `class Text_Wiki_Render_Creole_Strong extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Subscript.php:3` — `class Text_Wiki_Render_Creole_Subscript extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Superscript.php:3` — `class Text_Wiki_Render_Creole_Superscript extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Table.php:3` — `class Text_Wiki_Render_Creole_Table extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Tighten.php:3` — `class Text_Wiki_Render_Creole_Tighten extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Toc.php:3` — `class Text_Wiki_Render_Creole_Toc extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Tt.php:3` — `class Text_Wiki_Render_Creole_Tt extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Underline.php:3` — `class Text_Wiki_Render_Creole_Underline extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Url.php:3` — `class Text_Wiki_Render_Creole_Url extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Creole/Wikilink.php:3` — `class Text_Wiki_Render_Creole_Wikilink extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex.php:34` — `class Text_Wiki_Render_Latex extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Anchor.php:15` — `class Text_Wiki_Render_Latex_Anchor extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Blockquote.php:3` — `class Text_Wiki_Render_Latex_Blockquote extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Bold.php:2` — `class Text_Wiki_Render_Latex_Bold extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Box.php:28` — `class Text_Wiki_Render_Latex_Box extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Break.php:3` — `class Text_Wiki_Render_Latex_Break extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Center.php:3` — `class Text_Wiki_Render_Latex_Center extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Code.php:3` — `class Text_Wiki_Render_Latex_Code extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Colortext.php:3` — `class Text_Wiki_Render_Latex_Colortext extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Deflist.php:3` — `class Text_Wiki_Render_Latex_Deflist extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Delimiter.php:3` — `class Text_Wiki_Render_Latex_Delimiter extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Embed.php:3` — `class Text_Wiki_Render_Latex_Embed extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Emphasis.php:3` — `class Text_Wiki_Render_Latex_Emphasis extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Font.php:29` — `class Text_Wiki_Render_Latex_Font extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Freelink.php:3` — `class Text_Wiki_Render_Latex_Freelink extends Text_Wiki_Render_Latex_Wikilink {`
+- `includes/pear/Text/Wiki/Render/Latex/Function.php:3` — `class Text_Wiki_Render_Latex_Function extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Heading.php:3` — `class Text_Wiki_Render_Latex_Heading extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Horiz.php:3` — `class Text_Wiki_Render_Latex_Horiz extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Html.php:3` — `class Text_Wiki_Render_Latex_Html extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Image.php:2` — `class Text_Wiki_Render_Latex_Image extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Include.php:2` — `class Text_Wiki_Render_Latex_Include extends Text_Wiki_Render {    `
+- `includes/pear/Text/Wiki/Render/Latex/Interwiki.php:3` — `class Text_Wiki_Render_Latex_Interwiki extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Italic.php:2` — `class Text_Wiki_Render_Latex_Italic extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/List.php:4` — `class Text_Wiki_Render_Latex_List extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Newline.php:3` — `class Text_Wiki_Render_Latex_Newline extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Page.php:28` — `class Text_Wiki_Render_Latex_Page extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Paragraph.php:3` — `class Text_Wiki_Render_Latex_Paragraph extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Phplookup.php:3` — `class Text_Wiki_Render_Latex_Phplookup extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Plugin.php:28` — `class Text_Wiki_Render_Latex_Plugin extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Prefilter.php:50` — `class Text_Wiki_Render_Latex_Prefilter extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Preformatted.php:28` — `class Text_Wiki_Render_Latex_Preformatted extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Raw.php:3` — `class Text_Wiki_Render_Latex_Raw extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Revise.php:3` — `class Text_Wiki_Render_Latex_Revise extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Smiley.php:29` — `class Text_Wiki_Render_Latex_Smiley extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Specialchar.php:28` — `class Text_Wiki_Render_Latex_SpecialChar extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Strong.php:3` — `class Text_Wiki_Render_Latex_Strong extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Subscript.php:28` — `class Text_Wiki_Render_Latex_Subscript extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Superscript.php:3` — `class Text_Wiki_Render_Latex_Superscript extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Table.php:3` — `class Text_Wiki_Render_Latex_Table extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Tighten.php:2` — `class Text_Wiki_Render_Latex_Tighten extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Titlebar.php:28` — `class Text_Wiki_Render_Latex_Titlebar extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Toc.php:3` — `class Text_Wiki_Render_Latex_Toc extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Tt.php:3` — `class Text_Wiki_Render_Latex_tt extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Underline.php:3` — `class Text_Wiki_Render_Latex_Underline extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Url.php:4` — `class Text_Wiki_Render_Latex_Url extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Latex/Wikilink.php:3` — `class Text_Wiki_Render_Latex_Wikilink extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain.php:3` — `class Text_Wiki_Render_Plain extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Anchor.php:15` — `class Text_Wiki_Render_Plain_Anchor extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Blockquote.php:3` — `class Text_Wiki_Render_Plain_Blockquote extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Bold.php:3` — `class Text_Wiki_Render_Plain_Bold extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Box.php:28` — `class Text_Wiki_Render_Plain_Box extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Break.php:3` — `class Text_Wiki_Render_Plain_Break extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Center.php:3` — `class Text_Wiki_Render_Plain_Center extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Code.php:3` — `class Text_Wiki_Render_Plain_Code extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Colortext.php:3` — `class Text_Wiki_Render_Plain_Colortext extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Deflist.php:3` — `class Text_Wiki_Render_Plain_Deflist extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Delimiter.php:3` — `class Text_Wiki_Render_Plain_Delimiter extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Embed.php:3` — `class Text_Wiki_Render_Plain_Embed extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Emphasis.php:3` — `class Text_Wiki_Render_Plain_Emphasis extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Font.php:29` — `class Text_Wiki_Render_Plain_Font extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Freelink.php:3` — `class Text_Wiki_Render_Plain_Freelink extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Function.php:5` — `class Text_Wiki_Render_Plain_Function extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Heading.php:3` — `class Text_Wiki_Render_Plain_Heading extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Horiz.php:3` — `class Text_Wiki_Render_Plain_Horiz extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Html.php:3` — `class Text_Wiki_Render_Plain_Html extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Image.php:2` — `class Text_Wiki_Render_Plain_Image extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Include.php:2` — `class Text_Wiki_Render_Plain_Include extends Text_Wiki_Render {    `
+- `includes/pear/Text/Wiki/Render/Plain/Interwiki.php:3` — `class Text_Wiki_Render_Plain_Interwiki extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Italic.php:3` — `class Text_Wiki_Render_Plain_Italic extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/List.php:4` — `class Text_Wiki_Render_Plain_List extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Newline.php:3` — `class Text_Wiki_Render_Plain_Newline extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Page.php:28` — `class Text_Wiki_Render_Plain_Page extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Paragraph.php:3` — `class Text_Wiki_Render_Plain_Paragraph extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Phplookup.php:3` — `class Text_Wiki_Render_Plain_Phplookup extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Plugin.php:28` — `class Text_Wiki_Render_Plain_Plugin extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Prefilter.php:18` — `class Text_Wiki_Render_Plain_Prefilter extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Preformatted.php:28` — `class Text_Wiki_Render_Plain_Preformatted extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Raw.php:3` — `class Text_Wiki_Render_Plain_Raw extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Revise.php:3` — `class Text_Wiki_Render_Plain_Revise extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Smiley.php:29` — `class Text_Wiki_Render_Plain_Smiley extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Specialchar.php:28` — `class Text_Wiki_Render_Plain_SpecialChar extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Strong.php:3` — `class Text_Wiki_Render_Plain_Strong extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Subscript.php:28` — `class Text_Wiki_Render_Plain_Subscript extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Superscript.php:3` — `class Text_Wiki_Render_Plain_Superscript extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Table.php:3` — `class Text_Wiki_Render_Plain_Table extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Tighten.php:2` — `class Text_Wiki_Render_Plain_Tighten extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Titlebar.php:28` — `class Text_Wiki_Render_Plain_Titlebar extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Toc.php:3` — `class Text_Wiki_Render_Plain_Toc extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Tt.php:3` — `class Text_Wiki_Render_Plain_tt extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Underline.php:3` — `class Text_Wiki_Render_Plain_Underline extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Url.php:4` — `class Text_Wiki_Render_Plain_Url extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Plain/Wikilink.php:3` — `class Text_Wiki_Render_Plain_Wikilink extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml.php:26` — `class Text_Wiki_Render_Xhtml extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Address.php:23` — `class Text_Wiki_Render_Xhtml_Address extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Anchor.php:26` — `class Text_Wiki_Render_Xhtml_Anchor extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Blockquote.php:26` — `class Text_Wiki_Render_Xhtml_Blockquote extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Bold.php:26` — `class Text_Wiki_Render_Xhtml_Bold extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Box.php:26` — `class Text_Wiki_Render_Xhtml_Box extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Break.php:26` — `class Text_Wiki_Render_Xhtml_Break extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Center.php:26` — `class Text_Wiki_Render_Xhtml_Center extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Code.php:26` — `class Text_Wiki_Render_Xhtml_Code extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Colortext.php:26` — `class Text_Wiki_Render_Xhtml_Colortext extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Deflist.php:26` — `class Text_Wiki_Render_Xhtml_Deflist extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Delimiter.php:26` — `class Text_Wiki_Render_Xhtml_Delimiter extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Embed.php:26` — `class Text_Wiki_Render_Xhtml_Embed extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Emphasis.php:26` — `class Text_Wiki_Render_Xhtml_Emphasis extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Font.php:29` — `class Text_Wiki_Render_Xhtml_Font extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Freelink.php:31` — `class Text_Wiki_Render_Xhtml_Freelink extends Text_Wiki_Render_Xhtml_Wikilink {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Function.php:26` — `class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Heading.php:26` — `class Text_Wiki_Render_Xhtml_Heading extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Horiz.php:26` — `class Text_Wiki_Render_Xhtml_Horiz extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Html.php:26` — `class Text_Wiki_Render_Xhtml_Html extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Image.php:26` — `class Text_Wiki_Render_Xhtml_Image extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Include.php:26` — `class Text_Wiki_Render_Xhtml_Include extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Interwiki.php:26` — `class Text_Wiki_Render_Xhtml_Interwiki extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Italic.php:26` — `class Text_Wiki_Render_Xhtml_Italic extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/List.php:26` — `class Text_Wiki_Render_Xhtml_List extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Newline.php:26` — `class Text_Wiki_Render_Xhtml_Newline extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Page.php:26` — `class Text_Wiki_Render_Xhtml_Page extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Paragraph.php:26` — `class Text_Wiki_Render_Xhtml_Paragraph extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Phplookup.php:26` — `class Text_Wiki_Render_Xhtml_Phplookup extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Plugin.php:26` — `class Text_Wiki_Render_Xhtml_Plugin extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Prefilter.php:28` — `class Text_Wiki_Render_Xhtml_Prefilter extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Preformatted.php:26` — `class Text_Wiki_Render_Xhtml_Preformatted extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Raw.php:26` — `class Text_Wiki_Render_Xhtml_Raw extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Revise.php:26` — `class Text_Wiki_Render_Xhtml_Revise extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Smiley.php:29` — `class Text_Wiki_Render_Xhtml_Smiley extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Specialchar.php:26` — `class Text_Wiki_Render_Xhtml_SpecialChar extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Strong.php:26` — `class Text_Wiki_Render_Xhtml_Strong extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Subscript.php:26` — `class Text_Wiki_Render_Xhtml_Subscript extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Superscript.php:26` — `class Text_Wiki_Render_Xhtml_Superscript extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Table.php:26` — `class Text_Wiki_Render_Xhtml_Table extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Tighten.php:26` — `class Text_Wiki_Render_Xhtml_Tighten extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Titlebar.php:26` — `class Text_Wiki_Render_Xhtml_Titlebar extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Toc.php:26` — `class Text_Wiki_Render_Xhtml_Toc extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Tt.php:26` — `class Text_Wiki_Render_Xhtml_Tt extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Underline.php:26` — `class Text_Wiki_Render_Xhtml_Underline extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Url.php:26` — `class Text_Wiki_Render_Xhtml_Url extends Text_Wiki_Render {`
+- `includes/pear/Text/Wiki/Render/Xhtml/Wikilink.php:26` — `class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {`
+- `includes/pear/XML/Util.php:125` — `class XML_Util`
+- `includes/phpcoord/phpcoord-2.3.php:374` — `  class OSRef {`
+- `includes/phpcoord/phpcoord-2.3.php:38` — `  class LatLng {`
+- `includes/phpcoord/phpcoord-2.3.php:549` — `  class UTMRef {`
+- `includes/phpcoord/phpcoord-2.3.php:681` — `  class RefEll {`
+- `includes/phplot.php:36` — `class PHPlot`
+- `includes/phplot.php:6654` — `class PHPlot_truecolor extends PHPlot`
+- `includes/phpmailer/class.phpmailer.php:34` — `class PHPMailer {`
+- `includes/phpmailer/class.pop3.php:47` — `class POP3`
+- `includes/phpmailer/class.smtp.php:36` — `class SMTP`
+- `includes/phpsniff/phpSniff.class.php:37` — `class phpSniff`
+- `includes/phpsniff/phpSniff.core.php:23` — `class phpSniff_core`
+- `includes/simplepie/idn/idna_convert.class.php:54` — `class idna_convert`
+- `includes/simplepie/idn/idna_convert.class.php:945` — `class Net_IDNA_php4 extends idna_convert`
+- `includes/spyc/spyc.php:57` — `class Spyc {`
+- `includes/spyc/tests/DumpTest.php:5` — `class DumpTest extends PHPUnit_Framework_TestCase {`
+- `includes/spyc/tests/IndentTest.php:5` — `class IndentTest extends PHPUnit_Framework_TestCase {`
+- `includes/spyc/tests/ParseTest.php:6` — `class ParseTest extends PHPUnit_Framework_TestCase {`
+- `includes/tar.class.php:55` — `class tar {`
+- `includes/tree.php:30` — `class TreeMaker {`
+- `includes/zip_lib.php:404` — `class ZipWriter {`
+- `includes/zip_lib.php:497` — `class ZipReader {`
+- `javascript/class.JavaScriptPacker.php:533` — `class ParseMaster {`
+- `javascript/class.JavaScriptPacker.php:72` — `class JavaScriptPacker {`
+- `javascript/dynarch/jscalendar/calendar.php:15` — `class DHTML_Calendar {`
+- `javascript/suggest/suggest_lib.php:3` — `class SuggestLib {`
+
+## Web-facing PHP controllers
+
+- `index.php`
+- `javascript/class.JavaScriptPacker.php`
+- `javascript/dynarch/jscalendar/calendar.php`
+- `javascript/dynarch/jscalendar/test.php`
+- `javascript/jscompressor.php`
+- `javascript/pack-file.php`
+- `javascript/suggest/suggest_lib.php`
+
+## Declared schema tables
+
+No table declaration was mechanically identified. Inspect schema files and runtime SQL before concluding that the package is stateless.
+
+## Plugin and module directories
+
+- `javascript/jquery/plugins/`
+
+## Templates
+
+- `templates/html_head_inc.tpl`
+
+## Reading cautions
+
+- Presence in this inventory does not make a file a supported public API.
+- Bundled third-party libraries must be distinguished from package-owned code.
+- Base schema files do not prove the migration state of a deployed database.
+- Controllers may rely on include files, globals, services, and template callbacks not visible from their filename alone.
