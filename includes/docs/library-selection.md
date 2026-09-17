@@ -13,7 +13,7 @@ Notable package-owned entry points include:
 | Archive helpers | `zip_lib.php`, `tar.class.php`, `pclzip_lib.php` |
 | Mail integration | `phpmailer/`, `mailman_lib.php` |
 | MIME helpers | `mime_lib.php`, `mimetypes.php` |
-| Text conversion | `markdown.php`, `diff.php`, `htmlparser/` |
+| Text conversion | `parsedown/` (Parsedown 1.8.0), `markdown.php` (legacy PHP Markdown 1.0.1n), `diff.php`, `htmlparser/` |
 | Async/process helper | `PHPAsync.php` |
 | Browser detection | `BrowserDetection.php` |
 | Spreadsheets | `bitexcel/` |
