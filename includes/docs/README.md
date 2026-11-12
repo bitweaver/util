@@ -1,7 +1,8 @@
 # Util package documentation
 
-> Engineering documentation derived from the source in this package. The
-> package's `includes/` directory must be denied to direct HTTP requests.
+> Engineering documentation derived from the source in this package. No PHP
+> file in this package may be requested directly over HTTP, and the
+> `includes/` directory is denied entirely; see [Security](security.md).
 
 ## Purpose
 

@@ -7,10 +7,10 @@
 
 | Artifact | Count |
 |---|---:|
-| PHP files | 567 |
+| PHP files | 565 |
 | Smarty templates | 1 |
-| JavaScript files | 202 |
-| CSS files | 29 |
+| JavaScript files | 166 |
+| CSS files | 24 |
 
 ## Bootstrap and schema artifacts
 
@@ -22,6 +22,7 @@
 - `includes/Date/Human.php:34` — `class Date_Human`
 - `includes/Date/TimeZone.php:46` — `class Date_TimeZone`
 - `includes/PHPAsync.php:35` — `class PHPAsync extends BitBase{`
+- `includes/classes/SuggestLib.php:3` — `class SuggestLib {` (static `exportXml()`, used by `liberty/list_content.php`)
 - `includes/bitexcel/BitExcel.php:37` — `class BitExcel extends BitBase{`
 - `includes/bitexcel/BitExcelAsync.php:22` — `class BitExcelAsync extends BitExcel{`
 - `includes/dBug/dBug.php:49` — `class dBug {`
@@ -30,7 +31,8 @@
 - `includes/diff.php:443` — `class WikiDiff`
 - `includes/diff.php:765` — `class WikiDiffFormatter`
 - `includes/diff.php:932` — `class WikiUnifiedDiffFormatter extends WikiDiffFormatter`
-- `includes/geocalc/GeoCalc.class.php:26` — `class GeoCalc {`
+- `includes/geocalc/GeoCalc.class.php:26` — `class GeoCalc {
+`
 - `includes/getid3/demos/demo.audioinfo.class.php:46` — `class AudioInfo {`
 - `includes/getid3/getid3/extension.cache.dbm.php:72` — `class getID3_cached_dbm extends getID3`
 - `includes/getid3/getid3/extension.cache.mysql.php:72` — `class getID3_cached_mysql extends getID3`
@@ -96,9 +98,11 @@
 - `includes/getid3/getid3/write.real.php:16` — `class getid3_write_real`
 - `includes/getid3/getid3/write.vorbiscomment.php:17` — `class getid3_write_vorbiscomment`
 - `includes/htmlparser/html_parser_inc.php:5` — `class HtmlParser {`
-- `includes/htmlpure/Filter/CNBC.php:5` — `class HTMLPurifier_Filter_CNBC extends HTMLPurifier_Filter`
+- `includes/htmlpure/Filter/CNBC.php:5` — `class HTMLPurifier_Filter_CNBC extends HTMLPurifier_Filter
+`
 - `includes/htmlpure/Filter/SafeIframe.php:3` — `class HTMLPurifier_Filter_SafeIframe extends HTMLPurifier_Filter`
-- `includes/htmlpure/Filter/YouTube.php:5` — `class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter`
+- `includes/htmlpure/Filter/YouTube.php:5` — `class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter
+`
 - `includes/markdown.php:170` — `	class Textile {`
 - `includes/markdown.php:191` — `class Markdown_Parser {`
 - `includes/pclzip_lib.php:130` — `  class PclZip`
@@ -128,7 +132,8 @@
 - `includes/pear/Auth/Controller.php:61` — `class Auth_Controller`
 - `includes/pear/Auth/Frontend/Html.php:39` — `class Auth_Frontend_Html {`
 - `includes/pear/Console/Getopt.php:35` — `class Console_Getopt`
-- `includes/pear/HTTP.php:44` — `class HTTP`
+- `includes/pear/HTTP.php:44` — `class HTTP
+`
 - `includes/pear/HTTP/Download.php:91` — `class HTTP_Download`
 - `includes/pear/HTTP/Download/Archive.php:36` — `class HTTP_Download_Archive`
 - `includes/pear/HTTP/Download/PgLOB.php:39` — `class HTTP_Download_PgLOB`
@@ -507,7 +512,8 @@
 - `includes/phplot.php:6654` — `class PHPlot_truecolor extends PHPlot`
 - `includes/phpmailer/class.phpmailer.php:34` — `class PHPMailer {`
 - `includes/phpmailer/class.pop3.php:47` — `class POP3`
-- `includes/phpmailer/class.smtp.php:36` — `class SMTP`
+- `includes/phpmailer/class.smtp.php:36` — `class SMTP
+`
 - `includes/phpsniff/phpSniff.class.php:37` — `class phpSniff`
 - `includes/phpsniff/phpSniff.core.php:23` — `class phpSniff_core`
 - `includes/simplepie/idn/idna_convert.class.php:54` — `class idna_convert`
@@ -520,20 +526,17 @@
 - `includes/tree.php:30` — `class TreeMaker {`
 - `includes/zip_lib.php:404` — `class ZipWriter {`
 - `includes/zip_lib.php:497` — `class ZipReader {`
-- `javascript/class.JavaScriptPacker.php:533` — `class ParseMaster {`
-- `javascript/class.JavaScriptPacker.php:72` — `class JavaScriptPacker {`
 - `javascript/dynarch/jscalendar/calendar.php:15` — `class DHTML_Calendar {`
-- `javascript/suggest/suggest_lib.php:3` — `class SuggestLib {`
 
 ## Web-facing PHP controllers
 
-- `index.php`
-- `javascript/class.JavaScriptPacker.php`
+None. `util/.htaccess` and `util/web.config` deny direct requests for every
+PHP file in the package (see [security.md](security.md)). PHP files outside
+`includes/`, all reached only by `require` or the CLI:
+
+- `index.php` — legacy redirect stub
 - `javascript/dynarch/jscalendar/calendar.php`
 - `javascript/dynarch/jscalendar/test.php`
-- `javascript/jscompressor.php`
-- `javascript/pack-file.php`
-- `javascript/suggest/suggest_lib.php`
 
 ## Declared schema tables
 
