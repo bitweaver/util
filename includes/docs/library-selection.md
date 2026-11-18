@@ -81,7 +81,7 @@ bundles, and who uses it:
 | Path | Library | Used by |
 |---|---|---|
 | `bitweaver.js` | first-party `BitBase` helpers | every page (Themes) |
-| `dropzonejs/` | Dropzone 4.3.0 | designer photo upload, products PDF wizard |
+| `dropzonejs/` | Dropzone 6.3.5 (upstream `dist/`, unmodified) | designer photo upload, prints grid and template editor; products PDF wizard |
 | `multifile.js` | multiple-file input helper | liberty attachments when `liberty_attachment_style=multiple` |
 | `jquery/plugins/colorbox/` | Colorbox 1.6.4 | designer, products, bookstore, contests, create (lightbox) |
 | `jquery/plugins/cropper/` | Cropper 1.6.3 + jquery-cropper 1.0.2 | products cover/PDF tools, designer |
@@ -95,8 +95,16 @@ bundles, and who uses it:
 Removed and not to be re-added: Flash players (`flv_player`, `fspp`,
 `pdfviewer`), MochiKit, FancyZoom, Fancybox, the kruse and dynarch calendars
 (use `<input type="date">` / `datetime-local`), local jQuery copies, the
-JavaScript packer and `jscompressor.php`. Media plays in `<video>`, `<audio>`
+JavaScript packer and `jscompressor.php`, and the second Dropzone copy that
+`dzupload` loaded on every page. Media plays in `<video>`, `<audio>`
 and the browser PDF viewer.
+
+Dropzone is replaced as upstream's `dist/` files (`dropzone-min.js`, its map,
+`dropzone.css`, `LICENSE`) so the bytes can be compared with the npm release.
+Pages load `dropzone-min.js` themselves (it is not in the persistent bundle).
+Every `dropzone.css` rule is scoped to the `.dropzone` class, and no upload
+area here uses that class, so callers style their own zones and need not load
+it. Use `new Dropzone( element, {...} )`; Dropzone 6 has no `autoDiscover`.
 
 Before adding a library:
 
