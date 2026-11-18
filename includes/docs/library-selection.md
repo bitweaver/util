@@ -72,11 +72,38 @@ behavior to avoid duplicate side effects.
 
 ## Browser-side assets
 
-Many JavaScript directories contain legacy libraries. Before using one:
+jQuery and jQuery UI are not bundled: Themes loads them from the Google CDN
+(`BitThemes::loadAjax('jquery')`, defaults `jquery_version` 3.7.1 and
+`jquery_ui_version` 1.14.1, overridable per site in `kernel_config`) together
+with Bootstrap 3 from `config/themes/bootstrap`. What `javascript/` still
+bundles, and who uses it:
 
-- Check whether Themes already loads it.
-- Avoid loading multiple versions.
-- Verify browser/CSP compatibility.
+| Path | Library | Used by |
+|---|---|---|
+| `bitweaver.js` | first-party `BitBase` helpers | every page (Themes) |
+| `dropzonejs/` | Dropzone 4.3.0 | designer photo upload, products PDF wizard |
+| `multifile.js` | multiple-file input helper | liberty attachments when `liberty_attachment_style=multiple` |
+| `jquery/plugins/colorbox/` | Colorbox 1.6.4 | designer, products, bookstore, contests, create (lightbox) |
+| `jquery/plugins/cropper/` | Cropper 1.6.3 + jquery-cropper 1.0.2 | products cover/PDF tools, designer |
+| `jquery/plugins/magnify/` | magnify 2.1.0 | products image zoom |
+| `jquery/plugins/zoom/` | zoom 1.7.20 | designer image zoom |
+| `jquery/plugins/touch-punch/` | jQuery UI Touch Punch | touch drag in designer, chatgpt |
+| `jquery/plugins/acisortable/` | acisortable 1.6.0 | liberty |
+| `jquery/plugins/bootstrap-datetimepicker/` | bootstrap-datetimepicker 2.0 | bookstore stats only |
+| `jquery/plugins/cm_pageflip/` | page-flip viewer | products `pageflip.php` (designer preview) |
+
+Removed and not to be re-added: Flash players (`flv_player`, `fspp`,
+`pdfviewer`), MochiKit, FancyZoom, Fancybox, the kruse and dynarch calendars
+(use `<input type="date">` / `datetime-local`), local jQuery copies, the
+JavaScript packer and `jscompressor.php`. Media plays in `<video>`, `<audio>`
+and the browser PDF viewer.
+
+Before adding a library:
+
+- Check whether Themes already loads it, and never load a second version.
+- Pin an exact version and record it in the table above.
+- Remove its demo, test and example files (no PHP may sit under util; see
+  [security.md](security.md)).
 - Prefer package-scoped initialization over global mutation.
 
 ## Dependency direction

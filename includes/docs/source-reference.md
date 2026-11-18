@@ -7,10 +7,10 @@
 
 | Artifact | Count |
 |---|---:|
-| PHP files | 565 |
-| Smarty templates | 1 |
-| JavaScript files | 166 |
-| CSS files | 24 |
+| PHP files | 563 |
+| Smarty templates | 0 |
+| JavaScript files | 103 |
+| CSS files | 8 |
 
 ## Bootstrap and schema artifacts
 
@@ -526,7 +526,6 @@
 - `includes/tree.php:30` — `class TreeMaker {`
 - `includes/zip_lib.php:404` — `class ZipWriter {`
 - `includes/zip_lib.php:497` — `class ZipReader {`
-- `javascript/dynarch/jscalendar/calendar.php:15` — `class DHTML_Calendar {`
 
 ## Web-facing PHP controllers
 
@@ -535,8 +534,6 @@ PHP file in the package (see [security.md](security.md)). PHP files outside
 `includes/`, all reached only by `require` or the CLI:
 
 - `index.php` — legacy redirect stub
-- `javascript/dynarch/jscalendar/calendar.php`
-- `javascript/dynarch/jscalendar/test.php`
 
 ## Declared schema tables
 
@@ -548,7 +545,7 @@ No table declaration was mechanically identified. Inspect schema files and runti
 
 ## Templates
 
-- `templates/html_head_inc.tpl`
+None.
 
 ## Reading cautions
 
