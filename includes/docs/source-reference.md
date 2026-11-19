@@ -9,7 +9,7 @@
 |---|---:|
 | PHP files | 563 |
 | Smarty templates | 0 |
-| JavaScript files | 103 |
+| JavaScript files | 102 |
 | CSS files | 8 |
 
 ## Bootstrap and schema artifacts

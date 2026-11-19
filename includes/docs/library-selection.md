@@ -82,7 +82,6 @@ bundles, and who uses it:
 |---|---|---|
 | `bitweaver.js` | first-party `BitBase` helpers | every page (Themes) |
 | `dropzonejs/` | Dropzone 6.3.5 (upstream `dist/`, unmodified) | designer photo upload, prints grid and template editor; products PDF wizard |
-| `multifile.js` | multiple-file input helper | liberty attachments when `liberty_attachment_style=multiple` |
 | `jquery/plugins/colorbox/` | Colorbox 1.6.4 | designer, products, bookstore, contests, create (lightbox) |
 | `jquery/plugins/cropper/` | Cropper 1.6.3 + jquery-cropper 1.0.2 | products cover/PDF tools, designer |
 | `jquery/plugins/magnify/` | magnify 2.1.0 | products image zoom |
@@ -95,8 +94,10 @@ bundles, and who uses it:
 Removed and not to be re-added: Flash players (`flv_player`, `fspp`,
 `pdfviewer`), MochiKit, FancyZoom, Fancybox, the kruse and dynarch calendars
 (use `<input type="date">` / `datetime-local`), local jQuery copies, the
-JavaScript packer and `jscompressor.php`, and the second Dropzone copy that
-`dzupload` loaded on every page. Media plays in `<video>`, `<audio>`
+JavaScript packer and `jscompressor.php`, the second Dropzone copy that
+`dzupload` loaded on every page, and `multifile.js` (use
+`<input type="file" name="x[]" multiple>`; `LibertyMime::verify()` splits
+the posted array into one upload per file). Media plays in `<video>`, `<audio>`
 and the browser PDF viewer.
 
 Dropzone is replaced as upstream's `dist/` files (`dropzone-min.js`, its map,
